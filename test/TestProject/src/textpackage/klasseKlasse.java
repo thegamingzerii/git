@@ -3,5 +3,5 @@ package textpackage;
 public class klasseKlasse {
 test
 test2
-test3
+test5
 }
