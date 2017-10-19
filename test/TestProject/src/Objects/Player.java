@@ -54,10 +54,6 @@ public class Player extends JPanel implements ICollision{
 			y += yAcc * delta;
 		
 	}
-	public void render() {
-		this.repaint();
-	}
-	
 	
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT)
