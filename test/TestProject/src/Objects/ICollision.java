@@ -1,5 +1,6 @@
 package Objects;
 
+
 public interface ICollision {
 	
 	
@@ -15,6 +16,6 @@ public interface ICollision {
 	
 	int[] getCollisionSize();
 	
-	
+
 
 }
