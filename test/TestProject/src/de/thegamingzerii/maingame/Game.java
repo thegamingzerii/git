@@ -106,7 +106,7 @@ public class Game extends JPanel{
 		pauseState.init();
 		mainMenuState.init();
 		
-	
+		int testinglol;
 		
 		
 		
