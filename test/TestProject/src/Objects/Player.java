@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 public class Player extends JPanel{
 	double x = 0;
 	double y = 0;
+	double test = 1;
 
 
 	public Player() {
