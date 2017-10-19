@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import de.thegamingzerii.utility.Constantes;
 
 
-public class Player extends JPanel{
+public class Player extends JPanel implements ICollision{
 	double x = 0;
 	double y = 0;
 	double xAcc = 0;
@@ -96,6 +96,56 @@ public class Player extends JPanel{
 			e.printStackTrace();
 		}
 	
+	}
+
+
+
+
+	@Override
+	public boolean checkcollision(ICollision C) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+
+	@Override
+	public double getXAxis() {
+		return x;
+	}
+
+
+
+
+	@Override
+	public double getYAxis() {
+		return y;
+	}
+
+
+
+
+	@Override
+	public void setX(int x) {
+		this.x = x;
+	}
+
+
+
+
+	@Override
+	public void setY(int y) {
+		this.y = y;
+	}
+
+
+
+
+	@Override
+	public int[] getCollisionSize() {
+		int[] A = {(int) width, (int) height};
+        return A;
 	}
 
 	
