@@ -1,22 +1,26 @@
 package Objects;
 
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-import javax.swing.JFrame;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import de.thegamingzerii.maingame.PaintBox;
 
 public class Player extends JPanel{
 	double x = 0;
 	double y = 0;
 
+
 	public Player() {
-		
 	}
+	
+	
+
 	
 	public void update(double delta) {
 		x += 1 * delta;
@@ -46,7 +50,14 @@ public class Player extends JPanel{
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		int xUsable = (int)x;
 		int yUsable = (int)y;
-		g2d.fillRect(xUsable, yUsable, 30, 60);
+		try {
+			BufferedImage image = ImageIO.read(new File("Assets/Player.png"));
+			g.drawImage(image, xUsable, yUsable, this);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 	}
 
 	

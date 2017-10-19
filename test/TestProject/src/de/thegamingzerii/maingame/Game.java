@@ -142,15 +142,14 @@ public static void main(String[] args) throws InterruptedException {
 	frame = new JFrame("Mini Tennis");
 	Game game = new Game();
 	frame.add(game);
-	KeyboardListener keyboard = new KeyboardListener();
 	//frame.add(keyboard);
 	
 	long lastLoopTime = System.nanoTime();
-	final int TARGET_FPS = 99999999;
+	final int TARGET_FPS = 999999;
     final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;   
     final long CONSTANT_LOGIC_TIME = 1000000000 / 60; 
     long lastFpsTime = 0;
-    float fps = 0;
+    int fps = 0;
 	   
     // keep looping round til the game ends
     while (true)
