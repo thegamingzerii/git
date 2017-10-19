@@ -1,21 +1,19 @@
 package de.thegamingzerii.states;
 
+import java.awt.Graphics2D;
 import java.lang.reflect.Array;
 
-public class State {
-	private Object[] objects = new Object[64];
+import javax.swing.JPanel;
+
+public interface State {
+	Object[] objects = new Object[64];
 	
 	
-	public State() {
-		
-	}
 	
+	void init();
 	
-	public void update(long delta){
-		
-	}
+	void update(double delta);
 	
-	public void render() {
-		
-	}
+	void paint(Graphics2D g);
+	
 }
