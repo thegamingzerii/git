@@ -85,7 +85,6 @@ public class Game extends JPanel{
 
 	public Game run() {
 		System.out.println("App version " + Constantes.version);
-		System.out.println("Hallo");
 		init();
 
 		return this;
