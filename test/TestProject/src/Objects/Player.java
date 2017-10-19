@@ -11,11 +11,16 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import de.thegamingzerii.utility.Constantes;
+
 
 public class Player extends JPanel{
 	double x = 0;
 	double y = 0;
-
+	double xAcc = 0;
+	double yAcc = 0;
+	double height = 200;
+	double width = 100;
 
 	public Player() {
 	}
@@ -24,24 +29,35 @@ public class Player extends JPanel{
 
 	
 	public void update(double delta) {
-		x += 1 * delta;
-		//y += 1 * delta;
+		if(yAcc < Constantes.GRAVITY) {
+			yAcc += 0.5;
+		}
+		
+		
+		x += xAcc * delta;
+		if(! (y > Constantes.height - height) || yAcc < 0) 
+			y += yAcc * delta;
+		
 	}
-	
 	public void render() {
 		this.repaint();
 	}
 	
 	
 	public void keyReleased(KeyEvent e) {
-		
+		if (e.getKeyCode() == KeyEvent.VK_LEFT)
+			xAcc += 10;
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+			xAcc -= 10;
 	}
 
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT)
-			y =  100;
+			xAcc -= 10;
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-			y = 300;
+			xAcc += 10;
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) 
+			yAcc = -50;
 	}
 
 	public void paint(Graphics2D g) {
@@ -53,7 +69,7 @@ public class Player extends JPanel{
 		int yUsable = (int)y;
 		try {
 			BufferedImage image = ImageIO.read(new File("Assets/Player.png"));
-			Image scaledImage = image.getScaledInstance(100, 200, image.SCALE_DEFAULT);
+			Image scaledImage = image.getScaledInstance((int)width, (int)height, image.SCALE_DEFAULT);
 			g.drawImage(scaledImage, xUsable, yUsable, this);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

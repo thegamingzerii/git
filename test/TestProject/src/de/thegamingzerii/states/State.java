@@ -16,4 +16,5 @@ public interface State {
 	
 	void paint(Graphics2D g);
 	
+	
 }
