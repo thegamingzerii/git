@@ -5,9 +5,9 @@ public interface ICollision {
 	
 	boolean checkcollision(ICollision C);
 	
-	double getX();
+	double getXAxis();
 	
-	double getY();
+	double getYAxis();
 	
 	void setX(int x);
 	
