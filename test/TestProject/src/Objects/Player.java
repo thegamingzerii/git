@@ -1,6 +1,7 @@
 package Objects;
 
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -52,7 +53,8 @@ public class Player extends JPanel{
 		int yUsable = (int)y;
 		try {
 			BufferedImage image = ImageIO.read(new File("Assets/Player.png"));
-			g.drawImage(image, xUsable, yUsable, this);
+			Image scaledImage = image.getScaledInstance(100, 200, image.SCALE_DEFAULT);
+			g.drawImage(scaledImage, xUsable, yUsable, this);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
