@@ -64,7 +64,6 @@ public class Player extends JPanel{
 			moveLeft = false;
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			moveRight = false;
-			System.out.println("rechts losgelasses " + moveRight);
 		}
 			
 	}
