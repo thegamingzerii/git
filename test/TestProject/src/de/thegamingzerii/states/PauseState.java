@@ -1,6 +1,5 @@
 package de.thegamingzerii.states;
 
-import static org.lwjgl.opengl.GL11.glClearColor;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;

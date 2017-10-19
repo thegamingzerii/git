@@ -22,7 +22,7 @@ public class KeyboardListener extends JPanel {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-			System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
+			System.out.println("keyPressed="+e.getKeyCode());
 		}
 
 		@Override

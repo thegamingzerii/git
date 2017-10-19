@@ -13,6 +13,8 @@ import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.geom.Ellipse2D;
 
 import de.thegamingzerii.utility.Constantes;
@@ -58,6 +60,22 @@ public class Game extends JPanel{
 	
 	
 	public Game() {
+		addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				GameState.player.keyReleased(e);
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				GameState.player.keyPressed(e);
+			}
+		});
+		setFocusable(true);
 		currentGame = run();
 	}
 	
@@ -125,7 +143,7 @@ public static void main(String[] args) throws InterruptedException {
 	Game game = new Game();
 	frame.add(game);
 	KeyboardListener keyboard = new KeyboardListener();
-	frame.add(keyboard);
+	//frame.add(keyboard);
 	
 	long lastLoopTime = System.nanoTime();
 	final int TARGET_FPS = 99999999;
@@ -185,7 +203,21 @@ public static void main(String[] args) throws InterruptedException {
 	   }
     }
 		
-		
+public class MyKeyListener implements KeyListener {
+	@Override
+	public void keyTyped(KeyEvent e) {
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		System.out.println("keyReleased="+KeyEvent.getKeyText(e.getKeyCode()));
+	}
+}
 	
 
 }

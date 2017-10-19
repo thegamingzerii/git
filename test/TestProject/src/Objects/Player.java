@@ -3,6 +3,7 @@ package Objects;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,11 +20,23 @@ public class Player extends JPanel{
 	
 	public void update(double delta) {
 		x += 1 * delta;
-		y += 1 * delta;
+		//y += 1 * delta;
 	}
 	
 	public void render() {
 		this.repaint();
+	}
+	
+	
+	public void keyReleased(KeyEvent e) {
+		
+	}
+
+	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_LEFT)
+			y =  100;
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+			y = 300;
 	}
 
 	public void paint(Graphics2D g) {
