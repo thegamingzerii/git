@@ -126,6 +126,7 @@ public class Game extends JPanel{
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		GameState.player.paint(g2d);
+		GameState.block.paint(g2d);
 	}
 	
 	
