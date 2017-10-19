@@ -4,16 +4,18 @@ package Objects;
 public interface ICollision {
 	
 	
-	void checkcollision(ICollision C);
+	boolean checkcollision(ICollision C);
 	
-	double getX();
+	double getXAxis();
 	
-	double getY();
+	double getYAxis();
 	
 	void setX(int x);
 	
 	void setY(int y);
 	
 	int[] getSize();
+	
+
 
 }
