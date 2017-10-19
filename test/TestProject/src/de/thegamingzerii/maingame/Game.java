@@ -150,7 +150,7 @@ public static void main(String[] args) throws InterruptedException {
     long lastFpsTime = 0;
     int fps = 0;
 	   
-    // keep looping round til the game ends
+    // keep looping round till the game ends
     while (true)
     {
 		   
