@@ -14,7 +14,7 @@ public interface ICollision {
 	
 	void setY(int y);
 	
-	int[] getSize();
+	int[] getCollisionSize();
 	
 
 
