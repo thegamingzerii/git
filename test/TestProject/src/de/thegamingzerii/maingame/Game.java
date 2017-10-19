@@ -106,7 +106,6 @@ public class Game extends JPanel{
 		pauseState.init();
 		mainMenuState.init();
 		
-		int testinglol;
 		
 		
 		
@@ -144,7 +143,7 @@ public static void main(String[] args) throws InterruptedException {
 	//frame.add(keyboard);
 	
 	long lastLoopTime = System.nanoTime();
-	final int TARGET_FPS = 999999;
+	final int TARGET_FPS = 300;
     final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;   
     final long CONSTANT_LOGIC_TIME = 1000000000 / 60; 
     long lastFpsTime = 0;
@@ -172,8 +171,6 @@ public static void main(String[] args) throws InterruptedException {
 	      if (lastFpsTime >= 1000000000)
 	      {
 	         System.out.println("(FPS: "+fps+")");
-	         double test;
-	         double test2;
 	         lastFpsTime = 0;
 	         fps = 0;
 	      }
@@ -192,7 +189,10 @@ public static void main(String[] args) throws InterruptedException {
 	      // remember this is in ms, whereas our lastLoopTime etc. vars are in ns.
 	      //try{Thread.sleep( (lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000 )};
 	      try {
-			Thread.sleep( (lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000 );
+	    	  if((lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000 > 0) {
+	    		  Thread.sleep( (lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000 );
+	    	  }
+		
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
