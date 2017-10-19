@@ -174,6 +174,7 @@ public static void main(String[] args) throws InterruptedException {
 	      {
 	         System.out.println("(FPS: "+fps+")");
 	         double test;
+	         double test2;
 	         lastFpsTime = 0;
 	         fps = 0;
 	      }
