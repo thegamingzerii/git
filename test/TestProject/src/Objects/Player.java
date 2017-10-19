@@ -21,6 +21,9 @@ public class Player extends JPanel{
 	double yAcc = 0;
 	double height = 200;
 	double width = 100;
+	boolean moveRight = false;
+	boolean moveLeft = false;
+	double jumpCooldown = 0;
 
 	public Player() {
 	}
@@ -29,8 +32,20 @@ public class Player extends JPanel{
 
 	
 	public void update(double delta) {
+		jumpCooldown -= 1 * delta;
+		
 		if(yAcc < Constantes.GRAVITY) {
-			yAcc += 0.5;
+			yAcc += 0.5 * delta;
+		}
+		
+		if(!moveRight && !moveLeft) {
+			xAcc = 0;
+		}else {
+			if(moveRight)
+				xAcc = 10;
+			
+			if(moveLeft)
+				xAcc = -10;
 		}
 		
 		
@@ -46,18 +61,24 @@ public class Player extends JPanel{
 	
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT)
-			xAcc += 10;
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-			xAcc -= 10;
+			moveLeft = false;
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			moveRight = false;
+			System.out.println("rechts losgelasses " + moveRight);
+		}
+			
 	}
 
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
-			xAcc -= 10;
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-			xAcc += 10;
-		if (e.getKeyCode() == KeyEvent.VK_SPACE) 
-			yAcc = -50;
+		if (e.getKeyCode() == KeyEvent.VK_LEFT && !moveLeft)
+			moveLeft = true;
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT && !moveRight)
+			moveRight = true;
+		if (e.getKeyCode() == KeyEvent.VK_SPACE && jumpCooldown <= 0) {
+			yAcc = -20;
+			jumpCooldown = 100;
+		}
+			
 	}
 
 	public void paint(Graphics2D g) {
