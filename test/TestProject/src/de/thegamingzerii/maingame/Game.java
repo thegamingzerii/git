@@ -173,6 +173,7 @@ public static void main(String[] args) throws InterruptedException {
 	      if (lastFpsTime >= 1000000000)
 	      {
 	         System.out.println("(FPS: "+fps+")");
+	         double test;
 	         lastFpsTime = 0;
 	         fps = 0;
 	      }
