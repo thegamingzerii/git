@@ -1,5 +1,6 @@
 package Objects;
 
+import java.awt.Rectangle;
 
 public interface ICollision {
 	
@@ -14,7 +15,7 @@ public interface ICollision {
 	
 	void setY(int y);
 	
-	int[] getCollisionSize();
+	Rectangle getCollisionSize();
 	
 
 

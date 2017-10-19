@@ -2,24 +2,35 @@ package Objects;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class Block extends JPanel {
+import de.thegamingzerii.maingame.Game;
+
+public class Block extends JPanel implements ICollision{
+	
+	public static ArrayList<Block> allBlocks =  new ArrayList<Block>();
 	
 	double x = 0;
 	double y = 0;
-	double height = 1000;
-	double width = 3000;
+	double width = 0;
+	double height = 0;
 	
 	
-	public Block() {
-		
+	public Block(double x, double y, double width, double height) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		allBlocks.add(this);
+		Game.frame.add(this);
 	}
 	
 	
@@ -40,5 +51,49 @@ public class Block extends JPanel {
 		}
 
 	}
+
+
+	@Override
+	public boolean checkcollision(ICollision C) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public double getXAxis() {
+		// TODO Auto-generated method stub
+		return x;
+	}
+
+
+	@Override
+	public double getYAxis() {
+		// TODO Auto-generated method stub
+		return y;
+	}
+
+
+	@Override
+	public void setX(int x) {
+		this.x = x;
+		
+	}
+
+
+	@Override
+	public void setY(int y) {
+		this.y = y;
+		
+	}
+
+
+	@Override
+	public Rectangle getCollisionSize() {
+        return new Rectangle((int)x, (int)y, (int)width, (int)height);
+	}
+
+
+	
 }
 

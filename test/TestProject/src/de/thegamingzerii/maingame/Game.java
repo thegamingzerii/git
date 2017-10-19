@@ -6,6 +6,7 @@ import java.nio.IntBuffer;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Objects.Block;
 import Objects.Player;
 
 import java.awt.Color;
@@ -106,6 +107,11 @@ public class Game extends JPanel{
 		pauseState.init();
 		mainMenuState.init();
 		
+		new Block(100, 100, 200, 20);
+		new Block(500, 500, 300, 20);
+		new Block(0, 580, 300, 20);
+		new Block(800, 300, 100, 50);
+		
 		
 		
 		
@@ -125,8 +131,8 @@ public class Game extends JPanel{
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		GameState.player.paint(g2d);
-		GameState.block.paint(g2d);
+		ingameState.paint(g2d);
+		//GameState.block.paint(g2d);
 	}
 	
 	
@@ -138,7 +144,7 @@ public class Game extends JPanel{
 
 public static void main(String[] args) throws InterruptedException {
 	
-	frame = new JFrame("Mini Tennis");
+	frame = new JFrame("Game");
 	Game game = new Game();
 	frame.add(game);
 	//frame.add(keyboard);

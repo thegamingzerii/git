@@ -2,6 +2,7 @@ package Objects;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -11,6 +12,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import de.thegamingzerii.states.GameState;
+import de.thegamingzerii.utility.CollisionChecker;
 import de.thegamingzerii.utility.Constantes;
 
 
@@ -19,8 +22,8 @@ public class Player extends JPanel implements ICollision{
 	double y = 0;
 	double xAcc = 0;
 	double yAcc = 0;
-	double height = 200;
-	double width = 100;
+	double height = 100;
+	double width = 50;
 	boolean moveRight = false;
 	boolean moveLeft = false;
 	double jumpCooldown = 0;
@@ -32,6 +35,7 @@ public class Player extends JPanel implements ICollision{
 
 	
 	public void update(double delta) {
+		
 		jumpCooldown -= 1 * delta;
 		
 		if(yAcc < Constantes.GRAVITY) {
@@ -48,10 +52,22 @@ public class Player extends JPanel implements ICollision{
 				xAcc = -10;
 		}
 		
-		
 		x += xAcc * delta;
-		if(! (y > Constantes.height - height) || yAcc < 0) 
-			y += yAcc * delta;
+		if(CollisionChecker.CheckAllCollisions(this)) {
+			x-= xAcc * delta;
+		}
+
+		y += yAcc * delta;
+		if(CollisionChecker.CheckAllCollisions(this)) {
+			y-= yAcc * delta;
+			yAcc = 5;
+		}
+		
+		if(y > 2000) {
+			y = 0;
+			x = 0;
+		}
+			
 		
 	}
 		
@@ -71,7 +87,7 @@ public class Player extends JPanel implements ICollision{
 			moveRight = true;
 		if (e.getKeyCode() == KeyEvent.VK_SPACE && jumpCooldown <= 0) {
 			yAcc = -20;
-			jumpCooldown = 100;
+			jumpCooldown = 50;
 		}
 			
 	}
@@ -139,10 +155,10 @@ public class Player extends JPanel implements ICollision{
 
 
 	@Override
-	public int[] getCollisionSize() {
-		int[] A = {(int) width, (int) height};
-        return A;
+	public Rectangle getCollisionSize() {
+        return new Rectangle((int)x, (int)y, (int)width, (int)height);
 	}
+	
 
 	
 }
