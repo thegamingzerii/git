@@ -2,8 +2,8 @@ package de.thegamingzerii.utility;
 
 import java.awt.Rectangle;
 
-import Objects.Block;
-import Objects.ICollision;
+import de.thegamingzerii.objects.Block;
+import de.thegamingzerii.objects.ICollision;
 
 public class CollisionChecker {
 

@@ -7,9 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Objects.Block;
-import Objects.Player;
-
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Graphics;
@@ -21,6 +18,8 @@ import java.awt.geom.Ellipse2D;
 
 import de.thegamingzerii.utility.Constantes;
 import de.thegamingzerii.utility.KeyboardListener;
+import de.thegamingzerii.objects.Block;
+import de.thegamingzerii.objects.Player;
 import de.thegamingzerii.states.*;
 
 

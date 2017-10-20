@@ -1,4 +1,4 @@
-package Objects;
+package de.thegamingzerii.objects;
 
 import java.awt.Rectangle;
 

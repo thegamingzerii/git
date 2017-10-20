@@ -5,9 +5,9 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import Objects.Player;
-import Objects.Block;
 import de.thegamingzerii.maingame.Game;
+import de.thegamingzerii.objects.Block;
+import de.thegamingzerii.objects.Player;
 
 
 
