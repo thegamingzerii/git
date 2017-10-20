@@ -20,13 +20,17 @@ import de.thegamingzerii.utility.Constantes;
 public class Player extends JPanel implements ICollision{
 	double x = 0;
 	double y = 0;
+	double xSpeed = 0;
+	double ySpeed = 0;
 	double xAcc = 0;
 	double yAcc = 0;
 	double height = 100;
 	double width = 50;
 	boolean moveRight = false;
 	boolean moveLeft = false;
-	double jumpCooldown = 0;
+	boolean inAir = false;
+	boolean jumpPressed = false;
+	double jumpTimer = 0;
 
 	public Player() {
 	}
@@ -36,32 +40,63 @@ public class Player extends JPanel implements ICollision{
 	
 	public void update(double delta) {
 		
-		jumpCooldown -= 1 * delta;
+		if(jumpTimer > -1) {
+			jumpTimer -= delta;
+		}
 		
-		if(yAcc < Constantes.GRAVITY) {
-			yAcc += 0.5 * delta;
+		if(jumpPressed && jumpTimer > 0) {
+			ySpeed = - 10;
+		}
+		
+		
+		
+		if(ySpeed < Constantes.GRAVITY) {
+			ySpeed += (yAcc + 0.5) * delta;
 		}
 		
 		if(!moveRight && !moveLeft) {
 			xAcc = 0;
+			xSpeed -= xSpeed * 0.1 * delta;
+			if(!(xSpeed > 0.2 || xSpeed < -0.2)) {
+				xSpeed = 0;
+			}
 		}else {
 			if(moveRight)
-				xAcc = 10;
+				if(xAcc < 0.5) {
+					xAcc += 0.25*delta;
+				}
 			
 			if(moveLeft)
-				xAcc = -10;
+				if(xAcc > -0.5) {
+					xAcc -= 0.25*delta;
+				}
 		}
 		
-		x += xAcc * delta;
+		xSpeed += xAcc;
+		if(xSpeed > 10)
+			xSpeed = 10;
+		if(xSpeed < -10) {
+			xSpeed = -10;
+		}
+		x += xSpeed * delta;
 		if(CollisionChecker.CheckAllCollisions(this)) {
-			x-= xAcc * delta;
+			x-= xSpeed * delta;
 		}
 
-		y += yAcc * delta;
+		y += ySpeed * delta;
 		if(CollisionChecker.CheckAllCollisions(this)) {
-			y-= yAcc * delta;
-			yAcc = 5;
+			y-= ySpeed * delta;
+			yAcc = 0;
+			ySpeed = 0;
 		}
+		
+		y += 1;
+		if(CollisionChecker.CheckAllCollisions(this)) {
+			inAir = false;
+		}else {
+			inAir =  true;
+		}
+		y -= 1;
 		
 		if(y > 2000) {
 			y = 0;
@@ -77,6 +112,9 @@ public class Player extends JPanel implements ICollision{
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			moveRight = false;
 		}
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			jumpPressed = false;
+		}
 			
 	}
 
@@ -85,9 +123,9 @@ public class Player extends JPanel implements ICollision{
 			moveLeft = true;
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT && !moveRight)
 			moveRight = true;
-		if (e.getKeyCode() == KeyEvent.VK_SPACE && jumpCooldown <= 0) {
-			yAcc = -20;
-			jumpCooldown = 50;
+		if (e.getKeyCode() == KeyEvent.VK_SPACE && !inAir) {
+			jumpPressed = true;
+			jumpTimer = 20;
 		}
 			
 	}
