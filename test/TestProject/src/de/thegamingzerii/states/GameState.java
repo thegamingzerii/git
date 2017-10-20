@@ -18,13 +18,15 @@ public class GameState extends JPanel implements State{
 	public void update(double delta) {
 		// TODO Auto-generated method stub
 		player.update(delta);		
+		Game.camera.moveCamera((player.getXAxis() - Game.camera.getCameraPos().getX() - (Game.camera.getWidth()/2)) * 0.01, 
+				(player.getYAxis() - Game.camera.getCameraPos().getY() - (Game.camera.getHeight()/2)) * 0.01);
 	}
 
 
 
 	@Override
 	public void init() {
-		player = new Player();
+		player = new Player(96, 128);
 				
 	}
 

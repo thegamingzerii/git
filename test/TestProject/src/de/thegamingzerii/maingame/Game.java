@@ -19,6 +19,7 @@ import java.awt.geom.Ellipse2D;
 import de.thegamingzerii.utility.Constantes;
 import de.thegamingzerii.utility.KeyboardListener;
 import de.thegamingzerii.objects.Block;
+import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.Player;
 import de.thegamingzerii.states.*;
 
@@ -43,6 +44,7 @@ public class Game extends JPanel{
 
 
 	public static JFrame frame;
+	public static Camera camera;
 	
 	
 	
@@ -101,13 +103,16 @@ public class Game extends JPanel{
 		pauseState = new PauseState();
 		currentState = ingameState;
 		frame.setSize(width, height);
+		frame.setUndecorated(true);
 		frame.setVisible(true);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ingameState.init();
 		pauseState.init();
 		mainMenuState.init();
 		
-		new Block(100, 100, 200, 20);
+		camera = new Camera(0, 0);
+		
 		new Block(500, 500, 300, 20);
 		new Block(0, 580, 300, 20);
 		new Block(800, 300, 100, 50);
@@ -123,6 +128,7 @@ public class Game extends JPanel{
 		
 	public void update(double delta) {
 		currentState.update(delta);
+		Game.camera.update(delta);
 	}
 	
 	@Override
@@ -132,7 +138,6 @@ public class Game extends JPanel{
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		ingameState.paint(g2d);
-		//GameState.block.paint(g2d);
 	}
 	
 	

@@ -10,6 +10,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import de.thegamingzerii.maingame.Game;
+
 
 /**
  * 
@@ -20,6 +22,8 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class SpriteSheet extends JPanel{
+	double frameWidth;
+	double frameHeight;
 	double width;
 	double height;
 	String path;
@@ -27,9 +31,11 @@ public class SpriteSheet extends JPanel{
 	double counter = 0;
 	int frameCount;
 	
-	SpriteSheet(String path, double frameWidth, double frameHeight, int frameSpeed, int frameCount){
-		this.width = frameWidth;
-		this.height = frameHeight;
+	SpriteSheet(String path, double frameWidth, double frameHeight, int frameSpeed, int frameCount, double scaling){
+		this.frameWidth = frameWidth;
+		this.frameHeight = frameHeight;
+		this.width = frameWidth * scaling;
+		this.height = frameHeight * scaling;
 		this.path  = path;
 		this.frameSpeed = frameSpeed;
 		this.frameCount = frameCount;
@@ -39,18 +45,18 @@ public class SpriteSheet extends JPanel{
 		counter += delta;
 	}
 	
-	public void paint(Graphics2D g, double x, double y) {
+	public void paint(Graphics2D g, double x, double y, int row) {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		int xUsable = (int)x;
-		int yUsable = (int)y;
+		int xUsable = (int) ((x - Game.camera.getCameraPos().getX()) * Camera.scale);
+		int yUsable = (int)((y - Game.camera.getCameraPos().getY()) * Camera.scale);
 		
 		try {
 			BufferedImage image = ImageIO.read(new File(path));
-			Image rightPart = image.getSubimage((int) ((Math.floor(counter / frameSpeed)%frameCount) * width), 0, (int)width, (int)height);
-			Image scaledImage = rightPart.getScaledInstance(64, 64, image.SCALE_DEFAULT);
+			Image rightPart = image.getSubimage((int) ((Math.floor(counter / frameSpeed)%frameCount) * frameWidth), (int) (row * frameHeight), (int)frameWidth, (int)frameHeight);
+			Image scaledImage = rightPart.getScaledInstance((int)(width * Camera.scale), (int)(height * Camera.scale), image.SCALE_DEFAULT);
 			g.drawImage(scaledImage, xUsable, yUsable, this);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

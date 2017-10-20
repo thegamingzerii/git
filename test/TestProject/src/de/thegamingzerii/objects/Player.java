@@ -23,9 +23,11 @@ public class Player extends GravityObject implements ICollision{
 	double jumpTimer = 0;
 	String path = "Assets/Player.png";
 	SpriteSheet sprite;
+	int moveDirection = 0;
 
-	public Player() {
-		sprite =  new SpriteSheet(path, 32, 32, 60, 2);
+	public Player(double width, double height) {
+		super(width, height);
+		sprite =  new SpriteSheet(path, 32, 33, 30, 2, height/32);
 	}
 	
 	
@@ -65,11 +67,13 @@ public class Player extends GravityObject implements ICollision{
 		}else {
 			if(moveRight)
 				if(xAcc < 0.5) {
+					moveDirection = 0;
 					xAcc += 0.25*delta;
 				}
 			
 			if(moveLeft)
 				if(xAcc > -0.5) {
+					moveDirection = 1;
 					xAcc -= 0.25*delta;
 				}
 		}
@@ -130,7 +134,7 @@ public class Player extends GravityObject implements ICollision{
 
 	public void paint(Graphics2D g) {
 		super.paint(g);
-		sprite.paint(g, x, y);
+		sprite.paint(g, x-16, y+1, moveDirection);
 	
 	}
 
