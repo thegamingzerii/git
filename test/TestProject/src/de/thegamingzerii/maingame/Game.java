@@ -4,6 +4,7 @@ package de.thegamingzerii.maingame;
 import java.nio.IntBuffer;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Objects.Block;
@@ -177,7 +178,7 @@ public static void main(String[] args) throws InterruptedException {
 	      // we last recorded
 	      if (lastFpsTime >= 1000000000)
 	      {
-	         System.out.println("(FPS: "+fps+")");
+	    	 System.out.println("FPS: " + fps);
 	         lastFpsTime = 0;
 	         fps = 0;
 	      }

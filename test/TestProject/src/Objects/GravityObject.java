@@ -14,8 +14,8 @@ public class GravityObject extends JPanel implements ICollision{
 	double ySpeed = 0;
 	double xAcc = 0;
 	double yAcc = 0;
-	double height = 100;
-	double width = 50;
+	double height = 64;
+	double width = 64;
 	
 	public void gravity(double delta) {
 		if(ySpeed < Constantes.TERMINAL_VELO) {

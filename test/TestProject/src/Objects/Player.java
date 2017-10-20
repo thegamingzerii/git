@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import de.thegamingzerii.utility.CollisionChecker;
 
 
+@SuppressWarnings("serial")
 public class Player extends GravityObject implements ICollision{
 	
 	boolean moveRight = false;
@@ -20,18 +21,25 @@ public class Player extends GravityObject implements ICollision{
 	boolean inAir = false;
 	boolean jumpPressed = false;
 	double jumpTimer = 0;
+	String path = "Assets/Player.png";
+	SpriteSheet sprite;
 
 	public Player() {
+		sprite =  new SpriteSheet(path, 32, 32, 60, 2);
 	}
 	
 	
 
 	
 	public void update(double delta) {
+		sprite.update(delta);
+		
 		move(delta);
-		
-		
-			
+		if(xSpeed >= 0) {
+			path = "Assets/PlayerRight.png";
+		}else {
+			path = "Assets/PlayerLeft.png";
+		}
 		
 	}
 		
@@ -50,7 +58,7 @@ public class Player extends GravityObject implements ICollision{
 		
 		if(!moveRight && !moveLeft) {
 			xAcc = 0;
-			xSpeed -= xSpeed * 0.1 * delta;
+			xSpeed -= xSpeed * 0.2 * delta;
 			if(!(xSpeed > 0.2 || xSpeed < -0.2)) {
 				xSpeed = 0;
 			}
@@ -91,6 +99,7 @@ public class Player extends GravityObject implements ICollision{
 			y = 0;
 			x = 0;
 		}
+	
 	}
 	
 	public void keyReleased(KeyEvent e) {
@@ -116,22 +125,12 @@ public class Player extends GravityObject implements ICollision{
 		}
 			
 	}
+	
+	
 
 	public void paint(Graphics2D g) {
 		super.paint(g);
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
-		int xUsable = (int)x;
-		int yUsable = (int)y;
-		try {
-			BufferedImage image = ImageIO.read(new File("Assets/Player.png"));
-			Image scaledImage = image.getScaledInstance((int)width, (int)height, image.SCALE_DEFAULT);
-			g.drawImage(scaledImage, xUsable, yUsable, this);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		sprite.paint(g, x, y);
 	
 	}
 
