@@ -4,23 +4,20 @@ package de.thegamingzerii.maingame;
 import java.nio.IntBuffer;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.geom.Ellipse2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import de.thegamingzerii.utility.Constantes;
-import de.thegamingzerii.utility.KeyboardListener;
-import de.thegamingzerii.objects.Block;
+import de.thegamingzerii.editor.Map;
 import de.thegamingzerii.objects.Camera;
-import de.thegamingzerii.objects.Player;
 import de.thegamingzerii.states.*;
 
 
@@ -34,10 +31,11 @@ public class Game extends JPanel{
 	private long window;
 	private int width = Constantes.width;
 	private int height = Constantes.height;
-	private static State ingameState;
-	private static State mainMenuState;
-	private static State pauseState;
-	private static State currentState;
+	public static State ingameState;
+	public static State mainMenuState;
+	public static State pauseState;
+	public static State editingState;
+	public static State currentState;
 	
 	private static Game currentGame;
 	
@@ -101,21 +99,50 @@ public class Game extends JPanel{
 		ingameState = new GameState();
 		mainMenuState = new MenuState();
 		pauseState = new PauseState();
+		editingState = new EditingState();
 		currentState = ingameState;
 		frame.setSize(width, height);
 		frame.setUndecorated(true);
 		frame.setVisible(true);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.addMouseListener(new MouseListener() {
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		    }
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				((EditingState) editingState).mousePressed(e);
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				((EditingState) editingState).mouseReleased(e);
+				
+			}
+		});
 		ingameState.init();
 		pauseState.init();
 		mainMenuState.init();
 		
 		camera = new Camera(0, 0);
+		Map.loadMap();
 		
-		new Block(500, 500, 300, 20);
-		new Block(0, 580, 300, 20);
-		new Block(800, 300, 100, 50);
+
 		
 		
 		
@@ -137,7 +164,7 @@ public class Game extends JPanel{
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		ingameState.paint(g2d);
+		currentState.paint(g2d);
 	}
 	
 	

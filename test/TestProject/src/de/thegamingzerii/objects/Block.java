@@ -50,6 +50,7 @@ public class Block extends JPanel implements ICollision{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 
 	}
 

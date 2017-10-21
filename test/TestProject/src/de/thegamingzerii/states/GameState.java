@@ -20,6 +20,7 @@ public class GameState extends JPanel implements State{
 		player.update(delta);		
 		Game.camera.moveCamera((player.getXAxis() - Game.camera.getCameraPos().getX() - (Game.camera.getWidth()/2)) * 0.01, 
 				(player.getYAxis() - Game.camera.getCameraPos().getY() - (Game.camera.getHeight()/2)) * 0.01);
+		
 	}
 
 

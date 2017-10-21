@@ -10,6 +10,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import de.thegamingzerii.maingame.Game;
+import de.thegamingzerii.states.EditingState;
+import de.thegamingzerii.states.GameState;
 import de.thegamingzerii.utility.CollisionChecker;
 
 
@@ -127,6 +130,17 @@ public class Player extends GravityObject implements ICollision{
 			jumpPressed = true;
 			jumpTimer = 20;
 		}
+		if(e.getKeyCode() == KeyEvent.VK_E) {
+			if(Game.currentState != Game.editingState) {
+				Game.setCurrentState(Game.editingState);
+				EditingState.editing = true;
+			}
+			else {
+				Game.setCurrentState(Game.ingameState);
+				EditingState.editing = false;
+			}
+		}
+			
 			
 	}
 	
