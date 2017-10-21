@@ -57,7 +57,7 @@ public class EditingState extends JPanel implements State{
 			}
 
 			System.out.println((int)x + "; " + (int)y + "; " + (int)(xDiff) + "; " + (int)(yDiff));
-			g.drawRect ((int)x, (int)y, (int)(xDiff), (int)(yDiff));
+			g.drawRect ((int) Math.round(x), (int)Math.round(y), (int)Math.round(xDiff), (int)Math.round(yDiff));
 			  
 		}
 		
@@ -99,7 +99,7 @@ public class EditingState extends JPanel implements State{
 				
 				
 			if(xDifference != 0 && yDifference != 0)
-				Map.addToMap("Block " + x + " " + y + " " + xDifference + " " + yDifference);
+				Map.addToMap("Block " + Math.round(x) + " " + Math.round(y) + " " + Math.round(xDifference) + " " + Math.round(yDifference));
 			
 		}
 		
