@@ -30,7 +30,7 @@ public class Player extends GravityObject implements ICollision{
 
 	public Player(double width, double height) {
 		super(width, height);
-		sprite =  new SpriteSheet(path, 32, 33, 30, 2, height/32);
+		sprite =  new SpriteSheet(path, 32, 35, 12, 4, height/32);
 	}
 	
 	
@@ -87,9 +87,27 @@ public class Player extends GravityObject implements ICollision{
 		if(xSpeed < -10) {
 			xSpeed = -10;
 		}
+		
+		//checks if x direction movement is possible, also checks for stairs
 		x += xSpeed * delta;
 		if(CollisionChecker.CheckAllCollisions(this)) {
-			x-= xSpeed * delta;
+			int yMod = 1;
+			boolean finished = false;
+			//change yMod < XXXX for higher stairs to climb (in logic pixels)
+			while(yMod < 50 && !finished) {
+				yMod++;
+				y -= yMod;
+				
+				if(CollisionChecker.CheckAllCollisions(this)) {
+					y+= yMod;
+				}else {
+					finished = true;
+				}
+			}
+			if(!finished)
+				x-= xSpeed * delta;
+			
+			
 		}
 
 		
@@ -148,7 +166,15 @@ public class Player extends GravityObject implements ICollision{
 
 	public void paint(Graphics2D g) {
 		super.paint(g);
-		sprite.paint(g, x-16, y+1, moveDirection);
+		if(moveRight) {
+			sprite.paint(g, x-16, y-8, moveDirection+2);
+		}else {
+			if(moveLeft) 
+				sprite.paint(g, x-16, y-8, moveDirection+2);
+			else
+				sprite.paint(g, x-16, y-8, moveDirection);
+		}
+		
 	
 	}
 
