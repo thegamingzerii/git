@@ -1,12 +1,21 @@
 Block 0 500 300 20
-Block 298 500 429 19
-Block -1 519 728 1
-Block 726 501 759 17
-Block 1482 501 291 16
-Block -151 462 150 45
-Block -301 406 146 83
-Block -29 477 32 33
-Block -173 447 24 33
-Block 1770 450 88 69
-Block 1863 414 71 71
-Block 1745 483 49 25
+Jumper 100 100
+Block -447 500 446 19
+Block -422 266 78 39
+Jumper 713 318
+Jumper -321 85
+Block -23 500 50 17
+Jumper 434 181
+Jumper 320 331
+Jumper 309 33
+Jumper -142 -80
+Jumper -729 245
+Jumper -996 338
+Jumper -1658 181
+Jumper -1423 558
+Jumper -584 90
+Jumper -667 416
+Jumper -580 659
+Jumper -244 696
+Jumper 206 726
+Jumper 575 689

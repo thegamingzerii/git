@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 
 import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.ICollision;
+import de.thegamingzerii.objects.Jumper;
 
 public class CollisionChecker {
 
@@ -31,5 +32,13 @@ public class CollisionChecker {
 		}
 		return bool;
 		
+	}
+	
+	
+	public static void checkAllInteractions(ICollision object) {
+		for(int i = 0; i < Jumper.allJumpers.size(); i++) {
+			if(Jumper.allJumpers.get(i).checkProximity(object.getCollisionSize()))
+				Jumper.allJumpers.get(i).interact();
+		}
 	}
 }

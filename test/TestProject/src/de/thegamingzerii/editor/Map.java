@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import de.thegamingzerii.objects.Block;
+import de.thegamingzerii.objects.Jumper;
 
 public class Map {
 	
@@ -63,6 +64,10 @@ public class Map {
     		if(splited[0].equals("Block")) {
     			new Block(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), 
     					Double.parseDouble(splited[3]), Double.parseDouble(splited[4]));
+    		}
+    		
+    		if(splited[0].equals("Jumper")) {
+    			new Jumper(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]));
     		}
 		}
             	

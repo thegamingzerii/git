@@ -182,7 +182,7 @@ public static void main(String[] args) throws InterruptedException {
 	//frame.add(keyboard);
 	
 	long lastLoopTime = System.nanoTime();
-	final int TARGET_FPS = 300;
+	final int TARGET_FPS = 60;
     final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;   
     final long CONSTANT_LOGIC_TIME = 1000000000 / 60; 
     long lastFpsTime = 0;

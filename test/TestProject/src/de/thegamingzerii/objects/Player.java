@@ -22,7 +22,9 @@ public class Player extends GravityObject implements ICollision{
 	boolean moveRight = false;
 	boolean moveLeft = false;
 	boolean inAir = false;
+	boolean inJump = false;
 	boolean jumpPressed = false;
+	boolean doubleJumpAvailable = true;
 	double jumpTimer = 0;
 	String path = "Assets/Player.png";
 	SpriteSheet sprite;
@@ -30,7 +32,7 @@ public class Player extends GravityObject implements ICollision{
 
 	public Player(double width, double height) {
 		super(width, height);
-		sprite =  new SpriteSheet(path, 32, 35, 12, 4, height/32);
+		sprite =  new SpriteSheet(path, 32, 36, 8, 4, height/32);
 	}
 	
 	
@@ -48,6 +50,10 @@ public class Player extends GravityObject implements ICollision{
 		
 	}
 		
+	
+	public void resetDoubleJump() {
+		doubleJumpAvailable = true;
+	}
 	
 	public void move(double delta) {
 		super.gravity(delta);
@@ -115,38 +121,58 @@ public class Player extends GravityObject implements ICollision{
 		y += 1;
 		if(CollisionChecker.CheckAllCollisions(this)) {
 			inAir = false;
+			doubleJumpAvailable = true;
 		}else {
 			inAir =  true;
 		}
 		y -= 1;
 		
+		
+		if(inAir) {
+			y += 20;
+			if(CollisionChecker.CheckAllCollisions(this)) {
+				inJump = false;
+			}else {
+				inJump =  true;
+			}
+			y -= 20;
+			
+			
+		}
+		
 		if(y > 2000) {
 			y = 0;
 			x = 0;
 		}
+		
 	
 	}
 	
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
+		if ((e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A))
 			moveLeft = false;
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+		if ((e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D)) {
 			moveRight = false;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			jumpPressed = false;
+			jumpTimer = 0;
 		}
 			
 	}
 
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_LEFT && !moveLeft)
+		if ((e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) && !moveLeft)
 			moveLeft = true;
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT && !moveRight)
+		if ((e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) && !moveRight)
 			moveRight = true;
-		if (e.getKeyCode() == KeyEvent.VK_SPACE && !inAir) {
+		if (e.getKeyCode() == KeyEvent.VK_SPACE && (!inAir || doubleJumpAvailable)) {
+			if(inAir && jumpTimer <= 0) {
+				doubleJumpAvailable = false;
+			}
 			jumpPressed = true;
 			jumpTimer = 20;
+			
 		}
 		if(e.getKeyCode() == KeyEvent.VK_E) {
 			if(Game.currentState != Game.editingState) {
@@ -158,22 +184,36 @@ public class Player extends GravityObject implements ICollision{
 				EditingState.editing = false;
 			}
 		}
+		if(e.getKeyCode() == KeyEvent.VK_T) {
+			EditingState.mode = 0;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_R) {
+			EditingState.mode = 1;
+		}
 			
 			
 	}
 	
-	
+
 
 	public void paint(Graphics2D g) {
 		super.paint(g);
-		if(moveRight) {
-			sprite.paint(g, x-16, y-8, moveDirection+2);
+		if(inJump) {
+			if(moveDirection == 0)
+				sprite.paint(g, x-16, y-8, 5);
+			if(moveDirection == 1)
+				sprite.paint(g, x-16, y-8, 4);
 		}else {
-			if(moveLeft) 
+			if(moveRight) {
 				sprite.paint(g, x-16, y-8, moveDirection+2);
-			else
-				sprite.paint(g, x-16, y-8, moveDirection);
+			}else {
+				if(moveLeft) 
+					sprite.paint(g, x-16, y-8, moveDirection+2);
+				else
+					sprite.paint(g, x-16, y-8, moveDirection);
+			}
 		}
+		
 		
 	
 	}
