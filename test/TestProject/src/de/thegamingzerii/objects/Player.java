@@ -14,6 +14,7 @@ import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.states.EditingState;
 import de.thegamingzerii.states.GameState;
 import de.thegamingzerii.utility.CollisionChecker;
+import de.thegamingzerii.utility.Constantes;
 
 
 @SuppressWarnings("serial")
@@ -21,6 +22,8 @@ public class Player extends GravityObject implements ICollision{
 	
 	boolean moveRight = false;
 	boolean moveLeft = false;
+	boolean slidingLeft = false;
+	boolean slidingRight =  false;
 	boolean inAir = false;
 	boolean inJump = false;
 	boolean jumpPressed = false;
@@ -55,8 +58,44 @@ public class Player extends GravityObject implements ICollision{
 		doubleJumpAvailable = true;
 	}
 	
-	public void move(double delta) {
+	
+	public void jump() {
+		if(slidingLeft) {
+			xSpeed = 8;
+		}else {
+			if(slidingRight) {
+				xSpeed = -8;
+			}else {
+				if(inAir && jumpTimer <= 0) {
+					doubleJumpAvailable = false;
+				}
+				
+			}
+		}
+		jumpPressed = true;
+		jumpTimer = 20;
+		
+		
+	}
+	
+	
+	public void gravity(double delta) {
 		super.gravity(delta);
+		if((slidingLeft || slidingRight) && ySpeed > Constantes.SLIDING_VELO) {
+			ySpeed = Constantes.SLIDING_VELO;
+		}
+	}
+	
+	
+	public void move(double delta) {
+		gravity(delta);
+		if(slidingLeft || slidingRight)
+			doubleJumpAvailable = true;
+		
+		slidingLeft = false;
+		slidingRight = false;
+		
+		
 		if(jumpTimer > -1) {
 			jumpTimer -= delta;
 		}
@@ -69,7 +108,7 @@ public class Player extends GravityObject implements ICollision{
 		
 		if(!moveRight && !moveLeft) {
 			xAcc = 0;
-			xSpeed -= xSpeed * 0.2 * delta;
+			xSpeed -= xSpeed * 0.1 * delta;
 			if(!(xSpeed > 0.2 || xSpeed < -0.2)) {
 				xSpeed = 0;
 			}
@@ -77,13 +116,28 @@ public class Player extends GravityObject implements ICollision{
 			if(moveRight)
 				if(xAcc < 0.5) {
 					moveDirection = 0;
-					xAcc += 0.25*delta;
+					if(inAir) {
+						if(xAcc < 0.25) {
+							xAcc += 0.2*delta;
+						}
+						
+					}else {
+						xAcc += 0.2*delta;
+					}
+					
 				}
 			
 			if(moveLeft)
 				if(xAcc > -0.5) {
 					moveDirection = 1;
-					xAcc -= 0.25*delta;
+					if(inAir) {
+						if(xAcc > -0.25) {
+							xAcc -= 0.2*delta;
+						}
+					}else {
+						xAcc -= 0.2*delta;
+					}
+					
 				}
 		}
 		
@@ -104,14 +158,22 @@ public class Player extends GravityObject implements ICollision{
 				yMod++;
 				y -= yMod;
 				
-				if(CollisionChecker.CheckAllCollisions(this)) {
+				if(CollisionChecker.CheckAllCollisions(this) || inAir) {
 					y+= yMod;
 				}else {
 					finished = true;
 				}
 			}
-			if(!finished)
+			if(!finished) {
 				x-= xSpeed * delta;
+				if(inAir) {
+					if(xSpeed < 0)
+						slidingLeft = true;
+					else
+						slidingRight = true;
+				}
+			}
+				
 			
 			
 		}
@@ -150,10 +212,20 @@ public class Player extends GravityObject implements ICollision{
 	
 	public void keyReleased(KeyEvent e) {
 		if ((e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A))
-			moveLeft = false;
+			if(EditingState.editing) {
+				Game.camera.moveCamera(-1, 0);
+			}else {
+				moveLeft = false;
+			}
 		if ((e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D)) {
-			moveRight = false;
+			if(EditingState.editing) {
+				Game.camera.moveCamera(1, 0);
+			}else {
+				moveRight = false;
+			}
 		}
+		
+		
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			jumpPressed = false;
 			jumpTimer = 0;
@@ -162,16 +234,36 @@ public class Player extends GravityObject implements ICollision{
 	}
 
 	public void keyPressed(KeyEvent e) {
-		if ((e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) && !moveLeft)
-			moveLeft = true;
-		if ((e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) && !moveRight)
-			moveRight = true;
-		if (e.getKeyCode() == KeyEvent.VK_SPACE && (!inAir || doubleJumpAvailable)) {
-			if(inAir && jumpTimer <= 0) {
-				doubleJumpAvailable = false;
+		if ((e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) && !moveLeft) {
+			if(EditingState.editing) {
+				Game.camera.moveCamera(-100, 0);
+			}else {
+				moveLeft = true;
 			}
-			jumpPressed = true;
-			jumpTimer = 20;
+		}
+			
+		if ((e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) && !moveRight) {
+			if(EditingState.editing) {
+				Game.camera.moveCamera(100, 0);
+			}else {
+				moveRight = true;
+			}
+		}
+			
+		if ((e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W)) {
+			if(EditingState.editing) {
+				Game.camera.moveCamera(0, -100);
+			}else {
+			}
+		}
+		if ((e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S)) {
+			if(EditingState.editing) {
+				Game.camera.moveCamera(0, 100);
+			}else {
+			}
+		}
+		if (e.getKeyCode() == KeyEvent.VK_SPACE && (!inAir || doubleJumpAvailable || slidingLeft || slidingRight)) {
+			jump();
 			
 		}
 		if(e.getKeyCode() == KeyEvent.VK_E) {
@@ -190,6 +282,9 @@ public class Player extends GravityObject implements ICollision{
 		if(e.getKeyCode() == KeyEvent.VK_R) {
 			EditingState.mode = 1;
 		}
+		if(e.getKeyCode() == KeyEvent.VK_F) {
+			EditingState.mode = 2;
+		}
 			
 			
 	}
@@ -198,21 +293,30 @@ public class Player extends GravityObject implements ICollision{
 
 	public void paint(Graphics2D g) {
 		super.paint(g);
-		if(inJump) {
-			if(moveDirection == 0)
-				sprite.paint(g, x-16, y-8, 5);
-			if(moveDirection == 1)
-				sprite.paint(g, x-16, y-8, 4);
+		if(slidingLeft) {
+			sprite.paint(g, x-20, y-8, moveDirection + 6);
 		}else {
-			if(moveRight) {
-				sprite.paint(g, x-16, y-8, moveDirection+2);
+			if(slidingRight) {
+				sprite.paint(g, x-12, y-8, moveDirection + 6);
 			}else {
-				if(moveLeft) 
-					sprite.paint(g, x-16, y-8, moveDirection+2);
-				else
-					sprite.paint(g, x-16, y-8, moveDirection);
+				if(inJump) {
+					if(moveDirection == 0)
+						sprite.paint(g, x-16, y-8, 5);
+					if(moveDirection == 1)
+						sprite.paint(g, x-16, y-8, 4);
+				}else {
+					if(moveRight) {
+						sprite.paint(g, x-16, y-8, moveDirection+2);
+					}else {
+						if(moveLeft) 
+							sprite.paint(g, x-16, y-8, moveDirection+2);
+						else
+							sprite.paint(g, x-16, y-8, moveDirection);
+					}
+				}
 			}
 		}
+		
 		
 		
 	

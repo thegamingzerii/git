@@ -55,27 +55,34 @@ public class Map {
         return null;
 	}
 	
-	public static void loadMap() {
+	public static ArrayList<Object> loadMap() {
+		Block.allBlocks.clear();
+		Jumper.allJumpers.clear();
 		ArrayList<String> lines = readMapFile();
+		ArrayList<Object> objects = new ArrayList<Object>();
 		for(int i = 0; i < lines.size(); i++) {
 			String[] splited = lines.get(i).split("\\s+");
         	
     		
     		if(splited[0].equals("Block")) {
-    			new Block(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), 
-    					Double.parseDouble(splited[3]), Double.parseDouble(splited[4]));
+    			objects.add(new Block(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), 
+    					Double.parseDouble(splited[3]), Double.parseDouble(splited[4])));
     		}
     		
     		if(splited[0].equals("Jumper")) {
-    			new Jumper(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]));
+    			objects.add(new Jumper(Double.parseDouble(splited[1]), Double.parseDouble(splited[2])));
     		}
 		}
+		return objects;
             	
             		
             		
             	
                 
 	}
+	
+	
+	
 	
 	public static void addToMap(String mapObject) {
 		
@@ -115,5 +122,18 @@ public class Map {
         }
 		
 	}
+	
+	
+	public static void reWriteMap() {
+		ArrayList<String> object = new ArrayList<String>();
+		for(int i = 0; i < Jumper.allJumpers.size(); i++) {
+			object.add(Jumper.allJumpers.get(i).toString());
+		}
+		for(int i = 0; i < Block.allBlocks.size(); i++) {
+			object.add(Block.allBlocks.get(i).toString());
+		}
+			
+		writeToMap(object);
+		
+	}
 }
-

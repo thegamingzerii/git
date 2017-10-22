@@ -69,5 +69,19 @@ public class Jumper extends JPanel implements IInteract{
 		}
 	}
 	
+	public double getXAxis() {
+		return x;
+	}
+
+
+	
+	public double getYAxis() {
+		return y;
+	}
+	
+	public String toString() {
+		return "Jumper " + x + " " + y;
+	}
+	
 
 }

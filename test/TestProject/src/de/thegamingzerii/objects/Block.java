@@ -94,6 +94,10 @@ public class Block extends JPanel implements ICollision{
 	public Rectangle getCollisionSize() {
         return new Rectangle((int)x, (int)y, (int)width, (int)height);
 	}
+	
+	public String toString() {
+		return "Block " + x + " " + y + " " + width+ " " + height;
+	}
 
 
 	

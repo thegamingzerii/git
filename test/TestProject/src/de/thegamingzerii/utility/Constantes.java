@@ -7,6 +7,7 @@ public class Constantes {
 	
 	public static final double GRAVITY = 0.5;
 	public static final double TERMINAL_VELO = 50;
+	public static final double SLIDING_VELO = 5;
 	
 
 }
