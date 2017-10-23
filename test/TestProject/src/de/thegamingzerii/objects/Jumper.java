@@ -15,8 +15,10 @@ public class Jumper extends JPanel implements IInteract{
 	private double x = 0;
 	private double y = 0;
 	private double r = 100;
+	private double usedCounter = 0;
 	String path = "Assets/Lantern.png";
 	SpriteSheet sprite;
+	
 	
 	public Jumper(double x, double y) {
 		this.x = x;
@@ -27,11 +29,16 @@ public class Jumper extends JPanel implements IInteract{
 	
 	public void update(double delta) {
 		sprite.update(delta);
+		usedCounter -= delta;
 	}
 	
 	@Override
 	public void interact() {
-		GameState.player.resetDoubleJump();
+		if(usedCounter <= 0) {
+			GameState.player.resetDoubleJump();
+			usedCounter = 60;
+		}
+		
 		
 	}
 

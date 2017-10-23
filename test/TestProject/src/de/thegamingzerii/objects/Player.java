@@ -83,14 +83,32 @@ public class Player extends GravityObject implements ICollision{
 		super.gravity(delta);
 		if((slidingLeft || slidingRight) && ySpeed > Constantes.SLIDING_VELO) {
 			ySpeed = Constantes.SLIDING_VELO;
+			if(slidingLeft) {
+				if(Math.random() < 0.1) {
+					new Particle("Assets/Particle.png", x, y-28, 16, 16, 60);
+				}
+				if(Math.random() < 0.1) {
+					new Particle("Assets/Particle.png", x, y+100, 16, 16, 60);
+				}
+			}else {
+				if(Math.random() < 0.1) {
+					new Particle("Assets/Particle.png", x+85, y-28, 16, 16, 60);
+				}
+				if(Math.random() < 0.1) {
+					new Particle("Assets/Particle.png", x+85, y+100, 16, 16, 60);
+				}
+			}
+			
 		}
 	}
 	
 	
 	public void move(double delta) {
 		gravity(delta);
-		if(slidingLeft || slidingRight)
+		if(slidingLeft || slidingRight) {
 			doubleJumpAvailable = true;
+			
+		}
 		
 		slidingLeft = false;
 		slidingRight = false;
@@ -200,6 +218,8 @@ public class Player extends GravityObject implements ICollision{
 			y -= 20;
 			
 			
+		}else {
+			inJump = false;
 		}
 		
 		if(y > 2000) {

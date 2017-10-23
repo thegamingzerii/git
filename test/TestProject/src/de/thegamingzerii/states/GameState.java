@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.Jumper;
+import de.thegamingzerii.objects.Particle;
 import de.thegamingzerii.objects.Player;
 
 
@@ -27,6 +28,10 @@ public class GameState extends JPanel implements State{
 			if(Jumper.allJumpers.get(i).checkProximity(player.getCollisionSize())) {
 				Jumper.allJumpers.get(i).interact();
 			}
+		}
+		
+		for(int i = 0; i < Particle.allParticles.size(); i++) {
+			Particle.allParticles.get(i).update(delta);
 		}
 		
 	}
@@ -49,6 +54,9 @@ public class GameState extends JPanel implements State{
 			Jumper.allJumpers.get(i).paint(g);
 		}
 		
+		for(int i = 0; i < Particle.allParticles.size(); i++) {
+			Particle.allParticles.get(i).paint(g);
+		}
 	}
 
 	
