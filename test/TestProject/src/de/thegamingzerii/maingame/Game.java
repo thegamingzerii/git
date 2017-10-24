@@ -3,13 +3,18 @@ package de.thegamingzerii.maingame;
 
 import java.nio.IntBuffer;
 
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -18,6 +23,7 @@ import java.awt.event.MouseListener;
 import de.thegamingzerii.utility.Constantes;
 import de.thegamingzerii.editor.Map;
 import de.thegamingzerii.objects.Camera;
+import de.thegamingzerii.objects.Player;
 import de.thegamingzerii.states.*;
 
 
@@ -61,21 +67,8 @@ public class Game extends JPanel{
 	
 	
 	public Game() {
-		addKeyListener(new KeyListener() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-			}
 
-			@Override
-			public void keyReleased(KeyEvent e) {
-				GameState.player.keyReleased(e);
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				GameState.player.keyPressed(e);
-			}
-		});
+		
 		setFocusable(true);
 		currentGame = run();
 	}
@@ -95,12 +88,54 @@ public class Game extends JPanel{
 	
 
 	private void init() {
-		
+		int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
 		ingameState = new GameState();
 		mainMenuState = new MenuState();
 		pauseState = new PauseState();
 		editingState = new EditingState();
+		
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("SPACE"), "jump");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("W"), "move up");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("A"), "move left");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("S"), "move down");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("D"), "move right");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("released SPACE"), "stop jump");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("released W"), "stop move up");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("released A"), "stop move left");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("released S"), "stop move down");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("released D"), "stop move right");
+		
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("ESCAPE"), "escape");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("E"), "editor");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("R"), "r");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("T"), "t");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("F"), "f");
+		
+		ingameState.getActionMap().put("jump", new JumpAction(false));
+		ingameState.getActionMap().put("move up", new MoveAction(0, false));
+		ingameState.getActionMap().put("move left", new MoveAction(1, false));
+		ingameState.getActionMap().put("move down", new MoveAction(2, false));
+		ingameState.getActionMap().put("move right", new MoveAction(3, false));
+		ingameState.getActionMap().put("stop jump", new JumpAction(true));
+		ingameState.getActionMap().put("stop move up", new MoveAction(0, true));
+		ingameState.getActionMap().put("stop move left", new MoveAction(1, true));
+		ingameState.getActionMap().put("stop move down", new MoveAction(2, true));
+		ingameState.getActionMap().put("stop move right", new MoveAction(3, true));
+		
+		ingameState.getActionMap().put("escape", new EscapeAction());
+		ingameState.getActionMap().put("editor", new ChangeToEditorAction());
+		ingameState.getActionMap().put("t", new PressedOtherKey(0));
+		ingameState.getActionMap().put("r", new PressedOtherKey(1));
+		ingameState.getActionMap().put("f", new PressedOtherKey(2));
+		
+		
+		
+		
 		currentState = ingameState;
+		frame.add(ingameState);
+		frame.add(mainMenuState);
+		frame.add(pauseState);
+		frame.add(editingState);
 		frame.setSize(width, height);
 		frame.setUndecorated(true);
 		frame.setVisible(true);
@@ -131,7 +166,22 @@ public class Game extends JPanel{
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				((EditingState) editingState).mouseReleased(e);
+				if(currentState == editingState) {
+					((EditingState) editingState).mouseReleased(e);
+				}else {
+					if(currentState == pauseState) {
+						((PauseState) pauseState).mousePressed(e);
+					}else {
+						if(currentState == mainMenuState) {
+							((MenuState) mainMenuState).mousePressed(e);
+						}
+					}
+					
+				}
+				
+				
+				
+				
 				
 			}
 		});
@@ -166,6 +216,8 @@ public class Game extends JPanel{
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		currentState.paint(g2d);
 	}
+	
+	
 	
 	
 	
@@ -241,22 +293,140 @@ public static void main(String[] args) throws InterruptedException {
 	      
 	   }
     }
+
+
+private class JumpAction extends AbstractAction{
+	private boolean released = false;
+	public JumpAction(boolean released) {
+		this.released = released;
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
 		
-public class MyKeyListener implements KeyListener {
-	@Override
-	public void keyTyped(KeyEvent e) {
+		
+		if(e.getSource() instanceof GameState) {
+			if(released) {
+				GameState.player.jumpPressed = false;
+				GameState.player.jumpTimer = 0;
+			}
+			else
+				GameState.player.jump();
+				
+		}
+			
+		
 	}
+	
+}
 
-	@Override
-	public void keyPressed(KeyEvent e) {
-		System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
+private class MoveAction extends AbstractAction{
+	private int direction;
+	private boolean released = false;
+	
+	public MoveAction(int direction, boolean released) {
+		this.direction = direction;
+		this.released = released;
 	}
-
+	
 	@Override
-	public void keyReleased(KeyEvent e) {
-		System.out.println("keyReleased="+KeyEvent.getKeyText(e.getKeyCode()));
+	public void actionPerformed(ActionEvent e) {
+		if(currentState == ingameState) {
+			switch(direction) {
+			case 1:
+				GameState.player.recieveMovement(true, released);
+				break;
+			case 3:
+				GameState.player.recieveMovement(false, released);
+				break;
+			}
+		}
+		if(currentState == editingState) {
+			if(!released) {
+				switch(direction) {
+				case 0:
+					camera.moveCamera(0, -10);
+					break;
+				case 1:
+					camera.moveCamera(-10, 0);
+					break;
+				case 2:
+					camera.moveCamera(0, 10);
+					break;
+				case 3:
+					camera.moveCamera(10, 0);
+					break;
+				}
+			}
+			
+		}
+			
+		
 	}
 }
+
+
+private class EscapeAction extends AbstractAction{
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		
+		if(currentState == ingameState) {
+			currentState = pauseState;
+		}else {
+			if(currentState == pauseState)
+				currentState = ingameState;
+			else {
+				if(currentState == mainMenuState)
+					System.exit(0);
+			}
+			
+		}
+			
+		
+		
+	}
+	
+}
+
+private class ChangeToEditorAction extends AbstractAction{
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		if(currentState == ingameState) {
+			currentState = editingState;
+			EditingState.editing = true;
+		}	
+		else if(currentState == editingState) {
+			currentState = ingameState;
+			EditingState.editing = false;
+		}
+		
+	}
+	
+}
+
+private class PressedOtherKey extends AbstractAction{
+
+	int keyId;
+	
+	public PressedOtherKey(int keyId) {
+		this.keyId = keyId;
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(currentState == editingState) {
+				EditingState.mode = keyId;
+				
+			}
+		}
+		
+	}
+	
+}
+		
+
 	
 
-}

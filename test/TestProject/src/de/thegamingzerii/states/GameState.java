@@ -14,7 +14,7 @@ import de.thegamingzerii.objects.Player;
 
 
 
-public class GameState extends JPanel implements State{
+public class GameState extends State{
 	public static Player player;
 	@Override
 	public void update(double delta) {
@@ -57,6 +57,10 @@ public class GameState extends JPanel implements State{
 		for(int i = 0; i < Particle.allParticles.size(); i++) {
 			Particle.allParticles.get(i).paint(g);
 		}
+	}
+	
+	public void output() {
+System.out.println("dies das");
 	}
 
 	

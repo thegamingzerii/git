@@ -26,9 +26,9 @@ public class Player extends GravityObject implements ICollision{
 	boolean slidingRight =  false;
 	boolean inAir = false;
 	boolean inJump = false;
-	boolean jumpPressed = false;
+	public boolean jumpPressed = false;
 	boolean doubleJumpAvailable = true;
-	double jumpTimer = 0;
+	public double jumpTimer = 0;
 	String path = "Assets/Player.png";
 	SpriteSheet sprite;
 	int moveDirection = 0;
@@ -51,6 +51,7 @@ public class Player extends GravityObject implements ICollision{
 			path = "Assets/PlayerLeft.png";
 		}
 		
+		
 	}
 		
 	
@@ -60,35 +61,36 @@ public class Player extends GravityObject implements ICollision{
 	
 	
 	public void jump() {
-		if(slidingLeft) {
-			xSpeed = 8;
-			jumpPressed = true;
-			jumpTimer = 20;
-		}else {
-			if(slidingRight) {
-				xSpeed = -8;
+		if(!jumpPressed && (!inAir || doubleJumpAvailable || slidingLeft || slidingRight)) {
+			if(slidingLeft) {
+				xSpeed = 8;
 				jumpPressed = true;
 				jumpTimer = 20;
 			}else {
-				if(inAir && jumpTimer <= 0) {
-					doubleJumpAvailable = false;
+				if(slidingRight) {
+					xSpeed = -8;
 					jumpPressed = true;
 					jumpTimer = 20;
 				}else {
-					if(!inAir) {
+					if(inAir && jumpTimer <= 0) {
+						doubleJumpAvailable = false;
 						jumpPressed = true;
 						jumpTimer = 20;
 					}else {
-						jumpPressed = false;
+						if(!inAir) {
+							jumpPressed = true;
+							jumpTimer = 20;
+						}else {
+							jumpPressed = false;
+						}
 					}
+					
+					
 				}
-				
-				
 			}
+		
+		
 		}
-		
-		
-		
 	}
 	
 	
@@ -241,89 +243,27 @@ public class Player extends GravityObject implements ICollision{
 		}
 		
 	
+		while(CollisionChecker.CheckAllCollisions(this)) {
+			y -= 1;
+		}
+		
 	}
 	
-	public void keyReleased(KeyEvent e) {
-		if ((e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A))
-			if(EditingState.editing) {
-				Game.camera.moveCamera(-1, 0);
-			}else {
+	
+	public void recieveMovement(boolean direction, boolean released) {
+		if(released) {
+			if(direction)
 				moveLeft = false;
-			}
-		if ((e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D)) {
-			if(EditingState.editing) {
-				Game.camera.moveCamera(1, 0);
-			}else {
+			else
 				moveRight = false;
-			}
+		}else {
+			if(direction)
+				moveLeft = true;
+			else
+				moveRight = true;
 		}
-		
-		
-		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			jumpPressed = false;
-			jumpTimer = 0;
-		}
-			
 	}
 
-	public void keyPressed(KeyEvent e) {
-		if ((e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) && !moveLeft) {
-			if(EditingState.editing) {
-				Game.camera.moveCamera(-100, 0);
-			}else {
-				moveLeft = true;
-			}
-		}
-			
-		if ((e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) && !moveRight) {
-			if(EditingState.editing) {
-				Game.camera.moveCamera(100, 0);
-			}else {
-				moveRight = true;
-			}
-		}
-			
-		if ((e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W)) {
-			if(EditingState.editing) {
-				Game.camera.moveCamera(0, -100);
-			}else {
-			}
-		}
-		if ((e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S)) {
-			if(EditingState.editing) {
-				Game.camera.moveCamera(0, 100);
-			}else {
-			}
-		}
-		if (e.getKeyCode() == KeyEvent.VK_SPACE && (!inAir || doubleJumpAvailable || slidingLeft || slidingRight)) {
-			if(!jumpPressed) {
-				jump();
-			}
-			
-			
-		}
-		if(e.getKeyCode() == KeyEvent.VK_E) {
-			if(Game.currentState != Game.editingState) {
-				Game.setCurrentState(Game.editingState);
-				EditingState.editing = true;
-			}
-			else {
-				Game.setCurrentState(Game.ingameState);
-				EditingState.editing = false;
-			}
-		}
-		if(e.getKeyCode() == KeyEvent.VK_T) {
-			EditingState.mode = 0;
-		}
-		if(e.getKeyCode() == KeyEvent.VK_R) {
-			EditingState.mode = 1;
-		}
-		if(e.getKeyCode() == KeyEvent.VK_F) {
-			EditingState.mode = 2;
-		}
-			
-			
-	}
 	
 
 
@@ -352,14 +292,5 @@ public class Player extends GravityObject implements ICollision{
 				}
 			}
 		}
-		
-		
-		
-	
 	}
-
-
-	
-
-	
 }

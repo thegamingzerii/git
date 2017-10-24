@@ -3,15 +3,22 @@ package de.thegamingzerii.states;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.MouseInfo;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
-public class PauseState extends JPanel implements State{
+import de.thegamingzerii.objects.Button;
+import de.thegamingzerii.objects.ButtonText;
 
+public class PauseState extends State{
+	Button[] buttons = {new Button(200, 0, new ButtonText(62, 50, 80, "Continue game")),
+						new Button(400, 1, new ButtonText(62, 10, 80, "Exit to Main Menu"))};
 	@Override
 	public void update(double delta) {
-		// TODO Auto-generated method stub
-		
+		for(int i = 0; i < buttons.length; i++){
+			buttons[i].hover(MouseInfo.getPointerInfo().getLocation().getX(), MouseInfo.getPointerInfo().getLocation().getY());
+		}
 	}
 
 
@@ -23,8 +30,20 @@ public class PauseState extends JPanel implements State{
 
 	
 	public void paint(Graphics2D g) {
-		// TODO Auto-generated method stub
+		super.paint(g);
+		for(int i = 0; i < buttons.length; i++){
+			buttons[i].paint(g);
+		}
 		
+		
+	}
+	
+	
+	public void mousePressed(MouseEvent e) {
+		for(int i = 0; i < buttons.length; i++){
+			buttons[i].pressed(e.getX(), e.getY());
+		}
+
 	}
 
 }

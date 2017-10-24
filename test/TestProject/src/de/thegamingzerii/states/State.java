@@ -5,16 +5,30 @@ import java.lang.reflect.Array;
 
 import javax.swing.JPanel;
 
-public interface State {
-	Object[] objects = new Object[64];
-	
-	
-	
-	void init();
-	
-	void update(double delta);
-	
-	void paint(Graphics2D g);
-	
-	
+public class State  extends JPanel implements IState  {
+
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(double delta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void paint(Graphics2D g) {
+		// TODO Auto-generated method stub
+		
+	}
 }
+	
+	
+	
+	
+	
+	
+

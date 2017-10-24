@@ -21,7 +21,7 @@ import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.Jumper;
 
-public class EditingState extends JPanel implements State{
+public class EditingState extends State{
 
 	private boolean placing = false;
 	private double placingX = 0;
@@ -38,6 +38,14 @@ public class EditingState extends JPanel implements State{
 	@Override
 	public void update(double delta) {
 
+		if(MouseInfo.getPointerInfo().getLocation().getX() > 1900)
+			Game.camera.moveCamera(50, 0);
+		if(MouseInfo.getPointerInfo().getLocation().getY() > 1060)
+			Game.camera.moveCamera(0, 50);
+		if(MouseInfo.getPointerInfo().getLocation().getX() < 20)
+			Game.camera.moveCamera(-50, 0);
+		if(MouseInfo.getPointerInfo().getLocation().getY() < 20)
+			Game.camera.moveCamera(0, -50);
 		
 	}
 
@@ -54,6 +62,7 @@ public class EditingState extends JPanel implements State{
 			double yDiff = y2 - y;
 			switch(mode) {
 			case 0:
+				
 
 				if(xDiff < 0) {
 					x = x2;
@@ -89,6 +98,7 @@ public class EditingState extends JPanel implements State{
 			  
 		}
 		
+		 super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
@@ -97,12 +107,12 @@ public class EditingState extends JPanel implements State{
 		
 		try {
 			BufferedImage image = ImageIO.read(new File("Assets/Modes.png"));
-			Image scaledImage = image.getScaledInstance((int)(392 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
-			g.drawImage(scaledImage, xUsable, yUsable, this);
+			g.drawImage(image, xUsable, yUsable, this);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		
 	}
 	
