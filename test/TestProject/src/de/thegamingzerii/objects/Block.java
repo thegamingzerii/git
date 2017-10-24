@@ -35,30 +35,32 @@ public class Block extends JPanel implements ICollision{
 	
 	
 	public void paint(Graphics2D g) {
-		super.paint(g);
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
-		int xUsable = (int) ((x - Game.camera.getCameraPos().getX()) * Camera.scale);
-		int yUsable = (int)((y - Game.camera.getCameraPos().getY()) * Camera.scale);
-		
-		try {
-			BufferedImage image = ImageIO.read(new File("Assets/Block.png"));
-			Image scaledImage = image.getScaledInstance((int)(width * Camera.scale), (int)(height * Camera.scale), image.SCALE_DEFAULT);
-			g.drawImage(scaledImage, xUsable, yUsable, this);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(onScreen()) {
+			super.paint(g);
+			Graphics2D g2d = (Graphics2D) g;
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+					RenderingHints.VALUE_ANTIALIAS_ON);
+			int xUsable = (int) ((x - Game.camera.getCameraPos().getX()) * Camera.scale);
+			int yUsable = (int)((y - Game.camera.getCameraPos().getY()) * Camera.scale);
+			
+			try {
+				BufferedImage image = ImageIO.read(new File("Assets/Block.png"));
+				Image scaledImage = image.getScaledInstance((int)(width * Camera.scale), (int)(height * Camera.scale), image.SCALE_DEFAULT);
+				g.drawImage(scaledImage, xUsable, yUsable, this);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		
 		
 
 	}
 
 
 	@Override
-	public boolean checkcollision(ICollision C) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean checkcollision(Rectangle rect) {
+		return rect.intersects(getCollisionSize());
 	}
 
 
@@ -97,6 +99,20 @@ public class Block extends JPanel implements ICollision{
 	
 	public String toString() {
 		return "Block " + x + " " + y + " " + width+ " " + height;
+	}
+
+
+	@Override
+	public boolean onScreen() {
+		if(x > Game.camera.getX() + Game.camera.getWidth())
+			return false;
+		if(y > Game.camera.getY() + Game.camera.getHeight())
+			return false;
+		if(x + width < Game.camera.getX())
+			return false;
+		if(y + height < Game.camera.getY())
+			return false;
+		return true;
 	}
 
 

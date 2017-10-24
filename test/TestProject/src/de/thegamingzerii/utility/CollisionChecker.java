@@ -9,13 +9,15 @@ import de.thegamingzerii.objects.Jumper;
 public class CollisionChecker {
 
 	public static boolean CheckCollision(ICollision object1, ICollision object2) {
-		
-		Rectangle r1 = object1.getCollisionSize();
-		Rectangle r2 = object2.getCollisionSize();
-		if(r1.intersects(r2))
-		{
-		    return true;
+		if(object1.onScreen() && object2.onScreen()) {
+			Rectangle r1 = object1.getCollisionSize();
+			Rectangle r2 = object2.getCollisionSize();
+			if(r1.intersects(r2))
+			{
+			    return true;
+			}
 		}
+		
 		
 		
 		

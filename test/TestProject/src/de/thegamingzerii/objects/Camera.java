@@ -31,6 +31,14 @@ public class Camera {
 		return screenHeight;
 	}
 	
+	public double getX() {
+		return x;
+	}
+	
+	public double getY() {
+		return y;
+	}
+	
 	public void moveCamera(double x, double y) {
 		this.x += x;
 		this.y += y;

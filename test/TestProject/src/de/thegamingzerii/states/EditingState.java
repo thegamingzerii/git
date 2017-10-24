@@ -3,9 +3,11 @@ package de.thegamingzerii.states;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.MouseInfo;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -148,13 +150,7 @@ public class EditingState extends JPanel implements State{
 				Map.addToMap("Jumper " + Math.round(e.getX()+ Game.camera.getCameraPos().getX()) + " " + Math.round(e.getY()+ Game.camera.getCameraPos().getY()));
 				break;
 			case 2:
-				for(int i = Block.allBlocks.size()-1; i >= 0; i--) {
-					if(Block.allBlocks.get(i).getXAxis() > x && Block.allBlocks.get(i).getXAxis() < x + xDifference) {
-						if(Block.allBlocks.get(i).getYAxis() > y && Block.allBlocks.get(i).getYAxis() < y + yDifference) {
-							Block.allBlocks.remove(Block.allBlocks.get(i));
-						}
-					}
-				}
+				cutOutBlock(new Rectangle((int)x, (int)y, (int)xDifference, (int)yDifference));
 				
 				for(int i = Jumper.allJumpers.size()-1; i >= 0; i--) {
 					if(Jumper.allJumpers.get(i).getXAxis() > x && Jumper.allJumpers.get(i).getXAxis() < x + xDifference) {
@@ -164,6 +160,7 @@ public class EditingState extends JPanel implements State{
 					}
 				}
 				Map.reWriteMap();
+				break;
 			}
 			
 			
@@ -172,5 +169,54 @@ public class EditingState extends JPanel implements State{
 		
 		
 	}
+	
+	
+	public void cutOutBlock(Rectangle rect) {
+		for(int i = Block.allBlocks.size()-1; i >= 0; i--) {
+			if(Block.allBlocks.get(i).checkcollision(rect)) {
+				Rectangle blockRect = Block.allBlocks.get(i).getCollisionSize();
+				Rectangle2D intersection = rect.createIntersection(blockRect);
+				Rectangle rect1 = null;
+				Rectangle rect2 = null;
+				Rectangle rect3 = null;
+				Rectangle rect4 = null;
+				if(intersection.getX() > blockRect.getX()) {
+					rect1 = new Rectangle((int)blockRect.getX(), (int)blockRect.getY(), (int)Math.abs(blockRect.getX() - intersection.getX()), (int)blockRect.getHeight());
+				}
+				if(intersection.getY() > blockRect.getY()) {
+					rect2 = new Rectangle((int)blockRect.getX(), (int)blockRect.getY(), (int)blockRect.getWidth(), (int)Math.abs(blockRect.getY() - intersection.getY()));
+				}
+				if(intersection.getMaxX() < blockRect.getMaxX()) {
+					rect3 = new Rectangle((int)intersection.getMaxX(), (int)blockRect.getY(), (int)Math.abs(intersection.getMaxX() - blockRect.getMaxX()), (int)blockRect.getHeight());
+				}
+				if(intersection.getMaxY() < blockRect.getMaxY()) {
+					rect4 =  new Rectangle((int)blockRect.getX(), (int)intersection.getMaxY(), (int)blockRect.getWidth(), (int)Math.abs(intersection.getMaxY() - blockRect.getMaxY()));
+				}
+				Block.allBlocks.remove(Block.allBlocks.get(i));
+				Map.reWriteMap();
+				
+				if(rect1 !=null)
+					Map.addToMap("Block " + rect1.getX() + " " + rect1.getY() + " " + rect1.getWidth() + " " + rect1.getHeight());
+				if(rect2 !=null)
+					Map.addToMap("Block " + rect2.getX() + " " + rect2.getY() + " " + rect2.getWidth() + " " + rect2.getHeight());
+				if(rect3 !=null)
+					Map.addToMap("Block " + rect3.getX() + " " + rect3.getY() + " " + rect3.getWidth() + " " + rect3.getHeight());
+				if(rect4 !=null)
+					Map.addToMap("Block " + rect4.getX() + " " + rect4.getY() + " " + rect4.getWidth() + " " + rect4.getHeight());
+				
+			}
+			
+			
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

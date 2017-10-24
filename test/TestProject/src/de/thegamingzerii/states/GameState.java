@@ -20,8 +20,8 @@ public class GameState extends JPanel implements State{
 	public void update(double delta) {
 		// TODO Auto-generated method stub
 		player.update(delta);		
-		Game.camera.moveCamera((player.getXAxis() - Game.camera.getCameraPos().getX() - (Game.camera.getWidth()/2)) * 0.05, 
-				(player.getYAxis() - Game.camera.getCameraPos().getY() - (Game.camera.getHeight()/2)) * 0.05);
+		Game.camera.moveCamera((player.getXAxis() - Game.camera.getCameraPos().getX() - (Game.camera.getWidth()/2)) * 0.1, 
+				(player.getYAxis() - Game.camera.getCameraPos().getY() - (Game.camera.getHeight()/2)) * 0.1);
 		
 		for(int i = 0; i < Jumper.allJumpers.size(); i++) {
 			Jumper.allJumpers.get(i).update(delta);

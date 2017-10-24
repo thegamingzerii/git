@@ -62,18 +62,31 @@ public class Player extends GravityObject implements ICollision{
 	public void jump() {
 		if(slidingLeft) {
 			xSpeed = 8;
+			jumpPressed = true;
+			jumpTimer = 20;
 		}else {
 			if(slidingRight) {
 				xSpeed = -8;
+				jumpPressed = true;
+				jumpTimer = 20;
 			}else {
 				if(inAir && jumpTimer <= 0) {
 					doubleJumpAvailable = false;
+					jumpPressed = true;
+					jumpTimer = 20;
+				}else {
+					if(!inAir) {
+						jumpPressed = true;
+						jumpTimer = 20;
+					}else {
+						jumpPressed = false;
+					}
 				}
+				
 				
 			}
 		}
-		jumpPressed = true;
-		jumpTimer = 20;
+		
 		
 		
 	}
@@ -283,7 +296,10 @@ public class Player extends GravityObject implements ICollision{
 			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_SPACE && (!inAir || doubleJumpAvailable || slidingLeft || slidingRight)) {
-			jump();
+			if(!jumpPressed) {
+				jump();
+			}
+			
 			
 		}
 		if(e.getKeyCode() == KeyEvent.VK_E) {

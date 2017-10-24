@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.states.GameState;
 
 public class Jumper extends JPanel implements IInteract{
@@ -44,30 +45,37 @@ public class Jumper extends JPanel implements IInteract{
 
 	@Override
 	public boolean checkProximity(Rectangle rect) {
-		if(Math.abs(x - rect.x) > rect.getWidth() + 50 || Math.abs(y - rect.y) > rect.getHeight() + 50 ) {
-			return false;
-		}else {
-			double circleDistanceX = Math.abs(x - rect.x);
-		    double circleDistanceY = Math.abs(y - rect.y);
+		if(onScreen()) {
+			if(Math.abs(x - rect.x) > rect.getWidth() + 50 || Math.abs(y - rect.y) > rect.getHeight() + 50 ) {
+				return false;
+			}else {
+				double circleDistanceX = Math.abs(x - rect.x);
+			    double circleDistanceY = Math.abs(y - rect.y);
 
-		    if (circleDistanceX > (rect.width/2 + r)) { return false; }
-		    if (circleDistanceY > (rect.height/2 + r)) { return false; }
+			    if (circleDistanceX > (rect.width/2 + r)) { return false; }
+			    if (circleDistanceY > (rect.height/2 + r)) { return false; }
 
-		    if (circleDistanceX <= (rect.width/2)) { return true; } 
-		    if (circleDistanceY <= (rect.height/2)) { return true; }
+			    if (circleDistanceX <= (rect.width/2)) { return true; } 
+			    if (circleDistanceY <= (rect.height/2)) { return true; }
 
-		    double cornerDistance_sq = Math.pow(circleDistanceX - rect.width/2, 2) + Math.pow(circleDistanceY - rect.height/2, 2);
+			    double cornerDistance_sq = Math.pow(circleDistanceX - rect.width/2, 2) + Math.pow(circleDistanceY - rect.height/2, 2);
 
-		    return (cornerDistance_sq <= (r*r));
+			    return (cornerDistance_sq <= (r*r));
+			}
 		}
+		return false;
+		
 		
 		
 	}
 	
 	
 	public void paint(Graphics2D g) {
-		super.paintComponent(g);
-		sprite.paint(g, x-64, y-64, 0);
+		if(onScreen()) {
+			super.paintComponent(g);
+			sprite.paint(g, x-64, y-64, 0);
+		}
+		
 	}
 	
 	public static void paintAllJumpers(Graphics2D g) {
@@ -88,6 +96,19 @@ public class Jumper extends JPanel implements IInteract{
 	
 	public String toString() {
 		return "Jumper " + x + " " + y;
+	}
+
+	@Override
+	public boolean onScreen() {
+		if(x-100 > Game.camera.getX() + Game.camera.getWidth())
+			return false;
+		if(y-100 > Game.camera.getY() + Game.camera.getHeight())
+			return false;
+		if(x+100 < Game.camera.getX())
+			return false;
+		if(y+100 < Game.camera.getY())
+			return false;
+		return true;
 	}
 	
 

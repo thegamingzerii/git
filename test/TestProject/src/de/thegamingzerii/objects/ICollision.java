@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 public interface ICollision {
 	
 	
-	boolean checkcollision(ICollision C);
+	boolean checkcollision(Rectangle rect);
 	
 	double getXAxis();
 	
@@ -16,6 +16,8 @@ public interface ICollision {
 	void setY(int y);
 	
 	Rectangle getCollisionSize();
+	
+	boolean onScreen();
 	
 
 

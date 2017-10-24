@@ -7,4 +7,6 @@ public interface IInteract {
 	void interact();
 	
 	boolean checkProximity(Rectangle rect);
+	
+	boolean onScreen();
 }

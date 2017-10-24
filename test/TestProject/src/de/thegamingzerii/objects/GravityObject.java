@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 
 import javax.swing.JPanel;
 
+import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.utility.CollisionChecker;
 import de.thegamingzerii.utility.Constantes;
 
@@ -27,16 +28,19 @@ public class GravityObject extends JPanel implements ICollision{
 			ySpeed += (yAcc + Constantes.GRAVITY) * delta;
 		}
 		
-		y += ySpeed * delta;
-		if(CollisionChecker.CheckAllCollisions(this)) {
-			y-= ySpeed * delta;
-			yAcc = 0;
-			ySpeed = 0;
+		for(int i = 0; i < 4; i++) {
+			y += ySpeed/4 * delta;
+			if(CollisionChecker.CheckAllCollisions(this)) {
+				y-= ySpeed/4 * delta;
+				yAcc = 0;
+				ySpeed = 0;
+			}
 		}
+		
 	}
 
 	@Override
-	public boolean checkcollision(ICollision C) {
+	public boolean checkcollision(Rectangle rect) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -77,4 +81,19 @@ public class GravityObject extends JPanel implements ICollision{
 	public Rectangle getCollisionSize() {
         return new Rectangle((int)x, (int)y, (int)width, (int)height);
 	}
+
+	@Override
+	public boolean onScreen() {
+		if(x > Game.camera.getX() + Game.camera.getWidth())
+			return false;
+		if(y > Game.camera.getY() + Game.camera.getHeight())
+			return false;
+		if(x + width < Game.camera.getX())
+			return false;
+		if(y + height < Game.camera.getY())
+			return false;
+		return true;
+	}
+
+
 }
