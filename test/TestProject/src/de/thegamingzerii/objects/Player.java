@@ -76,12 +76,7 @@ public class Player extends GravityObject implements ICollision{
 	
 	
 	public void jump() {
-		if(hanging) {
-			hanging = false;
-			rope.interactionBlocked(30);
-			rope.letGo();
-			doubleJumpAvailable = true;
-		}
+		
 		if(!jumpPressed && (!inAir || doubleJumpAvailable || slidingLeft || slidingRight)) {
 			if(slidingLeft) {
 				xSpeed = 8;
@@ -99,7 +94,7 @@ public class Player extends GravityObject implements ICollision{
 						jumpPressed = true;
 						jumpTimer = 20;
 					}else {
-						if(!inAir) {
+						if(!inAir || hanging) {
 							jumpPressed = true;
 							jumpTimer = 20;
 						}else {
@@ -112,6 +107,12 @@ public class Player extends GravityObject implements ICollision{
 			}
 		
 		
+		}
+		if(hanging) {
+			hanging = false;
+			rope.interactionBlocked(30);
+			rope.letGo();
+			doubleJumpAvailable = true;
 		}
 	}
 	

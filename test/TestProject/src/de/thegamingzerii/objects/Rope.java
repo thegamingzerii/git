@@ -36,7 +36,7 @@ public class Rope extends JPanel implements IInteract{
 	
 	@Override
 	public void interact() {
-		if(blocked <= 0) {
+		if(blocked <= 0 && !GameState.player.hanging) {
 			GameState.player.rope = this;
 			GameState.player.hanging = true;
 			swinging = true;
@@ -98,7 +98,6 @@ public class Rope extends JPanel implements IInteract{
 		GameState.player.xAcc = 0;
 		System.out.println(10 *  (Math.cos(swingTimer)));
 		GameState.player.ySpeed = -20 *  Math.sin(swingTimer);
-		//GameState.player.yAcc = -1 *  Math.sin(swingTimer);
 	}
 	
 	public void paint(Graphics2D g) {
