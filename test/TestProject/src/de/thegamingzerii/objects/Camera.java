@@ -12,6 +12,7 @@ public class Camera {
 	private double screenHeight;
 	private double screenWidth;
 	public static double scale = 1;
+	public static double zoom = 1;
 	
 	
 	public Camera(double x, double y) {
@@ -24,11 +25,11 @@ public class Camera {
 	}
 	
 	public double getWidth() {
-		return screenWidth;
+		return screenWidth * zoom;
 	}
 	
 	public double getHeight() {
-		return screenHeight;
+		return screenHeight * zoom;
 	}
 	
 	public double getX() {
@@ -51,6 +52,6 @@ public class Camera {
 		
 		
 
-	    scale = (screenHeight / 1080) ;
+	    scale = (screenHeight / 1080) / zoom;
 	}
 }

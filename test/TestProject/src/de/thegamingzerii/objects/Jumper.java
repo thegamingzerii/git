@@ -73,7 +73,7 @@ public class Jumper extends JPanel implements IInteract{
 	public void paint(Graphics2D g) {
 		if(onScreen()) {
 			super.paintComponent(g);
-			sprite.paint(g, x-64, y-64, 0);
+			sprite.paint(g, x-64, y-64, 0, false);
 		}
 		
 	}

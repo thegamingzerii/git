@@ -54,8 +54,8 @@ public class EditingState extends State{
 		Game.ingameState.paint(g);
 		
 		if(placing) {
-			double x = placingX - Game.camera.getCameraPos().getX();
-			double y = placingY - Game.camera.getCameraPos().getY();
+			double x = (placingX - Game.camera.getCameraPos().getX()) / Camera.zoom;
+			double y = (placingY - Game.camera.getCameraPos().getY()) / Camera.zoom;
 			double x2 = MouseInfo.getPointerInfo().getLocation().getX();
 			double y2 = MouseInfo.getPointerInfo().getLocation().getY();
 			double xDiff = x2 - x;
@@ -120,8 +120,8 @@ public class EditingState extends State{
 	public void mousePressed(MouseEvent e) {
 		if(editing) {
 			placing = true;
-			placingX = e.getX() + Game.camera.getCameraPos().getX();
-			placingY = e.getY() + Game.camera.getCameraPos().getY();
+			placingX = e.getX()*Camera.zoom + Game.camera.getCameraPos().getX();
+			placingY = e.getY()*Camera.zoom + Game.camera.getCameraPos().getY();
 		}
 		
 		
@@ -130,12 +130,12 @@ public class EditingState extends State{
 	public void mouseReleased(MouseEvent e) {
 		if(editing) {
 			placing = false;
-			double xDifference = e.getX()+ Game.camera.getCameraPos().getX() - placingX;
-			double yDifference = e.getY()+ Game.camera.getCameraPos().getY() - placingY;
+			double xDifference = e.getX()*Camera.zoom+ Game.camera.getCameraPos().getX() - placingX;
+			double yDifference = e.getY()*Camera.zoom+ Game.camera.getCameraPos().getY() - placingY;
 			double y = 0;
 			double x = 0;
 			if(yDifference < 0) {
-				y = e.getY()+ Game.camera.getCameraPos().getY();
+				y = e.getY()*Camera.zoom+ Game.camera.getCameraPos().getY();
 				yDifference = Math.abs(yDifference);
 			}
 				
@@ -143,7 +143,7 @@ public class EditingState extends State{
 				y = placingY;
 			
 			if(xDifference < 0) {
-				x = e.getX()+ Game.camera.getCameraPos().getX();
+				x = e.getX()*Camera.zoom+ Game.camera.getCameraPos().getX();
 				xDifference = Math.abs(xDifference);
 			}
 			else
@@ -157,7 +157,7 @@ public class EditingState extends State{
 					Map.addToMap("Block " + Math.round(x) + " " + Math.round(y) + " " + Math.round(xDifference) + " " + Math.round(yDifference));
 				break;
 			case 1:
-				Map.addToMap("Jumper " + Math.round(e.getX()+ Game.camera.getCameraPos().getX()) + " " + Math.round(e.getY()+ Game.camera.getCameraPos().getY()));
+				Map.addToMap("Jumper " + Math.round(e.getX()*Camera.zoom+ Game.camera.getCameraPos().getX()) + " " + Math.round(e.getY()*Camera.zoom+ Game.camera.getCameraPos().getY()));
 				break;
 			case 2:
 				cutOutBlock(new Rectangle((int)x, (int)y, (int)xDifference, (int)yDifference));

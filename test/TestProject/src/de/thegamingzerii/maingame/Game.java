@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -33,7 +34,7 @@ public class Game extends JPanel{
 	
 	// The window handle
 	
-	
+	private static int lastFps = 0;
 	private long window;
 	private int width = Constantes.width;
 	private int height = Constantes.height;
@@ -215,6 +216,10 @@ public class Game extends JPanel{
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		currentState.paint(g2d);
+		g.setColor(Color.red);
+		String currentFont = g.getFont().toString();
+		g.setFont(new Font(currentFont, Font.PLAIN, 15));
+		g.drawString("FPS: " + lastFps, (int) (10 * Camera.scale) , (int) (20 * Camera.scale));
 	}
 	
 	
@@ -233,7 +238,7 @@ public static void main(String[] args) throws InterruptedException {
 	frame.add(game);
 	//frame.add(keyboard);
 	
-	long lastLoopTime = System.nanoTime();
+	double lastLoopTime = System.nanoTime();
 	final int TARGET_FPS = 60;
     final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;   
     final long CONSTANT_LOGIC_TIME = 1000000000 / 60; 
@@ -248,8 +253,9 @@ public static void main(String[] args) throws InterruptedException {
 		   // work out how long its been since the last update, this
 	  // will be used to calculate how far the entities should
 	      // move this loop
+    		lastFps = (int) (1000/((System.nanoTime() - lastLoopTime)/1000000));
 	      long now = System.nanoTime();
-	      long updateLength = now - lastLoopTime;
+	      long updateLength = (long) (now - lastLoopTime);
 	      lastLoopTime = now;
 	      double delta = updateLength / ((double)CONSTANT_LOGIC_TIME);
 
@@ -261,7 +267,8 @@ public static void main(String[] args) throws InterruptedException {
 	      // we last recorded
 	      if (lastFpsTime >= 1000000000)
 	      {
-	    	 System.out.println("FPS: " + fps);
+	    	  
+	    	 lastFps = fps;
 	         lastFpsTime = 0;
 	         fps = 0;
 	      }
@@ -281,7 +288,7 @@ public static void main(String[] args) throws InterruptedException {
 	      //try{Thread.sleep( (lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000 )};
 	      try {
 	    	  if((lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000 > 0) {
-	    		  Thread.sleep( (lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000 );
+	    		  Thread.sleep( (long) ((lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000) );
 	    	  }
 		
 		} catch (InterruptedException e) {

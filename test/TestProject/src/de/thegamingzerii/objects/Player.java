@@ -26,6 +26,7 @@ public class Player extends GravityObject implements ICollision{
 	boolean slidingRight =  false;
 	boolean inAir = false;
 	boolean inJump = false;
+	boolean inDoubleJump = false;
 	public boolean jumpPressed = false;
 	boolean doubleJumpAvailable = true;
 	public double jumpTimer = 0;
@@ -73,6 +74,7 @@ public class Player extends GravityObject implements ICollision{
 					jumpTimer = 20;
 				}else {
 					if(inAir && jumpTimer <= 0) {
+						inDoubleJump = true;
 						doubleJumpAvailable = false;
 						jumpPressed = true;
 						jumpTimer = 20;
@@ -99,17 +101,17 @@ public class Player extends GravityObject implements ICollision{
 		if((slidingLeft || slidingRight) && ySpeed > Constantes.SLIDING_VELO) {
 			ySpeed = Constantes.SLIDING_VELO;
 			if(slidingLeft) {
-				if(Math.random() < 0.1) {
+				if(Math.random() < 0.1*delta) {
 					new Particle("Assets/Particle.png", x, y-28, 16, 16, 60);
 				}
-				if(Math.random() < 0.1) {
+				if(Math.random() < 0.1*delta) {
 					new Particle("Assets/Particle.png", x, y+100, 16, 16, 60);
 				}
 			}else {
-				if(Math.random() < 0.1) {
+				if(Math.random() < 0.1*delta) {
 					new Particle("Assets/Particle.png", x+85, y-28, 16, 16, 60);
 				}
-				if(Math.random() < 0.1) {
+				if(Math.random() < 0.1*delta) {
 					new Particle("Assets/Particle.png", x+85, y+100, 16, 16, 60);
 				}
 			}
@@ -122,6 +124,7 @@ public class Player extends GravityObject implements ICollision{
 		gravity(delta);
 		if(slidingLeft || slidingRight) {
 			doubleJumpAvailable = true;
+			inDoubleJump = false;
 			
 		}
 		
@@ -174,7 +177,7 @@ public class Player extends GravityObject implements ICollision{
 				}
 		}
 		
-		xSpeed += xAcc;
+		xSpeed += xAcc * delta;
 		if(xSpeed > 10)
 			xSpeed = 10;
 		if(xSpeed < -10) {
@@ -217,6 +220,7 @@ public class Player extends GravityObject implements ICollision{
 		if(CollisionChecker.CheckAllCollisions(this)) {
 			inAir = false;
 			doubleJumpAvailable = true;
+			inDoubleJump = false;
 		}else {
 			inAir =  true;
 		}
@@ -270,26 +274,39 @@ public class Player extends GravityObject implements ICollision{
 	public void paint(Graphics2D g) {
 		super.paint(g);
 		if(slidingLeft) {
-			sprite.paint(g, x-20, y-8, moveDirection + 6);
+			sprite.paint(g, x-20, y-8, 3, true);
 		}else {
 			if(slidingRight) {
-				sprite.paint(g, x-12, y-8, moveDirection + 6);
+				sprite.paint(g, x-12, y-8, 3, false);
 			}else {
-				if(inJump) {
+				if(inDoubleJump) {
 					if(moveDirection == 0)
-						sprite.paint(g, x-16, y-8, 5);
+						sprite.paint(g, x-16, y-8, 2, false);
 					if(moveDirection == 1)
-						sprite.paint(g, x-16, y-8, 4);
+						sprite.paint(g, x-16, y-8, 2, true);
 				}else {
-					if(moveRight) {
-						sprite.paint(g, x-16, y-8, moveDirection+2);
+					if(inJump) {
+						if(moveDirection == 0)
+							sprite.paint(g, x-16, y-8, 4, false);
+						if(moveDirection == 1)
+							sprite.paint(g, x-16, y-8, 4, true);
 					}else {
-						if(moveLeft) 
-							sprite.paint(g, x-16, y-8, moveDirection+2);
-						else
-							sprite.paint(g, x-16, y-8, moveDirection);
+						if(moveRight) {
+							sprite.paint(g, x-16, y-8, 1, false);
+						}else {
+							if(moveLeft) 
+								sprite.paint(g, x-16, y-8, 1, true);
+							else
+								if(moveDirection == 0) {
+									sprite.paint(g, x-16, y-8, 0, false);
+								}else {
+									sprite.paint(g, x-16, y-8, 0, true);
+								}
+								
+						}
 					}
 				}
+				
 			}
 		}
 	}
