@@ -29,6 +29,8 @@ public class Player extends GravityObject implements ICollision{
 	boolean inDoubleJump = false;
 	public boolean jumpPressed = false;
 	boolean doubleJumpAvailable = true;
+	public boolean hanging = false;
+	public Rope rope = null;
 	public double jumpTimer = 0;
 	String path = "Assets/Player.png";
 	SpriteSheet sprite;
@@ -39,18 +41,30 @@ public class Player extends GravityObject implements ICollision{
 		sprite =  new SpriteSheet(path, 32, 36, 8, 4, height/32);
 	}
 	
-	
+	public void changePos(double x, double y) {
+		if(x > this.x) {
+			moveRight = true;
+			moveLeft = false;
+			moveDirection = 0;
+		}else {
+			moveRight = false;
+			moveLeft = true;
+			moveDirection = 1;
+		}
+		this.x = x;
+		this.y = y;
+	}
 
 	
 	public void update(double delta) {
 		sprite.update(delta);
 		
-		move(delta);
-		if(xSpeed >= 0) {
-			path = "Assets/PlayerRight.png";
+		if(!hanging) {
+			move(delta);
 		}else {
-			path = "Assets/PlayerLeft.png";
 		}
+		
+		
 		
 		
 	}
@@ -62,6 +76,12 @@ public class Player extends GravityObject implements ICollision{
 	
 	
 	public void jump() {
+		if(hanging) {
+			hanging = false;
+			rope.interactionBlocked(30);
+			rope.letGo();
+			doubleJumpAvailable = true;
+		}
 		if(!jumpPressed && (!inAir || doubleJumpAvailable || slidingLeft || slidingRight)) {
 			if(slidingLeft) {
 				xSpeed = 8;
@@ -121,6 +141,8 @@ public class Player extends GravityObject implements ICollision{
 	
 	
 	public void move(double delta) {
+		
+		
 		gravity(delta);
 		if(slidingLeft || slidingRight) {
 			doubleJumpAvailable = true;
@@ -261,10 +283,14 @@ public class Player extends GravityObject implements ICollision{
 			else
 				moveRight = false;
 		}else {
-			if(direction)
+			if(direction) {
 				moveLeft = true;
-			else
+				moveRight = false;
+			}
+			else {
 				moveRight = true;
+				moveLeft = false;
+			}
 		}
 	}
 

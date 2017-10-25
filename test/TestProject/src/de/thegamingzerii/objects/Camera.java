@@ -11,8 +11,11 @@ public class Camera {
 	private double y = 0;
 	private double screenHeight;
 	private double screenWidth;
+	private double zoomingTo = 0;
+	private boolean zooming = false;
 	public static double scale = 1;
 	public static double zoom = 1;
+	public static double time = 0;
 	
 	
 	public Camera(double x, double y) {
@@ -46,12 +49,25 @@ public class Camera {
 	}
 	
 	public void update(double delta) {
+		
+		if(zooming) {
+			zoom += (zoomingTo - zoom) * 0.05 * delta;
+			if(Math.abs(zoomingTo - zoom) < 0.05)
+				zoom = zoomingTo;
+		}
+			
+		
 		Rectangle screenSize = Game.frame.getBounds();
 		screenHeight = screenSize.getHeight();
 		screenWidth = screenSize.getWidth();
 		
 		
-
+		
 	    scale = (screenHeight / 1080) / zoom;
+	}
+	
+	public void reFrame(double zoom) {
+		zooming = true;
+		zoomingTo = zoom;
 	}
 }

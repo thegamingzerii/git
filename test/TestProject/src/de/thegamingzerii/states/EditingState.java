@@ -20,6 +20,7 @@ import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.Jumper;
+import de.thegamingzerii.objects.Rope;
 
 public class EditingState extends State{
 
@@ -46,6 +47,13 @@ public class EditingState extends State{
 			Game.camera.moveCamera(-50, 0);
 		if(MouseInfo.getPointerInfo().getLocation().getY() < 20)
 			Game.camera.moveCamera(0, -50);
+		
+		if(Camera.zoom != 4) {
+			Game.camera.moveCamera((GameState.player.getXAxis() - Game.camera.getCameraPos().getX() - (Game.camera.getWidth()/2)) * 0.1 * delta, 
+					(GameState.player.getYAxis() - Game.camera.getCameraPos().getY() - (Game.camera.getHeight()/2)) * 0.1 * delta);
+			Game.camera.reFrame(4);
+		}
+			
 		
 	}
 
@@ -77,7 +85,7 @@ public class EditingState extends State{
 				break;
 			
 			case 1:
-				g.drawOval((int)MouseInfo.getPointerInfo().getLocation().getX() - 50, (int)MouseInfo.getPointerInfo().getLocation().getY() - 50, 100, 100);
+				g.drawOval((int)(MouseInfo.getPointerInfo().getLocation().getX() - (50*Camera.scale)), (int)(MouseInfo.getPointerInfo().getLocation().getY() - (50*Camera.scale)), (int)(100*Camera.scale), (int)(100*Camera.scale));
 				break;
 				
 			case 2:
@@ -92,6 +100,12 @@ public class EditingState extends State{
 				}
 
 				g.drawRect ((int) Math.round(x), (int)Math.round(y), (int)Math.round(xDiff), (int)Math.round(yDiff));
+				break;
+			
+			case 3:
+				if(xDiff > 0 || yDiff > 0) {
+					g.drawLine((int)Math.round(x), (int)Math.round(y), (int)Math.round(x), (int)Math.round(y2));
+				}
 				break;
 			}
 			
@@ -169,7 +183,17 @@ public class EditingState extends State{
 						}
 					}
 				}
+				for(int i = Rope.allRopes.size()-1; i >= 0; i--) {
+					if(Rope.allRopes.get(i).getXAxis() > x && Rope.allRopes.get(i).getXAxis() < x + xDifference) {
+						if(Rope.allRopes.get(i).getYAxis() > y && Rope.allRopes.get(i).getYAxis() < y + yDifference) {
+							Rope.allRopes.remove(Rope.allRopes.get(i));
+						}
+					}
+				}
 				Map.reWriteMap();
+				break;
+			case 3:
+				Map.addToMap("Rope " + Math.round(x) + " " + Math.round(y) + " " + Math.round(yDifference));
 				break;
 			}
 			

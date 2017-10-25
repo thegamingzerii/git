@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.Jumper;
+import de.thegamingzerii.objects.Rope;
 
 public class Map {
 	
@@ -34,7 +35,7 @@ public class Map {
             	lines.add(line);
             	
                 
-            }   
+            } 
 
             // Always close files.
             bufferedReader.close();  
@@ -58,6 +59,7 @@ public class Map {
 	public static ArrayList<Object> loadMap() {
 		Block.allBlocks.clear();
 		Jumper.allJumpers.clear();
+		Rope.allRopes.clear();
 		ArrayList<String> lines = readMapFile();
 		ArrayList<Object> objects = new ArrayList<Object>();
 		for(int i = 0; i < lines.size(); i++) {
@@ -71,6 +73,10 @@ public class Map {
     		
     		if(splited[0].equals("Jumper")) {
     			objects.add(new Jumper(Double.parseDouble(splited[1]), Double.parseDouble(splited[2])));
+    		}
+    		
+    		if(splited[0].equals("Rope")) {
+    			objects.add(new Rope(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), Double.parseDouble(splited[3])));
     		}
 		}
 		return objects;
@@ -131,6 +137,9 @@ public class Map {
 		}
 		for(int i = 0; i < Block.allBlocks.size(); i++) {
 			object.add(Block.allBlocks.get(i).toString());
+		}
+		for(int i = 0; i < Rope.allRopes.size(); i++) {
+			object.add(Rope.allRopes.get(i).toString());
 		}
 			
 		writeToMap(object);
