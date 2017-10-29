@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.Camera;
+import de.thegamingzerii.objects.DeadlyBlock;
 import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.Particle;
 import de.thegamingzerii.objects.Player;
@@ -18,7 +19,6 @@ import de.thegamingzerii.objects.Rope;
 
 public class GameState extends State{
 	
-	Rope rope = new Rope(100, 100, 400);
 	
 	public static Player player;
 	@Override
@@ -46,8 +46,14 @@ public class GameState extends State{
 			Particle.allParticles.get(i).update(delta);
 		}
 		
-		if(Camera.zoom != 1)
-			Game.camera.reFrame(1);
+		for(int i = 0; i < DeadlyBlock.allDeadlyBlocks.size(); i++) {
+			if(DeadlyBlock.allDeadlyBlocks.get(i).checkProximity(player.getCollisionSize())) {
+				DeadlyBlock.allDeadlyBlocks.get(i).interact();
+			}
+		}
+		
+		if(Camera.zoom != 2)
+			Game.camera.reFrame(2);
 		
 	}
 
@@ -74,6 +80,9 @@ public class GameState extends State{
 		}
 		for(int i = 0; i < Rope.allRopes.size(); i++) {
 			Rope.allRopes.get(i).paint(g);
+		}
+		for(int i = 0; i < DeadlyBlock.allDeadlyBlocks.size(); i++) {
+			DeadlyBlock.allDeadlyBlocks.get(i).paint(g);
 		}
 	}
 	

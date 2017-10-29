@@ -19,6 +19,8 @@ public class Rope extends JPanel implements IInteract{
 	private double xSpeedMult;
 	private double xAcc;
 	private boolean swinging = false;
+	private boolean moveLeft = false;
+	private boolean moveRight = false;
 	private double swingTimer = 0;
 	public static ArrayList<Rope> allRopes = new ArrayList<Rope>();
 	
@@ -61,6 +63,24 @@ public class Rope extends JPanel implements IInteract{
 		return false;
 	}
 	
+	
+	public void recieveMovement(boolean direction, boolean released) {
+		if(released) {
+			if(direction)
+				moveLeft = false;
+			else
+				moveRight = false;
+		}else {
+			if(direction) {
+				moveLeft = true;
+				moveRight = false;
+			}
+			else {
+				moveRight = true;
+				moveLeft = false;
+			}
+		}
+	}
 	
 	public void update(double delta) {
 		blocked -= delta;

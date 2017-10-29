@@ -2,13 +2,16 @@ package de.thegamingzerii.objects;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.text.Position;
 
 import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.states.EditingState;
@@ -35,6 +38,7 @@ public class Player extends GravityObject implements ICollision{
 	String path = "Assets/Player.png";
 	SpriteSheet sprite;
 	int moveDirection = 0;
+	Point2D.Double checkPoint = new Point2D.Double(0, 0);
 
 	public Player(double width, double height) {
 		super(width, height);
@@ -265,8 +269,7 @@ public class Player extends GravityObject implements ICollision{
 		}
 		
 		if(y > 2000) {
-			y = 0;
-			x = 0;
+			damage(1);
 		}
 		
 	
@@ -274,10 +277,16 @@ public class Player extends GravityObject implements ICollision{
 			y -= 1;
 		}
 		
+		
+		if(!inAir)
+			checkPoint = new Point2D.Double(x, y);
+		
 	}
 	
 	
 	public void recieveMovement(boolean direction, boolean released) {
+		if(hanging)
+			rope.recieveMovement(direction, released);
 		if(released) {
 			if(direction)
 				moveLeft = false;
@@ -295,6 +304,16 @@ public class Player extends GravityObject implements ICollision{
 		}
 	}
 
+	
+	
+	public void damage(int damage) {
+		x = checkPoint.x;
+		y = checkPoint.y;
+		xSpeed = 0;
+		ySpeed = 0;
+		xAcc = 0;
+		yAcc = 0;
+	}
 	
 
 

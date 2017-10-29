@@ -19,6 +19,7 @@ import de.thegamingzerii.editor.Map;
 import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.Camera;
+import de.thegamingzerii.objects.DeadlyBlock;
 import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.Rope;
 
@@ -106,6 +107,18 @@ public class EditingState extends State{
 				if(xDiff > 0 || yDiff > 0) {
 					g.drawLine((int)Math.round(x), (int)Math.round(y), (int)Math.round(x), (int)Math.round(y2));
 				}
+				break;
+			case 4:
+				if(xDiff < 0) {
+					x = x2;
+					xDiff = Math.abs(xDiff);
+				}
+				if(yDiff < 0) {
+					y = y2;
+					yDiff = Math.abs(yDiff);
+				}
+
+				g.drawRect ((int) Math.round(x), (int)Math.round(y), (int)Math.round(xDiff), (int)Math.round(yDiff));
 				break;
 			}
 			
@@ -195,6 +208,10 @@ public class EditingState extends State{
 			case 3:
 				Map.addToMap("Rope " + Math.round(x) + " " + Math.round(y) + " " + Math.round(yDifference));
 				break;
+			case 4:
+				if(xDifference != 0 && yDifference != 0)
+					Map.addToMap("DeadlyBlock " + Math.round(x) + " " + Math.round(y) + " " + Math.round(xDifference) + " " + Math.round(yDifference));
+				break;
 			}
 			
 			
@@ -237,6 +254,45 @@ public class EditingState extends State{
 					Map.addToMap("Block " + rect3.getX() + " " + rect3.getY() + " " + rect3.getWidth() + " " + rect3.getHeight());
 				if(rect4 !=null)
 					Map.addToMap("Block " + rect4.getX() + " " + rect4.getY() + " " + rect4.getWidth() + " " + rect4.getHeight());
+				
+			}
+			
+			
+		}
+		
+		
+		
+		for(int i = DeadlyBlock.allDeadlyBlocks.size()-1; i >= 0; i--) {
+			if(DeadlyBlock.allDeadlyBlocks.get(i).checkProximity(rect)) {
+				Rectangle blockRect = DeadlyBlock.allDeadlyBlocks.get(i).getCollisionSize();
+				Rectangle2D intersection = rect.createIntersection(blockRect);
+				Rectangle rect1 = null;
+				Rectangle rect2 = null;
+				Rectangle rect3 = null;
+				Rectangle rect4 = null;
+				if(intersection.getX() > blockRect.getX()) {
+					rect1 = new Rectangle((int)blockRect.getX(), (int)blockRect.getY(), (int)Math.abs(blockRect.getX() - intersection.getX()), (int)blockRect.getHeight());
+				}
+				if(intersection.getY() > blockRect.getY()) {
+					rect2 = new Rectangle((int)blockRect.getX(), (int)blockRect.getY(), (int)blockRect.getWidth(), (int)Math.abs(blockRect.getY() - intersection.getY()));
+				}
+				if(intersection.getMaxX() < blockRect.getMaxX()) {
+					rect3 = new Rectangle((int)intersection.getMaxX(), (int)blockRect.getY(), (int)Math.abs(intersection.getMaxX() - blockRect.getMaxX()), (int)blockRect.getHeight());
+				}
+				if(intersection.getMaxY() < blockRect.getMaxY()) {
+					rect4 =  new Rectangle((int)blockRect.getX(), (int)intersection.getMaxY(), (int)blockRect.getWidth(), (int)Math.abs(intersection.getMaxY() - blockRect.getMaxY()));
+				}
+				DeadlyBlock.allDeadlyBlocks.remove(DeadlyBlock.allDeadlyBlocks.get(i));
+				Map.reWriteMap();
+				
+				if(rect1 !=null)
+					Map.addToMap("DeadlyBlock " + rect1.getX() + " " + rect1.getY() + " " + rect1.getWidth() + " " + rect1.getHeight());
+				if(rect2 !=null)
+					Map.addToMap("DeadlyBlock " + rect2.getX() + " " + rect2.getY() + " " + rect2.getWidth() + " " + rect2.getHeight());
+				if(rect3 !=null)
+					Map.addToMap("DeadlyBlock " + rect3.getX() + " " + rect3.getY() + " " + rect3.getWidth() + " " + rect3.getHeight());
+				if(rect4 !=null)
+					Map.addToMap("DeadlyBlock " + rect4.getX() + " " + rect4.getY() + " " + rect4.getWidth() + " " + rect4.getHeight());
 				
 			}
 			
