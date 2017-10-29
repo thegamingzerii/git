@@ -14,7 +14,7 @@ public class Camera {
 	private double zoomingTo = 0;
 	private boolean zooming = false;
 	public static double scale = 1;
-	public static double zoom = 2;
+	public static double zoom = 1;
 	public static double time = 0;
 	
 	

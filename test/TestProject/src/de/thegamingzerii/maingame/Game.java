@@ -52,6 +52,8 @@ public class Game extends JPanel{
 	public static Camera camera;
 	
 	
+	private double saveGameCounter = 0;
+	
 	
 	public static void setCurrentState(State state) {
 		currentState = state;
@@ -196,6 +198,7 @@ public class Game extends JPanel{
 		
 		camera = new Camera(0, 0);
 		Map.loadMap();
+		SaveGame.loadSaveGame();
 		
 
 		
@@ -211,6 +214,13 @@ public class Game extends JPanel{
 	public void update(double delta) {
 		currentState.update(delta);
 		Game.camera.update(delta);
+		
+		saveGameCounter += delta;
+		if(saveGameCounter >= 600) {
+			SaveGame.saveGame();
+			saveGameCounter = 0;
+		}
+		
 	}
 	
 	@Override

@@ -52,8 +52,8 @@ public class GameState extends State{
 			}
 		}
 		
-		if(Camera.zoom != 2)
-			Game.camera.reFrame(2);
+		if(Camera.zoom != 1)
+			Game.camera.reFrame(1);
 		
 	}
 

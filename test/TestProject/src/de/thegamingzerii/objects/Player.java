@@ -38,7 +38,7 @@ public class Player extends GravityObject implements ICollision{
 	String path = "Assets/Player.png";
 	SpriteSheet sprite;
 	int moveDirection = 0;
-	Point2D.Double checkPoint = new Point2D.Double(0, 0);
+	public Point2D.Double checkPoint = new Point2D.Double(0, 0);
 
 	public Player(double width, double height) {
 		super(width, height);
