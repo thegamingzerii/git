@@ -212,6 +212,7 @@ public class Game extends JPanel{
 		
 		
 	public void update(double delta) {
+		System.out.println("updating");
 		currentState.update(delta);
 		Game.camera.update(delta);
 		
@@ -225,6 +226,7 @@ public class Game extends JPanel{
 	
 	@Override
 	public void paint(Graphics g) {
+		System.out.println("painting");
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,

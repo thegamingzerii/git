@@ -23,8 +23,8 @@ import de.thegamingzerii.utility.Constantes;
 @SuppressWarnings("serial")
 public class Player extends GravityObject implements ICollision{
 	
-	boolean moveRight = false;
-	boolean moveLeft = false;
+	public boolean moveRight = false;
+	public boolean moveLeft = false;
 	boolean slidingLeft = false;
 	boolean slidingRight =  false;
 	boolean inAir = false;

@@ -1,10 +1,17 @@
 package de.thegamingzerii.objects;
 
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import de.thegamingzerii.maingame.Game;
@@ -43,7 +50,7 @@ public class Rope extends JPanel implements IInteract{
 			GameState.player.hanging = true;
 			swinging = true;
 			swingTimer = 0;
-			xSpeedMult = Math.abs(GameState.player.xSpeed / 10);
+			xSpeedMult = Math.abs(GameState.player.xSpeed / 12);
 			if(GameState.player.xSpeed < 0)
 				swingTimer = Math.PI;
 		}
@@ -92,12 +99,25 @@ public class Rope extends JPanel implements IInteract{
 		
 		
 		double x1 = line.getX1();
-		double x2 = originalX + Math.sin(swingTimer) * this.length*0.9 * xSpeedMult;
+		double x2 = originalX + Math.sin(swingTimer) * this.length*0.7 * xSpeedMult;
 		double y1 = line.getY1();
 		double length = this.length;
 		double y2 = Math.sqrt(Math.pow(length, 2) - Math.pow(x2 - x1, 2) ) + y1;
 		line.setLine(x1, y1, x2, y2);
-		if(swinging)
+		if(swinging) {
+			if(moveLeft && Math.sin(swingTimer) - Math.sin(swingTimer+0.1) > 0 && xSpeedMult <= 1) {
+				xSpeedMult += xSpeedMult * 0.003;
+			}
+			if(moveRight && Math.sin(swingTimer) - Math.sin(swingTimer+0.1) < 0 && xSpeedMult <= 1) {
+				xSpeedMult += xSpeedMult * 0.003;
+			}
+			if(moveLeft && Math.sin(swingTimer) - Math.sin(swingTimer+0.1) < 0) {
+				xSpeedMult -= xSpeedMult * 0.01;
+			}
+			if(moveRight && Math.sin(swingTimer) - Math.sin(swingTimer+0.1) > 0) {
+				xSpeedMult -= xSpeedMult * 0.01;
+			}
+		}
 			
 		
 		if(GameState.player.hanging && GameState.player.rope == this) {
@@ -116,7 +136,6 @@ public class Rope extends JPanel implements IInteract{
 	public void letGo() {
 		GameState.player.xSpeed = 10 *  (Math.cos(swingTimer));
 		GameState.player.xAcc = 0;
-		System.out.println(10 *  (Math.cos(swingTimer)));
 		GameState.player.ySpeed = -20 *  Math.sin(swingTimer);
 	}
 	
@@ -127,6 +146,18 @@ public class Rope extends JPanel implements IInteract{
 		int xEndUsable = (int) ((line.getX2() - Game.camera.getCameraPos().getX()) * Camera.scale);
 		int yEndUsable = (int)((line.getY2() - Game.camera.getCameraPos().getY()) * Camera.scale);
 		Line2D lin = new Line2D.Float(xUsable, yUsable, xEndUsable, yEndUsable);
+		BufferedImage image;
+		try {
+			image = ImageIO.read(new File("Assets/Rope.png"));
+			BufferedImage rightPart = image.getSubimage(0, 0, 8, (int)length/2);
+			
+			Image scaledImage = rightPart.getScaledInstance((int)(16 * Camera.scale), (int)(length * Camera.scale), image.SCALE_DEFAULT);
+			g.drawImage(scaledImage, xUsable, yUsable, this);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
         g.draw(lin);
 	}
 	
