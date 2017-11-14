@@ -13,6 +13,7 @@ import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.Particle;
 import de.thegamingzerii.objects.Player;
 import de.thegamingzerii.objects.Rope;
+import de.thegamingzerii.objects.TextureBlock;
 
 
 
@@ -68,9 +69,6 @@ public class GameState extends State{
 	
 	public void paint(Graphics2D g) {
 		player.paint(g);
-		for(int i = 0; i < Block.allBlocks.size(); i++) {
-			Block.allBlocks.get(i).paint(g);
-		}
 		for(int i = 0; i < Jumper.allJumpers.size(); i++) {
 			Jumper.allJumpers.get(i).paint(g);
 		}
@@ -83,6 +81,9 @@ public class GameState extends State{
 		}
 		for(int i = 0; i < DeadlyBlock.allDeadlyBlocks.size(); i++) {
 			DeadlyBlock.allDeadlyBlocks.get(i).paint(g);
+		}
+		for(int i = 0; i < TextureBlock.allTextureBlocks.size(); i++) {
+			TextureBlock.allTextureBlocks.get(i).draw(g);
 		}
 	}
 	

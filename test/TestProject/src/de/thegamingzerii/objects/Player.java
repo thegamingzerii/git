@@ -320,33 +320,33 @@ public class Player extends GravityObject implements ICollision{
 	public void paint(Graphics2D g) {
 		super.paint(g);
 		if(slidingLeft) {
-			sprite.paint(g, x-20, y-8, 3, true);
+			sprite.paintComponent(g, x-20, y-8, 3, true);
 		}else {
 			if(slidingRight) {
-				sprite.paint(g, x-12, y-8, 3, false);
+				sprite.paintComponent(g, x-12, y-8, 3, false);
 			}else {
 				if(inDoubleJump) {
 					if(moveDirection == 0)
-						sprite.paint(g, x-16, y-8, 2, false);
+						sprite.paintComponent(g, x-16, y-8, 2, false);
 					if(moveDirection == 1)
-						sprite.paint(g, x-16, y-8, 2, true);
+						sprite.paintComponent(g, x-16, y-8, 2, true);
 				}else {
 					if(inJump) {
 						if(moveDirection == 0)
-							sprite.paint(g, x-16, y-8, 4, false);
+							sprite.paintComponent(g, x-16, y-8, 4, false);
 						if(moveDirection == 1)
-							sprite.paint(g, x-16, y-8, 4, true);
+							sprite.paintComponent(g, x-16, y-8, 4, true);
 					}else {
 						if(moveRight) {
-							sprite.paint(g, x-16, y-8, 1, false);
+							sprite.paintComponent(g, x-16, y-8, 1, false);
 						}else {
 							if(moveLeft) 
-								sprite.paint(g, x-16, y-8, 1, true);
+								sprite.paintComponent(g, x-16, y-8, 1, true);
 							else
 								if(moveDirection == 0) {
-									sprite.paint(g, x-16, y-8, 0, false);
+									sprite.paintComponent(g, x-16, y-8, 0, false);
 								}else {
-									sprite.paint(g, x-16, y-8, 0, true);
+									sprite.paintComponent(g, x-16, y-8, 0, true);
 								}
 								
 						}

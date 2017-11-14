@@ -12,6 +12,8 @@ import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.DeadlyBlock;
 import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.Rope;
+import de.thegamingzerii.objects.TextureBlock;
+import de.thegamingzerii.utility.Constantes.BlockType;
 
 public class Map {
 	
@@ -62,6 +64,7 @@ public class Map {
 		Jumper.allJumpers.clear();
 		Rope.allRopes.clear();
 		DeadlyBlock.allDeadlyBlocks.clear();
+		TextureBlock.allTextureBlocks.clear();
 		ArrayList<String> lines = readMapFile();
 		ArrayList<Object> objects = new ArrayList<Object>();
 		for(int i = 0; i < lines.size(); i++) {
@@ -84,6 +87,20 @@ public class Map {
     		if(splited[0].equals("DeadlyBlock")) {
     			objects.add(new DeadlyBlock(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), 
     					Double.parseDouble(splited[3]), Double.parseDouble(splited[4])));
+    		}
+    		if(splited[0].equals("TextureBlock")) {
+    			BlockType type = null;
+    			switch(Integer.parseInt(splited[3])) {
+    			case 0:
+    				type = BlockType.Ground;
+    				break;
+    			case 1:
+    				type = BlockType.Grass;
+    				break;
+    			default:
+    				break;
+    			}
+    			objects.add(new TextureBlock(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), type));
     		}
 		}
 		return objects;
@@ -150,6 +167,9 @@ public class Map {
 		}
 		for(int i = 0; i < DeadlyBlock.allDeadlyBlocks.size(); i++) {
 			object.add(DeadlyBlock.allDeadlyBlocks.get(i).toString());
+		}
+		for(int i = 0; i < TextureBlock.allTextureBlocks.size(); i++) {
+			object.add(TextureBlock.allTextureBlocks.get(i).toString());
 		}
 			
 		writeToMap(object);

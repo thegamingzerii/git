@@ -47,7 +47,7 @@ public class SpriteSheet extends JPanel{
 		counter += delta;
 	}
 	
-	public void paint(Graphics2D g, double x, double y, int row, boolean flipped) {
+	public void paintComponent(Graphics2D g, double x, double y, int row, boolean flipped) {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,

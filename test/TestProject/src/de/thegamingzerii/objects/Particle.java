@@ -67,6 +67,7 @@ public class Particle extends JPanel{
 			Image scaledImage = image.getScaledInstance((int)(width * Camera.scale), (int)(height * Camera.scale), image.SCALE_DEFAULT);
 			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) (duration / originalDuration)));
 			g.drawImage(scaledImage, xUsable, yUsable, this);
+			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

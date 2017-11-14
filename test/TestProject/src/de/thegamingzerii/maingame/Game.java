@@ -46,6 +46,7 @@ public class Game extends JPanel{
 	
 	private static Game currentGame;
 	
+	
 
 
 	public static JFrame frame;
@@ -96,6 +97,10 @@ public class Game extends JPanel{
 		mainMenuState = new MenuState();
 		pauseState = new PauseState();
 		editingState = new EditingState();
+		ingameState.init();
+		mainMenuState.init();
+		pauseState.init();
+		editingState.init();
 		
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("SPACE"), "jump");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("W"), "move up");
@@ -115,6 +120,8 @@ public class Game extends JPanel{
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("F"), "f");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("G"), "g");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("Z"), "z");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("H"), "h");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("L"), "l");
 		
 		ingameState.getActionMap().put("jump", new JumpAction(false));
 		ingameState.getActionMap().put("move up", new MoveAction(0, false));
@@ -134,6 +141,8 @@ public class Game extends JPanel{
 		ingameState.getActionMap().put("f", new PressedOtherKey(2));
 		ingameState.getActionMap().put("g", new PressedOtherKey(3));
 		ingameState.getActionMap().put("z", new PressedOtherKey(4));
+		ingameState.getActionMap().put("h", new PressedOtherKey(5));
+		ingameState.getActionMap().put("l", new SwitchTexture());
 		
 		
 		
@@ -290,6 +299,7 @@ public static void main(String[] args) throws InterruptedException {
 	      }
 	      
 	      // update the game logic
+	      
 	      game.update(delta);
 	      
 	      
@@ -446,9 +456,27 @@ private class PressedOtherKey extends AbstractAction{
 			}
 		}
 		
+}
+
+
+private class SwitchTexture extends AbstractAction{
+
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(currentState == editingState) {
+				EditingState.textureMode++;
+				
+			}
+		}
+		
 	}
 	
 }
+	
+
+
+
 		
 
 	

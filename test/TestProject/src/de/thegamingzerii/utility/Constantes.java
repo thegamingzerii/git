@@ -14,4 +14,7 @@ public class Constantes {
 	public static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
 	
 
+	public enum BlockType{
+		Ground, Grass
+	}
 }

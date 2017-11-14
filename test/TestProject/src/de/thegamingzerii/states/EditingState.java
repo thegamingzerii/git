@@ -7,10 +7,13 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -22,6 +25,7 @@ import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.DeadlyBlock;
 import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.Rope;
+import de.thegamingzerii.objects.TextureBlock;
 
 public class EditingState extends State{
 
@@ -30,16 +34,23 @@ public class EditingState extends State{
 	private double placingY = 0;
 	public static boolean editing = false;
 	public static int mode = 0;
+	public static int textureMode = 0;
+	private ArrayList<Integer> xSnaps = new ArrayList<Integer>();
+	private ArrayList<Integer> ySnaps = new ArrayList<Integer>();
 	
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
+		for(int i = -1000; i < 1000; i++) {
+			xSnaps.add(128*i);
+			ySnaps.add(128*i);
+		}
 		
 	}
 
 	@Override
 	public void update(double delta) {
 
+		System.out.println("mode: " + mode);
 		if(MouseInfo.getPointerInfo().getLocation().getX() > 1900)
 			Game.camera.moveCamera(50, 0);
 		if(MouseInfo.getPointerInfo().getLocation().getY() > 1060)
@@ -61,6 +72,18 @@ public class EditingState extends State{
 	@Override
 	public void paint(Graphics2D g) {
 		Game.ingameState.paint(g);
+		for(int i = 0; i < xSnaps.size(); i++) {
+			g.drawLine((int)((xSnaps.get(i) - Game.camera.getCameraPos().getX())/Camera.zoom), 0, (int)((xSnaps.get(i) - Game.camera.getCameraPos().getX())/Camera.zoom), 1920);
+		}
+		for(int i = 0; i < ySnaps.size(); i++) {
+			g.drawLine(0, (int)((ySnaps.get(i) - Game.camera.getCameraPos().getY())/Camera.zoom), 1920, (int)((ySnaps.get(i) - Game.camera.getCameraPos().getY())/Camera.zoom));
+		}
+		
+		for(int i = 0; i < Block.allBlocks.size(); i++) {
+			Block.allBlocks.get(i).paint(g);
+		}
+		
+		
 		
 		if(placing) {
 			double x = (placingX - Game.camera.getCameraPos().getX()) / Camera.zoom;
@@ -149,6 +172,10 @@ public class EditingState extends State{
 			placing = true;
 			placingX = e.getX()*Camera.zoom + Game.camera.getCameraPos().getX();
 			placingY = e.getY()*Camera.zoom + Game.camera.getCameraPos().getY();
+			if(mode == 0 || mode == 4) {
+				placingX = getSnappedX(e.getX()*Camera.zoom+ Game.camera.getCameraPos().getX());
+				placingY = getSnappedY(e.getY()*Camera.zoom+ Game.camera.getCameraPos().getY());
+			}
 		}
 		
 		
@@ -159,6 +186,10 @@ public class EditingState extends State{
 			placing = false;
 			double xDifference = e.getX()*Camera.zoom+ Game.camera.getCameraPos().getX() - placingX;
 			double yDifference = e.getY()*Camera.zoom+ Game.camera.getCameraPos().getY() - placingY;
+			if(mode == 0 || mode == 4) {
+				xDifference = getSnappedX(e.getX()*Camera.zoom+ Game.camera.getCameraPos().getX()- placingX);
+				yDifference = getSnappedY(e.getY()*Camera.zoom+ Game.camera.getCameraPos().getY()- placingY);
+			}
 			double y = 0;
 			double x = 0;
 			if(yDifference < 0) {
@@ -212,6 +243,37 @@ public class EditingState extends State{
 				if(xDifference != 0 && yDifference != 0)
 					Map.addToMap("DeadlyBlock " + Math.round(x) + " " + Math.round(y) + " " + Math.round(xDifference) + " " + Math.round(yDifference));
 				break;
+			case 5:
+								
+				double distanceX = 10000;
+				int indexX = 0;
+				double distanceY = 10000;
+				int indexY = 0;
+				for(int i = 0; i < xSnaps.size(); i++) {
+					if(e.getX()*Camera.zoom+ Game.camera.getCameraPos().getX() - xSnaps.get(i) > 0 && e.getX()*Camera.zoom+ Game.camera.getCameraPos().getX() - xSnaps.get(i) < distanceX) {
+						
+						indexX = i;
+						distanceX = e.getX()*Camera.zoom+ Game.camera.getCameraPos().getX() - xSnaps.get(i);
+						
+					}
+
+				}
+				
+				
+				for(int i = 0; i < ySnaps.size(); i++) {
+					if(e.getY()*Camera.zoom+ Game.camera.getCameraPos().getY() - ySnaps.get(i) > 0 && e.getY()*Camera.zoom+ Game.camera.getCameraPos().getY() - ySnaps.get(i) < distanceY) {
+						
+						indexY = i;
+						distanceY = e.getY()*Camera.zoom+ Game.camera.getCameraPos().getY() - ySnaps.get(i);
+						
+					}
+
+				}
+				if(!TextureBlock.deleteTextureBlock(xSnaps.get(indexX), ySnaps.get(indexY)))
+					Map.addToMap("TextureBlock " + xSnaps.get(indexX) + " " + ySnaps.get(indexY) + " " + textureMode%2);
+				break;
+				
+				
 			}
 			
 			
@@ -299,6 +361,38 @@ public class EditingState extends State{
 			
 		}
 		
+	}
+	
+	
+	
+	
+	public int getSnappedX(double x) {
+		double distance = 10000;
+		int index = 0;
+		for(int i = 0; i < xSnaps.size(); i++) {
+			if(Math.abs(x - xSnaps.get(i))< distance){
+				if((x < 0 && xSnaps.get(i) <= 0) || (x > 0 && xSnaps.get(i) >= 0)) {
+					distance = Math.abs(x - xSnaps.get(i));
+					index = i;
+				}
+				
+			}
+		}
+		return xSnaps.get(index);
+	}
+	
+	public int getSnappedY(double y) {
+		double distance = 10000;
+		int index = 0;
+		for(int i = 0; i < ySnaps.size(); i++) {
+			if(Math.abs(y - ySnaps.get(i))< distance){
+				if((y < 0 && ySnaps.get(i) <= 0) || (y > 0 && ySnaps.get(i) >= 0)) {
+					distance = Math.abs(y - ySnaps.get(i));
+					index = i;
+				}
+			}
+		}
+		return ySnaps.get(index);
 	}
 	
 	
