@@ -85,6 +85,7 @@ public class GameState extends State{
 		for(int i = 0; i < TextureBlock.allTextureBlocks.size(); i++) {
 			TextureBlock.allTextureBlocks.get(i).draw(g);
 		}
+		TextureBlock.drawOtherBlocks(g);
 	}
 	
 	public void output() {

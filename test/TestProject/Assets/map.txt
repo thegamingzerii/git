@@ -1,5 +1,8 @@
+Jumper 71.0 150.0
 Block 1700.0 2600.0 1400.0 200.0
-Block -128.0 512.0 1408.0 128.0
+Block -1152.0 512.0 2432.0 256.0
+Block -1152.0 768.0 128.0 128.0
+Block 1152.0 768.0 128.0 128.0
 TextureBlock -128.0 512.0 0
 TextureBlock 0.0 512.0 0
 TextureBlock 128.0 512.0 0
@@ -22,22 +25,22 @@ TextureBlock 1152.0 384.0 1
 TextureBlock 128.0 384.0 1
 TextureBlock 0.0 384.0 1
 TextureBlock -128.0 384.0 1
-Block -1116 512 1024 128
-TextureBlock -256 512 0
-TextureBlock -384 512 0
-TextureBlock -512 512 0
-TextureBlock -640 512 0
-TextureBlock -768 512 0
-TextureBlock -896 512 0
-TextureBlock -1024 512 0
-TextureBlock -1152 512 0
-TextureBlock -256 384 1
-TextureBlock -384 384 1
-TextureBlock -512 384 1
-TextureBlock -640 384 1
-TextureBlock -768 384 1
-TextureBlock -896 384 1
-TextureBlock -1024 384 1
-TextureBlock -1152 384 1
-Block -1152 512 128 128
-Jumper 71 150
+TextureBlock -256.0 512.0 0
+TextureBlock -384.0 512.0 0
+TextureBlock -512.0 512.0 0
+TextureBlock -640.0 512.0 0
+TextureBlock -768.0 512.0 0
+TextureBlock -896.0 512.0 0
+TextureBlock -1024.0 512.0 0
+TextureBlock -1152.0 512.0 0
+TextureBlock -256.0 384.0 1
+TextureBlock -384.0 384.0 1
+TextureBlock -512.0 384.0 1
+TextureBlock -640.0 384.0 1
+TextureBlock -768.0 384.0 1
+TextureBlock -896.0 384.0 1
+TextureBlock -1024.0 384.0 1
+TextureBlock -1152.0 384.0 1
+TextureBlock -1152.0 768.0 0
+TextureBlock -1152.0 640.0 0
+TextureBlock 1152.0 640.0 0

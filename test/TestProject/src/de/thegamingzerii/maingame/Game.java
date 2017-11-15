@@ -44,7 +44,7 @@ public class Game extends JPanel{
 	public static State editingState;
 	public static State currentState;
 	
-	private static Game currentGame;
+	public static Game currentGame;
 	
 	
 

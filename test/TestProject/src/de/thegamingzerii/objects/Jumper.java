@@ -15,7 +15,7 @@ public class Jumper extends JPanel implements IInteract{
 	
 	private double x = 0;
 	private double y = 0;
-	private double r = 100;
+	private double r = 50;
 	private double usedCounter = 0;
 	String path = "Assets/Lantern.png";
 	SpriteSheet sprite;
