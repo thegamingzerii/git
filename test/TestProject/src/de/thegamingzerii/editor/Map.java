@@ -97,6 +97,9 @@ public class Map {
     			case 1:
     				type = BlockType.Grass;
     				break;
+    			case 2:
+    				type = BlockType.Ground2;
+    				break;
     			default:
     				break;
     			}

@@ -40,7 +40,7 @@ public class Block extends JPanel implements ICollision{
 				Block.allBlocks.remove(this);
 			}
 		}else {
-			if(onScreen()) {
+			if(false) {//onScreen()) {
 				super.paint(g);
 				Graphics2D g2d = (Graphics2D) g;
 				g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,

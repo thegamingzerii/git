@@ -154,7 +154,7 @@ public class Game extends JPanel{
 		frame.add(editingState);
 		frame.setSize(width, height);
 		frame.setUndecorated(true);
-		frame.setVisible(true);
+		
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.addMouseListener(new MouseListener() {
@@ -209,7 +209,7 @@ public class Game extends JPanel{
 		Map.loadMap();
 		SaveGame.loadSaveGame();
 		
-
+		frame.setVisible(true);
 		
 		
 		
@@ -221,17 +221,21 @@ public class Game extends JPanel{
 		
 		
 	public void update(double delta) {
-		System.out.println("updating");
-		currentState.update(delta);
-		Game.camera.update(delta);
 		
-		saveGameCounter += delta;
-		if(saveGameCounter >= 600) {
-			SaveGame.saveGame();
-			saveGameCounter = 0;
+			System.out.println("updating");
+			currentState.update(delta);
+			Game.camera.update(delta);			
+			saveGameCounter += delta;
+			if(saveGameCounter >= 600) {
+				SaveGame.saveGame();				
+				saveGameCounter = 0;
+			}
+						
 		}
 		
-	}
+		
+		
+	
 	
 	@Override
 	public void paint(Graphics g) {
@@ -275,8 +279,8 @@ public static void main(String[] args) throws InterruptedException {
     {
 		   
 		   
-		   // work out how long its been since the last update, this
-	  // will be used to calculate how far the entities should
+		  // work out how long its been since the last update, this
+    	  // will be used to calculate how far the entities should
 	      // move this loop
     		lastFps = (int) (1000/((System.nanoTime() - lastLoopTime)/1000000));
 	      long now = System.nanoTime();

@@ -270,7 +270,7 @@ public class EditingState extends State{
 
 				}
 				if(!TextureBlock.deleteTextureBlock(xSnaps.get(indexX), ySnaps.get(indexY)))
-					Map.addToMap("TextureBlock " + xSnaps.get(indexX) + " " + ySnaps.get(indexY) + " " + textureMode%2);
+					Map.addToMap("TextureBlock " + xSnaps.get(indexX) + " " + ySnaps.get(indexY) + " " + textureMode%3);
 				break;
 				
 				

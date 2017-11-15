@@ -76,9 +76,7 @@ public class GameState extends State{
 		for(int i = 0; i < Particle.allParticles.size(); i++) {
 			Particle.allParticles.get(i).paint(g);
 		}
-		for(int i = 0; i < Rope.allRopes.size(); i++) {
-			Rope.allRopes.get(i).paint(g);
-		}
+		
 		for(int i = 0; i < DeadlyBlock.allDeadlyBlocks.size(); i++) {
 			DeadlyBlock.allDeadlyBlocks.get(i).paint(g);
 		}
@@ -86,6 +84,10 @@ public class GameState extends State{
 			TextureBlock.allTextureBlocks.get(i).draw(g);
 		}
 		TextureBlock.drawOtherBlocks(g);
+		
+		for(int i = 0; i < Rope.allRopes.size(); i++) {
+			Rope.allRopes.get(i).paint(g);
+		}
 	}
 	
 	public void output() {

@@ -21,6 +21,7 @@ import de.thegamingzerii.utility.ExtraMaths;
 public class TextureBlock {
 	public static ArrayList<TextureBlock> allTextureBlocks = new ArrayList<TextureBlock>();
 	private static ArrayList<Point> ground = new ArrayList<Point>();
+	private static ArrayList<Point> ground2 = new ArrayList<Point>();
 	
 	private double x;
 	private double y;
@@ -37,6 +38,9 @@ public class TextureBlock {
 		String path = "";
 		switch(type) {
 		case Ground:
+			path = "Assets/Ground.png";
+			break;
+		case Ground2:
 			path = "Assets/Ground.png";
 			break;
 		case Grass:
@@ -61,6 +65,9 @@ public class TextureBlock {
 			switch(type) {
 			case Ground:
 				ground.add(new Point((int)x, (int)y));
+				break;
+			case Ground2:
+				ground2.add(new Point((int)x, (int)y));
 				break;
 			case Grass:			
 				sprite.paintComponent(g, x, y, ExtraMaths.ActualModulo(randomFactor, 5), randomFactor < 500);
@@ -91,6 +98,9 @@ public class TextureBlock {
 		switch(type) {
 		case Ground:
 			id = 0;
+			break;
+		case Ground2:
+			id = 2;
 			break;
 		case Grass:
 			id = 1;
@@ -131,12 +141,20 @@ public class TextureBlock {
 		
 		try {
 			BufferedImage image = ImageIO.read(new File("Assets/Ground.png"));
-
-			Image scaledImage = image.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
+			BufferedImage rightPart = image.getSubimage(0, 0, 128, 128);
+			Image scaledImage = rightPart.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
 			
 			for(int i = 0; i < ground.size(); i++) {
 				int xUsable = (int) ((ground.get(i).getX() - Game.camera.getCameraPos().getX()) * Camera.scale);
 				int yUsable = (int)((ground.get(i).getY() - Game.camera.getCameraPos().getY()) * Camera.scale);
+				g.drawImage(scaledImage, xUsable, yUsable, Game.currentGame);
+			}
+			
+			rightPart = image.getSubimage(0, 128, 128, 128);
+			scaledImage = rightPart.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
+			for(int i = 0; i < ground2.size(); i++) {
+				int xUsable = (int) ((ground2.get(i).getX() - Game.camera.getCameraPos().getX()) * Camera.scale);
+				int yUsable = (int)((ground2.get(i).getY() - Game.camera.getCameraPos().getY()) * Camera.scale);
 				g.drawImage(scaledImage, xUsable, yUsable, Game.currentGame);
 			}
 			
@@ -146,6 +164,7 @@ public class TextureBlock {
 		}
 		
 		ground.clear();
+		ground2.clear();
 	}
 }
 

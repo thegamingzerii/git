@@ -15,6 +15,6 @@ public class Constantes {
 	
 
 	public enum BlockType{
-		Ground, Grass
+		Ground, Grass, Ground2
 	}
 }
