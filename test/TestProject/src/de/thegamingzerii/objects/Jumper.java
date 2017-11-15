@@ -46,7 +46,7 @@ public class Jumper extends JPanel implements IInteract{
 	@Override
 	public boolean checkProximity(Rectangle rect) {
 		if(onScreen()) {
-			if(Math.abs(x - rect.x) > rect.getWidth() + 50 || Math.abs(y - rect.y) > rect.getHeight() + 50 ) {
+			if(Math.abs(x - rect.x) > rect.getWidth()+50 || Math.abs(y - rect.y) > rect.getHeight()+50 ) {
 				return false;
 			}else {
 				double circleDistanceX = Math.abs(x - rect.x);
@@ -73,7 +73,10 @@ public class Jumper extends JPanel implements IInteract{
 	public void paint(Graphics2D g) {
 		if(onScreen()) {
 			super.paintComponent(g);
-			sprite.paintComponent(g, x-64, y-64, 0, false);
+			if(checkProximity(GameState.player.getCollisionSize()))
+				sprite.paintComponent(g, x-64, y-64, 1, false);
+			else
+				sprite.paintComponent(g, x-64, y-64, 0, false);
 		}
 		
 	}

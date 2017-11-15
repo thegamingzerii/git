@@ -40,3 +40,4 @@ TextureBlock -896 384 1
 TextureBlock -1024 384 1
 TextureBlock -1152 384 1
 Block -1152 512 128 128
+Jumper 71 150
