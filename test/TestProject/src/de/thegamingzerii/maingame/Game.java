@@ -2,6 +2,7 @@ package de.thegamingzerii.maingame;
 
 
 import java.nio.IntBuffer;
+import java.util.ArrayList;
 
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
@@ -22,6 +23,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import de.thegamingzerii.utility.Constantes;
+import de.thegamingzerii.utility.PaintCall;
 import de.thegamingzerii.editor.Map;
 import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.Player;
@@ -43,7 +45,8 @@ public class Game extends JPanel{
 	public static State pauseState;
 	public static State editingState;
 	public static State currentState;
-	
+	public static long updateCounter = 0;
+	public static ArrayList<PaintCall> paintCalls = new ArrayList<PaintCall>();
 	public static Game currentGame;
 	
 	
@@ -221,7 +224,7 @@ public class Game extends JPanel{
 		
 		
 	public void update(double delta) {
-		
+		updateCounter++;
 			System.out.println("updating");
 			currentState.update(delta);
 			Game.camera.update(delta);			
@@ -236,19 +239,20 @@ public class Game extends JPanel{
 		
 		
 	
-	
 	@Override
 	public void paint(Graphics g) {
-		System.out.println("painting");
-		super.paint(g);
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
-		currentState.paint(g2d);
-		g.setColor(Color.red);
-		String currentFont = g.getFont().toString();
-		g.setFont(new Font(currentFont, Font.PLAIN, 15));
-		g.drawString("FPS: " + lastFps, (int) (10 * Camera.scale) , (int) (20 * Camera.scale));
+			System.out.println("painting");
+			super.paint(g);
+			Graphics2D g2d = (Graphics2D) g;
+			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+					RenderingHints.VALUE_ANTIALIAS_ON);
+			currentState.paint(g2d);
+			g.setColor(Color.red);
+			String currentFont = g.getFont().toString();
+			g.setFont(new Font(currentFont, Font.PLAIN, 15));
+			g.drawString("FPS: " + lastFps, (int) (10 * Camera.scale) , (int) (20 * Camera.scale));
+		
+		
 	}
 	
 	
@@ -265,6 +269,7 @@ public static void main(String[] args) throws InterruptedException {
 	frame = new JFrame("Game");
 	Game game = new Game();
 	frame.add(game);
+	frame.setIgnoreRepaint(true);
 	//frame.add(keyboard);
 	
 	double lastLoopTime = System.nanoTime();
@@ -278,7 +283,7 @@ public static void main(String[] args) throws InterruptedException {
     while (true)
     {
 		   
-		   
+		   System.out.println("------------------------------------------");
 		  // work out how long its been since the last update, this
     	  // will be used to calculate how far the entities should
 	      // move this loop
@@ -303,9 +308,8 @@ public static void main(String[] args) throws InterruptedException {
 	      }
 	      
 	      // update the game logic
-	      
 	      game.update(delta);
-	      
+	      //while(updating)
 	      
 	      // draw everyting
 	      game.repaint();

@@ -148,7 +148,6 @@ public class Rope extends JPanel implements IInteract{
 		image = RotatableImage.getImage(SIZE);
 		theta = Math.toRadians(Math.atan2(y1 - y2, x1 - x2));
 		
-		System.out.println(theta);
 			
 	}
 	

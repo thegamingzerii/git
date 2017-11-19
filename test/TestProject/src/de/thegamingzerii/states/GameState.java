@@ -2,6 +2,8 @@ package de.thegamingzerii.states;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -14,16 +16,24 @@ import de.thegamingzerii.objects.Particle;
 import de.thegamingzerii.objects.Player;
 import de.thegamingzerii.objects.Rope;
 import de.thegamingzerii.objects.TextureBlock;
+import de.thegamingzerii.utility.PaintCall;
 
 
 
 
 public class GameState extends State{
 	
+	public ArrayList<PaintCall> allCalls =  new ArrayList<PaintCall>();
 	
 	public static Player player;
 	@Override
 	public void update(double delta) {
+		
+		TextureBlock.ground.clear();
+		TextureBlock.ground2.clear();
+		
+		PaintCall currentCall = new PaintCall(Game.updateCounter);
+		
 		// TODO Auto-generated method stub
 		player.update(delta);		
 		Game.camera.moveCamera((player.getXAxis() - Game.camera.getCameraPos().getX() - (Game.camera.getWidth()/2)) * 0.1 * delta, 
@@ -53,9 +63,23 @@ public class GameState extends State{
 			}
 		}
 		
+		
+		for(int i = 0; i < TextureBlock.allTextureBlocks.size(); i++) {
+				TextureBlock.allTextureBlocks.get(i).update();
+		}
+		ArrayList<ArrayList<Point>> list = new ArrayList<ArrayList<Point>>();
+		list.add(TextureBlock.ground);
+		list.add(TextureBlock.ground2);
+		currentCall.setTextureBlocks(list);
+		
+		
 		if(Camera.zoom != 1)
 			Game.camera.reFrame(1);
+		currentCall.camPosX = Game.camera.getX();
+		currentCall.camPosY = Game.camera.getY();
+		currentCall.scale = Game.camera.scale;
 		
+		allCalls.add(currentCall);
 	}
 
 
@@ -68,6 +92,7 @@ public class GameState extends State{
 
 	
 	public void paint(Graphics2D g) {
+		allCalls.get(allCalls.size()-1).paint(g);
 		player.paint(g);
 		for(int i = 0; i < Jumper.allJumpers.size(); i++) {
 			Jumper.allJumpers.get(i).paint(g);
@@ -83,11 +108,13 @@ public class GameState extends State{
 		for(int i = 0; i < TextureBlock.allTextureBlocks.size(); i++) {
 			TextureBlock.allTextureBlocks.get(i).draw(g);
 		}
-		TextureBlock.drawOtherBlocks(g);
 		
 		for(int i = 0; i < Rope.allRopes.size(); i++) {
 			Rope.allRopes.get(i).paint(g);
 		}
+		
+		
+		
 	}
 	
 	public void output() {

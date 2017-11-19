@@ -20,8 +20,8 @@ import de.thegamingzerii.utility.ExtraMaths;
 
 public class TextureBlock {
 	public static ArrayList<TextureBlock> allTextureBlocks = new ArrayList<TextureBlock>();
-	private static ArrayList<Point> ground = new ArrayList<Point>();
-	private static ArrayList<Point> ground2 = new ArrayList<Point>();
+	public static ArrayList<Point> ground = new ArrayList<Point>();
+	public static ArrayList<Point> ground2 = new ArrayList<Point>();
 	
 	private double x;
 	private double y;
@@ -63,12 +63,6 @@ public class TextureBlock {
 	public void draw(Graphics2D g) {
 		if(onScreen()) {
 			switch(type) {
-			case Ground:
-				ground.add(new Point((int)x, (int)y));
-				break;
-			case Ground2:
-				ground2.add(new Point((int)x, (int)y));
-				break;
 			case Grass:			
 				sprite.paintComponent(g, x, y, ExtraMaths.ActualModulo(randomFactor, 5), randomFactor < 500);
 				break;
@@ -77,6 +71,21 @@ public class TextureBlock {
 			}
 		}
 		
+		
+	}
+	
+	
+	public void update() {
+			switch(type) {
+			case Ground:
+				ground.add(new Point((int)x, (int)y));
+				break;
+			case Ground2:
+				ground2.add(new Point((int)x, (int)y));
+				break;
+			default:
+				break;
+			}
 		
 	}
 	
@@ -136,25 +145,26 @@ public class TextureBlock {
 	}
 	
 	
-	public static void drawOtherBlocks(Graphics2D g) {
-		
+	public static void drawOtherBlocks(Graphics2D g, double camPosX, double camPosY, double scale, ArrayList<ArrayList<Point>> blockList) {
+		ArrayList<Point> mground = blockList.get(0);
+		ArrayList<Point> mground2 = blockList.get(1);
 		
 		try {
 			BufferedImage image = ImageIO.read(new File("Assets/Ground.png"));
 			BufferedImage rightPart = image.getSubimage(0, 0, 128, 128);
-			Image scaledImage = rightPart.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
+			Image scaledImage = rightPart.getScaledInstance((int)(128 * scale), (int)(128 * scale), image.SCALE_DEFAULT);
 			
-			for(int i = 0; i < ground.size(); i++) {
-				int xUsable = (int) ((ground.get(i).getX() - Game.camera.getCameraPos().getX()) * Camera.scale);
-				int yUsable = (int)((ground.get(i).getY() - Game.camera.getCameraPos().getY()) * Camera.scale);
+			for(int i = 0; i < mground.size(); i++) {
+				int xUsable = (int) ((mground.get(i).getX() - camPosX) * scale);
+				int yUsable = (int)((mground.get(i).getY() - camPosY) * scale);
 				g.drawImage(scaledImage, xUsable, yUsable, Game.currentGame);
 			}
 			
 			rightPart = image.getSubimage(0, 128, 128, 128);
-			scaledImage = rightPart.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
-			for(int i = 0; i < ground2.size(); i++) {
-				int xUsable = (int) ((ground2.get(i).getX() - Game.camera.getCameraPos().getX()) * Camera.scale);
-				int yUsable = (int)((ground2.get(i).getY() - Game.camera.getCameraPos().getY()) * Camera.scale);
+			scaledImage = rightPart.getScaledInstance((int)(128 * scale), (int)(128 * scale), image.SCALE_DEFAULT);
+			for(int i = 0; i < mground2.size(); i++) {
+				int xUsable = (int) ((mground2.get(i).getX() - camPosX) * scale);
+				int yUsable = (int)((mground2.get(i).getY() - camPosY) * scale);
 				g.drawImage(scaledImage, xUsable, yUsable, Game.currentGame);
 			}
 			
@@ -163,8 +173,7 @@ public class TextureBlock {
 			e.printStackTrace();
 		}
 		
-		ground.clear();
-		ground2.clear();
+		
 	}
 }
 

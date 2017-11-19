@@ -1,6 +1,8 @@
 Block -1152.0 512.0 2432.0 256.0
 Block -1152.0 768.0 128.0 128.0
 Block 1152.0 768.0 128.0 128.0
+Block 2048.0 0.0 384.0 256.0
+Block 1152.0 1408.0 384.0 128.0
 TextureBlock -128.0 512.0 0
 TextureBlock 0.0 512.0 0
 TextureBlock 128.0 512.0 0
@@ -58,7 +60,7 @@ TextureBlock 768.0 640.0 2
 TextureBlock 896.0 640.0 2
 TextureBlock 1024.0 640.0 2
 TextureBlock 1152.0 640.0 2
-Rope -396 -618 152
-Rope 332 -5 248
-Rope -895 -209 236
-Rope 715 56 264
+TextureBlock 1408.0 1408.0 0
+TextureBlock 1280.0 1408.0 0
+TextureBlock 1152.0 1408.0 0
+Rope -22 -564 712
