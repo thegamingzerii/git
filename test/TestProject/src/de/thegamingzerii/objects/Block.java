@@ -1,5 +1,6 @@
 package de.thegamingzerii.objects;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -40,13 +41,15 @@ public class Block extends JPanel implements ICollision{
 				Block.allBlocks.remove(this);
 			}
 		}else {
-			if(false) {//onScreen()) {
+			if(onScreen()) {
 				super.paint(g);
 				Graphics2D g2d = (Graphics2D) g;
 				g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 						RenderingHints.VALUE_ANTIALIAS_ON);
 				int xUsable = (int) ((x - Game.camera.getCameraPos().getX()) * Camera.scale);
 				int yUsable = (int)((y - Game.camera.getCameraPos().getY()) * Camera.scale);
+				
+				g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 0.5));
 				
 				try {
 					BufferedImage image = ImageIO.read(new File("Assets/Block.png"));

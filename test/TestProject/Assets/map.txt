@@ -1,8 +1,10 @@
 Block -1152.0 512.0 2432.0 256.0
 Block -1152.0 768.0 128.0 128.0
 Block 1152.0 768.0 128.0 128.0
-Block 2048.0 0.0 384.0 256.0
 Block 1152.0 1408.0 384.0 128.0
+Block -1122.0 768.0 3430.0 128.0
+Block 2206.0 128.0 102.0 768.0
+Rope -22.0 -564.0 712.0
 TextureBlock -128.0 512.0 0
 TextureBlock 0.0 512.0 0
 TextureBlock 128.0 512.0 0
@@ -63,4 +65,67 @@ TextureBlock 1152.0 640.0 2
 TextureBlock 1408.0 1408.0 0
 TextureBlock 1280.0 1408.0 0
 TextureBlock 1152.0 1408.0 0
-Rope -22 -564 712
+TextureBlock 1152.0 768.0 2
+TextureBlock 1024.0 768.0 2
+TextureBlock 896.0 768.0 2
+TextureBlock 768.0 768.0 2
+TextureBlock 640.0 768.0 2
+TextureBlock 512.0 768.0 2
+TextureBlock 384.0 768.0 2
+TextureBlock 256.0 768.0 2
+TextureBlock 128.0 768.0 2
+TextureBlock 0.0 768.0 2
+TextureBlock -128.0 768.0 2
+TextureBlock -256.0 768.0 2
+TextureBlock -384.0 768.0 2
+TextureBlock -512.0 768.0 2
+TextureBlock -640.0 768.0 2
+TextureBlock -768.0 768.0 2
+TextureBlock -896.0 768.0 2
+TextureBlock -1024.0 768.0 2
+TextureBlock -1152.0 768.0 2
+TextureBlock 1408.0 384.0 4
+TextureBlock 1664.0 256.0 4
+TextureBlock 1920.0 128.0 4
+TextureBlock 2176.0 0.0 4
+TextureBlock 1280.0 384.0 3
+TextureBlock 1536.0 256.0 3
+TextureBlock 1792.0 128.0 3
+TextureBlock 2048.0 0.0 3
+TextureBlock 1408.0 512.0 2
+TextureBlock 1664.0 384.0 2
+TextureBlock 1536.0 512.0 2
+TextureBlock 2048.0 256.0 2
+TextureBlock 2176.0 128.0 2
+TextureBlock 1920.0 256.0 2
+TextureBlock 1792.0 384.0 2
+TextureBlock 1920.0 384.0 2
+TextureBlock 1664.0 512.0 2
+TextureBlock 1280.0 640.0 2
+TextureBlock 1408.0 640.0 2
+TextureBlock 2176.0 256.0 2
+TextureBlock 1536.0 384.0 5
+TextureBlock 1280.0 512.0 5
+TextureBlock 1792.0 256.0 5
+TextureBlock 2048.0 128.0 5
+TextureBlock 2176.0 384.0 2
+TextureBlock 2176.0 512.0 2
+TextureBlock 2176.0 640.0 2
+TextureBlock 2176.0 768.0 2
+TextureBlock 2048.0 768.0 2
+TextureBlock 1920.0 768.0 2
+TextureBlock 1664.0 768.0 2
+TextureBlock 1792.0 768.0 2
+TextureBlock 1536.0 768.0 2
+TextureBlock 1408.0 768.0 2
+TextureBlock 1280.0 768.0 2
+TextureBlock 1536.0 640.0 2
+TextureBlock 1664.0 640.0 2
+TextureBlock 1792.0 640.0 2
+TextureBlock 1920.0 640.0 2
+TextureBlock 2048.0 640.0 2
+TextureBlock 2048.0 512.0 2
+TextureBlock 2048.0 384.0 2
+TextureBlock 1920.0 512.0 2
+TextureBlock 1792.0 512.0 2
+Slope 1280.0 512.0 2304.0 0.0

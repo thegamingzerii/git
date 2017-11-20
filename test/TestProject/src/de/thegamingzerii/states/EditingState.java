@@ -25,6 +25,7 @@ import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.DeadlyBlock;
 import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.Rope;
+import de.thegamingzerii.objects.Slope;
 import de.thegamingzerii.objects.TextureBlock;
 
 public class EditingState extends State{
@@ -38,6 +39,8 @@ public class EditingState extends State{
 	private ArrayList<Integer> xSnaps = new ArrayList<Integer>();
 	private ArrayList<Integer> ySnaps = new ArrayList<Integer>();
 	
+	private final int differentBlockTextures = 6;
+	
 	@Override
 	public void init() {
 		for(int i = -1000; i < 1000; i++) {
@@ -50,7 +53,6 @@ public class EditingState extends State{
 	@Override
 	public void update(double delta) {
 
-		System.out.println("mode: " + mode);
 		if(MouseInfo.getPointerInfo().getLocation().getX() > 1900)
 			Game.camera.moveCamera(50, 0);
 		if(MouseInfo.getPointerInfo().getLocation().getY() > 1060)
@@ -78,10 +80,7 @@ public class EditingState extends State{
 		for(int i = 0; i < ySnaps.size(); i++) {
 			g.drawLine(0, (int)((ySnaps.get(i) - Game.camera.getCameraPos().getY())/Camera.zoom), 1920, (int)((ySnaps.get(i) - Game.camera.getCameraPos().getY())/Camera.zoom));
 		}
-		
-		for(int i = 0; i < Block.allBlocks.size(); i++) {
-			Block.allBlocks.get(i).paint(g);
-		}
+
 		
 		
 		
@@ -143,9 +142,18 @@ public class EditingState extends State{
 
 				g.drawRect ((int) Math.round(x), (int)Math.round(y), (int)Math.round(xDiff), (int)Math.round(yDiff));
 				break;
+			case 6:
+				if(xDiff > 0 || yDiff > 0) {
+					g.drawLine((int)Math.round(x), (int)Math.round(y), (int)Math.round(x2), (int)Math.round(y2));
+				}
+				break;
 			}
 			
 			  
+		}
+		
+		if(mode == 5) {
+			TextureBlock.drawCurrentlyPlacing(g, textureMode%differentBlockTextures, (int) Math.round(MouseInfo.getPointerInfo().getLocation().getX()), (int) Math.round(MouseInfo.getPointerInfo().getLocation().getY()));
 		}
 		
 		 super.paint(g);
@@ -172,7 +180,7 @@ public class EditingState extends State{
 			placing = true;
 			placingX = e.getX()*Camera.zoom + Game.camera.getCameraPos().getX();
 			placingY = e.getY()*Camera.zoom + Game.camera.getCameraPos().getY();
-			if(mode == 0 || mode == 4) {
+			if(mode == 0 || mode == 4 || mode == 6) {
 				placingX = getSnappedX(e.getX()*Camera.zoom+ Game.camera.getCameraPos().getX());
 				placingY = getSnappedY(e.getY()*Camera.zoom+ Game.camera.getCameraPos().getY());
 			}
@@ -234,6 +242,19 @@ public class EditingState extends State{
 						}
 					}
 				}
+				for(int i = Slope.allSlopes.size()-1; i >= 0; i--) {
+					if(Slope.allSlopes.get(i).getXAxis() > x && Slope.allSlopes.get(i).getXAxis() < x + xDifference) {
+						if(Slope.allSlopes.get(i).getYAxis() > y && Slope.allSlopes.get(i).getYAxis() < y + yDifference) {
+							Slope.allSlopes.remove(Slope.allSlopes.get(i));
+						}
+					}else {
+						if(Slope.allSlopes.get(i).getX2() > x && Slope.allSlopes.get(i).getX2() < x + xDifference) {
+							if(Slope.allSlopes.get(i).getY2() > y && Slope.allSlopes.get(i).getY2() < y + yDifference) {
+								Slope.allSlopes.remove(Slope.allSlopes.get(i));
+							}
+						}
+					}
+				}
 				Map.reWriteMap();
 				break;
 			case 3:
@@ -270,7 +291,10 @@ public class EditingState extends State{
 
 				}
 				if(!TextureBlock.deleteTextureBlock(xSnaps.get(indexX), ySnaps.get(indexY)))
-					Map.addToMap("TextureBlock " + xSnaps.get(indexX) + " " + ySnaps.get(indexY) + " " + textureMode%3);
+					Map.addToMap("TextureBlock " + xSnaps.get(indexX) + " " + ySnaps.get(indexY) + " " + textureMode%differentBlockTextures);
+				break;
+			case 6:
+				Map.addToMap("Slope " + Math.round(placingX) + " " + Math.round(placingY) + " " + Math.round(getSnappedX(e.getX()*Camera.zoom+ Game.camera.getCameraPos().getX())) + " " + Math.round(getSnappedY(e.getY()*Camera.zoom+ Game.camera.getCameraPos().getY())));
 				break;
 				
 				

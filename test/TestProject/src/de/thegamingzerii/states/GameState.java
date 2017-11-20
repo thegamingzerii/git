@@ -15,15 +15,14 @@ import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.Particle;
 import de.thegamingzerii.objects.Player;
 import de.thegamingzerii.objects.Rope;
+import de.thegamingzerii.objects.Slope;
 import de.thegamingzerii.objects.TextureBlock;
-import de.thegamingzerii.utility.PaintCall;
 
 
 
 
 public class GameState extends State{
 	
-	public ArrayList<PaintCall> allCalls =  new ArrayList<PaintCall>();
 	
 	public static Player player;
 	@Override
@@ -32,7 +31,6 @@ public class GameState extends State{
 		TextureBlock.ground.clear();
 		TextureBlock.ground2.clear();
 		
-		PaintCall currentCall = new PaintCall(Game.updateCounter);
 		
 		// TODO Auto-generated method stub
 		player.update(delta);		
@@ -64,22 +62,10 @@ public class GameState extends State{
 		}
 		
 		
-		for(int i = 0; i < TextureBlock.allTextureBlocks.size(); i++) {
-				TextureBlock.allTextureBlocks.get(i).update();
-		}
-		ArrayList<ArrayList<Point>> list = new ArrayList<ArrayList<Point>>();
-		list.add(TextureBlock.ground);
-		list.add(TextureBlock.ground2);
-		currentCall.setTextureBlocks(list);
-		
 		
 		if(Camera.zoom != 1)
 			Game.camera.reFrame(1);
-		currentCall.camPosX = Game.camera.getX();
-		currentCall.camPosY = Game.camera.getY();
-		currentCall.scale = Game.camera.scale;
 		
-		allCalls.add(currentCall);
 	}
 
 
@@ -92,7 +78,6 @@ public class GameState extends State{
 
 	
 	public void paint(Graphics2D g) {
-		allCalls.get(allCalls.size()-1).paint(g);
 		player.paint(g);
 		for(int i = 0; i < Jumper.allJumpers.size(); i++) {
 			Jumper.allJumpers.get(i).paint(g);
@@ -112,6 +97,17 @@ public class GameState extends State{
 		for(int i = 0; i < Rope.allRopes.size(); i++) {
 			Rope.allRopes.get(i).paint(g);
 		}
+		TextureBlock.drawOtherBlocks(g);
+		
+		if(Game.drawHitBoxes)
+		for(int i = 0; i < Block.allBlocks.size(); i++) {
+			Block.allBlocks.get(i).paint(g);
+		}
+		
+		for(int i = 0; i < Slope.allSlopes.size(); i++) {
+			Slope.allSlopes.get(i).paintComponent(g);
+		}
+		
 		
 		
 		

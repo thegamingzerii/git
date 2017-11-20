@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.ICollision;
 import de.thegamingzerii.objects.Jumper;
+import de.thegamingzerii.objects.Slope;
 
 public class CollisionChecker {
 
@@ -25,13 +26,21 @@ public class CollisionChecker {
 	}
 	
 	
-	public static boolean CheckAllCollisions(ICollision object1) {
+	
+	public static boolean CheckAllCollisions(ICollision object) {
 		boolean bool = false;
 		for(int i = 0; i < Block.allBlocks.size(); i++) {
-			if(CheckCollision(object1, Block.allBlocks.get(i))) {
+			if(CheckCollision(object, Block.allBlocks.get(i))) {
 				bool =  true;
 			}
 		}
+		
+		for(int i = 0; i < Slope.allSlopes.size(); i++) {
+			if(Slope.allSlopes.get(i).checkCollision(object.getCollisionSize())) 
+				bool =  true;
+
+		}
+		
 		return bool;
 		
 	}

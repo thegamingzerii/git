@@ -1,5 +1,6 @@
 package de.thegamingzerii.editor;
 
+import java.awt.geom.Point2D;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -12,6 +13,7 @@ import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.DeadlyBlock;
 import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.Rope;
+import de.thegamingzerii.objects.Slope;
 import de.thegamingzerii.objects.TextureBlock;
 import de.thegamingzerii.utility.Constantes.BlockType;
 
@@ -65,6 +67,7 @@ public class Map {
 		Rope.allRopes.clear();
 		DeadlyBlock.allDeadlyBlocks.clear();
 		TextureBlock.allTextureBlocks.clear();
+		Slope.allSlopes.clear();
 		ArrayList<String> lines = readMapFile();
 		ArrayList<Object> objects = new ArrayList<Object>();
 		for(int i = 0; i < lines.size(); i++) {
@@ -100,10 +103,22 @@ public class Map {
     			case 2:
     				type = BlockType.Ground2;
     				break;
+    			case 3:
+    				type = BlockType.Slope1;
+    				break;
+    			case 4:
+    				type = BlockType.Slope2;
+    				break;
+    			case 5:
+    				type = BlockType.Slope3;
+    				break;
     			default:
     				break;
     			}
     			objects.add(new TextureBlock(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), type));
+    		}
+    		if(splited[0].equals("Slope")) {
+    			objects.add(new Slope(new Point2D.Double(Double.parseDouble(splited[1]), Double.parseDouble(splited[2])), new Point2D.Double(Double.parseDouble(splited[3]), Double.parseDouble(splited[4]))));
     		}
 		}
 		return objects;
@@ -173,6 +188,9 @@ public class Map {
 		}
 		for(int i = 0; i < TextureBlock.allTextureBlocks.size(); i++) {
 			object.add(TextureBlock.allTextureBlocks.get(i).toString());
+		}
+		for(int i = 0; i < Slope.allSlopes.size(); i++) {
+			object.add(Slope.allSlopes.get(i).toString());
 		}
 			
 		writeToMap(object);

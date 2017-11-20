@@ -3,6 +3,8 @@ package de.thegamingzerii.maingame;
 
 import java.nio.IntBuffer;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.TimerTask;
 
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
@@ -10,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import javax.swing.Timer;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -17,13 +20,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import de.thegamingzerii.utility.Constantes;
-import de.thegamingzerii.utility.PaintCall;
 import de.thegamingzerii.editor.Map;
 import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.Player;
@@ -46,8 +49,10 @@ public class Game extends JPanel{
 	public static State editingState;
 	public static State currentState;
 	public static long updateCounter = 0;
-	public static ArrayList<PaintCall> paintCalls = new ArrayList<PaintCall>();
 	public static Game currentGame;
+	
+	
+	public static boolean drawHitBoxes = false;
 	
 	
 
@@ -76,7 +81,8 @@ public class Game extends JPanel{
 	public Game() {
 
 		
-		setFocusable(true);
+		frame.setFocusable(true);
+		frame.requestFocus();
 		currentGame = run();
 	}
 	
@@ -125,6 +131,7 @@ public class Game extends JPanel{
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("Z"), "z");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("H"), "h");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("L"), "l");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("U"), "u");
 		
 		ingameState.getActionMap().put("jump", new JumpAction(false));
 		ingameState.getActionMap().put("move up", new MoveAction(0, false));
@@ -145,6 +152,7 @@ public class Game extends JPanel{
 		ingameState.getActionMap().put("g", new PressedOtherKey(3));
 		ingameState.getActionMap().put("z", new PressedOtherKey(4));
 		ingameState.getActionMap().put("h", new PressedOtherKey(5));
+		ingameState.getActionMap().put("u", new PressedOtherKey(6));
 		ingameState.getActionMap().put("l", new SwitchTexture());
 		
 		
@@ -224,8 +232,6 @@ public class Game extends JPanel{
 		
 		
 	public void update(double delta) {
-		updateCounter++;
-			System.out.println("updating");
 			currentState.update(delta);
 			Game.camera.update(delta);			
 			saveGameCounter += delta;
@@ -241,7 +247,6 @@ public class Game extends JPanel{
 	
 	@Override
 	public void paint(Graphics g) {
-			System.out.println("painting");
 			super.paint(g);
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -272,13 +277,69 @@ public static void main(String[] args) throws InterruptedException {
 	frame.setIgnoreRepaint(true);
 	//frame.add(keyboard);
 	
-	double lastLoopTime = System.nanoTime();
-	final int TARGET_FPS = 60;
-    final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;   
+	
     final long CONSTANT_LOGIC_TIME = 1000000000 / 60; 
-    long lastFpsTime = 0;
-    int fps = 0;
-	   
+    
+    	
+    Thread scannerThread = new Thread(new Runnable() {
+  	  public void run() {
+  		Scanner reader = new Scanner(System.in);  // Reading from System.in
+  		  while(true) {
+  			
+  	  	    String command = reader.nextLine(); // Scans the next token of the input as an int.
+  	  	    if(command.equals("drawHitBoxes")) {
+  	  	    	if(drawHitBoxes)
+  	  	    		drawHitBoxes = false;
+  	  	    	else
+  	  	    		drawHitBoxes = true;
+  	  	    	
+  	  	    	System.out.println("Toggled hitBoxes");
+  	  	    }
+  	  	    //once finished
+  	  	    
+  		  }
+  		
+  	  }
+  	});
+    scannerThread.start();
+
+    
+    
+    
+    Timer timer = new Timer(1, new ActionListener() {
+    	long lastFpsTime = 0;
+        int fps = 0;
+        double lastLoopTime = System.nanoTime();
+    	  public void actionPerformed( ActionEvent e ) {
+    		  
+              //lastFps = (int) (1000/((System.nanoTime() - lastLoopTime)/1000000));
+    	      long now = System.nanoTime();
+    	      long updateLength = (long) (now - lastLoopTime);
+    	      lastLoopTime = now;
+    	      double delta = updateLength / ((double)CONSTANT_LOGIC_TIME);
+
+    	      // update the frame counter
+    	      lastFpsTime += updateLength;
+    	      fps++;
+    	      
+    	      // update our FPS counter if a second has passed since
+    	      // we last recorded
+    	      if (lastFpsTime >= 1000000000)
+    	      {
+    	    	  
+    	    	 lastFps = fps;
+    	         lastFpsTime = 0;
+    	         fps = 0;
+    	      }
+    	      
+    	      game.update(delta);
+              game.repaint();
+              
+              //.setDelay((int) ((lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000));
+    		  }});
+    timer.start();
+
+	   /**
     // keep looping round till the game ends
     while (true)
     {
@@ -333,6 +394,7 @@ public static void main(String[] args) throws InterruptedException {
 	     
 	      
 	   }
+	   */
     }
 
 
@@ -479,6 +541,20 @@ private class SwitchTexture extends AbstractAction{
 		}
 		
 	}
+
+
+private class ConsoleScanner implements Runnable {
+
+    public void run() {
+        System.out.println("Hello from a thread!");
+    }
+    
+
+    public void main(String args[]) {
+        (new Thread(new ConsoleScanner())).start();
+    }
+
+}
 	
 }
 	
