@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import de.thegamingzerii.maingame.Game;
+import de.thegamingzerii.utility.ExtraMaths;
 
 public class Slope extends JPanel implements ICollision{
 	public static ArrayList<Slope> allSlopes = new ArrayList<Slope>();
@@ -29,8 +30,10 @@ public class Slope extends JPanel implements ICollision{
 
 	@Override
 	public boolean checkcollision(Rectangle rect) {
-		// TODO Auto-generated method stub
+		if(onScreen())
+			return ((line.intersects(new Rectangle((int)rect.getX(), (int)rect.getY(), (int)(rect.getWidth()/2), (int)rect.getHeight())))&&(line.intersects(new Rectangle((int)rect.getCenterX(), (int)rect.getY(), (int)(rect.getWidth()/2), (int)rect.getHeight()))));
 		return false;
+
 	}
 
 	@Override
@@ -69,20 +72,20 @@ public class Slope extends JPanel implements ICollision{
 		return null;
 	}
 	
-	public boolean checkCollision(Rectangle rect) {
-		return ((line.intersects(new Rectangle((int)rect.getX(), (int)rect.getY(), (int)(rect.getWidth()/2), (int)rect.getHeight())))&&(line.intersects(new Rectangle((int)rect.getCenterX(), (int)rect.getY(), (int)(rect.getWidth()/2), (int)rect.getHeight()))));
-		
-	}
 
 	@Override
 	public boolean onScreen() {
-		// TODO Auto-generated method stub
+		if(ExtraMaths.onScreen(line.getP1()))
+			return true;
+		if(ExtraMaths.onScreen(line.getP2()))
+			return true;
 		return false;
+					
 	}
 	
 	public void paintComponent(Graphics2D g) {
 		super.paint(g);
-		if(Game.drawHitBoxes) {
+		if(Game.drawHitBoxes && onScreen()) {
 			int xUsable = (int) ((line.getX1() - Game.camera.getCameraPos().getX()-4) * Camera.scale);
 			int yUsable = (int)((line.getY1() - Game.camera.getCameraPos().getY()) * Camera.scale);
 			int xEndUsable = (int) ((line.getX2() - Game.camera.getCameraPos().getX()-4) * Camera.scale);

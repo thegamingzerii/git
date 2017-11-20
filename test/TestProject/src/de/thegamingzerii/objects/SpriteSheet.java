@@ -50,8 +50,6 @@ public class SpriteSheet extends JPanel{
 	public void paintComponent(Graphics2D g, double x, double y, int row, boolean flipped) {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
 		int xUsable = (int) ((x - Game.camera.getCameraPos().getX()) * Camera.scale);
 		int yUsable = (int)((y - Game.camera.getCameraPos().getY()) * Camera.scale);
 		
@@ -64,6 +62,7 @@ public class SpriteSheet extends JPanel{
 				AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 				rightPart = op.filter(rightPart, null);
 			}
+			
 			Image scaledImage = rightPart.getScaledInstance((int)(width * Camera.scale), (int)(height * Camera.scale), image.SCALE_DEFAULT);
 			g.drawImage(scaledImage, xUsable, yUsable, this);
 		} catch (IOException e) {

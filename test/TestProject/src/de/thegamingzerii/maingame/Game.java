@@ -25,11 +25,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 
 import de.thegamingzerii.utility.Constantes;
 import de.thegamingzerii.editor.Map;
 import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.Player;
+import de.thegamingzerii.objects.TextureBlock;
 import de.thegamingzerii.states.*;
 
 
@@ -215,6 +217,12 @@ public class Game extends JPanel{
 		ingameState.init();
 		pauseState.init();
 		mainMenuState.init();
+		try {
+			TextureBlock.init();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		camera = new Camera(0, 0);
 		Map.loadMap();
@@ -255,7 +263,7 @@ public class Game extends JPanel{
 			g.setColor(Color.red);
 			String currentFont = g.getFont().toString();
 			g.setFont(new Font(currentFont, Font.PLAIN, 15));
-			g.drawString("FPS: " + lastFps, (int) (10 * Camera.scale) , (int) (20 * Camera.scale));
+			g.drawString("FPS: " + lastFps, 10 , 20);
 		
 		
 	}

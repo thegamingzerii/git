@@ -20,11 +20,32 @@ import de.thegamingzerii.utility.ExtraMaths;
 
 public class TextureBlock {
 	public static ArrayList<TextureBlock> allTextureBlocks = new ArrayList<TextureBlock>();
-	public static ArrayList<Point> ground = new ArrayList<Point>();
-	public static ArrayList<Point> ground2 = new ArrayList<Point>();
-	public static ArrayList<Point> slope1 = new ArrayList<Point>();
-	public static ArrayList<Point> slope2 = new ArrayList<Point>();
-	public static ArrayList<Point> slope3 = new ArrayList<Point>();
+	private static BufferedImage g1 = null;
+	private static BufferedImage g2 = null;
+	private static BufferedImage s1 = null;
+	private static BufferedImage s2 = null;
+	private static BufferedImage s3 = null;
+	private static BufferedImage gr1 = null;
+	private static BufferedImage gr2 = null;
+	private static BufferedImage gr3 = null;
+	private static BufferedImage gr4 = null;
+	private static BufferedImage gr5 = null;
+	
+	private static Image ground1 = null;
+	private static Image ground2 = null;
+	private static Image slope1 = null;
+	private static Image slope2 = null;
+	private static Image slope3 = null;
+	private static Image grass1 = null;
+	private static Image grass2 = null;
+	private static Image grass3 = null;
+	private static Image grass4 = null;
+	private static Image grass5 = null;
+	
+	
+	
+	
+	private static BufferedImage image = null;
 	
 	private double x;
 	private double y;
@@ -33,65 +54,86 @@ public class TextureBlock {
 	private double randomFactor;
 	Random generator;
 	
+	public static void init() throws IOException {
+		BufferedImage image = ImageIO.read(new File("Assets/Ground.png"));
+		g1 = image.getSubimage(0, 0, 128, 128);
+		g2 = image.getSubimage(0, 128, 128, 128);
+		s1 = image.getSubimage(0, 256, 128, 128);
+		s2 = image.getSubimage(0, 384, 128, 128);
+		s3 = image.getSubimage(0, 512, 128, 128);
+		
+		image = ImageIO.read(new File("Assets/Grass.png"));
+		gr1 = image.getSubimage(0, 0, 128, 128);
+		gr2 = image.getSubimage(0, 128, 128, 128);
+		gr3 = image.getSubimage(0, 256, 128, 128);
+		gr4 = image.getSubimage(0, 384, 128, 128);
+		gr5 = image.getSubimage(0, 512, 128, 128);
+		reScale(1);
+	}
+	
+	public static void reScale(double scaling) {
+		System.out.println("scaling");
+		ground1 = g1.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
+		ground2 = g2.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
+		slope1 = s1.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
+		slope2 = s2.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
+		slope3 = s3.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
+		grass1 = gr1.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
+		grass2 = gr2.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
+		grass3 = gr3.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
+		grass4 = gr4.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
+		grass5 = gr5.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
+	}
+	
+	
 	public TextureBlock(double x, double y, BlockType type) {
 		this.x = x;
 		this.y = y;
 		this.type = type;
-		
-		String path = "";
-		switch(type) {
-		case Ground:
-			path = "Assets/Ground.png";
-			break;
-		case Ground2:
-			path = "Assets/Ground.png";
-			break;
-		case Slope1:
-			path = "Assets/Ground.png";
-			break;
-		case Slope2:
-			path = "Assets/Ground.png";
-			break;
-		case Slope3:
-			path = "Assets/Ground.png";
-			break;
-		case Grass:
-			path = "Assets/Grass.png";
-			break;
-		default:
-			break;
-		}
-		sprite = new SpriteSheet(path, 128,128, 0, 1, 1);
 		generator = new Random((long) (x*y));
 		randomFactor = Math.round(generator.nextInt()/100);
-		
-		
-		
-		
 		allTextureBlocks.add(this);
 	}
 
 	
 	public void draw(Graphics2D g) {
 		if(onScreen()) {
+			int xUsable = (int) ((x - Game.camera.getX()) * Camera.scale);
+			int yUsable = (int)((y - Game.camera.getY()) * Camera.scale);
 			switch(type) {
 			case Ground:
-				ground.add(new Point((int)x, (int)y));
+				g.drawImage(ground1, xUsable, yUsable, Game.currentGame);
 				break;
 			case Ground2:
-				ground2.add(new Point((int)x, (int)y));
+				g.drawImage(ground2, xUsable, yUsable, Game.currentGame);
 				break;
 			case Slope1:
-				slope1.add(new Point((int)x, (int)y));
+				g.drawImage(slope1, xUsable, yUsable, Game.currentGame);
 				break;
 			case Slope2:
-				slope2.add(new Point((int)x, (int)y));
+				g.drawImage(slope2, xUsable, yUsable, Game.currentGame);
 				break;
 			case Slope3:
-				slope3.add(new Point((int)x, (int)y));
+				g.drawImage(slope3, xUsable, yUsable, Game.currentGame);
 				break;
-			case Grass:			
-				sprite.paintComponent(g, x, y, ExtraMaths.ActualModulo(randomFactor, 5), randomFactor < 500);
+			case Grass:		
+				switch(ExtraMaths.ActualModulo(randomFactor, 5)) {
+				case 0:
+					g.drawImage(grass1, xUsable, yUsable, Game.currentGame);
+					break;
+				case 1:
+					g.drawImage(grass2, xUsable, yUsable, Game.currentGame);
+					break;
+				case 2:
+					g.drawImage(grass3, xUsable, yUsable, Game.currentGame);
+					break;
+				case 3:
+					g.drawImage(grass4, xUsable, yUsable, Game.currentGame);
+					break;
+				case 4:
+					g.drawImage(grass5, xUsable, yUsable, Game.currentGame);
+					break;
+				}				
 				break;
 			default:
 				break;
@@ -167,93 +209,32 @@ public class TextureBlock {
 		return returnValue;
 	}
 	
-	
-	public static void drawOtherBlocks(Graphics2D g) {
-		
-		try {
-			BufferedImage image = ImageIO.read(new File("Assets/Ground.png"));
-			BufferedImage rightPart = image.getSubimage(0, 0, 128, 128);
-			Image scaledImage = rightPart.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
-			
-			for(int i = 0; i < ground.size(); i++) {
-				int xUsable = (int) ((ground.get(i).getX() - Game.camera.getX()) * Camera.scale);
-				int yUsable = (int)((ground.get(i).getY() - Game.camera.getY()) * Camera.scale);
-				g.drawImage(scaledImage, xUsable, yUsable, Game.currentGame);
-			}
-			
-			rightPart = image.getSubimage(0, 128, 128, 128);
-			scaledImage = rightPart.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
-			for(int i = 0; i < ground2.size(); i++) {
-				int xUsable = (int) ((ground2.get(i).getX() - Game.camera.getX()) * Camera.scale);
-				int yUsable = (int)((ground2.get(i).getY() - Game.camera.getY()) * Camera.scale);
-				g.drawImage(scaledImage, xUsable, yUsable, Game.currentGame);
-			}
-			rightPart = image.getSubimage(0, 256, 128, 128);
-			scaledImage = rightPart.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
-			for(int i = 0; i < slope1.size(); i++) {
-				int xUsable = (int) ((slope1.get(i).getX() - Game.camera.getX()) * Camera.scale);
-				int yUsable = (int)((slope1.get(i).getY() - Game.camera.getY()) * Camera.scale);
-				g.drawImage(scaledImage, xUsable, yUsable, Game.currentGame);
-			}
-			rightPart = image.getSubimage(0, 384, 128, 128);
-			scaledImage = rightPart.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
-			for(int i = 0; i < slope2.size(); i++) {
-				int xUsable = (int) ((slope2.get(i).getX() - Game.camera.getX()) * Camera.scale);
-				int yUsable = (int)((slope2.get(i).getY() - Game.camera.getY()) * Camera.scale);
-				g.drawImage(scaledImage, xUsable, yUsable, Game.currentGame);
-			}
-			rightPart = image.getSubimage(0, 512, 128, 128);
-			scaledImage = rightPart.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
-			for(int i = 0; i < slope3.size(); i++) {
-				int xUsable = (int) ((slope3.get(i).getX() - Game.camera.getX()) * Camera.scale);
-				int yUsable = (int)((slope3.get(i).getY() - Game.camera.getY()) * Camera.scale);
-				g.drawImage(scaledImage, xUsable, yUsable, Game.currentGame);
-			}
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ground.clear();
-		ground2.clear();
-		slope1.clear();
-		slope2.clear();
-		slope3.clear();
-		
-		
-	}
+
 	
 	public static void drawCurrentlyPlacing(Graphics2D g, int id, int x, int y) {
-		try {
-			BufferedImage image = ImageIO.read(new File("Assets/Ground.png"));
-			BufferedImage rightPart = image.getSubimage(0, 0, 128, 128);
 			
 			switch(id) {	
 			case 0:
+				g.drawImage(ground1, x, y, Game.currentGame);
 				break;
 			case 1:
-				image = ImageIO.read(new File("Assets/Grass.png"));
-				rightPart = image.getSubimage(0, 0, 128, 128);
+				g.drawImage(grass1, x, y, Game.currentGame);
 				break;
 			case 2:
-				rightPart = image.getSubimage(0, 128, 128, 128);
+				g.drawImage(ground2, x, y, Game.currentGame);
 				break;
 			case 3:
-				rightPart = image.getSubimage(0, 256, 128, 128);
+				g.drawImage(slope1, x, y, Game.currentGame);
 				break;
 			case 4:
-				rightPart = image.getSubimage(0, 384, 128, 128);
+				g.drawImage(slope2, x, y, Game.currentGame);
 				break;
 			case 5:
-				rightPart = image.getSubimage(0, 512, 128, 128);
+				g.drawImage(slope3, x, y, Game.currentGame);
 				break;
 				
 			}
-			Image scaledImage = rightPart.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
-			g.drawImage(scaledImage, (int)(x-(64*Camera.scale)), (int)(y-(64*Camera.scale)), Game.currentGame);
-		}catch (IOException e){
-			e.printStackTrace();
-		}
+
 		
 	}
 }

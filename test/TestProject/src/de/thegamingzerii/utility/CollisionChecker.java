@@ -36,7 +36,7 @@ public class CollisionChecker {
 		}
 		
 		for(int i = 0; i < Slope.allSlopes.size(); i++) {
-			if(Slope.allSlopes.get(i).checkCollision(object.getCollisionSize())) 
+			if(Slope.allSlopes.get(i).checkcollision(object.getCollisionSize())) 
 				bool =  true;
 
 		}

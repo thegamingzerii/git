@@ -28,9 +28,6 @@ public class GameState extends State{
 	@Override
 	public void update(double delta) {
 		
-		TextureBlock.ground.clear();
-		TextureBlock.ground2.clear();
-		
 		
 		// TODO Auto-generated method stub
 		player.update(delta);		
@@ -97,7 +94,6 @@ public class GameState extends State{
 		for(int i = 0; i < Rope.allRopes.size(); i++) {
 			Rope.allRopes.get(i).paint(g);
 		}
-		TextureBlock.drawOtherBlocks(g);
 		
 		if(Game.drawHitBoxes)
 		for(int i = 0; i < Block.allBlocks.size(); i++) {

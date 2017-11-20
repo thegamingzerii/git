@@ -52,8 +52,15 @@ public class Camera {
 		
 		if(zooming) {
 			zoom += (zoomingTo - zoom) * 0.05 * delta;
-			if(Math.abs(zoomingTo - zoom) < 0.05)
+			scale = (screenHeight / 1080) / zoom;
+			TextureBlock.reScale(scale);
+			if(Math.abs(zoomingTo - zoom) < 0.05) {
 				zoom = zoomingTo;
+				scale = (screenHeight / 1080) / zoom;
+				TextureBlock.reScale(scale);
+				zooming = false;
+			}
+				
 		}
 			
 		
@@ -63,7 +70,8 @@ public class Camera {
 		
 		
 		
-	    scale = (screenHeight / 1080) / zoom;
+	    
+	    	
 	}
 	
 	public void reFrame(double zoom) {
