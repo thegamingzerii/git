@@ -72,7 +72,6 @@ public class TextureBlock {
 	}
 	
 	public static void reScale(double scaling) {
-		System.out.println("scaling");
 		ground1 = g1.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
 		ground2 = g2.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
 		slope1 = s1.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);

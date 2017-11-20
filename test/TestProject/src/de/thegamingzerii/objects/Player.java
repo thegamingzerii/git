@@ -18,6 +18,7 @@ import de.thegamingzerii.states.EditingState;
 import de.thegamingzerii.states.GameState;
 import de.thegamingzerii.utility.CollisionChecker;
 import de.thegamingzerii.utility.Constantes;
+import de.thegamingzerii.utility.Vector2d;
 
 
 @SuppressWarnings("serial")
@@ -33,6 +34,7 @@ public class Player extends GravityObject implements ICollision{
 	public boolean jumpPressed = false;
 	boolean doubleJumpAvailable = true;
 	public boolean hanging = false;
+	private boolean overSlope = false;
 	public Rope rope = null;
 	public double jumpTimer = 0;
 	String path = "Assets/Player.png";
@@ -146,6 +148,7 @@ public class Player extends GravityObject implements ICollision{
 	
 	
 	public void move(double delta) {
+		
 		
 		
 		gravity(delta);
@@ -281,6 +284,18 @@ public class Player extends GravityObject implements ICollision{
 		if(!inAir)
 			checkPoint = new Point2D.Double(x, y);
 		
+		 y += 50;
+		 overSlope = false;
+		for(int i = 0; i < Slope.allSlopes.size(); i++) {
+			if(Slope.allSlopes.get(i).checkcollision(getCollisionSize())) {
+				resetDoubleJump();
+				inDoubleJump = false;
+				overSlope = true;
+			}
+				
+		}
+		y-= 50;
+		
 	}
 	
 	
@@ -325,13 +340,13 @@ public class Player extends GravityObject implements ICollision{
 			if(slidingRight) {
 				sprite.paintComponent(g, x-12, y-8, 3, false);
 			}else {
-				if(inDoubleJump) {
+				if(inDoubleJump && !overSlope) {
 					if(moveDirection == 0)
 						sprite.paintComponent(g, x-16, y-8, 2, false);
 					if(moveDirection == 1)
 						sprite.paintComponent(g, x-16, y-8, 2, true);
 				}else {
-					if(inJump) {
+					if(inJump && !overSlope) {
 						if(moveDirection == 0)
 							sprite.paintComponent(g, x-16, y-8, 4, false);
 						if(moveDirection == 1)

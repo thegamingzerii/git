@@ -17,13 +17,16 @@ import javax.swing.JPanel;
 
 import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.utility.ExtraMaths;
+import de.thegamingzerii.utility.Vector2d;
 
 public class Slope extends JPanel implements ICollision{
 	public static ArrayList<Slope> allSlopes = new ArrayList<Slope>();
 	private Line2D line;
+	private Vector2d vector;
 	
 	public Slope(Point2D point1, Point2D point2) {
 		line = new Line2D.Double(point1, point2);
+		vector = new Vector2d(point1, point2);
 		allSlopes.add(this);
 	}
 	
@@ -54,6 +57,10 @@ public class Slope extends JPanel implements ICollision{
 		return line.getY2();
 	}
 
+	public Vector2d getVector() {
+		return vector;
+	}
+	
 	@Override
 	public void setX(int x) {
 		// TODO Auto-generated method stub
