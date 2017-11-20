@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.ICollision;
 import de.thegamingzerii.objects.Jumper;
+import de.thegamingzerii.objects.MovingPlatform;
 import de.thegamingzerii.objects.Slope;
 
 public class CollisionChecker {
@@ -33,6 +34,11 @@ public class CollisionChecker {
 			if(CheckCollision(object, Block.allBlocks.get(i))) {
 				bool =  true;
 			}
+		}
+		
+		for(int i = 0; i < MovingPlatform.allMovingPlatforms.size(); i++) {
+			if(MovingPlatform.allMovingPlatforms.get(i).checkcollision(object.getCollisionSize())) 
+				bool =  true;
 		}
 		
 		for(int i = 0; i < Slope.allSlopes.size(); i++) {

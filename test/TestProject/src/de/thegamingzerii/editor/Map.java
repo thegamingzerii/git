@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.DeadlyBlock;
 import de.thegamingzerii.objects.Jumper;
+import de.thegamingzerii.objects.MovingPlatform;
 import de.thegamingzerii.objects.Rope;
 import de.thegamingzerii.objects.Slope;
 import de.thegamingzerii.objects.TextureBlock;
@@ -68,6 +69,7 @@ public class Map {
 		DeadlyBlock.allDeadlyBlocks.clear();
 		TextureBlock.allTextureBlocks.clear();
 		Slope.allSlopes.clear();
+		MovingPlatform.allMovingPlatforms.clear();
 		ArrayList<String> lines = readMapFile();
 		ArrayList<Object> objects = new ArrayList<Object>();
 		for(int i = 0; i < lines.size(); i++) {
@@ -119,6 +121,9 @@ public class Map {
     		}
     		if(splited[0].equals("Slope")) {
     			objects.add(new Slope(new Point2D.Double(Double.parseDouble(splited[1]), Double.parseDouble(splited[2])), new Point2D.Double(Double.parseDouble(splited[3]), Double.parseDouble(splited[4]))));
+    		}
+    		if(splited[0].equals("MovingPlatform")) {
+    			objects.add(new MovingPlatform(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), Double.parseDouble(splited[3]), Double.parseDouble(splited[4])));
     		}
 		}
 		return objects;
@@ -191,6 +196,9 @@ public class Map {
 		}
 		for(int i = 0; i < Slope.allSlopes.size(); i++) {
 			object.add(Slope.allSlopes.get(i).toString());
+		}
+		for(int i = 0; i < MovingPlatform.allMovingPlatforms.size(); i++) {
+			object.add(MovingPlatform.allMovingPlatforms.get(i).toString());
 		}
 			
 		writeToMap(object);

@@ -12,6 +12,7 @@ import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.DeadlyBlock;
 import de.thegamingzerii.objects.Jumper;
+import de.thegamingzerii.objects.MovingPlatform;
 import de.thegamingzerii.objects.Particle;
 import de.thegamingzerii.objects.Player;
 import de.thegamingzerii.objects.Rope;
@@ -58,6 +59,10 @@ public class GameState extends State{
 			}
 		}
 		
+		for(int i = 0; i < MovingPlatform.allMovingPlatforms.size(); i++) {
+			MovingPlatform.allMovingPlatforms.get(i).update(delta);
+		}
+		
 		
 		
 		if(Camera.zoom != 1)
@@ -102,6 +107,9 @@ public class GameState extends State{
 		
 		for(int i = 0; i < Slope.allSlopes.size(); i++) {
 			Slope.allSlopes.get(i).paintComponent(g);
+		}
+		for(int i = 0; i < MovingPlatform.allMovingPlatforms.size(); i++) {
+			MovingPlatform.allMovingPlatforms.get(i).paintComponent(g);
 		}
 		
 		

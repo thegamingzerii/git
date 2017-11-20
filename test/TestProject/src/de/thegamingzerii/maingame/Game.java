@@ -134,6 +134,7 @@ public class Game extends JPanel{
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("H"), "h");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("L"), "l");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("U"), "u");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("J"), "j");
 		
 		ingameState.getActionMap().put("jump", new JumpAction(false));
 		ingameState.getActionMap().put("move up", new MoveAction(0, false));
@@ -155,6 +156,7 @@ public class Game extends JPanel{
 		ingameState.getActionMap().put("z", new PressedOtherKey(4));
 		ingameState.getActionMap().put("h", new PressedOtherKey(5));
 		ingameState.getActionMap().put("u", new PressedOtherKey(6));
+		ingameState.getActionMap().put("j", new PressedOtherKey(7));
 		ingameState.getActionMap().put("l", new SwitchTexture());
 		
 		

@@ -24,6 +24,7 @@ import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.DeadlyBlock;
 import de.thegamingzerii.objects.Jumper;
+import de.thegamingzerii.objects.MovingPlatform;
 import de.thegamingzerii.objects.Rope;
 import de.thegamingzerii.objects.Slope;
 import de.thegamingzerii.objects.TextureBlock;
@@ -147,6 +148,11 @@ public class EditingState extends State{
 					g.drawLine((int)Math.round(x), (int)Math.round(y), (int)Math.round(x2), (int)Math.round(y2));
 				}
 				break;
+			case 7:
+				if(xDiff > 0 || yDiff > 0) {
+					g.drawLine((int)Math.round(x), (int)Math.round(y), (int)Math.round(x2), (int)Math.round(y2));
+				}
+				break;
 			}
 			
 			  
@@ -180,7 +186,7 @@ public class EditingState extends State{
 			placing = true;
 			placingX = e.getX()*Camera.zoom + Game.camera.getCameraPos().getX();
 			placingY = e.getY()*Camera.zoom + Game.camera.getCameraPos().getY();
-			if(mode == 0 || mode == 4 || mode == 6) {
+			if(mode == 0 || mode == 4 || mode == 6 || mode == 7) {
 				placingX = getSnappedX(e.getX()*Camera.zoom+ Game.camera.getCameraPos().getX());
 				placingY = getSnappedY(e.getY()*Camera.zoom+ Game.camera.getCameraPos().getY());
 			}
@@ -255,6 +261,19 @@ public class EditingState extends State{
 						}
 					}
 				}
+				for(int i = MovingPlatform.allMovingPlatforms.size()-1; i >= 0; i--) {
+					if(MovingPlatform.allMovingPlatforms.get(i).getXAxis() > x && MovingPlatform.allMovingPlatforms.get(i).getXAxis() < x + xDifference) {
+						if(MovingPlatform.allMovingPlatforms.get(i).getYAxis() > y && MovingPlatform.allMovingPlatforms.get(i).getYAxis() < y + yDifference) {
+							MovingPlatform.allMovingPlatforms.remove(MovingPlatform.allMovingPlatforms.get(i));
+						}
+					}else {
+						if(MovingPlatform.allMovingPlatforms.get(i).getX2() > x && MovingPlatform.allMovingPlatforms.get(i).getX2() < x + xDifference) {
+							if(MovingPlatform.allMovingPlatforms.get(i).getY2() > y && MovingPlatform.allMovingPlatforms.get(i).getY2() < y + yDifference) {
+								MovingPlatform.allMovingPlatforms.remove(MovingPlatform.allMovingPlatforms.get(i));
+							}
+						}
+					}
+				}
 				Map.reWriteMap();
 				break;
 			case 3:
@@ -295,6 +314,9 @@ public class EditingState extends State{
 				break;
 			case 6:
 				Map.addToMap("Slope " + Math.round(placingX) + " " + Math.round(placingY) + " " + Math.round(getSnappedX(e.getX()*Camera.zoom+ Game.camera.getCameraPos().getX())) + " " + Math.round(getSnappedY(e.getY()*Camera.zoom+ Game.camera.getCameraPos().getY())));
+				break;
+			case 7:
+				Map.addToMap("MovingPlatform " + Math.round(placingX) + " " + Math.round(placingY) + " " + Math.round(getSnappedX(e.getX()*Camera.zoom+ Game.camera.getCameraPos().getX())) + " " + Math.round(getSnappedY(e.getY()*Camera.zoom+ Game.camera.getCameraPos().getY())));
 				break;
 				
 				
