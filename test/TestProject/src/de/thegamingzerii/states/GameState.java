@@ -2,12 +2,17 @@ package de.thegamingzerii.states;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import de.thegamingzerii.maingame.Game;
+import de.thegamingzerii.objects.BackgroundObject;
 import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.DeadlyBlock;
@@ -18,12 +23,12 @@ import de.thegamingzerii.objects.Player;
 import de.thegamingzerii.objects.Rope;
 import de.thegamingzerii.objects.Slope;
 import de.thegamingzerii.objects.TextureBlock;
+import de.thegamingzerii.utility.Constantes.BackgroundType;
 
 
 
 
 public class GameState extends State{
-	
 	
 	public static Player player;
 	@Override
@@ -80,6 +85,10 @@ public class GameState extends State{
 
 	
 	public void paint(Graphics2D g) {
+		for(int i = 0; i < BackgroundObject.allBackgroundObjects.size(); i++) {
+			BackgroundObject.allBackgroundObjects.get(i).paint(g);
+		}
+		
 		player.paint(g);
 		for(int i = 0; i < Jumper.allJumpers.size(); i++) {
 			Jumper.allJumpers.get(i).paint(g);
@@ -100,16 +109,18 @@ public class GameState extends State{
 			Rope.allRopes.get(i).paint(g);
 		}
 		
-		if(Game.drawHitBoxes)
-		for(int i = 0; i < Block.allBlocks.size(); i++) {
-			Block.allBlocks.get(i).paint(g);
-		}
+		
 		
 		for(int i = 0; i < Slope.allSlopes.size(); i++) {
 			Slope.allSlopes.get(i).paintComponent(g);
 		}
 		for(int i = 0; i < MovingPlatform.allMovingPlatforms.size(); i++) {
 			MovingPlatform.allMovingPlatforms.get(i).paintComponent(g);
+		}
+		
+		if(Game.drawHitBoxes)
+		for(int i = 0; i < Block.allBlocks.size(); i++) {
+			Block.allBlocks.get(i).paint(g);
 		}
 		
 		

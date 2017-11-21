@@ -15,20 +15,26 @@ import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import de.thegamingzerii.utility.Constantes;
 import de.thegamingzerii.editor.Map;
+import de.thegamingzerii.editor.Settings;
+import de.thegamingzerii.objects.BackgroundObject;
 import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.Player;
 import de.thegamingzerii.objects.TextureBlock;
@@ -50,8 +56,10 @@ public class Game extends JPanel{
 	public static State pauseState;
 	public static State editingState;
 	public static State currentState;
-	public static long updateCounter = 0;
+	public static double animationCounter = 0;
 	public static Game currentGame;
+	
+	public static Cursor defaultCursor;
 	
 	
 	public static boolean drawHitBoxes = false;
@@ -135,6 +143,7 @@ public class Game extends JPanel{
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("L"), "l");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("U"), "u");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("J"), "j");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("K"), "k");
 		
 		ingameState.getActionMap().put("jump", new JumpAction(false));
 		ingameState.getActionMap().put("move up", new MoveAction(0, false));
@@ -157,6 +166,7 @@ public class Game extends JPanel{
 		ingameState.getActionMap().put("h", new PressedOtherKey(5));
 		ingameState.getActionMap().put("u", new PressedOtherKey(6));
 		ingameState.getActionMap().put("j", new PressedOtherKey(7));
+		ingameState.getActionMap().put("k", new PressedOtherKey(8));
 		ingameState.getActionMap().put("l", new SwitchTexture());
 		
 		
@@ -225,16 +235,36 @@ public class Game extends JPanel{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		BackgroundObject.init();
 		
 		camera = new Camera(0, 0);
 		Map.loadMap();
 		SaveGame.loadSaveGame();
+		Settings.loadSettings();
 		
 		frame.setVisible(true);
 		
+		defaultCursor = frame.getContentPane().getCursor();
+		
+		cursorVisibility(false);
 		
 		
-		
+	}
+	
+	
+	public static void cursorVisibility(boolean bool) {
+		if(!bool) {
+			BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+
+			// Create a new blank cursor.
+			Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(
+			    cursorImg, new Point(0, 0), "blank cursor");
+
+			// Set the blank cursor to the JFrame.
+			frame.getContentPane().setCursor(blankCursor);
+		}else {
+			frame.getContentPane().setCursor(defaultCursor);
+		}
 		
 		
 	}
@@ -242,11 +272,13 @@ public class Game extends JPanel{
 		
 		
 	public void update(double delta) {
+			animationCounter += delta;
 			currentState.update(delta);
 			Game.camera.update(delta);			
 			saveGameCounter += delta;
 			if(saveGameCounter >= 600) {
-				SaveGame.saveGame();				
+				SaveGame.saveGame();	
+				Settings.saveSettings();
 				saveGameCounter = 0;
 			}
 						
@@ -485,12 +517,14 @@ private class EscapeAction extends AbstractAction{
 	public void actionPerformed(ActionEvent e) {
 		
 		
-		if(currentState == ingameState) {
+		if(currentState == ingameState || currentState == editingState) {
+			cursorVisibility(true);
 			currentState = pauseState;
 		}else {
-			if(currentState == pauseState)
+			if(currentState == pauseState) {
+				cursorVisibility(false);
 				currentState = ingameState;
-			else {
+			}else {
 				if(currentState == mainMenuState)
 					System.exit(0);
 			}
@@ -508,10 +542,12 @@ private class ChangeToEditorAction extends AbstractAction{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if(currentState == ingameState) {
+			cursorVisibility(true);
 			currentState = editingState;
 			EditingState.editing = true;
 		}	
 		else if(currentState == editingState) {
+			cursorVisibility(false);
 			currentState = ingameState;
 			EditingState.editing = false;
 		}

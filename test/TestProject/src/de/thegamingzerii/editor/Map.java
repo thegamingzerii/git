@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import de.thegamingzerii.objects.BackgroundObject;
 import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.DeadlyBlock;
 import de.thegamingzerii.objects.Jumper;
@@ -16,6 +17,7 @@ import de.thegamingzerii.objects.MovingPlatform;
 import de.thegamingzerii.objects.Rope;
 import de.thegamingzerii.objects.Slope;
 import de.thegamingzerii.objects.TextureBlock;
+import de.thegamingzerii.utility.Constantes.BackgroundType;
 import de.thegamingzerii.utility.Constantes.BlockType;
 
 public class Map {
@@ -70,6 +72,7 @@ public class Map {
 		TextureBlock.allTextureBlocks.clear();
 		Slope.allSlopes.clear();
 		MovingPlatform.allMovingPlatforms.clear();
+		BackgroundObject.allBackgroundObjects.clear();
 		ArrayList<String> lines = readMapFile();
 		ArrayList<Object> objects = new ArrayList<Object>();
 		for(int i = 0; i < lines.size(); i++) {
@@ -124,6 +127,18 @@ public class Map {
     		}
     		if(splited[0].equals("MovingPlatform")) {
     			objects.add(new MovingPlatform(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), Double.parseDouble(splited[3]), Double.parseDouble(splited[4])));
+    		}
+    		if(splited[0].equals("BackgroundObject")) {
+    			BackgroundType type = null;
+    			switch(Integer.parseInt(splited[3])) {
+    			case 0:
+    				type = BackgroundType.Tree1;
+    				break;
+    			case 1:
+    				type = BackgroundType.Bush1;
+    				break;
+    			}
+    			objects.add(new BackgroundObject(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), type));
     		}
 		}
 		return objects;
@@ -199,6 +214,9 @@ public class Map {
 		}
 		for(int i = 0; i < MovingPlatform.allMovingPlatforms.size(); i++) {
 			object.add(MovingPlatform.allMovingPlatforms.get(i).toString());
+		}
+		for(int i = 0; i < BackgroundObject.allBackgroundObjects.size(); i++) {
+			object.add(BackgroundObject.allBackgroundObjects.get(i).toString());
 		}
 			
 		writeToMap(object);

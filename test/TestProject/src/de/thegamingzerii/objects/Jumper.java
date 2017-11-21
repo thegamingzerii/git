@@ -1,5 +1,6 @@
 package de.thegamingzerii.objects;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class Jumper extends JPanel implements IInteract{
 	public void interact() {
 		if(usedCounter <= 0) {
 			GameState.player.resetDoubleJump();
+			GameState.player.canJumpTimer = 30;
 			usedCounter = 60;
 		}
 		
@@ -46,22 +48,7 @@ public class Jumper extends JPanel implements IInteract{
 	@Override
 	public boolean checkProximity(Rectangle rect) {
 		if(onScreen()) {
-			if(Math.abs(x - rect.x) > rect.getWidth()+50 || Math.abs(y - rect.y) > rect.getHeight()+50 ) {
-				return false;
-			}else {
-				double circleDistanceX = Math.abs(x - rect.x);
-			    double circleDistanceY = Math.abs(y - rect.y);
-
-			    if (circleDistanceX > (rect.width/2 + r)) { return false; }
-			    if (circleDistanceY > (rect.height/2 + r)) { return false; }
-
-			    if (circleDistanceX <= (rect.width/2)) { return true; } 
-			    if (circleDistanceY <= (rect.height/2)) { return true; }
-
-			    double cornerDistance_sq = Math.pow(circleDistanceX - rect.width/2, 2) + Math.pow(circleDistanceY - rect.height/2, 2);
-
-			    return (cornerDistance_sq <= (r*r));
-			}
+			return Math.hypot(rect.getCenterX() - x, rect.getCenterY() - y) < 150;
 		}
 		return false;
 		
@@ -77,6 +64,15 @@ public class Jumper extends JPanel implements IInteract{
 				sprite.paintComponent(g, x-64, y-64, 1, false);
 			else
 				sprite.paintComponent(g, x-64, y-64, 0, false);
+			
+			if(Game.drawHitBoxes) {
+				int xUsable = (int) ((x -50 - Game.camera.getCameraPos().getX()) * Camera.scale);
+				int yUsable = (int)((y -50 - Game.camera.getCameraPos().getY()) * Camera.scale);
+				g.setColor(Color.ORANGE);
+				g.drawOval((int)xUsable, (int)yUsable, 100, 100);
+				g.setColor(Color.black);
+			}
+				
 		}
 		
 	}

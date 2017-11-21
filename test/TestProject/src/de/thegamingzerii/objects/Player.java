@@ -1,5 +1,6 @@
 package de.thegamingzerii.objects;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
@@ -33,6 +34,7 @@ public class Player extends GravityObject implements ICollision{
 	boolean inDoubleJump = false;
 	public boolean jumpPressed = false;
 	boolean doubleJumpAvailable = true;
+	public double canJumpTimer = 0;
 	public boolean hanging = false;
 	private boolean overSlope = false;
 	public Rope rope = null;
@@ -94,13 +96,14 @@ public class Player extends GravityObject implements ICollision{
 					jumpPressed = true;
 					jumpTimer = 20;
 				}else {
-					if(inAir && jumpTimer <= 0) {
+					if(canJumpTimer <= 0 && jumpTimer <= 0) {
 						inDoubleJump = true;
 						doubleJumpAvailable = false;
 						jumpPressed = true;
 						jumpTimer = 20;
 					}else {
-						if(!inAir || hanging) {
+						if(canJumpTimer > 0 || hanging) {
+							canJumpTimer = 0;
 							jumpPressed = true;
 							jumpTimer = 20;
 						}else {
@@ -268,8 +271,10 @@ public class Player extends GravityObject implements ICollision{
 			
 			
 		}else {
+			canJumpTimer = 10;
 			inJump = false;
 		}
+		canJumpTimer -= delta;
 		
 		if(y > 2000) {
 			damage(1);
@@ -330,6 +335,11 @@ public class Player extends GravityObject implements ICollision{
 		yAcc = 0;
 	}
 	
+	
+	public Point2D getCenter() {
+		return new Point2D.Double(x+width/2, y+height/2);
+	}
+	
 
 
 	public void paint(Graphics2D g) {
@@ -370,5 +380,19 @@ public class Player extends GravityObject implements ICollision{
 				
 			}
 		}
+		
+		
+		int xUsable = (int) ((x - Game.camera.getCameraPos().getX()) * Camera.scale);
+		int yUsable = (int)((y - Game.camera.getCameraPos().getY()) * Camera.scale);
+		
+		if(Game.drawHitBoxes) {
+			g.setColor(Color.GREEN);
+			g.drawRect(xUsable, yUsable, (int)(96*Camera.scale), (int)(128*Camera.scale));
+			g.setColor(Color.RED);
+			g.drawLine(xUsable, (int)(yUsable + (height* 0.5 * Camera.scale)), (int)(xUsable + (width* Camera.scale)), (int)(yUsable + (height * 0.5 * Camera.scale)));
+			g.drawLine((int)(xUsable + (width * 0.5 * Camera.scale)), yUsable, (int)(xUsable + (width* 0.5 * Camera.scale)), (int)(yUsable + (height * Camera.scale)));
+			g.setColor(Color.black);
+		}
+		
 	}
 }

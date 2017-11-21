@@ -31,7 +31,6 @@ public static ArrayList<DeadlyBlock> allDeadlyBlocks =  new ArrayList<DeadlyBloc
 		this.width = width;
 		this.height = height;
 		allDeadlyBlocks.add(this);
-		Game.frame.add(this);
 	}
 	
 	public Rectangle getCollisionSize() {

@@ -42,6 +42,7 @@ public class Button extends JPanel{
 			switch (type) {
 			case 0:
 				Game.currentState = Game.ingameState;
+				Game.cursorVisibility(false);
 				break;
 			case 1:
 				Game.currentState = Game.mainMenuState;

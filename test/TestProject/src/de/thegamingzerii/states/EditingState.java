@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 
 import de.thegamingzerii.editor.Map;
 import de.thegamingzerii.maingame.Game;
+import de.thegamingzerii.objects.BackgroundObject;
 import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.DeadlyBlock;
@@ -41,6 +42,7 @@ public class EditingState extends State{
 	private ArrayList<Integer> ySnaps = new ArrayList<Integer>();
 	
 	private final int differentBlockTextures = 6;
+	private final int differentBackgroundTextures = 2;
 	
 	@Override
 	public void init() {
@@ -160,6 +162,33 @@ public class EditingState extends State{
 		
 		if(mode == 5) {
 			TextureBlock.drawCurrentlyPlacing(g, textureMode%differentBlockTextures, (int) Math.round(MouseInfo.getPointerInfo().getLocation().getX()), (int) Math.round(MouseInfo.getPointerInfo().getLocation().getY()));
+		}
+		if(mode == 8) {
+			double distanceX = 10000;
+			int indexX = 0;
+			double distanceY = 10000;
+			int indexY = 0;
+			for(int i = 0; i < xSnaps.size(); i++) {
+				if(MouseInfo.getPointerInfo().getLocation().getX()*Camera.zoom+ Game.camera.getCameraPos().getX() - xSnaps.get(i) > 0 && MouseInfo.getPointerInfo().getLocation().getX()*Camera.zoom+ Game.camera.getCameraPos().getX() - xSnaps.get(i) < distanceX) {
+					
+					indexX = i;
+					distanceX = MouseInfo.getPointerInfo().getLocation().getX()*Camera.zoom+ Game.camera.getCameraPos().getX() - xSnaps.get(i);
+					
+				}
+
+			}
+			
+			
+			for(int i = 0; i < ySnaps.size(); i++) {
+				if(MouseInfo.getPointerInfo().getLocation().getY()*Camera.zoom+ Game.camera.getCameraPos().getY() - ySnaps.get(i) > 0 && MouseInfo.getPointerInfo().getLocation().getY()*Camera.zoom+ Game.camera.getCameraPos().getY() - ySnaps.get(i) < distanceY) {
+					
+					indexY = i;
+					distanceY = MouseInfo.getPointerInfo().getLocation().getY()*Camera.zoom+ Game.camera.getCameraPos().getY() - ySnaps.get(i);
+					
+				}
+
+			}
+			BackgroundObject.drawCurrentlyPlacing(g, textureMode%differentBackgroundTextures, (int) ((xSnaps.get(indexX)- Game.camera.getCameraPos().getX()) / Camera.zoom), (int) ((ySnaps.get(indexY)- Game.camera.getCameraPos().getY()) / Camera.zoom));
 		}
 		
 		 super.paint(g);
@@ -317,6 +346,35 @@ public class EditingState extends State{
 				break;
 			case 7:
 				Map.addToMap("MovingPlatform " + Math.round(placingX) + " " + Math.round(placingY) + " " + Math.round(getSnappedX(e.getX()*Camera.zoom+ Game.camera.getCameraPos().getX())) + " " + Math.round(getSnappedY(e.getY()*Camera.zoom+ Game.camera.getCameraPos().getY())));
+				break;
+			case 8:
+				
+				distanceX = 10000;
+				indexX = 0;
+				distanceY = 10000;
+				indexY = 0;
+				for(int i = 0; i < xSnaps.size(); i++) {
+					if(e.getX()*Camera.zoom+ Game.camera.getCameraPos().getX() - xSnaps.get(i) > 0 && e.getX()*Camera.zoom+ Game.camera.getCameraPos().getX() - xSnaps.get(i) < distanceX) {
+						
+						indexX = i;
+						distanceX = e.getX()*Camera.zoom+ Game.camera.getCameraPos().getX() - xSnaps.get(i);
+						
+					}
+
+				}
+				
+				
+				for(int i = 0; i < ySnaps.size(); i++) {
+					if(e.getY()*Camera.zoom+ Game.camera.getCameraPos().getY() - ySnaps.get(i) > 0 && e.getY()*Camera.zoom+ Game.camera.getCameraPos().getY() - ySnaps.get(i) < distanceY) {
+						
+						indexY = i;
+						distanceY = e.getY()*Camera.zoom+ Game.camera.getCameraPos().getY() - ySnaps.get(i);
+						
+					}
+
+				}
+				if(!BackgroundObject.deletBackgroundObject(xSnaps.get(indexX), ySnaps.get(indexY)))
+					Map.addToMap("BackgroundObject " + xSnaps.get(indexX) + " " + ySnaps.get(indexY) + " " + textureMode%differentBackgroundTextures);
 				break;
 				
 				

@@ -98,7 +98,9 @@ public class Slope extends JPanel implements ICollision{
 			int xEndUsable = (int) ((line.getX2() - Game.camera.getCameraPos().getX()-4) * Camera.scale);
 			int yEndUsable = (int)((line.getY2() - Game.camera.getCameraPos().getY()) * Camera.scale);
 			Line2D lin = new Line2D.Float(xUsable, yUsable, xEndUsable, yEndUsable);
+			g.setColor(Color.ORANGE);
 	        g.draw(new Line2D.Float(xUsable, yUsable, xEndUsable, yEndUsable));
+	        g.setColor(Color.black);
 		}
 		
 		

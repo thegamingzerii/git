@@ -8,6 +8,7 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -42,6 +43,9 @@ public class TextureBlock {
 	private static Image grass4 = null;
 	private static Image grass5 = null;
 	
+	private static Image[][] grass = new Image[4][5];
+	private static Image[][] scaledGrass = new Image[4][5];
+	
 	
 	
 	
@@ -63,11 +67,12 @@ public class TextureBlock {
 		s3 = image.getSubimage(0, 512, 128, 128);
 		
 		image = ImageIO.read(new File("Assets/Grass.png"));
-		gr1 = image.getSubimage(0, 0, 128, 128);
-		gr2 = image.getSubimage(0, 128, 128, 128);
-		gr3 = image.getSubimage(0, 256, 128, 128);
-		gr4 = image.getSubimage(0, 384, 128, 128);
-		gr5 = image.getSubimage(0, 512, 128, 128);
+		
+		for(int i = 0; i < 4; i++) {
+			for(int j = 0; j < 5; j++) {
+				grass[i][j] = image.getSubimage(0 + 128 * i, 0 + 128 * j, 128, 128);
+			}
+		}
 		reScale(1);
 	}
 	
@@ -77,11 +82,11 @@ public class TextureBlock {
 		slope1 = s1.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
 		slope2 = s2.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
 		slope3 = s3.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
-		grass1 = gr1.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
-		grass2 = gr2.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
-		grass3 = gr3.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
-		grass4 = gr4.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
-		grass5 = gr5.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
+		for(int i = 0; i < 4; i++) {
+			for(int j = 0; j < 5; j++) {
+				scaledGrass[i][j] = grass[i][j].getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
+			}
+		}
 	}
 	
 	
@@ -116,25 +121,7 @@ public class TextureBlock {
 				g.drawImage(slope3, xUsable, yUsable, Game.currentGame);
 				break;
 			case Grass:		
-				switch(ExtraMaths.ActualModulo(randomFactor, 5)) {
-				case 0:
-					g.drawImage(grass1, xUsable, yUsable, Game.currentGame);
-					break;
-				case 1:
-					g.drawImage(grass2, xUsable, yUsable, Game.currentGame);
-					break;
-				case 2:
-					g.drawImage(grass3, xUsable, yUsable, Game.currentGame);
-					break;
-				case 3:
-					g.drawImage(grass4, xUsable, yUsable, Game.currentGame);
-					break;
-				case 4:
-					g.drawImage(grass5, xUsable, yUsable, Game.currentGame);
-					break;
-				}				
-				break;
-			default:
+				g.drawImage(scaledGrass[ExtraMaths.ActualModulo(Math.floor((Game.animationCounter) /20), 4)][ExtraMaths.ActualModulo(randomFactor, 5)], xUsable, yUsable, Game.currentGame);
 				break;
 			}
 		}

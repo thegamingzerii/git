@@ -1,5 +1,6 @@
 package de.thegamingzerii.objects;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Line2D;
@@ -24,12 +25,12 @@ public class MovingPlatform extends JPanel implements ICollision{
 	
 	public MovingPlatform(double x1, double y1, double x2, double y2) {
 		line = new Line2D.Double(x1, y1, x2, y2);
-		platform = new Rectangle.Double(x1-100, y1-10, 200, 20);
+		platform = new Rectangle.Double(x1-100, y1-20, 200, 40);
 		length = Math.abs(Math.sqrt(Math.pow(x1-x2, 2) + Math.pow(y1-y2, 2)));
 		vector = new Vector2d(line.getP1(), line.getP2());
 		vector.normalize();
 		allMovingPlatforms.add(this);
-		sprite = new SpriteSheet("Assets/Platform.png", 100, 10, 0, 1, 2);
+		sprite = new SpriteSheet("Assets/Platform.png", 200, 40, 0, 1, 1);
 	}
 	
 	public void update(double delta) {
@@ -39,7 +40,7 @@ public class MovingPlatform extends JPanel implements ICollision{
 			if(playerOnPlatform()) {
 				GameState.player.x -= vector.getX() * delta * 3;
 			}
-			if(Math.abs(platform.x - line.getX2()) < 100 && Math.abs(platform.y - line.getY2()) < 20) {
+			if(Math.abs(platform.x - line.getX2()) < 100 && Math.abs(platform.y - line.getY2()) < 40) {
 				direction = false;
 			}
 		}else {
@@ -48,7 +49,7 @@ public class MovingPlatform extends JPanel implements ICollision{
 			if(playerOnPlatform()) {
 				GameState.player.x += vector.getX() * delta * 3;
 			}
-			if(Math.abs(platform.x - line.getX1()) < 100 && Math.abs(platform.y - line.getY1()) < 20) {
+			if(Math.abs(platform.x - line.getX1()) < 100 && Math.abs(platform.y - line.getY1()) < 40) {
 				direction = true;
 			}
 		}
@@ -69,7 +70,10 @@ public class MovingPlatform extends JPanel implements ICollision{
         g.draw(new Line2D.Float(xUsable, yUsable, xEndUsable, yEndUsable));
         
         sprite.paintComponent(g, platform.x, platform.y, 0, false);
-        g.drawRect((int)((platform.x- Game.camera.getCameraPos().getX()) * Camera.scale), (int)((platform.y- Game.camera.getCameraPos().getY()) * Camera.scale), (int)(platform.width*Camera.scale), (int)(platform.height*Camera.scale));
+        if(Game.drawHitBoxes)
+        	g.setColor(Color.ORANGE);
+        	g.drawRect((int)((platform.x- Game.camera.getCameraPos().getX()) * Camera.scale), (int)((platform.y- Game.camera.getCameraPos().getY()) * Camera.scale), (int)(platform.width*Camera.scale), (int)(platform.height*Camera.scale));
+        	g.setColor(Color.black);
 	}
 	
 	

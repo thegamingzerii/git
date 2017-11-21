@@ -31,11 +31,11 @@ public class Block extends JPanel implements ICollision{
 		this.width = width;
 		this.height = height;
 		allBlocks.add(this);
-		Game.frame.add(this);
 	}
 	
 	
 	public void paint(Graphics2D g) {
+
 		if(width < 2*Camera.scale || height < 2*Camera.scale) {
 			if(width < 1 || height < 1){
 				Block.allBlocks.remove(this);
@@ -49,18 +49,20 @@ public class Block extends JPanel implements ICollision{
 				int xUsable = (int) ((x - Game.camera.getCameraPos().getX()) * Camera.scale);
 				int yUsable = (int)((y - Game.camera.getCameraPos().getY()) * Camera.scale);
 				
-				g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 0.5));
-				
 				try {
 					BufferedImage image = ImageIO.read(new File("Assets/Block.png"));
 					Image scaledImage = image.getScaledInstance((int)(width * Camera.scale), (int)(height * Camera.scale), image.SCALE_DEFAULT);
-					g.drawImage(scaledImage, xUsable, yUsable, this);
+					g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float)0.5));
+					g2d.drawImage(scaledImage, xUsable, yUsable, this);			
+					g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
+
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		}
+		
 		
 		
 		
