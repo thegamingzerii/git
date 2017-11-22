@@ -36,6 +36,7 @@ import de.thegamingzerii.editor.Map;
 import de.thegamingzerii.editor.Settings;
 import de.thegamingzerii.objects.BackgroundObject;
 import de.thegamingzerii.objects.Camera;
+import de.thegamingzerii.objects.Gate;
 import de.thegamingzerii.objects.Player;
 import de.thegamingzerii.objects.TextureBlock;
 import de.thegamingzerii.states.*;
@@ -144,6 +145,7 @@ public class Game extends JPanel{
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("U"), "u");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("J"), "j");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("K"), "k");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("B"), "b");
 		
 		ingameState.getActionMap().put("jump", new JumpAction(false));
 		ingameState.getActionMap().put("move up", new MoveAction(0, false));
@@ -167,6 +169,7 @@ public class Game extends JPanel{
 		ingameState.getActionMap().put("u", new PressedOtherKey(6));
 		ingameState.getActionMap().put("j", new PressedOtherKey(7));
 		ingameState.getActionMap().put("k", new PressedOtherKey(8));
+		ingameState.getActionMap().put("b", new PressedOtherKey(9));
 		ingameState.getActionMap().put("l", new SwitchTexture());
 		
 		
@@ -235,6 +238,7 @@ public class Game extends JPanel{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		Gate.init();
 		BackgroundObject.init();
 		
 		camera = new Camera(0, 0);
@@ -336,6 +340,12 @@ public static void main(String[] args) throws InterruptedException {
   	  	    		drawHitBoxes = true;
   	  	    	
   	  	    	System.out.println("Toggled hitBoxes");
+  	  	    }
+  	  	    if(command.equals("open")) {
+  	  	    for(int i = 0; i < Gate.allGates.size(); i++) {
+  				Gate.allGates.get(i).open();
+  			}
+  	  	    	System.out.println("Opening door");
   	  	    }
   	  	    //once finished
   	  	    

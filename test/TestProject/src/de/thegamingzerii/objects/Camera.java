@@ -53,13 +53,15 @@ public class Camera {
 		if(zooming) {
 			zoom += (zoomingTo - zoom) * 0.05 * delta;
 			scale = (screenHeight / 1080) / zoom;
-			TextureBlock.reScale(scale);
+			TextureBlock.reScale();
+			Gate.reScale();
 			BackgroundObject.reScale();
 			if(Math.abs(zoomingTo - zoom) < 0.05) {
 				zoom = zoomingTo;
 				scale = (screenHeight / 1080) / zoom;
-				TextureBlock.reScale(scale);
+				TextureBlock.reScale();
 				BackgroundObject.reScale();
+				Gate.reScale();
 				zooming = false;
 			}
 				

@@ -24,6 +24,7 @@ import de.thegamingzerii.objects.BackgroundObject;
 import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.DeadlyBlock;
+import de.thegamingzerii.objects.Gate;
 import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.MovingPlatform;
 import de.thegamingzerii.objects.Rope;
@@ -163,7 +164,7 @@ public class EditingState extends State{
 		if(mode == 5) {
 			TextureBlock.drawCurrentlyPlacing(g, textureMode%differentBlockTextures, (int) Math.round(MouseInfo.getPointerInfo().getLocation().getX()), (int) Math.round(MouseInfo.getPointerInfo().getLocation().getY()));
 		}
-		if(mode == 8) {
+		if(mode == 8 || mode == 9) {
 			double distanceX = 10000;
 			int indexX = 0;
 			double distanceY = 10000;
@@ -188,7 +189,12 @@ public class EditingState extends State{
 				}
 
 			}
-			BackgroundObject.drawCurrentlyPlacing(g, textureMode%differentBackgroundTextures, (int) ((xSnaps.get(indexX)- Game.camera.getCameraPos().getX()) / Camera.zoom), (int) ((ySnaps.get(indexY)- Game.camera.getCameraPos().getY()) / Camera.zoom));
+			if(mode == 8)
+				BackgroundObject.drawCurrentlyPlacing(g, textureMode%differentBackgroundTextures, (int) ((xSnaps.get(indexX)- Game.camera.getCameraPos().getX()) / Camera.zoom), (int) ((ySnaps.get(indexY)- Game.camera.getCameraPos().getY()) / Camera.zoom));
+			
+			if(mode == 9)
+				Gate.drawCurrentlyPlacing(g, ((xSnaps.get(indexX)- Game.camera.getCameraPos().getX()) / Camera.zoom), ((ySnaps.get(indexY)- Game.camera.getCameraPos().getY()) / Camera.zoom));
+
 		}
 		
 		 super.paint(g);
@@ -215,7 +221,7 @@ public class EditingState extends State{
 			placing = true;
 			placingX = e.getX()*Camera.zoom + Game.camera.getCameraPos().getX();
 			placingY = e.getY()*Camera.zoom + Game.camera.getCameraPos().getY();
-			if(mode == 0 || mode == 4 || mode == 6 || mode == 7) {
+			if(mode == 0 || mode == 4 || mode == 6 || mode == 7 || mode == 9) {
 				placingX = getSnappedX(e.getX()*Camera.zoom+ Game.camera.getCameraPos().getX());
 				placingY = getSnappedY(e.getY()*Camera.zoom+ Game.camera.getCameraPos().getY());
 			}
@@ -373,8 +379,11 @@ public class EditingState extends State{
 					}
 
 				}
-				if(!BackgroundObject.deletBackgroundObject(xSnaps.get(indexX), ySnaps.get(indexY)))
+				if(!BackgroundObject.deletBackgroundObject(xSnaps.get(indexX), ySnaps.get(indexY), textureMode%differentBackgroundTextures))
 					Map.addToMap("BackgroundObject " + xSnaps.get(indexX) + " " + ySnaps.get(indexY) + " " + textureMode%differentBackgroundTextures);
+				break;
+			case 9:
+				Map.addToMap("Gate " + Math.round(placingX) + " " + Math.round(placingY) + " " + "false");
 				break;
 				
 				

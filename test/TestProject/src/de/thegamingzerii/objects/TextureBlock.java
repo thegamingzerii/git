@@ -19,7 +19,7 @@ import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.utility.Constantes.BlockType;
 import de.thegamingzerii.utility.ExtraMaths;
 
-public class TextureBlock {
+public class TextureBlock{
 	public static ArrayList<TextureBlock> allTextureBlocks = new ArrayList<TextureBlock>();
 	private static BufferedImage g1 = null;
 	private static BufferedImage g2 = null;
@@ -73,10 +73,10 @@ public class TextureBlock {
 				grass[i][j] = image.getSubimage(0 + 128 * i, 0 + 128 * j, 128, 128);
 			}
 		}
-		reScale(1);
+		reScale();
 	}
 	
-	public static void reScale(double scaling) {
+	public static void reScale() {
 		ground1 = g1.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
 		ground2 = g2.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
 		slope1 = s1.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);

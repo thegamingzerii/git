@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import de.thegamingzerii.objects.BackgroundObject;
 import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.DeadlyBlock;
+import de.thegamingzerii.objects.Gate;
 import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.MovingPlatform;
 import de.thegamingzerii.objects.Rope;
@@ -73,6 +74,7 @@ public class Map {
 		Slope.allSlopes.clear();
 		MovingPlatform.allMovingPlatforms.clear();
 		BackgroundObject.allBackgroundObjects.clear();
+		Gate.allGates.clear();
 		ArrayList<String> lines = readMapFile();
 		ArrayList<Object> objects = new ArrayList<Object>();
 		for(int i = 0; i < lines.size(); i++) {
@@ -139,6 +141,9 @@ public class Map {
     				break;
     			}
     			objects.add(new BackgroundObject(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), type));
+    		}
+    		if(splited[0].equals("Gate")) {
+    			objects.add(new Gate(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), Boolean.valueOf(splited[3])));
     		}
 		}
 		return objects;
@@ -217,6 +222,9 @@ public class Map {
 		}
 		for(int i = 0; i < BackgroundObject.allBackgroundObjects.size(); i++) {
 			object.add(BackgroundObject.allBackgroundObjects.get(i).toString());
+		}
+		for(int i = 0; i < Gate.allGates.size(); i++) {
+			object.add(Gate.allGates.get(i).toString());
 		}
 			
 		writeToMap(object);

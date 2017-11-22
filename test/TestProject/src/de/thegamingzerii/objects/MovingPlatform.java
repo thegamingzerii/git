@@ -70,10 +70,11 @@ public class MovingPlatform extends JPanel implements ICollision{
         g.draw(new Line2D.Float(xUsable, yUsable, xEndUsable, yEndUsable));
         
         sprite.paintComponent(g, platform.x, platform.y, 0, false);
-        if(Game.drawHitBoxes)
+        if(Game.drawHitBoxes) {
         	g.setColor(Color.ORANGE);
         	g.drawRect((int)((platform.x- Game.camera.getCameraPos().getX()) * Camera.scale), (int)((platform.y- Game.camera.getCameraPos().getY()) * Camera.scale), (int)(platform.width*Camera.scale), (int)(platform.height*Camera.scale));
         	g.setColor(Color.black);
+        }
 	}
 	
 	

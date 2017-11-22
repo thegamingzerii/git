@@ -51,6 +51,17 @@ public class BackgroundObject{
 		}
 	}
 	
+	public int getId() {
+		switch(type) {
+		case Tree1:
+			return 0;
+		case Bush1:
+			return 1;
+		default:
+			return -1;
+			
+		}
+	}
 	
 	public void paint(Graphics2D g) {
 		int xUsable = (int) ((x - Game.camera.getX()) * Camera.scale);
@@ -66,13 +77,15 @@ public class BackgroundObject{
 		}
 	}
 	
-	public static boolean deletBackgroundObject(double x, double y) {
+	public static boolean deletBackgroundObject(double x, double y, int id) {
 		boolean returnValue = false;
 		for(int i = allBackgroundObjects.size()-1; i >= 0; i--) {
 			if(allBackgroundObjects.get(i).getX() == x && allBackgroundObjects.get(i).getY() == y) {
-				returnValue = true;
-				allBackgroundObjects.remove(allBackgroundObjects.get(i));
-				Map.reWriteMap();
+				if(allBackgroundObjects.get(i).getId() == id) {
+					returnValue = true;
+					allBackgroundObjects.remove(allBackgroundObjects.get(i));
+					Map.reWriteMap();
+				}
 			}
 				
 				
