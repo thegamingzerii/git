@@ -11,12 +11,13 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import de.thegamingzerii.logicParts.Gate;
+import de.thegamingzerii.logicParts.Lever;
 import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.objects.BackgroundObject;
 import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.DeadlyBlock;
-import de.thegamingzerii.objects.Gate;
 import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.MovingPlatform;
 import de.thegamingzerii.objects.Particle;
@@ -44,14 +45,19 @@ public class GameState extends State{
 		for(int i = 0; i < Jumper.allJumpers.size(); i++) {
 			Jumper.allJumpers.get(i).update(delta);
 			if(Jumper.allJumpers.get(i).checkProximity(player.getCollisionSize())) {
-				Jumper.allJumpers.get(i).interact();
+				Jumper.allJumpers.get(i).interact(false);
 			}
+		}
+		
+		for(int i = 0; i < Lever.allLevers.size(); i++) {
+			if(Lever.allLevers.get(i).checkProximity(player.getCollisionSize()))
+				Lever.allLevers.get(i).interact(false);
 		}
 		
 		for(int i = 0; i < Rope.allRopes.size(); i++) {
 			Rope.allRopes.get(i).update(delta);
 			if(Rope.allRopes.get(i).checkProximity(player.getCollisionSize())) {
-				Rope.allRopes.get(i).interact();
+				Rope.allRopes.get(i).interact(false);
 			}
 		}
 		
@@ -61,7 +67,7 @@ public class GameState extends State{
 		
 		for(int i = 0; i < DeadlyBlock.allDeadlyBlocks.size(); i++) {
 			if(DeadlyBlock.allDeadlyBlocks.get(i).checkProximity(player.getCollisionSize())) {
-				DeadlyBlock.allDeadlyBlocks.get(i).interact();
+				DeadlyBlock.allDeadlyBlocks.get(i).interact(false);
 			}
 		}
 		
@@ -101,6 +107,10 @@ public class GameState extends State{
 		
 		for(int i = 0; i < Gate.allGates.size(); i++) {
 			Gate.allGates.get(i).paint(g);
+		}
+		
+		for(int i = 0; i < Lever.allLevers.size(); i++) {
+			Lever.allLevers.get(i).paint(g);
 		}
 		
 		for(int i = 0; i < Particle.allParticles.size(); i++) {

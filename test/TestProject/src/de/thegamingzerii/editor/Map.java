@@ -9,10 +9,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import de.thegamingzerii.logicParts.Gate;
+import de.thegamingzerii.logicParts.Lever;
+import de.thegamingzerii.logicParts.LogicTile;
 import de.thegamingzerii.objects.BackgroundObject;
 import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.DeadlyBlock;
-import de.thegamingzerii.objects.Gate;
 import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.MovingPlatform;
 import de.thegamingzerii.objects.Rope;
@@ -75,12 +77,16 @@ public class Map {
 		MovingPlatform.allMovingPlatforms.clear();
 		BackgroundObject.allBackgroundObjects.clear();
 		Gate.allGates.clear();
+		Lever.allLevers.clear();
 		ArrayList<String> lines = readMapFile();
 		ArrayList<Object> objects = new ArrayList<Object>();
 		for(int i = 0; i < lines.size(); i++) {
 			String[] splited = lines.get(i).split("\\s+");
         	
-    		
+			if(splited[0].equals("NextLogicId")) {
+    			LogicTile.nextId = Integer.parseInt(splited[1]);
+    		}
+			
     		if(splited[0].equals("Block")) {
     			objects.add(new Block(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), 
     					Double.parseDouble(splited[3]), Double.parseDouble(splited[4])));
@@ -143,7 +149,12 @@ public class Map {
     			objects.add(new BackgroundObject(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), type));
     		}
     		if(splited[0].equals("Gate")) {
-    			objects.add(new Gate(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), Boolean.valueOf(splited[3])));
+    			objects.add(new Gate(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), Boolean.valueOf(splited[3]),
+    					Integer.parseInt(splited[4]), Integer.parseInt(splited[5])));
+    		}
+    		if(splited[0].equals("Lever")) {
+    			objects.add(new Lever(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), Boolean.valueOf(splited[3]),
+    					Integer.parseInt(splited[4]), Integer.parseInt(splited[5])));
     		}
 		}
 		return objects;
@@ -199,6 +210,9 @@ public class Map {
 	
 	public static void reWriteMap() {
 		ArrayList<String> object = new ArrayList<String>();
+		
+		object.add("NextLogicId " + LogicTile.nextId);
+		
 		for(int i = 0; i < Jumper.allJumpers.size(); i++) {
 			object.add(Jumper.allJumpers.get(i).toString());
 		}
@@ -225,6 +239,9 @@ public class Map {
 		}
 		for(int i = 0; i < Gate.allGates.size(); i++) {
 			object.add(Gate.allGates.get(i).toString());
+		}
+		for(int i = 0; i < Lever.allLevers.size(); i++) {
+			object.add(Lever.allLevers.get(i).toString());
 		}
 			
 		writeToMap(object);

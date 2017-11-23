@@ -3,6 +3,8 @@ package de.thegamingzerii.objects;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 
+import de.thegamingzerii.logicParts.Gate;
+import de.thegamingzerii.logicParts.Lever;
 import de.thegamingzerii.maingame.Game;
 
 public class Camera {
@@ -55,6 +57,7 @@ public class Camera {
 			scale = (screenHeight / 1080) / zoom;
 			TextureBlock.reScale();
 			Gate.reScale();
+			Lever.reScale();
 			BackgroundObject.reScale();
 			if(Math.abs(zoomingTo - zoom) < 0.05) {
 				zoom = zoomingTo;

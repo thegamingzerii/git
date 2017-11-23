@@ -2,8 +2,9 @@ package de.thegamingzerii.utility;
 
 import java.awt.Rectangle;
 
+import de.thegamingzerii.logicParts.Gate;
+import de.thegamingzerii.logicParts.Lever;
 import de.thegamingzerii.objects.Block;
-import de.thegamingzerii.objects.Gate;
 import de.thegamingzerii.objects.ICollision;
 import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.MovingPlatform;
@@ -60,9 +61,11 @@ public class CollisionChecker {
 	
 	
 	public static void checkAllInteractions(ICollision object) {
+		System.out.println("check prox");
 		for(int i = 0; i < Jumper.allJumpers.size(); i++) {
 			if(Jumper.allJumpers.get(i).checkProximity(object.getCollisionSize()))
-				Jumper.allJumpers.get(i).interact();
+				Jumper.allJumpers.get(i).interact(false);
 		}
+		
 	}
 }

@@ -56,7 +56,7 @@ public static ArrayList<DeadlyBlock> allDeadlyBlocks =  new ArrayList<DeadlyBloc
 	}
 
 	@Override
-	public void interact() {
+	public void interact(Boolean keyPressed) {
 		GameState.player.damage(1);
 		
 	}

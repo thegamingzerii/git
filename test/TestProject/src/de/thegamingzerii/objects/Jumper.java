@@ -35,7 +35,7 @@ public class Jumper extends JPanel implements IInteract{
 	}
 	
 	@Override
-	public void interact() {
+	public void interact(Boolean keyPressed) {
 		if(usedCounter <= 0) {
 			GameState.player.resetDoubleJump();
 			GameState.player.canJumpTimer = 30;

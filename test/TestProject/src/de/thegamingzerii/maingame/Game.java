@@ -34,10 +34,15 @@ import java.io.IOException;
 import de.thegamingzerii.utility.Constantes;
 import de.thegamingzerii.editor.Map;
 import de.thegamingzerii.editor.Settings;
+import de.thegamingzerii.logicParts.Gate;
+import de.thegamingzerii.logicParts.Lever;
 import de.thegamingzerii.objects.BackgroundObject;
 import de.thegamingzerii.objects.Camera;
-import de.thegamingzerii.objects.Gate;
+import de.thegamingzerii.objects.DeadlyBlock;
+import de.thegamingzerii.objects.Jumper;
+import de.thegamingzerii.objects.Particle;
 import de.thegamingzerii.objects.Player;
+import de.thegamingzerii.objects.Rope;
 import de.thegamingzerii.objects.TextureBlock;
 import de.thegamingzerii.states.*;
 
@@ -134,7 +139,8 @@ public class Game extends JPanel{
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("released D"), "stop move right");
 		
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("ESCAPE"), "escape");
-		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("E"), "editor");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("Q"), "editor");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("E"), "e");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("R"), "r");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("T"), "t");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("F"), "f");
@@ -146,6 +152,8 @@ public class Game extends JPanel{
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("J"), "j");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("K"), "k");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("B"), "b");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("N"), "n");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("M"), "m");
 		
 		ingameState.getActionMap().put("jump", new JumpAction(false));
 		ingameState.getActionMap().put("move up", new MoveAction(0, false));
@@ -170,7 +178,10 @@ public class Game extends JPanel{
 		ingameState.getActionMap().put("j", new PressedOtherKey(7));
 		ingameState.getActionMap().put("k", new PressedOtherKey(8));
 		ingameState.getActionMap().put("b", new PressedOtherKey(9));
+		ingameState.getActionMap().put("n", new PressedOtherKey(10));
+		ingameState.getActionMap().put("m", new PressedOtherKey(11));
 		ingameState.getActionMap().put("l", new SwitchTexture());
+		ingameState.getActionMap().put("e", new Interact());
 		
 		
 		
@@ -240,6 +251,7 @@ public class Game extends JPanel{
 		}
 		Gate.init();
 		BackgroundObject.init();
+		Lever.init();
 		
 		camera = new Camera(0, 0);
 		Map.loadMap();
@@ -322,7 +334,7 @@ public static void main(String[] args) throws InterruptedException {
 	frame.add(game);
 	frame.setIgnoreRepaint(true);
 	//frame.add(keyboard);
-	
+		
 	
     final long CONSTANT_LOGIC_TIME = 1000000000 / 60; 
     
@@ -341,11 +353,14 @@ public static void main(String[] args) throws InterruptedException {
   	  	    	
   	  	    	System.out.println("Toggled hitBoxes");
   	  	    }
-  	  	    if(command.equals("open")) {
+  	  	    if(command.equals("reset")) {
   	  	    for(int i = 0; i < Gate.allGates.size(); i++) {
-  				Gate.allGates.get(i).open();
+  				Gate.allGates.get(i).reset();
   			}
-  	  	    	System.out.println("Opening door");
+  	  	    for(int i = 0; i < Lever.allLevers.size(); i++) {
+  	  	    Lever.allLevers.get(i).reset();
+			}
+  	  	    	System.out.println("Reset Logic Tiles");
   	  	    }
   	  	    //once finished
   	  	    
@@ -611,6 +626,40 @@ private class ConsoleScanner implements Runnable {
     }
 
 }
+
+private class Interact extends AbstractAction{
+
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(currentState == ingameState) {
+			for(int i = 0; i < Jumper.allJumpers.size(); i++) {
+				if(Jumper.allJumpers.get(i).checkProximity(GameState.player.getCollisionSize())) {
+					Jumper.allJumpers.get(i).interact(true);
+				}
+			}
+			
+			for(int i = 0; i < Lever.allLevers.size(); i++) {
+				if(Lever.allLevers.get(i).checkProximity(GameState.player.getCollisionSize()))
+					Lever.allLevers.get(i).interact(true);
+			}
+			
+			for(int i = 0; i < Rope.allRopes.size(); i++) {
+				if(Rope.allRopes.get(i).checkProximity(GameState.player.getCollisionSize())) {
+					Rope.allRopes.get(i).interact(true);
+				}
+			}
+			
+			for(int i = 0; i < DeadlyBlock.allDeadlyBlocks.size(); i++) {
+				if(DeadlyBlock.allDeadlyBlocks.get(i).checkProximity(GameState.player.getCollisionSize())) {
+					DeadlyBlock.allDeadlyBlocks.get(i).interact(true);
+				}
+			}
+				
+			}
+		}
+		
+	}
 	
 }
 	

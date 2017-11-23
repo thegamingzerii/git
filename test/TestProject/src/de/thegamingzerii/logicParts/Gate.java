@@ -1,9 +1,10 @@
-package de.thegamingzerii.objects;
+package de.thegamingzerii.logicParts;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -13,9 +14,11 @@ import javax.imageio.ImageIO;
 
 import de.thegamingzerii.editor.Map;
 import de.thegamingzerii.maingame.Game;
+import de.thegamingzerii.objects.Camera;
+import de.thegamingzerii.objects.ICollision;
 import de.thegamingzerii.utility.ExtraMaths;
 
-public class Gate implements ICollision{
+public class Gate extends LogicTile implements ICollision{
 
 	private static BufferedImage gateImage;
 	private static BufferedImage frameImage;
@@ -24,15 +27,18 @@ public class Gate implements ICollision{
 	private double x;
 	private double y;
 	private boolean open;
+	private boolean opening;
 	private Rectangle doorRect;
 	private Rectangle upperRect;
 	private Rectangle lowerRect;
 	private double doorY;
 	private double openingTimer = -1;
+	private double movementSpeed;
 	
 	public static ArrayList<Gate> allGates = new ArrayList<Gate>();
 	
-	public Gate(double x, double y, boolean open) {
+	public Gate(double x, double y, boolean open, int id, int connectedTo) {
+		super(id, connectedTo);
 		this.x = x;
 		this.y = y;
 		this.open = open;		
@@ -50,24 +56,77 @@ public class Gate implements ICollision{
 		}
 		
 		allGates.add(this);
+		//Map.reWriteMap();
 	}
 	
 	public void update(double delta) {
-		if(openingTimer > 0) {
-			openingTimer -= delta;
-			if(openingTimer <= 0) {
-				openingTimer = 0;
-				open = true;
-				Map.reWriteMap();
+		
+		movementSpeed = delta * 3;
+		
+		if(openingTimer >= 0) {
+			if(opening) {
+				openingTimer -= movementSpeed;
+				doorY = doorY + movementSpeed;
+				if(openingTimer <= 0) {
+					openingTimer = 0;
+					open = true;
+					doorY = y + 244;
+					Map.reWriteMap();
+				}
+			}else {
+				openingTimer += movementSpeed;
+				doorY = doorY - movementSpeed;
+				if(openingTimer >= 244) {
+					openingTimer = 244;
+					open = false;
+					doorY = y;
+					Map.reWriteMap();
+				}
 			}
-			doorY = doorY + delta;
+			
+			
 			doorRect.y = (int)doorY + 4;
 		}
 			
 	}
 	
 	public void open() {
-		openingTimer = 244;
+		if(openingTimer == -1)
+			openingTimer = 244;
+		opening = true;
+	}
+	
+	public void close() {
+		if(openingTimer == -1)
+			openingTimer = 0;
+		opening = false;
+	}
+	
+	public void reset() {
+		openingTimer = -1;
+		open = false;
+	}
+	
+	@Override
+	public Point2D getLogicWirePoint() {
+		return new Point2D.Double(x, y);
+	}
+	
+	public boolean connectsTo(Point2D point) {
+		Rectangle testRect = new Rectangle((int)x, (int)y, 128, 256);
+		return testRect.contains(point);
+	}
+	
+	public boolean Activateable() {
+		return true;
+	}
+	
+	public void activate(Boolean bool) {
+		if(bool)
+			open();
+		else
+			close();
+		super.activate(bool);
 	}
 	
 	public static void init() {
@@ -96,7 +155,12 @@ public class Gate implements ICollision{
 	}
 	
 	public String toString() {
-		return "Gate " + x + " " + y + " " + open;
+		Boolean bool = false;
+		if(opening == open)
+			bool = open;
+		else
+			bool = opening;
+		return "Gate " + x + " " + y + " " + bool + " " + " " + getId() + " " + getConnectedTo();
 	}
 	
 	public void paint(Graphics2D g) {
@@ -117,6 +181,8 @@ public class Gate implements ICollision{
 				g.drawRect((int)(doorRect.x- Game.camera.getCameraPos().getX() * Camera.scale), (int)(doorRect.y - Game.camera.getCameraPos().getY() * Camera.scale), (int)(doorRect.width * Camera.scale), (int)(doorRect.height * Camera.scale));
 				g.setColor(Color.black);
 			}
+			
+			super.paint(g);
 				
 		}
 	}

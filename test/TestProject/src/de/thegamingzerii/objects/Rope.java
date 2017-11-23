@@ -56,7 +56,7 @@ public class Rope extends JPanel implements IInteract{
 	}
 	
 	@Override
-	public void interact() {
+	public void interact(Boolean keyPressed) {
 		if(blocked <= 0 && !GameState.player.hanging) {
 			GameState.player.rope = this;
 			GameState.player.hanging = true;
