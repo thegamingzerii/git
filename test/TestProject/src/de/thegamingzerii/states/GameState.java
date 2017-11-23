@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import de.thegamingzerii.items.Bomb;
 import de.thegamingzerii.logicParts.Gate;
 import de.thegamingzerii.logicParts.Lever;
 import de.thegamingzerii.maingame.Game;
@@ -47,6 +48,10 @@ public class GameState extends State{
 			if(Jumper.allJumpers.get(i).checkProximity(player.getCollisionSize())) {
 				Jumper.allJumpers.get(i).interact(false);
 			}
+		}
+		
+		for(int i = 0; i < Bomb.allBombs.size(); i++) {
+			Bomb.allBombs.get(i).update(delta);
 		}
 		
 		for(int i = 0; i < Lever.allLevers.size(); i++) {
@@ -128,7 +133,9 @@ public class GameState extends State{
 			Rope.allRopes.get(i).paint(g);
 		}
 		
-		
+		for(int i = 0; i < Bomb.allBombs.size(); i++) {
+			Bomb.allBombs.get(i).paint(g);
+		}
 		
 		for(int i = 0; i < Slope.allSlopes.size(); i++) {
 			Slope.allSlopes.get(i).paintComponent(g);

@@ -41,7 +41,7 @@ public class Player extends GravityObject implements ICollision{
 	public double jumpTimer = 0;
 	String path = "Assets/Player.png";
 	SpriteSheet sprite;
-	int moveDirection = 0;
+	public int moveDirection = 0;
 	public Point2D.Double checkPoint = new Point2D.Double(0, 0);
 
 	public Player(double width, double height) {
@@ -126,8 +126,8 @@ public class Player extends GravityObject implements ICollision{
 	}
 	
 	
-	public void gravity(double delta) {
-		super.gravity(delta);
+	public boolean gravity(double delta) {
+		boolean bool = super.gravity(delta);
 		if((slidingLeft || slidingRight) && ySpeed > Constantes.SLIDING_VELO) {
 			ySpeed = Constantes.SLIDING_VELO;
 			if(slidingLeft) {
@@ -147,6 +147,7 @@ public class Player extends GravityObject implements ICollision{
 			}
 			
 		}
+		return bool;
 	}
 	
 	

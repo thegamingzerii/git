@@ -34,6 +34,7 @@ import java.io.IOException;
 import de.thegamingzerii.utility.Constantes;
 import de.thegamingzerii.editor.Map;
 import de.thegamingzerii.editor.Settings;
+import de.thegamingzerii.items.Bomb;
 import de.thegamingzerii.logicParts.Gate;
 import de.thegamingzerii.logicParts.Lever;
 import de.thegamingzerii.objects.BackgroundObject;
@@ -170,6 +171,7 @@ public class Game extends JPanel{
 		ingameState.getActionMap().put("editor", new ChangeToEditorAction());
 		ingameState.getActionMap().put("t", new PressedOtherKey(0));
 		ingameState.getActionMap().put("r", new PressedOtherKey(1));
+		ingameState.getActionMap().put("r", new ThrowBomb());
 		ingameState.getActionMap().put("f", new PressedOtherKey(2));
 		ingameState.getActionMap().put("g", new PressedOtherKey(3));
 		ingameState.getActionMap().put("z", new PressedOtherKey(4));
@@ -406,62 +408,6 @@ public static void main(String[] args) throws InterruptedException {
     		  }});
     timer.start();
 
-	   /**
-    // keep looping round till the game ends
-    while (true)
-    {
-		   
-		   System.out.println("------------------------------------------");
-		  // work out how long its been since the last update, this
-    	  // will be used to calculate how far the entities should
-	      // move this loop
-    		lastFps = (int) (1000/((System.nanoTime() - lastLoopTime)/1000000));
-	      long now = System.nanoTime();
-	      long updateLength = (long) (now - lastLoopTime);
-	      lastLoopTime = now;
-	      double delta = updateLength / ((double)CONSTANT_LOGIC_TIME);
-
-	      // update the frame counter
-	      lastFpsTime += updateLength;
-	      fps++;
-	      
-	      // update our FPS counter if a second has passed since
-	      // we last recorded
-	      if (lastFpsTime >= 1000000000)
-	      {
-	    	  
-	    	 lastFps = fps;
-	         lastFpsTime = 0;
-	         fps = 0;
-	      }
-	      
-	      // update the game logic
-	      game.update(delta);
-	      //while(updating)
-	      
-	      // draw everyting
-	      game.repaint();
-	      
-	      // we want each frame to take 10 milliseconds, to do this
-	      // we've recorded when we started the frame. We add 10 milliseconds
-	      // to this and then factor in the current time to give 
-	      // us our final value to wait for
-	      // remember this is in ms, whereas our lastLoopTime etc. vars are in ns.
-	      //try{Thread.sleep( (lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000 )};
-	      try {
-	    	  if((lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000 > 0) {
-	    		  Thread.sleep( (long) ((lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000) );
-	    	  }
-		
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	      
-	     
-	      
-	   }
-	   */
     }
 
 
@@ -661,6 +607,24 @@ private class Interact extends AbstractAction{
 		
 	}
 	
+
+
+private class ThrowBomb extends AbstractAction{
+
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(currentState == ingameState) {
+			if(GameState.player.moveDirection == 0)
+				new Bomb(GameState.player.getXAxis(), GameState.player.getYAxis(), 4);
+			else
+				new Bomb(GameState.player.getXAxis(), GameState.player.getYAxis(), -4);
+
+				
+			}
+		}
+		
+	}
 }
 	
 

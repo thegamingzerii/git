@@ -9,21 +9,22 @@ import de.thegamingzerii.utility.CollisionChecker;
 import de.thegamingzerii.utility.Constantes;
 
 public class GravityObject extends JPanel implements ICollision{
-	double x = 0;
-	double y = 0;
-	double xSpeed = 0;
-	double ySpeed = 0;
-	double xAcc = 0;
-	double yAcc = 0;
-	double height = 128;
-	double width = 128;
+	public double x = 0;
+	public double y = 0;
+	public double xSpeed = 0;
+	public double ySpeed = 0;
+	public double xAcc = 0;
+	public double yAcc = 0;
+	public double height = 128;
+	public double width = 128;
 	
 	public GravityObject(double width, double height) {
 		this.width = width;
 		this.height = height;
 	}
 	
-	public void gravity(double delta) {
+	public boolean gravity(double delta) {
+		boolean bool = false;
 		if(ySpeed < Constantes.TERMINAL_VELO) {
 			ySpeed += (yAcc + Constantes.GRAVITY) * delta;
 		}
@@ -31,11 +32,13 @@ public class GravityObject extends JPanel implements ICollision{
 		for(int i = 0; i < 4; i++) {
 			y += ySpeed/4 * delta;
 			if(CollisionChecker.CheckAllCollisions(this)) {
+				bool = true;
 				y-= ySpeed/4 * delta;
 				yAcc = 0;
 				ySpeed = 0;
 			}
 		}
+		return bool;
 		
 	}
 
