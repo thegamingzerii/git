@@ -1,15 +1,6 @@
 package de.thegamingzerii.states;
 
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Point;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
 
 import de.thegamingzerii.items.Bomb;
 import de.thegamingzerii.logicParts.Gate;
@@ -26,11 +17,11 @@ import de.thegamingzerii.objects.Player;
 import de.thegamingzerii.objects.Rope;
 import de.thegamingzerii.objects.Slope;
 import de.thegamingzerii.objects.TextureBlock;
-import de.thegamingzerii.utility.Constantes.BackgroundType;
 
 
 
 
+@SuppressWarnings("serial")
 public class GameState extends State{
 	
 	public static Player player;
@@ -38,7 +29,6 @@ public class GameState extends State{
 	public void update(double delta) {
 		
 		
-		// TODO Auto-generated method stub
 		player.update(delta);		
 		Game.camera.moveCamera((player.getXAxis() - Game.camera.getCameraPos().getX() - (Game.camera.getWidth()/2)) * 0.1 * delta, 
 				(player.getYAxis() - Game.camera.getCameraPos().getY() - (Game.camera.getHeight()/2)) * 0.1 * delta);

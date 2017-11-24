@@ -8,6 +8,7 @@ import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.utility.CollisionChecker;
 import de.thegamingzerii.utility.Constantes;
 
+@SuppressWarnings("serial")
 public class GravityObject extends JPanel implements ICollision{
 	public double x = 0;
 	public double y = 0;
@@ -44,7 +45,6 @@ public class GravityObject extends JPanel implements ICollision{
 
 	@Override
 	public boolean checkcollision(Rectangle rect) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

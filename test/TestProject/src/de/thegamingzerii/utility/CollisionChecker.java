@@ -3,7 +3,6 @@ package de.thegamingzerii.utility;
 import java.awt.Rectangle;
 
 import de.thegamingzerii.logicParts.Gate;
-import de.thegamingzerii.logicParts.Lever;
 import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.ICollision;
 import de.thegamingzerii.objects.Jumper;

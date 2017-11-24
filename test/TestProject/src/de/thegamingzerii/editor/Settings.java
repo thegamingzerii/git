@@ -1,6 +1,5 @@
 package de.thegamingzerii.editor;
 
-import java.awt.geom.Point2D;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -10,7 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import de.thegamingzerii.maingame.Game;
-import de.thegamingzerii.states.GameState;
 
 public class Settings {
 	
@@ -20,7 +18,7 @@ public class Settings {
 
         // This will reference one line at a time
         String line = null;
-        ArrayList<String> lines = new ArrayList();
+		ArrayList<String> lines = new ArrayList<String>();
 
         try {
             // FileReader reads text files in the default encoding.

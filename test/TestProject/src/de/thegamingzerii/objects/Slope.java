@@ -1,24 +1,19 @@
 package de.thegamingzerii.objects;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.utility.ExtraMaths;
 import de.thegamingzerii.utility.Vector2d;
 
+@SuppressWarnings("serial")
 public class Slope extends JPanel implements ICollision{
 	public static ArrayList<Slope> allSlopes = new ArrayList<Slope>();
 	private Line2D line;
@@ -63,19 +58,16 @@ public class Slope extends JPanel implements ICollision{
 	
 	@Override
 	public void setX(int x) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void setY(int y) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public Rectangle getCollisionSize() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
@@ -97,7 +89,6 @@ public class Slope extends JPanel implements ICollision{
 			int yUsable = (int)((line.getY1() - Game.camera.getCameraPos().getY()) * Camera.scale);
 			int xEndUsable = (int) ((line.getX2() - Game.camera.getCameraPos().getX()-4) * Camera.scale);
 			int yEndUsable = (int)((line.getY2() - Game.camera.getCameraPos().getY()) * Camera.scale);
-			Line2D lin = new Line2D.Float(xUsable, yUsable, xEndUsable, yEndUsable);
 			g.setColor(Color.ORANGE);
 	        g.draw(new Line2D.Float(xUsable, yUsable, xEndUsable, yEndUsable));
 	        g.setColor(Color.black);

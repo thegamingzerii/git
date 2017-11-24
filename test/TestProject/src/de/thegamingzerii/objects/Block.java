@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 import de.thegamingzerii.maingame.Game;
 
+@SuppressWarnings("serial")
 public class Block extends JPanel implements ICollision{
 	
 	public static ArrayList<Block> allBlocks =  new ArrayList<Block>();
@@ -51,13 +52,13 @@ public class Block extends JPanel implements ICollision{
 				
 				try {
 					BufferedImage image = ImageIO.read(new File("Assets/Block.png"));
+					@SuppressWarnings("static-access")
 					Image scaledImage = image.getScaledInstance((int)(width * Camera.scale), (int)(height * Camera.scale), image.SCALE_DEFAULT);
 					g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float)0.5));
 					g2d.drawImage(scaledImage, xUsable, yUsable, this);			
 					g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
 
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -78,14 +79,12 @@ public class Block extends JPanel implements ICollision{
 
 	@Override
 	public double getXAxis() {
-		// TODO Auto-generated method stub
 		return x;
 	}
 
 
 	@Override
 	public double getYAxis() {
-		// TODO Auto-generated method stub
 		return y;
 	}
 

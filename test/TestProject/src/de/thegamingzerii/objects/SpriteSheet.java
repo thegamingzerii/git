@@ -2,7 +2,6 @@ package de.thegamingzerii.objects;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -49,7 +48,6 @@ public class SpriteSheet extends JPanel{
 	
 	public void paintComponent(Graphics2D g, double x, double y, int row, boolean flipped) {
 		super.paint(g);
-		Graphics2D g2d = (Graphics2D) g;
 		int xUsable = (int) ((x - Game.camera.getCameraPos().getX()) * Camera.scale);
 		int yUsable = (int)((y - Game.camera.getCameraPos().getY()) * Camera.scale);
 		
@@ -63,10 +61,10 @@ public class SpriteSheet extends JPanel{
 				rightPart = op.filter(rightPart, null);
 			}
 			
+			@SuppressWarnings("static-access")
 			Image scaledImage = rightPart.getScaledInstance((int)(width * Camera.scale), (int)(height * Camera.scale), image.SCALE_DEFAULT);
 			g.drawImage(scaledImage, xUsable, yUsable, this);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	

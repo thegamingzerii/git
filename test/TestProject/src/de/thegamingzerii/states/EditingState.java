@@ -1,23 +1,18 @@
 package de.thegamingzerii.states;
 
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
 
 import de.thegamingzerii.editor.Map;
 import de.thegamingzerii.logicParts.Gate;
@@ -34,6 +29,7 @@ import de.thegamingzerii.objects.Rope;
 import de.thegamingzerii.objects.Slope;
 import de.thegamingzerii.objects.TextureBlock;
 
+@SuppressWarnings("serial")
 public class EditingState extends State{
 
 	private boolean placing = false;
@@ -191,7 +187,7 @@ public class EditingState extends State{
 			BufferedImage image = ImageIO.read(new File("Assets/Modes.png"));
 			g.drawImage(image, xUsable, yUsable, this);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		

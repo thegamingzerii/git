@@ -8,6 +8,7 @@ import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.GravityObject;
 import de.thegamingzerii.utility.CollisionChecker;
 
+@SuppressWarnings("serial")
 public class Bomb extends GravityObject{
 
 	private double explosionTimer = 30;

@@ -16,7 +16,6 @@ import de.thegamingzerii.editor.Map;
 import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.ICollision;
-import de.thegamingzerii.utility.ExtraMaths;
 
 public class Gate extends LogicTile implements ICollision{
 
@@ -134,12 +133,12 @@ public class Gate extends LogicTile implements ICollision{
 			gateImage = ImageIO.read(new File("Assets/Gate.png"));
 			frameImage = ImageIO.read(new File("Assets/GateFrame.png"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		reScale();
 	}
 	
+	@SuppressWarnings("static-access")
 	public static void reScale() {
 		gate = gateImage.getScaledInstance((int)(64*Camera.scale), (int)(256*Camera.scale), gateImage.SCALE_DEFAULT);
 		frame = frameImage.getScaledInstance((int)(64*Camera.scale), (int)(256*Camera.scale), frameImage.SCALE_DEFAULT);

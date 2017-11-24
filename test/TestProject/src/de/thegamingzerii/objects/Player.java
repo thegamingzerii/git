@@ -2,24 +2,11 @@ package de.thegamingzerii.objects;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.RenderingHints;
-import java.awt.event.KeyEvent;
 import java.awt.geom.Point2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.text.Position;
 
 import de.thegamingzerii.maingame.Game;
-import de.thegamingzerii.states.EditingState;
-import de.thegamingzerii.states.GameState;
 import de.thegamingzerii.utility.CollisionChecker;
 import de.thegamingzerii.utility.Constantes;
-import de.thegamingzerii.utility.Vector2d;
 
 
 @SuppressWarnings("serial")

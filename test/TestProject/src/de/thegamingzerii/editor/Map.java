@@ -25,6 +25,7 @@ import de.thegamingzerii.utility.Constantes.BlockType;
 
 public class Map {
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static ArrayList<String> readMapFile() {
 		// The name of the file to open.
         String fileName = "Assets/map.txt";

@@ -9,10 +9,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import de.thegamingzerii.objects.Block;
-import de.thegamingzerii.objects.DeadlyBlock;
-import de.thegamingzerii.objects.Jumper;
-import de.thegamingzerii.objects.Rope;
 import de.thegamingzerii.states.GameState;
 
 public class SaveGame {
@@ -23,7 +19,7 @@ public class SaveGame {
 
         // This will reference one line at a time
         String line = null;
-        ArrayList<String> lines = new ArrayList();
+        ArrayList<String> lines = new ArrayList<String>();
 
         try {
             // FileReader reads text files in the default encoding.

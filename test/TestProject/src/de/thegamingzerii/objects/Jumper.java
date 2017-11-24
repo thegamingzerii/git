@@ -10,13 +10,13 @@ import javax.swing.JPanel;
 import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.states.GameState;
 
+@SuppressWarnings("serial")
 public class Jumper extends JPanel implements IInteract{
 
 	public static ArrayList<Jumper> allJumpers =  new ArrayList<Jumper>();
 	
 	private double x = 0;
 	private double y = 0;
-	private double r = 50;
 	private double usedCounter = 0;
 	String path = "Assets/Lantern.png";
 	SpriteSheet sprite;

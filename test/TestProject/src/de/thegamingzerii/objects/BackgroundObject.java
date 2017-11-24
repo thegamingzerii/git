@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
 
 import de.thegamingzerii.editor.Map;
 import de.thegamingzerii.maingame.Game;
@@ -37,13 +36,13 @@ public class BackgroundObject{
 			bufferedImages.add(ImageIO.read(new File("Assets/Tree.png")));
 			bufferedImages.add(ImageIO.read(new File("Assets/Bush.png")));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		reScale();
 		
 	}
 	
+	@SuppressWarnings("static-access")
 	public static void reScale() {
 		images.clear();
 		for(int i = 0; i < bufferedImages.size(); i++) {

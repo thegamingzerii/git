@@ -12,6 +12,7 @@ import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.states.GameState;
 import de.thegamingzerii.utility.Vector2d;
 
+@SuppressWarnings("serial")
 public class MovingPlatform extends JPanel implements ICollision{
 
 	public static ArrayList<MovingPlatform> allMovingPlatforms = new ArrayList<MovingPlatform>();
@@ -19,14 +20,12 @@ public class MovingPlatform extends JPanel implements ICollision{
 	private Line2D line;
 	private Rectangle.Double platform;
 	private boolean direction = true;
-	private double length;
 	private Vector2d vector;
 	private SpriteSheet sprite;
 	
 	public MovingPlatform(double x1, double y1, double x2, double y2) {
 		line = new Line2D.Double(x1, y1, x2, y2);
 		platform = new Rectangle.Double(x1-100, y1-20, 200, 40);
-		length = Math.abs(Math.sqrt(Math.pow(x1-x2, 2) + Math.pow(y1-y2, 2)));
 		vector = new Vector2d(line.getP1(), line.getP2());
 		vector.normalize();
 		allMovingPlatforms.add(this);
@@ -103,13 +102,11 @@ public class MovingPlatform extends JPanel implements ICollision{
 
 	@Override
 	public void setX(int x) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void setY(int y) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -120,7 +117,6 @@ public class MovingPlatform extends JPanel implements ICollision{
 
 	@Override
 	public boolean onScreen() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 	

@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import de.thegamingzerii.maingame.Game;
 
+@SuppressWarnings("serial")
 public class Particle extends JPanel{
 
 	public static ArrayList<Particle> allParticles = new ArrayList<Particle>();
@@ -64,12 +65,12 @@ public class Particle extends JPanel{
 		
 		try {
 			BufferedImage image = ImageIO.read(new File(path));
+			@SuppressWarnings("static-access")
 			Image scaledImage = image.getScaledInstance((int)(width * Camera.scale), (int)(height * Camera.scale), image.SCALE_DEFAULT);
 			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) (duration / originalDuration)));
 			g.drawImage(scaledImage, xUsable, yUsable, this);
 			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import de.thegamingzerii.editor.Map;
 import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.IInteract;
@@ -44,12 +43,12 @@ public class Lever extends LogicTile implements IInteract{
 			leverImageFlipped = leverImage.getSubimage(0, 128, 128, 128);
 			leverImage = leverImage.getSubimage(0, 0, 128, 128);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		reScale();
 	}
 	
+	@SuppressWarnings("static-access")
 	public static void reScale() {
 		lever = leverImage.getScaledInstance((int)(128*Camera.scale), (int)(128*Camera.scale), leverImage.SCALE_DEFAULT);
 		leverFlipped = leverImageFlipped.getScaledInstance((int)(128*Camera.scale), (int)(128*Camera.scale), leverImage.SCALE_DEFAULT);

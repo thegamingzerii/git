@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.states.GameState;
 
+@SuppressWarnings("serial")
 public class DeadlyBlock extends JPanel implements IInteract{
 
 public static ArrayList<DeadlyBlock> allDeadlyBlocks =  new ArrayList<DeadlyBlock>();
@@ -67,6 +68,7 @@ public static ArrayList<DeadlyBlock> allDeadlyBlocks =  new ArrayList<DeadlyBloc
 		return rect.intersects(getCollisionSize());
 	}
 	
+	@SuppressWarnings("static-access")
 	public void paint(Graphics2D g) {
 		if(width < 2*Camera.scale || height < 2*Camera.scale) {
 			if(width < 1 || height < 1){
@@ -86,7 +88,6 @@ public static ArrayList<DeadlyBlock> allDeadlyBlocks =  new ArrayList<DeadlyBloc
 					Image scaledImage = image.getScaledInstance((int)(width * Camera.scale), (int)(height * Camera.scale), image.SCALE_DEFAULT);
 					g.drawImage(scaledImage, xUsable, yUsable, this);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

@@ -2,13 +2,9 @@ package de.thegamingzerii.objects;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Point;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -26,11 +22,6 @@ public class TextureBlock{
 	private static BufferedImage s1 = null;
 	private static BufferedImage s2 = null;
 	private static BufferedImage s3 = null;
-	private static BufferedImage gr1 = null;
-	private static BufferedImage gr2 = null;
-	private static BufferedImage gr3 = null;
-	private static BufferedImage gr4 = null;
-	private static BufferedImage gr5 = null;
 	
 	private static Image ground1 = null;
 	private static Image ground2 = null;
@@ -38,10 +29,6 @@ public class TextureBlock{
 	private static Image slope2 = null;
 	private static Image slope3 = null;
 	private static Image grass1 = null;
-	private static Image grass2 = null;
-	private static Image grass3 = null;
-	private static Image grass4 = null;
-	private static Image grass5 = null;
 	
 	private static Image[][] grass = new Image[4][5];
 	private static Image[][] scaledGrass = new Image[4][5];
@@ -54,7 +41,6 @@ public class TextureBlock{
 	private double x;
 	private double y;
 	private BlockType type;
-	private SpriteSheet sprite;
 	private double randomFactor;
 	Random generator;
 	
@@ -76,6 +62,7 @@ public class TextureBlock{
 		reScale();
 	}
 	
+	@SuppressWarnings("static-access")
 	public static void reScale() {
 		ground1 = g1.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
 		ground2 = g2.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);

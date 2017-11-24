@@ -4,14 +4,10 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.GraphicsConfiguration;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
-import java.awt.Transparency;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +20,7 @@ import javax.swing.JPanel;
 import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.states.GameState;
 
+@SuppressWarnings("serial")
 public class Rope extends JPanel implements IInteract{
 
 	private Line2D line;
@@ -31,17 +28,12 @@ public class Rope extends JPanel implements IInteract{
 	private double originalX;
 	private double blocked = 0;
 	private double xSpeedMult;
-	private double xAcc;
 	private boolean swinging = false;
 	private boolean moveLeft = false;
 	private boolean moveRight = false;
 	private double swingTimer = 0;
 	public static ArrayList<Rope> allRopes = new ArrayList<Rope>();
 	private static final int SIZE = 256;
-    private static double DELTA_THETA = Math.PI / 90;
-    private Image image = RotatableImage.getImage(SIZE);
-    private double dt = DELTA_THETA;
-    private double theta = 1000;
 	
 	public Rope(double x, double y, double length) {
 		line = new Line2D.Double(x, y, x, y + length);
@@ -72,13 +64,11 @@ public class Rope extends JPanel implements IInteract{
 
 	@Override
 	public boolean checkProximity(Rectangle rect) {
-		// TODO Auto-generated method stub
 		return line.intersects(rect);
 	}
 
 	@Override
 	public boolean onScreen() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 	
@@ -145,8 +135,6 @@ public class Rope extends JPanel implements IInteract{
 		
 		if(xSpeedMult < 0.02)
 			xSpeedMult = 0;
-		image = RotatableImage.getImage(SIZE);
-		theta = Math.toRadians(Math.atan2(y1 - y2, x1 - x2));
 		
 			
 	}
@@ -167,7 +155,6 @@ public class Rope extends JPanel implements IInteract{
 		int yUsable = (int)((line.getY1() - Game.camera.getCameraPos().getY()) * Camera.scale);
 		int xEndUsable = (int) ((line.getX2() - Game.camera.getCameraPos().getX()-4) * Camera.scale);
 		int yEndUsable = (int)((line.getY2() - Game.camera.getCameraPos().getY()) * Camera.scale);
-		Line2D lin = new Line2D.Float(xUsable, yUsable, xEndUsable, yEndUsable);
 		BufferedImage image;
 		g.setStroke(new BasicStroke((float) (20*Camera.scale/Camera.zoom)));
 		Color brown = new Color(59, 31, 6);
@@ -176,29 +163,13 @@ public class Rope extends JPanel implements IInteract{
         g.setColor(Color.BLACK);
         g.setStroke(new BasicStroke(1));
 		try {
-			/**
-			image = ImageIO.read(new File("Assets/Rope.png"));
-			BufferedImage rightPart = image.getSubimage(0, 2048-(int)length, 8, (int)length*2);
-			
-			Image scaledImage = rightPart.getScaledInstance((int)(8 * Camera.scale), (int)(length* 6 * Camera.scale), image.SCALE_DEFAULT);
-			
-			
-			
-			AffineTransform oldXForm = g.getTransform();
-			g.translate(scaledImage.getWidth(this) / 2 + xUsable, scaledImage.getWidth(this) / 2 + yUsable);
-	        g.rotate(Math.PI- xSpeedMult *Math.sin(swingTimer)* 0.08*Math.PI);
-	        g.translate(-(scaledImage.getWidth(this) / 2+ xUsable), -(scaledImage.getHeight(this) / 2+ yUsable));
-	        g.drawImage(scaledImage, xUsable, (int) (yUsable-length*3), null);
-	        g.setTransform(oldXForm);
-	        */
-	        
 	        image = ImageIO.read(new File("Assets/Knot.png"));
-	        Image scaledImage = image.getScaledInstance((int)(64/ Camera.zoom), (int)(64/ Camera.zoom), image.SCALE_DEFAULT);
+	        @SuppressWarnings("static-access")
+			Image scaledImage = image.getScaledInstance((int)(64/ Camera.zoom), (int)(64/ Camera.zoom), image.SCALE_DEFAULT);
 	        g.drawImage(scaledImage, (int)(xUsable-32*Camera.scale), (int)(yUsable-32*Camera.scale), null);
 	        g.drawImage(scaledImage, (int)(xEndUsable-32*Camera.scale), (int)(yEndUsable-10*Camera.scale), null);
 	        
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

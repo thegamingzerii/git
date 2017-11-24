@@ -1,15 +1,11 @@
 package de.thegamingzerii.maingame;
 
 
-import java.nio.IntBuffer;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.TimerTask;
 
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
@@ -24,8 +20,6 @@ import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -41,21 +35,19 @@ import de.thegamingzerii.objects.BackgroundObject;
 import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.DeadlyBlock;
 import de.thegamingzerii.objects.Jumper;
-import de.thegamingzerii.objects.Particle;
-import de.thegamingzerii.objects.Player;
 import de.thegamingzerii.objects.Rope;
 import de.thegamingzerii.objects.TextureBlock;
 import de.thegamingzerii.states.*;
 
 
 
+@SuppressWarnings("serial")
 public class Game extends JPanel{
 
 	
 	// The window handle
 	
 	private static int lastFps = 0;
-	private long window;
 	private int width = Constantes.width;
 	private int height = Constantes.height;
 	public static State ingameState;
@@ -205,13 +197,11 @@ public class Game extends JPanel{
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 
@@ -248,7 +238,6 @@ public class Game extends JPanel{
 		try {
 			TextureBlock.init();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		Gate.init();
@@ -306,8 +295,8 @@ public class Game extends JPanel{
 		
 	
 	@Override
-	public void paint(Graphics g) {
-			super.paint(g);
+	public void paintComponent(Graphics g) {
+			super.paintComponent(g);
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 					RenderingHints.VALUE_ANTIALIAS_ON);
@@ -333,8 +322,8 @@ public static void main(String[] args) throws InterruptedException {
 	
 	frame = new JFrame("Game");
 	Game game = new Game();
+	game.setSize(Constantes.windowWidth, Constantes.windowHeight);
 	frame.add(game);
-	frame.setIgnoreRepaint(true);
 	//frame.add(keyboard);
 		
 	
@@ -343,7 +332,8 @@ public static void main(String[] args) throws InterruptedException {
     	
     Thread scannerThread = new Thread(new Runnable() {
   	  public void run() {
-  		Scanner reader = new Scanner(System.in);  // Reading from System.in
+  		@SuppressWarnings("resource")
+		Scanner reader = new Scanner(System.in);  // Reading from System.in
   		  while(true) {
   			
   	  	    String command = reader.nextLine(); // Scans the next token of the input as an int.
@@ -559,19 +549,6 @@ private class SwitchTexture extends AbstractAction{
 		
 	}
 
-
-private class ConsoleScanner implements Runnable {
-
-    public void run() {
-        System.out.println("Hello from a thread!");
-    }
-    
-
-    public void main(String args[]) {
-        (new Thread(new ConsoleScanner())).start();
-    }
-
-}
 
 private class Interact extends AbstractAction{
 
