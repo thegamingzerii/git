@@ -7,6 +7,7 @@ import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.ICollision;
 import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.MovingPlatform;
+import de.thegamingzerii.objects.Obstacle;
 import de.thegamingzerii.objects.Slope;
 
 public class CollisionChecker {
@@ -31,10 +32,10 @@ public class CollisionChecker {
 	
 	public static boolean CheckAllCollisions(ICollision object) {
 		boolean bool = false;
-		for(int i = 0; i < Block.allBlocks.size(); i++) {
-			if(CheckCollision(object, Block.allBlocks.get(i))) {
+		
+		for(int i = 0; i < Obstacle.allObstacles.size(); i++) {
+			if(Obstacle.allObstacles.get(i).checkcollision(object.getCollisionSize())) 
 				bool =  true;
-			}
 		}
 		
 		for(int i = 0; i < MovingPlatform.allMovingPlatforms.size(); i++) {

@@ -7,33 +7,28 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
-import javax.swing.JPanel;
-
 import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.utility.ExtraMaths;
 import de.thegamingzerii.utility.Vector2d;
 
-@SuppressWarnings("serial")
-public class Slope extends JPanel implements ICollision{
-	public static ArrayList<Slope> allSlopes = new ArrayList<Slope>();
+public class Obstacle implements ICollision{
+	public static ArrayList<Obstacle> allObstacles = new ArrayList<Obstacle>();
 	Line2D line;
-	private Vector2d vector;
 	
-	public Slope(Point2D point1, Point2D point2) {
+	public Obstacle(Point2D point1, Point2D point2) {
 		line = new Line2D.Double(point1, point2);
-		vector = new Vector2d(point1, point2);
-		allSlopes.add(this);
+		allObstacles.add(this);
 	}
 	
-	public Slope(Slope slope) {
-		line = slope.line;
+	public Obstacle(Obstacle obstacle) {
+		line = obstacle.line;
 	}
 	
 
 	@Override
 	public boolean checkcollision(Rectangle rect) {
 		if(onScreen())
-			return ((line.intersects(new Rectangle((int)rect.getX(), (int)rect.getY(), (int)(rect.getWidth()/2), (int)rect.getHeight())))&&(line.intersects(new Rectangle((int)rect.getCenterX(), (int)rect.getY(), (int)(rect.getWidth()/2), (int)rect.getHeight()))));
+			return line.intersects(rect);
 		return false;
 
 	}
@@ -56,9 +51,6 @@ public class Slope extends JPanel implements ICollision{
 		return line.getY2();
 	}
 
-	public Vector2d getVector() {
-		return vector;
-	}
 	
 	@Override
 	public void setX(int x) {
@@ -78,17 +70,12 @@ public class Slope extends JPanel implements ICollision{
 
 	@Override
 	public boolean onScreen() {
-		if(ExtraMaths.onScreen(line.getP1()))
-			return true;
-		if(ExtraMaths.onScreen(line.getP2()))
-			return true;
-		return false;
+		return line.intersects(Game.actualCamera.getScreen());
 					
 	}
 	
 	public void paint(Graphics2D g) {
-		super.paint(g);
-		if(Game.drawHitBoxes && onScreen()) {
+		if(Game.drawHitBoxes) {
 			int xUsable = (int) ((line.getX1() - Game.camera.getCameraPos().getX()-4) * Game.camera.scale);
 			int yUsable = (int)((line.getY1() - Game.camera.getCameraPos().getY()) * Game.camera.scale);
 			int xEndUsable = (int) ((line.getX2() - Game.camera.getCameraPos().getX()-4) * Game.camera.scale);
@@ -103,7 +90,7 @@ public class Slope extends JPanel implements ICollision{
 	
 	
 	public String toString() {
-		return "Slope " + line.getX1() + " " + line.getY1() + " " + line.getX2() + " " + line.getY2();
+		return "Obstacle " + line.getX1() + " " + line.getY1() + " " + line.getX2() + " " + line.getY2();
 	}
 	
 	
@@ -118,11 +105,10 @@ public class Slope extends JPanel implements ICollision{
 
 	@Override
 	public IBufferable getCopy() {
-		return new Slope(this);
+		return new Obstacle(this);
 	}
 	
 	
 	
 	
-
 }

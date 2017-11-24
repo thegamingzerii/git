@@ -6,13 +6,11 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.RenderingHints;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -23,15 +21,15 @@ import de.thegamingzerii.states.GameState;
 @SuppressWarnings("serial")
 public class Rope extends JPanel implements IInteract{
 
-	private Line2D line;
-	private double length;
-	private double originalX;
-	private double blocked = 0;
-	private double xSpeedMult;
-	private boolean swinging = false;
-	private boolean moveLeft = false;
-	private boolean moveRight = false;
-	private double swingTimer = 0;
+	Line2D line;
+	double length;
+	double originalX;
+	double blocked = 0;
+	double xSpeedMult;
+	boolean swinging = false;
+	boolean moveLeft = false;
+	boolean moveRight = false;
+	double swingTimer = 0;
 	public static ArrayList<Rope> allRopes = new ArrayList<Rope>();
 	private static final int SIZE = 256;
 	
@@ -40,6 +38,10 @@ public class Rope extends JPanel implements IInteract{
 		allRopes.add(this);
 		this.length = length;
 		this.originalX = x;
+	}
+	
+	public Rope(Rope rope) {
+		line = rope.line;
 	}
 	
 	public void interactionBlocked(int time) {
@@ -69,7 +71,7 @@ public class Rope extends JPanel implements IInteract{
 
 	@Override
 	public boolean onScreen() {
-		return false;
+		return Game.actualCamera.getScreen().intersectsLine(line);
 	}
 	
 	
@@ -151,12 +153,12 @@ public class Rope extends JPanel implements IInteract{
 	
 	public void paint(Graphics2D g) {
 		super.paint(g);
-		int xUsable = (int) ((line.getX1() - Game.camera.getCameraPos().getX()-4) * Camera.scale);
-		int yUsable = (int)((line.getY1() - Game.camera.getCameraPos().getY()) * Camera.scale);
-		int xEndUsable = (int) ((line.getX2() - Game.camera.getCameraPos().getX()-4) * Camera.scale);
-		int yEndUsable = (int)((line.getY2() - Game.camera.getCameraPos().getY()) * Camera.scale);
+		int xUsable = (int) ((line.getX1() - Game.camera.getCameraPos().getX()-4) * Game.camera.scale);
+		int yUsable = (int)((line.getY1() - Game.camera.getCameraPos().getY()) * Game.camera.scale);
+		int xEndUsable = (int) ((line.getX2() - Game.camera.getCameraPos().getX()-4) * Game.camera.scale);
+		int yEndUsable = (int)((line.getY2() - Game.camera.getCameraPos().getY()) * Game.camera.scale);
 		BufferedImage image;
-		g.setStroke(new BasicStroke((float) (20*Camera.scale/Camera.zoom)));
+		g.setStroke(new BasicStroke((float) (20*Game.camera.scale/Game.camera.zoom)));
 		Color brown = new Color(59, 31, 6);
 		g.setColor(brown);
         g.draw(new Line2D.Float(xUsable, yUsable, xEndUsable, yEndUsable));
@@ -165,9 +167,9 @@ public class Rope extends JPanel implements IInteract{
 		try {
 	        image = ImageIO.read(new File("Assets/Knot.png"));
 	        @SuppressWarnings("static-access")
-			Image scaledImage = image.getScaledInstance((int)(64/ Camera.zoom), (int)(64/ Camera.zoom), image.SCALE_DEFAULT);
-	        g.drawImage(scaledImage, (int)(xUsable-32*Camera.scale), (int)(yUsable-32*Camera.scale), null);
-	        g.drawImage(scaledImage, (int)(xEndUsable-32*Camera.scale), (int)(yEndUsable-10*Camera.scale), null);
+			Image scaledImage = image.getScaledInstance((int)(64/ Game.camera.zoom), (int)(64/ Game.camera.zoom), image.SCALE_DEFAULT);
+	        g.drawImage(scaledImage, (int)(xUsable-32*Game.camera.scale), (int)(yUsable-32*Game.camera.scale), null);
+	        g.drawImage(scaledImage, (int)(xEndUsable-32*Game.camera.scale), (int)(yEndUsable-10*Game.camera.scale), null);
 	        
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -179,48 +181,6 @@ public class Rope extends JPanel implements IInteract{
 	}
 
 	
-	
-	
-	/**
-	
-	
-	class RotatePanel extends JPanel implements ActionListener {
-
-	    private static final int SIZE = 256;
-	    private static double DELTA_THETA = Math.PI / 90;
-	    private final Timer timer = new Timer(25, this);
-	    private Image image = RotatableImage.getImage(SIZE);
-	    private double dt = DELTA_THETA;
-	    private double theta;
-
-	    public RotatePanel() {
-	        this.setBackground(Color.lightGray);
-	        this.setPreferredSize(new Dimension(
-	            image.getWidth(null), image.getHeight(null)));
-	        this.addMouseListener(new MouseAdapter() {
-
-	            @Override
-	            public void mousePressed(MouseEvent e) {
-	                image = RotatableImage.getImage(SIZE);
-	                dt = -dt;
-	            }
-	        });
-	        timer.start();
-	    }
-
-	    @Override
-	    public void paintComponent(Graphics g) {
-	        super.paintComponent(g);
-	        Graphics2D g2d = (Graphics2D) g;
-	        g2d.translate(this.getWidth() / 2, this.getHeight() / 2);
-	        g2d.rotate(theta);
-	        g2d.translate(-image.getWidth(this) / 2, -image.getHeight(this) / 2);
-	        g2d.drawImage(image, 0, 0, null);
-	    }
-
-	    
-	}
-	*/
 	
 
     @Override
@@ -242,32 +202,14 @@ public double getYAxis() {
 	return line.getY1();
 }
 
+@Override
+public void buffer() {
+	if(onScreen())
+		Game.currentBuffer.add(this.getCopy());
+}
 
-static class RotatableImage {
-
-    private static final Random r = new Random();
-
-    static public Image getImage(int size) {
-        BufferedImage bi = new BufferedImage(
-            size, size, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = bi.createGraphics();
-        g2d.setRenderingHint(
-            RenderingHints.KEY_ANTIALIASING,
-            RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setPaint(Color.getHSBColor(r.nextFloat(), 1, 1));
-        g2d.setStroke(new BasicStroke(size / 8));
-        g2d.drawLine(0, size / 2, size, size / 2);
-        g2d.drawLine(size / 2, 0, size / 2, size);
-        g2d.dispose();
-        return bi;
-    }
-	
-
-
-	
-	
-	
-	
-
+@Override
+public IBufferable getCopy() {
+	return new Rope(this);
 }
 }

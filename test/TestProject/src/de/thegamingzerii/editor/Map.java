@@ -17,6 +17,7 @@ import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.DeadlyBlock;
 import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.MovingPlatform;
+import de.thegamingzerii.objects.Obstacle;
 import de.thegamingzerii.objects.Rope;
 import de.thegamingzerii.objects.Slope;
 import de.thegamingzerii.objects.TextureBlock;
@@ -69,7 +70,7 @@ public class Map {
 	}
 	
 	public static ArrayList<Object> loadMap() {
-		Block.allBlocks.clear();
+		Obstacle.allObstacles.clear();
 		Jumper.allJumpers.clear();
 		Rope.allRopes.clear();
 		DeadlyBlock.allDeadlyBlocks.clear();
@@ -88,9 +89,9 @@ public class Map {
     			LogicTile.nextId = Integer.parseInt(splited[1]);
     		}
 			
-    		if(splited[0].equals("Block")) {
-    			objects.add(new Block(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), 
-    					Double.parseDouble(splited[3]), Double.parseDouble(splited[4])));
+    		if(splited[0].equals("Obstacle")) {
+    			objects.add(new Obstacle(new Point2D.Double(Double.parseDouble(splited[1]), Double.parseDouble(splited[2])), new Point2D.Double(Double.parseDouble(splited[3]), Double.parseDouble(splited[4]))));
+
     		}
     		
     		if(splited[0].equals("Jumper")) {
@@ -217,8 +218,8 @@ public class Map {
 		for(int i = 0; i < Jumper.allJumpers.size(); i++) {
 			object.add(Jumper.allJumpers.get(i).toString());
 		}
-		for(int i = 0; i < Block.allBlocks.size(); i++) {
-			object.add(Block.allBlocks.get(i).toString());
+		for(int i = 0; i < Obstacle.allObstacles.size(); i++) {
+			object.add(Obstacle.allObstacles.get(i).toString());
 		}
 		for(int i = 0; i < Rope.allRopes.size(); i++) {
 			object.add(Rope.allRopes.get(i).toString());

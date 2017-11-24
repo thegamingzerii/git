@@ -36,6 +36,22 @@ public class Player extends GravityObject implements ICollision{
 		sprite =  new SpriteSheet(path, 32, 36, 8, 4, height/32);
 	}
 	
+	public Player(Player player) {
+		super(player.width, player.height);
+		sprite =  player.sprite;
+		inAir = player.inAir;
+		inJump = player.inJump;
+		moveRight = player.moveRight;
+		moveLeft = player.moveLeft;
+		slidingRight = player.slidingRight;
+		slidingLeft = player.slidingLeft;
+		inDoubleJump = player.inDoubleJump;
+		hanging = player.hanging;
+		moveDirection = player.moveDirection;
+		x = player.x;
+		y = player.y;
+	}
+	
 	public void changePos(double x, double y) {
 		if(x > this.x) {
 			moveRight = true;
@@ -211,7 +227,7 @@ public class Player extends GravityObject implements ICollision{
 			int yMod = 1;
 			boolean finished = false;
 			//change yMod < XXXX for higher stairs to climb (in logic pixels)
-			while(yMod < 50 && !finished) {
+			while(yMod < 4 && !finished) {
 				yMod++;
 				y -= yMod;
 				
@@ -370,17 +386,34 @@ public class Player extends GravityObject implements ICollision{
 		}
 		
 		
-		int xUsable = (int) ((x - Game.camera.getCameraPos().getX()) * Camera.scale);
-		int yUsable = (int)((y - Game.camera.getCameraPos().getY()) * Camera.scale);
+		int xUsable = (int) ((x - Game.camera.getCameraPos().getX()) * Game.camera.scale);
+		int yUsable = (int)((y - Game.camera.getCameraPos().getY()) * Game.camera.scale);
 		
 		if(Game.drawHitBoxes) {
 			g.setColor(Color.GREEN);
-			g.drawRect(xUsable, yUsable, (int)(96*Camera.scale), (int)(128*Camera.scale));
+			g.drawRect(xUsable, yUsable, (int)(96*Game.camera.scale), (int)(128*Game.camera.scale));
 			g.setColor(Color.RED);
-			g.drawLine(xUsable, (int)(yUsable + (height* 0.5 * Camera.scale)), (int)(xUsable + (width* Camera.scale)), (int)(yUsable + (height * 0.5 * Camera.scale)));
-			g.drawLine((int)(xUsable + (width * 0.5 * Camera.scale)), yUsable, (int)(xUsable + (width* 0.5 * Camera.scale)), (int)(yUsable + (height * Camera.scale)));
+			g.drawLine(xUsable, (int)(yUsable + (height* 0.5 * Game.camera.scale)), (int)(xUsable + (width* Game.camera.scale)), (int)(yUsable + (height * 0.5 * Game.camera.scale)));
+			g.drawLine((int)(xUsable + (width * 0.5 * Game.camera.scale)), yUsable, (int)(xUsable + (width* 0.5 * Game.camera.scale)), (int)(yUsable + (height * Game.camera.scale)));
 			g.setColor(Color.black);
 		}
 		
+	}
+	
+	
+	@Override
+	public boolean onScreen() {
+		return true;
+	}
+	
+	@Override
+	public void buffer() {
+		if(onScreen())
+			Game.currentBuffer.add(this.getCopy());
+	}
+
+	@Override
+	public IBufferable getCopy() {
+		return new Player(this);
 	}
 }

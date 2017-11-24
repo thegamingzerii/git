@@ -48,8 +48,8 @@ public class SpriteSheet extends JPanel{
 	
 	public void paintComponent(Graphics2D g, double x, double y, int row, boolean flipped) {
 		super.paint(g);
-		int xUsable = (int) ((x - Game.camera.getCameraPos().getX()) * Camera.scale);
-		int yUsable = (int)((y - Game.camera.getCameraPos().getY()) * Camera.scale);
+		int xUsable = (int) ((x - Game.camera.getCameraPos().getX()) * Game.camera.scale);
+		int yUsable = (int)((y - Game.camera.getCameraPos().getY()) * Game.camera.scale);
 		
 		try {
 			BufferedImage image = ImageIO.read(new File(path));
@@ -62,7 +62,7 @@ public class SpriteSheet extends JPanel{
 			}
 			
 			@SuppressWarnings("static-access")
-			Image scaledImage = rightPart.getScaledInstance((int)(width * Camera.scale), (int)(height * Camera.scale), image.SCALE_DEFAULT);
+			Image scaledImage = rightPart.getScaledInstance((int)(width * Game.camera.scale), (int)(height * Game.camera.scale), image.SCALE_DEFAULT);
 			g.drawImage(scaledImage, xUsable, yUsable, this);
 		} catch (IOException e) {
 			e.printStackTrace();

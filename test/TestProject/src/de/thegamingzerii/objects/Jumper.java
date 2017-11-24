@@ -29,6 +29,13 @@ public class Jumper extends JPanel implements IInteract{
 		allJumpers.add(this);
 	}
 	
+	public Jumper(Jumper jumper) {
+		this.x = jumper.x;
+		this.y = jumper.y;
+		sprite =  jumper.sprite;
+	}
+	
+	
 	public void update(double delta) {
 		sprite.update(delta);
 		usedCounter -= delta;
@@ -66,8 +73,8 @@ public class Jumper extends JPanel implements IInteract{
 				sprite.paintComponent(g, x-64, y-64, 0, false);
 			
 			if(Game.drawHitBoxes) {
-				int xUsable = (int) ((x -50 - Game.camera.getCameraPos().getX()) * Camera.scale);
-				int yUsable = (int)((y -50 - Game.camera.getCameraPos().getY()) * Camera.scale);
+				int xUsable = (int) ((x -50 - Game.camera.getCameraPos().getX()) * Game.camera.scale);
+				int yUsable = (int)((y -50 - Game.camera.getCameraPos().getY()) * Game.camera.scale);
 				g.setColor(Color.ORANGE);
 				g.drawOval((int)xUsable, (int)yUsable, 100, 100);
 				g.setColor(Color.black);
@@ -108,6 +115,17 @@ public class Jumper extends JPanel implements IInteract{
 		if(y+100 < Game.camera.getY())
 			return false;
 		return true;
+	}
+	
+	@Override
+	public void buffer() {
+		if(onScreen())
+			Game.currentBuffer.add(this.getCopy());
+	}
+
+	@Override
+	public IBufferable getCopy() {
+		return new Jumper(this);
 	}
 	
 

@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import de.thegamingzerii.maingame.Game;
 
 @SuppressWarnings("serial")
-public class Button extends JPanel{
+public class Button extends JPanel implements IBufferable{
 
 	double x = 1920/2 - 512/2;
 	double y;
@@ -31,9 +31,15 @@ public class Button extends JPanel{
 		this.text = text;
 	}
 	
+	public Button(Button button) {
+		this.y = button.y;
+		this.type = button.type;
+		this.text = button.text;
+	}
+	
 	public void hover(double x, double y) {
 
-		mouseOver = (x * Camera.scale > this.x && x * Camera.scale < this.x + width && y * Camera.scale > this.y && y * Camera.scale < this.y + this.height);
+		mouseOver = (x * Game.camera.scale > this.x && x * Game.camera.scale < this.x + width && y * Game.camera.scale > this.y && y * Game.camera.scale < this.y + this.height);
 			
 	}
 	
@@ -66,8 +72,8 @@ public class Button extends JPanel{
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		int xUsable = (int) (x * Camera.scale);
-		int yUsable = (int)(y  * Camera.scale);
+		int xUsable = (int) (x * Game.camera.scale);
+		int yUsable = (int)(y  * Game.camera.scale);
 		try {
 			BufferedImage image = ImageIO.read(new File(path));
 			g.drawImage(image, xUsable, yUsable, this);
@@ -75,10 +81,26 @@ public class Button extends JPanel{
 			g.setFont(new Font(currentFont, Font.PLAIN, text.size));
 		     
 		    g.setColor(Color.white);
-			g.drawString(text.text, (int) (xUsable + text.x * Camera.scale) , (int) (yUsable + text.y * Camera.scale));
+			g.drawString(text.text, (int) (xUsable + text.x * Game.camera.scale) , (int) (yUsable + text.y * Game.camera.scale));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public boolean onScreen() {
+		return true;
+	}
+	
+	@Override
+	public void buffer() {
+		if(onScreen())
+			Game.currentBuffer.add(this.getCopy());
+	}
+
+	@Override
+	public IBufferable getCopy() {
+		return new Button(this);
 	}
 }

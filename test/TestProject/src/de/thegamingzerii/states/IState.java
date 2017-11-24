@@ -8,4 +8,6 @@ public interface IState {
 	void update(double delta);
 	
 	void paint(Graphics2D g);
+	
+	void buffer();
 }

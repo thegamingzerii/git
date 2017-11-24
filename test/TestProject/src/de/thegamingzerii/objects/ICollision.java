@@ -2,7 +2,7 @@ package de.thegamingzerii.objects;
 
 import java.awt.Rectangle;
 
-public interface ICollision {
+public interface ICollision extends IBufferable{
 	
 	
 	boolean checkcollision(Rectangle rect);

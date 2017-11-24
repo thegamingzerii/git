@@ -21,6 +21,12 @@ public class State  extends JPanel implements IState  {
 	public void paint(Graphics2D g) {
 		
 	}
+
+	@Override
+	public void buffer() {
+		// TODO Auto-generated method stub
+		
+	}
 }
 	
 	

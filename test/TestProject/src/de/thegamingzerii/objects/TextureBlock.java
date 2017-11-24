@@ -15,7 +15,7 @@ import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.utility.Constantes.BlockType;
 import de.thegamingzerii.utility.ExtraMaths;
 
-public class TextureBlock{
+public class TextureBlock implements IBufferable{
 	public static ArrayList<TextureBlock> allTextureBlocks = new ArrayList<TextureBlock>();
 	private static BufferedImage g1 = null;
 	private static BufferedImage g2 = null;
@@ -40,9 +40,28 @@ public class TextureBlock{
 	
 	private double x;
 	private double y;
-	private BlockType type;
-	private double randomFactor;
+	public BlockType type;
+	public double randomFactor;
 	Random generator;
+	
+	
+	
+	public TextureBlock(double x, double y, BlockType type) {
+		this.x = x;
+		this.y = y;
+		this.type = type;
+		generator = new Random((long) (x*y));
+		randomFactor = Math.round(generator.nextInt()/100);
+		allTextureBlocks.add(this);
+	}
+	
+	
+	public TextureBlock(TextureBlock block) {
+		this.x = block.getX();
+		this.y = block.getY();
+		this.type = block.type;
+		randomFactor = block.randomFactor;
+	}
 	
 	public static void init() throws IOException {
 		BufferedImage image = ImageIO.read(new File("Assets/Ground.png"));
@@ -64,33 +83,24 @@ public class TextureBlock{
 	
 	@SuppressWarnings("static-access")
 	public static void reScale() {
-		ground1 = g1.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
-		ground2 = g2.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
-		slope1 = s1.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
-		slope2 = s2.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
-		slope3 = s3.getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
+		ground1 = g1.getScaledInstance((int)(128 * Game.camera.scale), (int)(128 * Game.camera.scale), image.SCALE_DEFAULT);
+		ground2 = g2.getScaledInstance((int)(128 * Game.camera.scale), (int)(128 * Game.camera.scale), image.SCALE_DEFAULT);
+		slope1 = s1.getScaledInstance((int)(128 * Game.camera.scale), (int)(128 * Game.camera.scale), image.SCALE_DEFAULT);
+		slope2 = s2.getScaledInstance((int)(128 * Game.camera.scale), (int)(128 * Game.camera.scale), image.SCALE_DEFAULT);
+		slope3 = s3.getScaledInstance((int)(128 * Game.camera.scale), (int)(128 * Game.camera.scale), image.SCALE_DEFAULT);
 		for(int i = 0; i < 4; i++) {
 			for(int j = 0; j < 5; j++) {
-				scaledGrass[i][j] = grass[i][j].getScaledInstance((int)(128 * Camera.scale), (int)(128 * Camera.scale), image.SCALE_DEFAULT);
+				scaledGrass[i][j] = grass[i][j].getScaledInstance((int)(128 * Game.camera.scale), (int)(128 * Game.camera.scale), image.SCALE_DEFAULT);
 			}
 		}
 	}
 	
-	
-	public TextureBlock(double x, double y, BlockType type) {
-		this.x = x;
-		this.y = y;
-		this.type = type;
-		generator = new Random((long) (x*y));
-		randomFactor = Math.round(generator.nextInt()/100);
-		allTextureBlocks.add(this);
-	}
 
 	
-	public void draw(Graphics2D g) {
+	public void paint(Graphics2D g) {
 		if(onScreen()) {
-			int xUsable = (int) ((x - Game.camera.getX()) * Camera.scale);
-			int yUsable = (int)((y - Game.camera.getY()) * Camera.scale);
+			int xUsable = (int) ((x - Game.camera.getX()) * Game.camera.scale);
+			int yUsable = (int)((y - Game.camera.getY()) * Game.camera.scale);
 			switch(type) {
 			case Ground:
 				g.drawImage(ground1, xUsable, yUsable, Game.currentGame);
@@ -120,13 +130,13 @@ public class TextureBlock{
 	
 	
 	public boolean onScreen() {
-		if(x > Game.camera.getX() + Game.camera.getWidth())
+		if(x > Game.actualCamera.getX() + Game.actualCamera.getWidth())
 			return false;
-		if(y > Game.camera.getY() + Game.camera.getHeight())
+		if(y > Game.actualCamera.getY() + Game.actualCamera.getHeight())
 			return false;
-		if(x + 128 < Game.camera.getX())
+		if(x + 128 < Game.actualCamera.getX())
 			return false;
-		if(y + 128 < Game.camera.getY())
+		if(y + 128 < Game.actualCamera.getY())
 			return false;
 		return true;
 	}
@@ -209,6 +219,20 @@ public class TextureBlock{
 			}
 
 		
+	}
+
+	@Override
+	public void buffer() {
+		
+		if(onScreen()) {
+			Game.currentBuffer.add(this.getCopy());
+		}
+			
+	}
+
+	@Override
+	public IBufferable getCopy() {
+		return new TextureBlock(this);
 	}
 }
 

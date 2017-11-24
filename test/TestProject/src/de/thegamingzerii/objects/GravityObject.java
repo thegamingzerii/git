@@ -1,5 +1,6 @@
 package de.thegamingzerii.objects;
 
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 import javax.swing.JPanel;
@@ -96,6 +97,23 @@ public class GravityObject extends JPanel implements ICollision{
 		if(y + height < Game.camera.getY())
 			return false;
 		return true;
+	}
+
+	@Override
+	public void buffer() {
+		if(onScreen())
+			Game.currentBuffer.add(this.getCopy());
+	}
+
+	@Override
+	public IBufferable getCopy() {
+		return null;
+	}
+
+	@Override
+	public void paint(Graphics2D g) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

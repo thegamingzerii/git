@@ -11,13 +11,13 @@ public class ExtraMaths {
 	}
 	
 	public static boolean onScreen(Point2D point) {
-		if(point.getX() > Game.camera.getX() + Game.camera.getWidth())
+		if(point.getX() > Game.actualCamera.getX() + Game.actualCamera.getWidth())
 			return false;
-		if(point.getY() > Game.camera.getY() + Game.camera.getHeight())
+		if(point.getY() > Game.actualCamera.getY() + Game.actualCamera.getHeight())
 			return false;
-		if(point.getX() < Game.camera.getX())
+		if(point.getX() < Game.actualCamera.getX())
 			return false;
-		if(point.getY() < Game.camera.getY())
+		if(point.getY() < Game.actualCamera.getY())
 			return false;
 		
 		return true;

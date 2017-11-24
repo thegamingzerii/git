@@ -34,6 +34,13 @@ public static ArrayList<DeadlyBlock> allDeadlyBlocks =  new ArrayList<DeadlyBloc
 		allDeadlyBlocks.add(this);
 	}
 	
+	public DeadlyBlock(DeadlyBlock deadly) {
+		this.x = deadly.x;
+		this.y = deadly.y;
+		this.width = deadly.width;
+		this.height = deadly.height;
+	}
+	
 	public Rectangle getCollisionSize() {
         return new Rectangle((int)x, (int)y, (int)width, (int)height);
 	}
@@ -70,7 +77,7 @@ public static ArrayList<DeadlyBlock> allDeadlyBlocks =  new ArrayList<DeadlyBloc
 	
 	@SuppressWarnings("static-access")
 	public void paint(Graphics2D g) {
-		if(width < 2*Camera.scale || height < 2*Camera.scale) {
+		if(width < 2*Game.camera.scale || height < 2*Game.camera.scale) {
 			if(width < 1 || height < 1){
 				DeadlyBlock.allDeadlyBlocks.remove(this);
 			}
@@ -80,18 +87,29 @@ public static ArrayList<DeadlyBlock> allDeadlyBlocks =  new ArrayList<DeadlyBloc
 				Graphics2D g2d = (Graphics2D) g;
 				g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 						RenderingHints.VALUE_ANTIALIAS_ON);
-				int xUsable = (int) ((x - Game.camera.getCameraPos().getX()) * Camera.scale);
-				int yUsable = (int)((y - Game.camera.getCameraPos().getY()) * Camera.scale);
+				int xUsable = (int) ((x - Game.camera.getCameraPos().getX()) * Game.camera.scale);
+				int yUsable = (int)((y - Game.camera.getCameraPos().getY()) * Game.camera.scale);
 				
 				try {
 					BufferedImage image = ImageIO.read(new File("Assets/DeadlyBlock.png"));
-					Image scaledImage = image.getScaledInstance((int)(width * Camera.scale), (int)(height * Camera.scale), image.SCALE_DEFAULT);
+					Image scaledImage = image.getScaledInstance((int)(width * Game.camera.scale), (int)(height * Game.camera.scale), image.SCALE_DEFAULT);
 					g.drawImage(scaledImage, xUsable, yUsable, this);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 		}
+	}
+	
+	@Override
+	public void buffer() {
+		if(onScreen())
+			Game.currentBuffer.add(this.getCopy());
+	}
+
+	@Override
+	public IBufferable getCopy() {
+		return new DeadlyBlock(this);
 	}
 
 }

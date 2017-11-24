@@ -53,9 +53,9 @@ public class Bomb extends GravityObject{
 	
 	public void paint(Graphics2D g) {
 		if(!exploded) {
-			int xUsable = (int) ((x - Game.camera.getCameraPos().getX()) * Camera.scale);
-			int yUsable = (int)((y - Game.camera.getCameraPos().getY()) * Camera.scale);
-			g.fillOval(xUsable, yUsable, (int)(width * Camera.scale), (int)(height*Camera.scale));
+			int xUsable = (int) ((x - Game.camera.getCameraPos().getX()) * Game.camera.scale);
+			int yUsable = (int)((y - Game.camera.getCameraPos().getY()) * Game.camera.scale);
+			g.fillOval(xUsable, yUsable, (int)(width * Game.camera.scale), (int)(height*Game.camera.scale));
 		}
 		
 	}

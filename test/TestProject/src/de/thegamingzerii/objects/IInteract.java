@@ -2,7 +2,7 @@ package de.thegamingzerii.objects;
 
 import java.awt.Rectangle;
 
-public interface IInteract {
+public interface IInteract extends IBufferable{
 	
 	void interact(Boolean keyPressed);
 	

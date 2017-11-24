@@ -13,11 +13,11 @@ import de.thegamingzerii.editor.Map;
 import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.utility.Constantes.BackgroundType;
 
-public class BackgroundObject{
+public class BackgroundObject implements IBufferable{
 	
-	private double x;
-	private double y;
-	private BackgroundType type;
+	double x;
+	double y;
+	BackgroundType type;
 	public static ArrayList<BackgroundObject> allBackgroundObjects = new ArrayList<BackgroundObject>();
 	
 	private static ArrayList<BufferedImage> bufferedImages = new ArrayList<BufferedImage>();
@@ -28,6 +28,12 @@ public class BackgroundObject{
 		this.y = y;
 		this.type = type;
 		allBackgroundObjects.add(this);
+	}
+	
+	public BackgroundObject(BackgroundObject bgo) {
+		this.x = bgo.x;
+		this.y = bgo.y;
+		this.type = bgo.type;
 	}
 	
 	
@@ -46,7 +52,7 @@ public class BackgroundObject{
 	public static void reScale() {
 		images.clear();
 		for(int i = 0; i < bufferedImages.size(); i++) {
-			images.add(bufferedImages.get(i).getScaledInstance((int)(512 * Camera.scale), (int)(1024 * Camera.scale), bufferedImages.get(i).SCALE_DEFAULT));
+			images.add(bufferedImages.get(i).getScaledInstance((int)(512 * Game.camera.scale), (int)(1024 * Game.camera.scale), bufferedImages.get(i).SCALE_DEFAULT));
 		}
 	}
 	
@@ -63,8 +69,8 @@ public class BackgroundObject{
 	}
 	
 	public void paint(Graphics2D g) {
-		int xUsable = (int) ((x - Game.camera.getX()) * Camera.scale);
-		int yUsable = (int)((y - Game.camera.getY()) * Camera.scale);
+		int xUsable = (int) ((x - Game.camera.getX()) * Game.camera.scale);
+		int yUsable = (int)((y - Game.camera.getY()) * Game.camera.scale);
 		switch(type) {
 		case Tree1:
 			g.drawImage(images.get(0), xUsable, yUsable, Game.currentGame);
@@ -120,6 +126,32 @@ public class BackgroundObject{
 		g.drawImage(images.get(id), x, y, Game.currentGame);
 	
 }
+
+
+	@Override
+	public boolean onScreen() {
+		if(x > Game.actualCamera.getX() + Game.actualCamera.getWidth())
+			return false;
+		if(y > Game.actualCamera.getY() + Game.actualCamera.getHeight())
+			return false;
+		if(x + 512 < Game.actualCamera.getX())
+			return false;
+		if(y + 1024 < Game.actualCamera.getY())
+			return false;
+		return true;
+	}
+
+
+	@Override
+	public void buffer() {
+		if(onScreen())
+			Game.currentBuffer.add(this.getCopy());
+	}
+
+	@Override
+	public IBufferable getCopy() {
+		return new BackgroundObject(this);
+	}
 	
 	
 }

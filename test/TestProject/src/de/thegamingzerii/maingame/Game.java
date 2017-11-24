@@ -1,6 +1,7 @@
 package de.thegamingzerii.maingame;
 
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.AbstractAction;
@@ -34,6 +35,7 @@ import de.thegamingzerii.logicParts.Lever;
 import de.thegamingzerii.objects.BackgroundObject;
 import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.DeadlyBlock;
+import de.thegamingzerii.objects.IBufferable;
 import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.Rope;
 import de.thegamingzerii.objects.TextureBlock;
@@ -44,12 +46,9 @@ import de.thegamingzerii.states.*;
 @SuppressWarnings("serial")
 public class Game extends JPanel{
 
-	
-	// The window handle
-	
+		
 	private static int lastFps = 0;
-	private int width = Constantes.width;
-	private int height = Constantes.height;
+	private static int lastUps = 0;
 	public static State ingameState;
 	public static State mainMenuState;
 	public static State pauseState;
@@ -57,6 +56,9 @@ public class Game extends JPanel{
 	public static State currentState;
 	public static double animationCounter = 0;
 	public static Game currentGame;
+	
+	public static ArrayList<ArrayList<IBufferable>> bufferList = new ArrayList<ArrayList<IBufferable>>();
+	public static ArrayList<IBufferable> currentBuffer;
 	
 	public static Cursor defaultCursor;
 	
@@ -68,6 +70,8 @@ public class Game extends JPanel{
 
 	public static JFrame frame;
 	public static Camera camera;
+	public static Camera actualCamera;
+	
 	
 	
 	private double saveGameCounter = 0;
@@ -185,7 +189,7 @@ public class Game extends JPanel{
 		frame.add(mainMenuState);
 		frame.add(pauseState);
 		frame.add(editingState);
-		frame.setSize(width, height);
+		frame.setSize(Constantes.windowWidth, Constantes.windowHeight);
 		frame.setUndecorated(true);
 		
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
@@ -232,6 +236,9 @@ public class Game extends JPanel{
 				
 			}
 		});
+		
+		actualCamera = new Camera(GameState.player.getXAxis() - Constantes.windowWidth/2, GameState.player.getYAxis() - Constantes.windowHeight/2);
+		camera = actualCamera;
 		ingameState.init();
 		pauseState.init();
 		mainMenuState.init();
@@ -244,16 +251,16 @@ public class Game extends JPanel{
 		BackgroundObject.init();
 		Lever.init();
 		
-		camera = new Camera(0, 0);
 		Map.loadMap();
 		SaveGame.loadSaveGame();
 		Settings.loadSettings();
-		
+
 		frame.setVisible(true);
 		
 		defaultCursor = frame.getContentPane().getCursor();
 		
 		cursorVisibility(false);
+		
 		
 		
 	}
@@ -279,15 +286,19 @@ public class Game extends JPanel{
 		
 		
 	public void update(double delta) {
+			currentBuffer = new ArrayList<IBufferable>();
 			animationCounter += delta;
 			currentState.update(delta);
-			Game.camera.update(delta);			
+			actualCamera.update(delta);	
+			currentState.buffer();
 			saveGameCounter += delta;
 			if(saveGameCounter >= 600) {
 				SaveGame.saveGame();	
 				Settings.saveSettings();
 				saveGameCounter = 0;
 			}
+			
+			bufferList.add(currentBuffer);
 						
 		}
 		
@@ -300,11 +311,28 @@ public class Game extends JPanel{
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 					RenderingHints.VALUE_ANTIALIAS_ON);
+			camera.paint(g2d);
 			currentState.paint(g2d);
+			
+			ArrayList<IBufferable> paintBuffer = bufferList.get(bufferList.size()-1);
+			bufferList.clear();
+			bufferList.add(paintBuffer);
+			
+			camera = (Camera) paintBuffer.get(0);
+			 
+			
+			for(int i = 1; i < paintBuffer.size(); i++) {
+				paintBuffer.get(i).paint(g2d);
+			}
+				
+			
 			g.setColor(Color.red);
 			String currentFont = g.getFont().toString();
 			g.setFont(new Font(currentFont, Font.PLAIN, 15));
 			g.drawString("FPS: " + lastFps, 10 , 20);
+			g.drawString("UPS: " + lastUps, 10 , 40);
+			
+			
 		
 		
 	}
@@ -323,6 +351,9 @@ public static void main(String[] args) throws InterruptedException {
 	frame = new JFrame("Game");
 	Game game = new Game();
 	game.setSize(Constantes.windowWidth, Constantes.windowHeight);
+	game.update(1);
+	game.update(1);
+	game.update(1);
 	frame.add(game);
 	//frame.add(keyboard);
 		
@@ -365,38 +396,83 @@ public static void main(String[] args) throws InterruptedException {
     
     
     
-    Timer timer = new Timer(1, new ActionListener() {
-    	long lastFpsTime = 0;
-        int fps = 0;
-        double lastLoopTime = System.nanoTime();
-    	  public void actionPerformed( ActionEvent e ) {
-    		  
-              //lastFps = (int) (1000/((System.nanoTime() - lastLoopTime)/1000000));
-    	      long now = System.nanoTime();
-    	      long updateLength = (long) (now - lastLoopTime);
-    	      lastLoopTime = now;
-    	      double delta = updateLength / ((double)CONSTANT_LOGIC_TIME);
+    Thread updateThread = new Thread(new Runnable() {
+    	  public void run() {
+    		  Timer timer1 = new Timer(1, new ActionListener() {
+    		    	long ulastFpsTime = 0;
+    		        int ufps = 0;
+    		        double ulastLoopTime = System.nanoTime();
+    		    	  public void actionPerformed( ActionEvent e ) {
+    		    		  
+    		              //lastFps = (int) (1000/((System.nanoTime() - lastLoopTime)/1000000));
+    		    	      long unow = System.nanoTime();
+    		    	      long uupdateLength = (long) (unow - ulastLoopTime);
+    		    	      ulastLoopTime = unow;
+    		    	      double delta = uupdateLength / ((double)CONSTANT_LOGIC_TIME);
 
-    	      // update the frame counter
-    	      lastFpsTime += updateLength;
-    	      fps++;
-    	      
-    	      // update our FPS counter if a second has passed since
-    	      // we last recorded
-    	      if (lastFpsTime >= 1000000000)
-    	      {
-    	    	  
-    	    	 lastFps = fps;
-    	         lastFpsTime = 0;
-    	         fps = 0;
-    	      }
-    	      
-    	      game.update(delta);
-              game.repaint();
-              
-              //.setDelay((int) ((lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000));
-    		  }});
-    timer.start();
+    		    	      // update the frame counter
+    		    	      ulastFpsTime += uupdateLength;
+    		    	      ufps++;
+    		    	      
+    		    	      // update our FPS counter if a second has passed since
+    		    	      // we last recorded
+    		    	      if (ulastFpsTime >= 1000000000)
+    		    	      {
+    		    	    	  
+    		    	    	 lastUps = ufps;
+    		    	         ulastFpsTime = 0;
+    		    	         ufps = 0;
+    		    	      }
+    		    	      
+    		    	      game.update(delta);    		              
+    		              //.setDelay((int) ((lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000));
+    		    		  }});
+    		    timer1.start();
+    		
+    	  }
+    	});
+    updateThread.start();
+    
+    
+    
+    Thread paintThread = new Thread(new Runnable() {
+  	  public void run() {
+  		Timer timer = new Timer(1, new ActionListener() {
+  	    	long lastFpsTime = 0;
+  	        int fps = 0;
+  	        double lastLoopTime = System.nanoTime();
+  	    	  public void actionPerformed( ActionEvent e ) {
+  	    		  
+  	              //lastFps = (int) (1000/((System.nanoTime() - lastLoopTime)/1000000));
+  	    	      long now = System.nanoTime();
+  	    	      long updateLength = (long) (now - lastLoopTime);
+  	    	      lastLoopTime = now;
+
+  	    	      // update the frame counter
+  	    	      lastFpsTime += updateLength;
+  	    	      fps++;
+  	    	      
+  	    	      // update our FPS counter if a second has passed since
+  	    	      // we last recorded
+  	    	      if (lastFpsTime >= 1000000000)
+  	    	      {
+  	    	    	  
+  	    	    	 lastFps = fps;
+  	    	         lastFpsTime = 0;
+  	    	         fps = 0;
+  	    	      }
+  	    	      
+  	              game.repaint();
+  	              
+  	    		  }});
+  	    timer.start();
+  		
+  	  }
+  	});
+    paintThread.setPriority(10);
+  paintThread.start();
+    
+    
 
     }
 

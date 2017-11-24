@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
 
 import de.thegamingzerii.editor.Map;
 import de.thegamingzerii.maingame.Game;
-import de.thegamingzerii.objects.Camera;
+import de.thegamingzerii.objects.IBufferable;
 import de.thegamingzerii.objects.ICollision;
 
 public class Gate extends LogicTile implements ICollision{
@@ -23,15 +23,15 @@ public class Gate extends LogicTile implements ICollision{
 	private static BufferedImage frameImage;
 	private static Image gate;
 	private static Image frame;
-	private double x;
-	private double y;
-	private boolean open;
-	private boolean opening;
-	private Rectangle doorRect;
-	private Rectangle upperRect;
-	private Rectangle lowerRect;
-	private double doorY;
-	private double openingTimer = -1;
+	double x;
+	double y;
+	boolean open;
+	boolean opening;
+	Rectangle doorRect;
+	Rectangle upperRect;
+	Rectangle lowerRect;
+	double doorY;
+	double openingTimer = -1;
 	private double movementSpeed;
 	
 	public static ArrayList<Gate> allGates = new ArrayList<Gate>();
@@ -56,6 +56,20 @@ public class Gate extends LogicTile implements ICollision{
 		
 		allGates.add(this);
 		//Map.reWriteMap();
+	}
+	
+	
+	public Gate(Gate gate) {
+		super(gate.id, gate.connectedTo);
+		this.x = gate.x;
+		this.y = gate.y;
+		this.open = gate.open;
+		this.opening = gate.opening;
+		this.openingTimer = gate.openingTimer;
+		this.doorY = gate.doorY;
+		this.doorRect = gate.doorRect;
+		this.upperRect = gate.upperRect;
+		this.lowerRect = gate.lowerRect;
 	}
 	
 	public void update(double delta) {
@@ -140,13 +154,10 @@ public class Gate extends LogicTile implements ICollision{
 	
 	@SuppressWarnings("static-access")
 	public static void reScale() {
-		gate = gateImage.getScaledInstance((int)(64*Camera.scale), (int)(256*Camera.scale), gateImage.SCALE_DEFAULT);
-		frame = frameImage.getScaledInstance((int)(64*Camera.scale), (int)(256*Camera.scale), frameImage.SCALE_DEFAULT);
+		gate = gateImage.getScaledInstance((int)(64*Game.camera.scale), (int)(256*Game.camera.scale), gateImage.SCALE_DEFAULT);
+		frame = frameImage.getScaledInstance((int)(64*Game.camera.scale), (int)(256*Game.camera.scale), frameImage.SCALE_DEFAULT);
 	}
 	
-	public boolean onScreen() {
-		return true;
-	}
 	
 	public static void drawCurrentlyPlacing(Graphics2D g, double x, double y) {
 		g.drawImage(gate, (int)x, (int)y, null);
@@ -164,20 +175,20 @@ public class Gate extends LogicTile implements ICollision{
 	
 	public void paint(Graphics2D g) {
 		if(onScreen()) {
-			int xUsable = (int) ((x - Game.camera.getX()) * Camera.scale);
-			int yUsable = (int)((y - Game.camera.getY()) * Camera.scale);
+			int xUsable = (int) ((x - Game.camera.getX()) * Game.camera.scale);
+			int yUsable = (int)((y - Game.camera.getY()) * Game.camera.scale);
 
 			g.drawImage(frame, xUsable, yUsable, null);
 			if(openingTimer != -1)
-				g.drawImage(gate, xUsable, (int)(yUsable  + (244 - openingTimer) * Camera.scale), null);
+				g.drawImage(gate, xUsable, (int)(yUsable  + (244 - openingTimer) * Game.camera.scale), null);
 			else
 				g.drawImage(gate, xUsable, yUsable, null);
 			
 			if(Game.drawHitBoxes) {
 				g.setColor(Color.ORANGE);
-				g.drawRect((int)(upperRect.x- Game.camera.getCameraPos().getX() * Camera.scale), (int)(upperRect.y - Game.camera.getCameraPos().getY() * Camera.scale), (int)(upperRect.width * Camera.scale), (int)(upperRect.height * Camera.scale));
-				g.drawRect((int)(lowerRect.x- Game.camera.getCameraPos().getX() * Camera.scale), (int)(lowerRect.y - Game.camera.getCameraPos().getY() * Camera.scale), (int)(lowerRect.width * Camera.scale), (int)(lowerRect.height * Camera.scale));
-				g.drawRect((int)(doorRect.x- Game.camera.getCameraPos().getX() * Camera.scale), (int)(doorRect.y - Game.camera.getCameraPos().getY() * Camera.scale), (int)(doorRect.width * Camera.scale), (int)(doorRect.height * Camera.scale));
+				g.drawRect((int)(upperRect.x- Game.camera.getCameraPos().getX() * Game.camera.scale), (int)(upperRect.y - Game.camera.getCameraPos().getY() * Game.camera.scale), (int)(upperRect.width * Game.camera.scale), (int)(upperRect.height * Game.camera.scale));
+				g.drawRect((int)(lowerRect.x- Game.camera.getCameraPos().getX() * Game.camera.scale), (int)(lowerRect.y - Game.camera.getCameraPos().getY() * Game.camera.scale), (int)(lowerRect.width * Game.camera.scale), (int)(lowerRect.height * Game.camera.scale));
+				g.drawRect((int)(doorRect.x- Game.camera.getCameraPos().getX() * Game.camera.scale), (int)(doorRect.y - Game.camera.getCameraPos().getY() * Game.camera.scale), (int)(doorRect.width * Game.camera.scale), (int)(doorRect.height * Game.camera.scale));
 				g.setColor(Color.black);
 			}
 			
@@ -222,6 +233,30 @@ public class Gate extends LogicTile implements ICollision{
 	@Override
 	public Rectangle getCollisionSize() {
 		return null;
+	}
+	
+	@Override
+	public boolean onScreen() {
+		if(x > Game.actualCamera.getX() + Game.actualCamera.getWidth())
+			return false;
+		if(y > Game.actualCamera.getY() + Game.actualCamera.getHeight())
+			return false;
+		if(x + 128 < Game.actualCamera.getX())
+			return false;
+		if(y + 256 < Game.actualCamera.getY())
+			return false;
+		return true;
+	}
+	
+	@Override
+	public void buffer() {
+		if(onScreen())
+			Game.currentBuffer.add(this.getCopy());
+	}
+
+	@Override
+	public IBufferable getCopy() {
+		return new Gate(this);
 	}
 	
 }

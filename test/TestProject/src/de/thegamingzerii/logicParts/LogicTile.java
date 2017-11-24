@@ -14,8 +14,8 @@ public class LogicTile {
 	public static int nextId = 0;
 	public static HashMap<Integer, LogicTile> tiles = new HashMap<Integer, LogicTile>();
 	
-	private int id;
-	private int connectedTo;
+	int id;
+	int connectedTo;
 	
 	public LogicTile(int id, int connectedTo) {
 		if(id == -1) {
@@ -61,10 +61,10 @@ public class LogicTile {
 	
 	public void paint(Graphics2D g) {
 		if(connectedTo != -1 && Game.drawHitBoxes) {
-			int xUsable = (int) (getLogicWirePoint().getX() -  Game.camera.getCameraPos().getX()  * Camera.scale);
-			int yUsable = (int) (getLogicWirePoint().getY() -  Game.camera.getCameraPos().getY()  * Camera.scale);
-			int x2Usable = (int) (tiles.get(connectedTo).getLogicWirePoint().getX() -  Game.camera.getCameraPos().getX()  * Camera.scale);
-			int y2Usable = (int) (tiles.get(connectedTo).getLogicWirePoint().getY() -  Game.camera.getCameraPos().getY()  * Camera.scale);
+			int xUsable = (int) (getLogicWirePoint().getX() -  Game.camera.getCameraPos().getX()  * Game.camera.scale);
+			int yUsable = (int) (getLogicWirePoint().getY() -  Game.camera.getCameraPos().getY()  * Game.camera.scale);
+			int x2Usable = (int) (tiles.get(connectedTo).getLogicWirePoint().getX() -  Game.camera.getCameraPos().getX()  * Game.camera.scale);
+			int y2Usable = (int) (tiles.get(connectedTo).getLogicWirePoint().getY() -  Game.camera.getCameraPos().getY()  * Game.camera.scale);
 			g.setColor(Color.red);
 			g.drawLine(xUsable, yUsable, x2Usable, y2Usable);
 			g.setColor(Color.black);
