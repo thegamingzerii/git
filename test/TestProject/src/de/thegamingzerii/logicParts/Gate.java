@@ -60,11 +60,10 @@ public class Gate extends LogicTile implements ICollision{
 	
 	
 	public Gate(Gate gate) {
-		super(gate.id, gate.connectedTo);
+		super(gate.id+1000, gate.connectedTo);
 		this.x = gate.x;
 		this.y = gate.y;
 		this.open = gate.open;
-		this.opening = gate.opening;
 		this.openingTimer = gate.openingTimer;
 		this.doorY = gate.doorY;
 		this.doorRect = gate.doorRect;
@@ -93,7 +92,7 @@ public class Gate extends LogicTile implements ICollision{
 					openingTimer = 244;
 					open = false;
 					doorY = y;
-					Map.reWriteMap();
+					//Map.reWriteMap();
 				}
 			}
 			
@@ -104,6 +103,8 @@ public class Gate extends LogicTile implements ICollision{
 	}
 	
 	public void open() {
+		
+		
 		if(openingTimer == -1)
 			openingTimer = 244;
 		opening = true;
@@ -139,6 +140,7 @@ public class Gate extends LogicTile implements ICollision{
 			open();
 		else
 			close();
+		
 		super.activate(bool);
 	}
 	

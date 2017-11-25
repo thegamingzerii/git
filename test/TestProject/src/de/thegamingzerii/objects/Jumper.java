@@ -106,13 +106,13 @@ public class Jumper extends JPanel implements IInteract{
 
 	@Override
 	public boolean onScreen() {
-		if(x-100 > Game.camera.getX() + Game.camera.getWidth())
+		if(x-100 > Game.actualCamera.getX() + Game.actualCamera.getWidth())
 			return false;
-		if(y-100 > Game.camera.getY() + Game.camera.getHeight())
+		if(y-100 > Game.actualCamera.getY() + Game.actualCamera.getHeight())
 			return false;
-		if(x+100 < Game.camera.getX())
+		if(x+100 < Game.actualCamera.getX())
 			return false;
-		if(y+100 < Game.camera.getY())
+		if(y+100 < Game.actualCamera.getY())
 			return false;
 		return true;
 	}

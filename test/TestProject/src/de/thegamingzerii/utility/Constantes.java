@@ -23,4 +23,8 @@ public class Constantes {
 	public enum BackgroundType{
 		Tree1, Bush1
 	}
+	
+	public enum SpawnerType{
+		Leaf
+	}
 }

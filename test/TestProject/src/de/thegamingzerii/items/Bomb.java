@@ -3,9 +3,12 @@ package de.thegamingzerii.items;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import de.thegamingzerii.logicParts.Gate;
 import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.GravityObject;
+import de.thegamingzerii.objects.IBufferable;
+import de.thegamingzerii.utility.Animation;
 import de.thegamingzerii.utility.CollisionChecker;
 
 @SuppressWarnings("serial")
@@ -23,6 +26,12 @@ public class Bomb extends GravityObject{
 		this.ySpeed = -10;
 		this.xSpeed = xSpeed;
 		allBombs.add(this);
+	}
+	
+	public Bomb(Bomb bomb) {
+		super(20, 20);
+		this.x = bomb.x;
+		this.y = bomb.y;
 	}
 	
 	
@@ -48,6 +57,7 @@ public class Bomb extends GravityObject{
 	
 	private void explode() {
 		exploded = true;
+		new Animation(x-64, y-64, "Assets/Explosion.png", 5, 128, 128, 0);
 		allBombs.remove(this);
 	}
 	
@@ -58,6 +68,21 @@ public class Bomb extends GravityObject{
 			g.fillOval(xUsable, yUsable, (int)(width * Game.camera.scale), (int)(height*Game.camera.scale));
 		}
 		
+	}
+	
+	public boolean onScreen() {
+		return true;
+	}
+	
+	@Override
+	public void buffer() {
+		if(onScreen())
+			Game.currentBuffer.add(this.getCopy());
+	}
+
+	@Override
+	public IBufferable getCopy() {
+		return new Bomb(this);
 	}
 	
 

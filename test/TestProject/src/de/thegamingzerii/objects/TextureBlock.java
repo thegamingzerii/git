@@ -118,7 +118,7 @@ public class TextureBlock implements IBufferable{
 				g.drawImage(slope3, xUsable, yUsable, Game.currentGame);
 				break;
 			case Grass:		
-				g.drawImage(scaledGrass[ExtraMaths.ActualModulo(Math.floor((Game.animationCounter) /20), 4)][ExtraMaths.ActualModulo(randomFactor, 5)], xUsable, yUsable, Game.currentGame);
+				g.drawImage(scaledGrass[ExtraMaths.ActualModulo(Math.floor((Game.animationCounter + randomFactor) /8), 4)][ExtraMaths.ActualModulo(randomFactor, 5)], xUsable, yUsable, Game.currentGame);
 				break;
 			}
 		}

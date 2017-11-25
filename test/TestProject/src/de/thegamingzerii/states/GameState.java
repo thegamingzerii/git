@@ -7,7 +7,6 @@ import de.thegamingzerii.logicParts.Gate;
 import de.thegamingzerii.logicParts.Lever;
 import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.objects.BackgroundObject;
-import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.DeadlyBlock;
 import de.thegamingzerii.objects.Jumper;
@@ -18,6 +17,9 @@ import de.thegamingzerii.objects.Player;
 import de.thegamingzerii.objects.Rope;
 import de.thegamingzerii.objects.Slope;
 import de.thegamingzerii.objects.TextureBlock;
+import de.thegamingzerii.spawners.Leaf;
+import de.thegamingzerii.spawners.Spawner;
+import de.thegamingzerii.utility.Animation;
 
 
 
@@ -32,7 +34,11 @@ public class GameState extends State{
 		if(Game.actualCamera.zoom != 1)
 			Game.actualCamera.reFrame(1);
 		else {
-			player.update(delta);		
+			player.update(delta);	
+			
+			for(int i = 0; i < Spawner.allSpawners.size(); i++) {
+				Spawner.allSpawners.get(i).update(delta);
+			}
 			
 			for(int i = 0; i < Jumper.allJumpers.size(); i++) {
 				Jumper.allJumpers.get(i).update(delta);
@@ -75,6 +81,14 @@ public class GameState extends State{
 			for(int i = 0; i < Gate.allGates.size(); i++) {
 				Gate.allGates.get(i).update(delta);
 			}
+			
+			for(int i = 0; i < Animation.allAnimations.size(); i++) {
+				Animation.allAnimations.get(i).update(delta);
+			}
+			
+			for(int i = 0; i < Leaf.allLeafs.size(); i++) {
+				Leaf.allLeafs.get(i).update(delta);
+			}
 		}
 		
 		
@@ -98,6 +112,11 @@ public class GameState extends State{
 		}
 		
 		player.buffer();
+		
+		for(int i = 0; i < Leaf.allLeafs.size(); i++) {
+			Leaf.allLeafs.get(i).buffer();
+		}
+		
 		for(int i = 0; i < Jumper.allJumpers.size(); i++) {
 			Jumper.allJumpers.get(i).buffer();
 		}
@@ -141,6 +160,15 @@ public class GameState extends State{
 		for(int i = 0; i < Obstacle.allObstacles.size(); i++) {
 			Obstacle.allObstacles.get(i).buffer();
 		}
+		
+		for(int i = 0; i < Animation.allAnimations.size(); i++) {
+			Animation.allAnimations.get(i).buffer();
+		}
+		
+		for(int i = 0; i < Spawner.allSpawners.size(); i++) {
+			Spawner.allSpawners.get(i).buffer();
+		}
+		
 	}
 
 

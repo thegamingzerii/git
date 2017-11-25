@@ -39,6 +39,7 @@ import de.thegamingzerii.objects.IBufferable;
 import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.Rope;
 import de.thegamingzerii.objects.TextureBlock;
+import de.thegamingzerii.spawners.Leaf;
 import de.thegamingzerii.states.*;
 
 
@@ -151,6 +152,7 @@ public class Game extends JPanel{
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("B"), "b");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("N"), "n");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("M"), "m");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("V"), "v");
 		
 		ingameState.getActionMap().put("jump", new JumpAction(false));
 		ingameState.getActionMap().put("move up", new MoveAction(0, false));
@@ -178,6 +180,7 @@ public class Game extends JPanel{
 		ingameState.getActionMap().put("b", new PressedOtherKey(9));
 		ingameState.getActionMap().put("n", new PressedOtherKey(10));
 		ingameState.getActionMap().put("m", new PressedOtherKey(11));
+		ingameState.getActionMap().put("v", new PressedOtherKey(12));
 		ingameState.getActionMap().put("l", new SwitchTexture());
 		ingameState.getActionMap().put("e", new Interact());
 		
@@ -250,6 +253,7 @@ public class Game extends JPanel{
 		Gate.init();
 		BackgroundObject.init();
 		Lever.init();
+		Leaf.init();
 		
 		Map.loadMap();
 		SaveGame.loadSaveGame();
@@ -376,6 +380,7 @@ public static void main(String[] args) throws InterruptedException {
   	  	    	
   	  	    	System.out.println("Toggled hitBoxes");
   	  	    }
+  	  	    
   	  	    if(command.equals("reset")) {
   	  	    for(int i = 0; i < Gate.allGates.size(); i++) {
   				Gate.allGates.get(i).reset();
@@ -385,7 +390,11 @@ public static void main(String[] args) throws InterruptedException {
 			}
   	  	    	System.out.println("Reset Logic Tiles");
   	  	    }
-  	  	    //once finished
+  	  	    
+  	  	    if(command.equals("spawnLeaf")) {
+  	  	    new Leaf(GameState.player.x - 100, GameState.player.y);
+  	  	    System.out.println("Leaf Spawned");
+  	  	    }
   	  	    
   		  }
   		
@@ -669,9 +678,9 @@ private class ThrowBomb extends AbstractAction{
 	public void actionPerformed(ActionEvent e) {
 		if(currentState == ingameState) {
 			if(GameState.player.moveDirection == 0)
-				new Bomb(GameState.player.getXAxis(), GameState.player.getYAxis(), 4);
+				new Bomb(GameState.player.getXAxis(), GameState.player.getYAxis(), 3);
 			else
-				new Bomb(GameState.player.getXAxis(), GameState.player.getYAxis(), -4);
+				new Bomb(GameState.player.getXAxis(), GameState.player.getYAxis(), -3);
 
 				
 			}

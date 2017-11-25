@@ -13,7 +13,6 @@ import de.thegamingzerii.logicParts.Gate;
 import de.thegamingzerii.logicParts.Lever;
 import de.thegamingzerii.logicParts.LogicTile;
 import de.thegamingzerii.objects.BackgroundObject;
-import de.thegamingzerii.objects.Block;
 import de.thegamingzerii.objects.DeadlyBlock;
 import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.MovingPlatform;
@@ -21,8 +20,10 @@ import de.thegamingzerii.objects.Obstacle;
 import de.thegamingzerii.objects.Rope;
 import de.thegamingzerii.objects.Slope;
 import de.thegamingzerii.objects.TextureBlock;
+import de.thegamingzerii.spawners.Spawner;
 import de.thegamingzerii.utility.Constantes.BackgroundType;
 import de.thegamingzerii.utility.Constantes.BlockType;
+import de.thegamingzerii.utility.Constantes.SpawnerType;
 
 public class Map {
 	
@@ -80,6 +81,7 @@ public class Map {
 		BackgroundObject.allBackgroundObjects.clear();
 		Gate.allGates.clear();
 		Lever.allLevers.clear();
+		Spawner.allSpawners.clear();
 		ArrayList<String> lines = readMapFile();
 		ArrayList<Object> objects = new ArrayList<Object>();
 		for(int i = 0; i < lines.size(); i++) {
@@ -157,6 +159,17 @@ public class Map {
     		if(splited[0].equals("Lever")) {
     			objects.add(new Lever(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), Boolean.valueOf(splited[3]),
     					Integer.parseInt(splited[4]), Integer.parseInt(splited[5])));
+    		}
+    		if(splited[0].equals("Spawner")) {
+    			SpawnerType type = null;
+    			switch(Integer.parseInt(splited[3])) {
+    			case 0:
+    				type = SpawnerType.Leaf;
+    				break;
+    			default:
+    				break;
+    			}
+    			objects.add(new Spawner(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), type));
     		}
 		}
 		return objects;
@@ -244,6 +257,9 @@ public class Map {
 		}
 		for(int i = 0; i < Lever.allLevers.size(); i++) {
 			object.add(Lever.allLevers.get(i).toString());
+		}
+		for(int i = 0; i < Spawner.allSpawners.size(); i++) {
+			object.add(Spawner.allSpawners.get(i).toString());
 		}
 			
 		writeToMap(object);

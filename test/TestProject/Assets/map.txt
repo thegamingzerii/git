@@ -321,5 +321,9 @@ BackgroundObject -128.0 -384.0 1
 BackgroundObject 1408.0 -512.0 1
 BackgroundObject 384.0 -384.0 0
 BackgroundObject -128.0 -384.0 0
-Gate 2816.0 -256.0 false  2 -1
-Lever 2624.0 -64.0 false 0 2
+Gate 2816.0 -256.0 true  2 -1
+Lever 2624.0 -64.0 true 0 2
+Spawner 621 94 0
+Spawner 1696 233 0
+Spawner 152 73 0
+Spawner 136 369 0

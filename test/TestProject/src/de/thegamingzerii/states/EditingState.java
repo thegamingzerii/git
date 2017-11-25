@@ -20,8 +20,6 @@ import de.thegamingzerii.logicParts.Lever;
 import de.thegamingzerii.logicParts.LogicTile;
 import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.objects.BackgroundObject;
-import de.thegamingzerii.objects.Block;
-import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.DeadlyBlock;
 import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.MovingPlatform;
@@ -335,6 +333,9 @@ public class EditingState extends State{
 					tile1.connectTo(tile2.getId());
 				}
 				Map.reWriteMap();
+				break;
+			case 12:
+				Map.addToMap("Spawner " + Math.round(e.getX()*Game.camera.zoom+ Game.camera.getCameraPos().getX()) + " " + Math.round(e.getY()*Game.camera.zoom+ Game.camera.getCameraPos().getY()) + " " + 0);
 				break;
 				
 				

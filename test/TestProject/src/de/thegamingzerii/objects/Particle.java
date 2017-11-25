@@ -91,14 +91,6 @@ public class Particle extends JPanel implements IBufferable{
 
 	@Override
 	public boolean onScreen() {
-		if(x > Game.camera.getX() + Game.camera.getWidth())
-			return false;
-		if(y > Game.camera.getY() + Game.camera.getHeight())
-			return false;
-		if(x + width < Game.camera.getX())
-			return false;
-		if(y + height < Game.camera.getY())
-			return false;
 		return true;
 	}
 	
