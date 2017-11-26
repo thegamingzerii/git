@@ -7,6 +7,7 @@ import java.awt.geom.Point2D;
 import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.utility.CollisionChecker;
 import de.thegamingzerii.utility.Constantes;
+import de.thegamingzerii.utility.Constantes.ParticleType;
 
 
 @SuppressWarnings("serial")
@@ -135,17 +136,17 @@ public class Player extends GravityObject implements ICollision{
 			ySpeed = Constantes.SLIDING_VELO;
 			if(slidingLeft) {
 				if(Math.random() < 0.1*delta) {
-					new Particle("Assets/Particle.png", x, y-28, 16, 16, 60);
+					new Particle(ParticleType.Dust1, x, y-28, 60);
 				}
 				if(Math.random() < 0.1*delta) {
-					new Particle("Assets/Particle.png", x, y+100, 16, 16, 60);
+					new Particle(ParticleType.Dust1, x, y+100, 60);
 				}
 			}else {
 				if(Math.random() < 0.1*delta) {
-					new Particle("Assets/Particle.png", x+85, y-28, 16, 16, 60);
+					new Particle(ParticleType.Dust1, x+85, y-28, 60);
 				}
 				if(Math.random() < 0.1*delta) {
-					new Particle("Assets/Particle.png", x+85, y+100, 16, 16, 60);
+					new Particle(ParticleType.Dust1, x+85, y+100, 60);
 				}
 			}
 			
@@ -227,7 +228,7 @@ public class Player extends GravityObject implements ICollision{
 			int yMod = 1;
 			boolean finished = false;
 			//change yMod < XXXX for higher stairs to climb (in logic pixels)
-			while(yMod < 4 && !finished) {
+			while(yMod < 10 && !finished) {
 				yMod++;
 				y -= yMod;
 				

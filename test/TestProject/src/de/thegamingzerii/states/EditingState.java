@@ -20,6 +20,7 @@ import de.thegamingzerii.logicParts.Lever;
 import de.thegamingzerii.logicParts.LogicTile;
 import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.objects.BackgroundObject;
+import de.thegamingzerii.objects.BreakableWall;
 import de.thegamingzerii.objects.DeadlyBlock;
 import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.MovingPlatform;
@@ -127,16 +128,7 @@ public class EditingState extends State{
 				}
 				break;
 			case 4:
-				if(xDiff < 0) {
-					x = x2;
-					xDiff = Math.abs(xDiff);
-				}
-				if(yDiff < 0) {
-					y = y2;
-					yDiff = Math.abs(yDiff);
-				}
-
-				g.drawRect ((int) Math.round(x), (int)Math.round(y), (int)Math.round(xDiff), (int)Math.round(yDiff));
+				g.drawLine((int)Math.round(x), (int)Math.round(y), (int)Math.round(x2), (int)Math.round(y2));
 				break;
 			case 6:
 				if(xDiff > 0 || yDiff > 0) {
@@ -169,6 +161,9 @@ public class EditingState extends State{
 		if(mode == 10)
 			Lever.drawCurrentlyPlacing(g, (int) ((getSnappedLeftX(MouseInfo.getPointerInfo().getLocation().getX()) + 64- Game.camera.getCameraPos().getX()) / Game.camera.zoom), (int) ((getSnappedUpY(MouseInfo.getPointerInfo().getLocation().getY()) + 64 - Game.camera.getCameraPos().getY()) / Game.camera.zoom));
 		
+		if(mode == 13)
+			BreakableWall.drawCurrentlyPlacing(g, (int) ((getSnappedLeftX(MouseInfo.getPointerInfo().getLocation().getX())- Game.camera.getCameraPos().getX()) / Game.camera.zoom), (int) ((getSnappedUpY(MouseInfo.getPointerInfo().getLocation().getY())- Game.camera.getCameraPos().getY()) / Game.camera.zoom));
+		
 		 super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -193,7 +188,7 @@ public class EditingState extends State{
 			placing = true;
 			placingX = e.getX()*Game.camera.zoom + Game.camera.getCameraPos().getX();
 			placingY = e.getY()*Game.camera.zoom + Game.camera.getCameraPos().getY();
-			if(mode == 0 || mode == 4 || mode == 6 || mode == 7 || mode == 9) {
+			if(mode == 0 || mode == 4 || mode == 6 || mode == 7 || mode == 9 || mode == 13) {
 				placingX = getSnappedX(e.getX()*Game.camera.zoom+ Game.camera.getCameraPos().getX());
 				placingY = getSnappedY(e.getY()*Game.camera.zoom+ Game.camera.getCameraPos().getY());
 			}
@@ -284,8 +279,7 @@ public class EditingState extends State{
 				Map.addToMap("Rope " + Math.round(x) + " " + Math.round(y) + " " + Math.round(yDifference));
 				break;
 			case 4:
-				if(xDifference != 0 && yDifference != 0)
-					Map.addToMap("DeadlyBlock " + Math.round(x) + " " + Math.round(y) + " " + Math.round(xDifference) + " " + Math.round(yDifference));
+				Map.addToMap("DeadlyBlock " + Math.round(placingX) + " " + Math.round(placingY) + " " + Math.round(getSnappedX(e.getX()*Game.camera.zoom+ Game.camera.getCameraPos().getX())) + " " + Math.round(getSnappedY(e.getY()*Game.camera.zoom+ Game.camera.getCameraPos().getY())));
 				break;
 			case 5:
 				
@@ -336,6 +330,9 @@ public class EditingState extends State{
 				break;
 			case 12:
 				Map.addToMap("Spawner " + Math.round(e.getX()*Game.camera.zoom+ Game.camera.getCameraPos().getX()) + " " + Math.round(e.getY()*Game.camera.zoom+ Game.camera.getCameraPos().getY()) + " " + 0);
+				break;
+			case 13:
+				Map.addToMap("BreakableWall " + getSnappedLeftX(e.getX()) + " " + getSnappedUpY(e.getY()) + " " + "false");
 				break;
 				
 				

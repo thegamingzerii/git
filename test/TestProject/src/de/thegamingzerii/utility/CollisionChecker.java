@@ -3,6 +3,7 @@ package de.thegamingzerii.utility;
 import java.awt.Rectangle;
 
 import de.thegamingzerii.logicParts.Gate;
+import de.thegamingzerii.objects.BreakableWall;
 import de.thegamingzerii.objects.ICollision;
 import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.MovingPlatform;
@@ -50,6 +51,12 @@ public class CollisionChecker {
 		
 		for(int i = 0; i < Gate.allGates.size(); i++) {
 			if(Gate.allGates.get(i).checkcollision(object.getCollisionSize())) 
+				bool =  true;
+
+		}
+		
+		for(int i = 0; i < BreakableWall.allBreakableWalls.size(); i++) {
+			if(BreakableWall.allBreakableWalls.get(i).checkcollision(object.getCollisionSize())) 
 				bool =  true;
 
 		}

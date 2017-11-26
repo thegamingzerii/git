@@ -4,6 +4,7 @@ package de.thegamingzerii.maingame;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -16,6 +17,7 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
@@ -24,6 +26,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 import de.thegamingzerii.utility.Constantes;
@@ -33,10 +36,12 @@ import de.thegamingzerii.items.Bomb;
 import de.thegamingzerii.logicParts.Gate;
 import de.thegamingzerii.logicParts.Lever;
 import de.thegamingzerii.objects.BackgroundObject;
+import de.thegamingzerii.objects.BreakableWall;
 import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.DeadlyBlock;
 import de.thegamingzerii.objects.IBufferable;
 import de.thegamingzerii.objects.Jumper;
+import de.thegamingzerii.objects.Particle;
 import de.thegamingzerii.objects.Rope;
 import de.thegamingzerii.objects.TextureBlock;
 import de.thegamingzerii.spawners.Leaf;
@@ -72,7 +77,6 @@ public class Game extends JPanel{
 	public static JFrame frame;
 	public static Camera camera;
 	public static Camera actualCamera;
-	
 	
 	
 	private double saveGameCounter = 0;
@@ -124,6 +128,7 @@ public class Game extends JPanel{
 		mainMenuState.init();
 		pauseState.init();
 		editingState.init();
+	
 		
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("SPACE"), "jump");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("W"), "move up");
@@ -153,6 +158,7 @@ public class Game extends JPanel{
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("N"), "n");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("M"), "m");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("V"), "v");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("C"), "c");
 		
 		ingameState.getActionMap().put("jump", new JumpAction(false));
 		ingameState.getActionMap().put("move up", new MoveAction(0, false));
@@ -169,7 +175,6 @@ public class Game extends JPanel{
 		ingameState.getActionMap().put("editor", new ChangeToEditorAction());
 		ingameState.getActionMap().put("t", new PressedOtherKey(0));
 		ingameState.getActionMap().put("r", new PressedOtherKey(1));
-		ingameState.getActionMap().put("r", new ThrowBomb());
 		ingameState.getActionMap().put("f", new PressedOtherKey(2));
 		ingameState.getActionMap().put("g", new PressedOtherKey(3));
 		ingameState.getActionMap().put("z", new PressedOtherKey(4));
@@ -181,6 +186,7 @@ public class Game extends JPanel{
 		ingameState.getActionMap().put("n", new PressedOtherKey(10));
 		ingameState.getActionMap().put("m", new PressedOtherKey(11));
 		ingameState.getActionMap().put("v", new PressedOtherKey(12));
+		ingameState.getActionMap().put("c", new PressedOtherKey(13));
 		ingameState.getActionMap().put("l", new SwitchTexture());
 		ingameState.getActionMap().put("e", new Interact());
 		
@@ -254,7 +260,9 @@ public class Game extends JPanel{
 		BackgroundObject.init();
 		Lever.init();
 		Leaf.init();
-		
+		BreakableWall.init();
+		Particle.init();
+				
 		Map.loadMap();
 		SaveGame.loadSaveGame();
 		Settings.loadSettings();
@@ -323,7 +331,6 @@ public class Game extends JPanel{
 			bufferList.add(paintBuffer);
 			
 			camera = (Camera) paintBuffer.get(0);
-			 
 			
 			for(int i = 1; i < paintBuffer.size(); i++) {
 				paintBuffer.get(i).paint(g2d);
@@ -382,19 +389,23 @@ public static void main(String[] args) throws InterruptedException {
   	  	    }
   	  	    
   	  	    if(command.equals("reset")) {
-  	  	    for(int i = 0; i < Gate.allGates.size(); i++) {
+  	  	    for(int i = 0; i < Gate.allGates.size(); i++)
   				Gate.allGates.get(i).reset();
-  			}
-  	  	    for(int i = 0; i < Lever.allLevers.size(); i++) {
-  	  	    Lever.allLevers.get(i).reset();
-			}
-  	  	    	System.out.println("Reset Logic Tiles");
+  	  	    for(int i = 0; i < Lever.allLevers.size(); i++)
+  	  	    	Lever.allLevers.get(i).reset();
+  	  	    for(int i = 0; i < BreakableWall.allBreakableWalls.size(); i++)
+  	  	    	BreakableWall.allBreakableWalls.get(i).reset();
+  	  	    System.out.println("Reset Logic Tiles");
   	  	    }
   	  	    
   	  	    if(command.equals("spawnLeaf")) {
-  	  	    new Leaf(GameState.player.x - 100, GameState.player.y);
-  	  	    System.out.println("Leaf Spawned");
+  	  	    	new Leaf(GameState.player.x - 100, GameState.player.y);
+  	  	    	System.out.println("Leaf Spawned");
   	  	    }
+  	  	    if(command.equals("rewriteMap")) {
+	  	    	Map.reWriteMap();
+	  	    	System.out.println("map rewritten");
+	  	    }
   	  	    
   		  }
   		
@@ -606,6 +617,7 @@ private class PressedOtherKey extends AbstractAction{
 
 	int keyId;
 	
+	
 	public PressedOtherKey(int keyId) {
 		this.keyId = keyId;
 	}
@@ -616,6 +628,15 @@ private class PressedOtherKey extends AbstractAction{
 				EditingState.mode = keyId;
 				
 			}
+		if(keyId == 1)
+			if(currentState == ingameState) {
+				if(GameState.player.moveDirection == 0)
+					new Bomb(GameState.player.getXAxis(), GameState.player.getYAxis(), 3);
+				else
+					new Bomb(GameState.player.getXAxis(), GameState.player.getYAxis(), -3);
+
+					
+				}
 		}
 		
 }
@@ -668,26 +689,9 @@ private class Interact extends AbstractAction{
 		}
 		
 	}
-	
-
-
-private class ThrowBomb extends AbstractAction{
-
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(currentState == ingameState) {
-			if(GameState.player.moveDirection == 0)
-				new Bomb(GameState.player.getXAxis(), GameState.player.getYAxis(), 3);
-			else
-				new Bomb(GameState.player.getXAxis(), GameState.player.getYAxis(), -3);
-
-				
-			}
-		}
-		
-	}
 }
+	
+
 	
 
 

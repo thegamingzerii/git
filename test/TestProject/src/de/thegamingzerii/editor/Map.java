@@ -13,6 +13,7 @@ import de.thegamingzerii.logicParts.Gate;
 import de.thegamingzerii.logicParts.Lever;
 import de.thegamingzerii.logicParts.LogicTile;
 import de.thegamingzerii.objects.BackgroundObject;
+import de.thegamingzerii.objects.BreakableWall;
 import de.thegamingzerii.objects.DeadlyBlock;
 import de.thegamingzerii.objects.Jumper;
 import de.thegamingzerii.objects.MovingPlatform;
@@ -82,6 +83,7 @@ public class Map {
 		Gate.allGates.clear();
 		Lever.allLevers.clear();
 		Spawner.allSpawners.clear();
+		BreakableWall.allBreakableWalls.clear();
 		ArrayList<String> lines = readMapFile();
 		ArrayList<Object> objects = new ArrayList<Object>();
 		for(int i = 0; i < lines.size(); i++) {
@@ -105,8 +107,8 @@ public class Map {
     		}
     		
     		if(splited[0].equals("DeadlyBlock")) {
-    			objects.add(new DeadlyBlock(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), 
-    					Double.parseDouble(splited[3]), Double.parseDouble(splited[4])));
+    			objects.add(new DeadlyBlock(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), Double.parseDouble(splited[3]), Double.parseDouble(splited[4])));
+
     		}
     		if(splited[0].equals("TextureBlock")) {
     			BlockType type = null;
@@ -170,6 +172,9 @@ public class Map {
     				break;
     			}
     			objects.add(new Spawner(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), type));
+    		}
+    		if(splited[0].equals("BreakableWall")) {
+    			objects.add(new BreakableWall(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), Boolean.valueOf(splited[3])));
     		}
 		}
 		return objects;
@@ -260,6 +265,9 @@ public class Map {
 		}
 		for(int i = 0; i < Spawner.allSpawners.size(); i++) {
 			object.add(Spawner.allSpawners.get(i).toString());
+		}
+		for(int i = 0; i < BreakableWall.allBreakableWalls.size(); i++) {
+			object.add(BreakableWall.allBreakableWalls.get(i).toString());
 		}
 			
 		writeToMap(object);

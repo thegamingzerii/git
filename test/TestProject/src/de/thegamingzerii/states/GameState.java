@@ -7,6 +7,7 @@ import de.thegamingzerii.logicParts.Gate;
 import de.thegamingzerii.logicParts.Lever;
 import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.objects.BackgroundObject;
+import de.thegamingzerii.objects.BreakableWall;
 import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.DeadlyBlock;
 import de.thegamingzerii.objects.Jumper;
@@ -125,6 +126,10 @@ public class GameState extends State{
 			Gate.allGates.get(i).buffer();
 		}
 		
+		for(int i = 0; i < BreakableWall.allBreakableWalls.size(); i++) {
+			BreakableWall.allBreakableWalls.get(i).buffer();
+		}
+		
 		for(int i = 0; i < Lever.allLevers.size(); i++) {
 			Lever.allLevers.get(i).buffer();
 		}
@@ -133,11 +138,12 @@ public class GameState extends State{
 			Particle.allParticles.get(i).buffer();
 		}
 		
-		for(int i = 0; i < DeadlyBlock.allDeadlyBlocks.size(); i++) {
-			DeadlyBlock.allDeadlyBlocks.get(i).buffer();
-		}
 		for(int i = 0; i < TextureBlock.allTextureBlocks.size(); i++) {
 			TextureBlock.allTextureBlocks.get(i).buffer();
+		}
+		
+		for(int i = 0; i < DeadlyBlock.allDeadlyBlocks.size(); i++) {
+			DeadlyBlock.allDeadlyBlocks.get(i).buffer();
 		}
 		
 		for(int i = 0; i < Rope.allRopes.size(); i++) {

@@ -1,10 +1,12 @@
 package de.thegamingzerii.items;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import de.thegamingzerii.logicParts.Gate;
 import de.thegamingzerii.maingame.Game;
+import de.thegamingzerii.objects.BreakableWall;
 import de.thegamingzerii.objects.Camera;
 import de.thegamingzerii.objects.GravityObject;
 import de.thegamingzerii.objects.IBufferable;
@@ -49,8 +51,11 @@ public class Bomb extends GravityObject{
 			
 			x += xSpeed;
 			
-			if(CollisionChecker.CheckAllCollisions(this))
+			if(CollisionChecker.CheckAllCollisions(this)) {
 				x -= xSpeed;
+				explode();
+			}
+				
 		}
 		
 	}
@@ -58,6 +63,9 @@ public class Bomb extends GravityObject{
 	private void explode() {
 		exploded = true;
 		new Animation(x-64, y-64, "Assets/Explosion.png", 5, 128, 128, 0);
+		for(int i = 0; i < BreakableWall.allBreakableWalls.size(); i++)
+			if(BreakableWall.allBreakableWalls.get(i).checkcollision(new Rectangle((int)(x-64), (int)(y-64), 128, 128)))
+				BreakableWall.allBreakableWalls.get(i).destroy();
 		allBombs.remove(this);
 	}
 	

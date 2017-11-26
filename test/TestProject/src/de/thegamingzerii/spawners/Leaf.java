@@ -16,7 +16,7 @@ import de.thegamingzerii.utility.ExtraMaths;
 
 public class Leaf implements IBufferable{
 
-	private static int rows = 3;
+	private static int rows = 4;
 	public static ArrayList<Leaf> allLeafs = new ArrayList<Leaf>();
 	private static Image[][] leaf = new Image[4][rows];
 	
@@ -48,7 +48,7 @@ public class Leaf implements IBufferable{
 	}
 	
 	public void update(double delta) {
-		if(aliveTimer < 1100)
+		if(aliveTimer < 300)
 			aliveTimer += delta;
 		else
 			allLeafs.remove(this);
@@ -92,8 +92,8 @@ public class Leaf implements IBufferable{
 	public void paint(Graphics2D g) {
 		int xUsable = (int) ((x - Game.camera.getCameraPos().getX()) * Game.camera.scale);
 		int yUsable = (int)((y - Game.camera.getCameraPos().getY()) * Game.camera.scale);
-		if(aliveTimer < 30)
-			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) (aliveTimer/30)));	
+		if(aliveTimer < 50)
+			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) (aliveTimer/50)));	
 		g.drawImage(leaf[ExtraMaths.ActualModulo(animationTimer/10, 4)][row], xUsable, yUsable, null);
 		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
 		

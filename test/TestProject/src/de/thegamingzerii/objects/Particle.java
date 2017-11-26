@@ -13,28 +13,30 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import de.thegamingzerii.maingame.Game;
+import de.thegamingzerii.utility.Constantes.ParticleType;
+import de.thegamingzerii.utility.ExtraMaths;
 
 @SuppressWarnings("serial")
 public class Particle extends JPanel implements IBufferable{
 
 	public static ArrayList<Particle> allParticles = new ArrayList<Particle>();
+	private static int differenParticles = 1;
+	private static Image[][] images = new Image[4][differenParticles];
+	private static Image[][] scaled= new Image[4][differenParticles];
+	private static BufferedImage image;
 	
-	String path;
+	ParticleType type;
 	double x;
 	double y;
-	int width;
-	int height;
 	double duration;
 	double originalDuration;
 	double xDirection = Math.random();
 	double yDirection = Math.random();
 	
-	public Particle(String path, double x, double y, int width, int height, int duration) {
-		this.path = path;
+	public Particle(ParticleType type, double x, double y, int duration) {
+		this.type = type;
 		this.x = x;
 		this.y = y;
-		this.width = width;
-		this.height = height;
 		this.duration = duration;
 		this.originalDuration = duration;
 		
@@ -46,14 +48,32 @@ public class Particle extends JPanel implements IBufferable{
 	
 	
 	public Particle(Particle particle) {
-		this.path = particle.path;
+		this.type = particle.type;
 		this.x = particle.x;
 		this.y = particle.y;
-		this.width = particle.width;
-		this.height = particle.height;
 		this.duration = particle.duration;
-		this.originalDuration = particle.duration;		
+		this.originalDuration = particle.originalDuration;		
 		
+	}
+	
+	
+	public static void init() {
+		try {
+			image = ImageIO.read(new File("Assets/Particles.png"));
+			for(int i = 0; i < 4; i++)
+				for(int j = 0; j < 1; j++)
+					images[i][j] = image.getSubimage(0 + 64 * i, 0 + 64 * j, 64, 64);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		reScale();
+	}
+	
+	
+	public static void reScale() {
+		for(int i = 0; i < 4; i++)
+			for(int j = 0; j < 1; j++)
+				scaled[i][j] = images[i][j].getScaledInstance((int)(32 * Game.camera.scale), (int)(32 * Game.camera.scale), image.SCALE_DEFAULT);
 	}
 	
 	
@@ -76,16 +96,26 @@ public class Particle extends JPanel implements IBufferable{
 		int xUsable = (int) ((x - Game.camera.getCameraPos().getX()) * Game.camera.scale);
 		int yUsable = (int)((y - Game.camera.getCameraPos().getY()) * Game.camera.scale);
 		
-		try {
-			BufferedImage image = ImageIO.read(new File(path));
-			@SuppressWarnings("static-access")
-			Image scaledImage = image.getScaledInstance((int)(width * Game.camera.scale), (int)(height * Game.camera.scale), image.SCALE_DEFAULT);
-			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) (duration / originalDuration)));
-			g.drawImage(scaledImage, xUsable, yUsable, this);
-			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
-		} catch (IOException e) {
-			e.printStackTrace();
+		int id = 0;
+		switch (type) {
+			case Dust1:
+				id = 0;
+				break;
 		}
+			
+		
+
+		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) (duration / originalDuration)));
+		if(duration/originalDuration > 0.75)
+			g.drawImage(scaled[0][id], xUsable, yUsable, this);
+		else if(duration/originalDuration > 0.5)
+			g.drawImage(scaled[1][id], xUsable, yUsable, this);
+		else if(duration/originalDuration > 0.25)
+			g.drawImage(scaled[2][id], xUsable, yUsable, this);
+		else
+			g.drawImage(scaled[3][id], xUsable, yUsable, this);
+		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
+
 	}
 
 

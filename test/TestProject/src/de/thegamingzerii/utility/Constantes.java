@@ -27,4 +27,8 @@ public class Constantes {
 	public enum SpawnerType{
 		Leaf
 	}
+	
+	public enum ParticleType{
+		Dust1
+	}
 }

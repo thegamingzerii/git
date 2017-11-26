@@ -76,7 +76,7 @@ public class Jumper extends JPanel implements IInteract{
 				int xUsable = (int) ((x -50 - Game.camera.getCameraPos().getX()) * Game.camera.scale);
 				int yUsable = (int)((y -50 - Game.camera.getCameraPos().getY()) * Game.camera.scale);
 				g.setColor(Color.ORANGE);
-				g.drawOval((int)xUsable, (int)yUsable, 100, 100);
+				g.drawOval((int)xUsable, (int)yUsable, (int)(100* Game.camera.scale), (int)(100* Game.camera.scale));
 				g.setColor(Color.black);
 			}
 				

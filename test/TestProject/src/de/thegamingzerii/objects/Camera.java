@@ -101,7 +101,7 @@ public class Camera implements IBufferable{
 	}
 	
 	public Rectangle getScreen() {
-		return new Rectangle((int)x, (int)y, (int)screenWidth, (int)screenHeight);
+		return new Rectangle((int)x, (int)y, (int)(screenWidth * zoom), (int)(screenHeight * zoom));
 	}
 
 	@Override
@@ -125,6 +125,8 @@ public class Camera implements IBufferable{
 			Gate.reScale();
 			Lever.reScale();
 			BackgroundObject.reScale();
+			BreakableWall.reScale();
+			Particle.reScale();
 			
 				
 		}
@@ -136,6 +138,8 @@ public class Camera implements IBufferable{
 			BackgroundObject.reScale();
 			Gate.reScale();			
 			Lever.reScale();
+			BreakableWall.reScale();
+			Particle.reScale();
 			zoomEnded = false;
 		}
 	}
