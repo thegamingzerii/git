@@ -21,6 +21,7 @@ import de.thegamingzerii.objects.TextureBlock;
 import de.thegamingzerii.spawners.Leaf;
 import de.thegamingzerii.spawners.Spawner;
 import de.thegamingzerii.utility.Animation;
+import de.thegamingzerii.utility.DisplayText;
 
 
 
@@ -40,6 +41,11 @@ public class GameState extends State{
 			for(int i = 0; i < Spawner.allSpawners.size(); i++) {
 				Spawner.allSpawners.get(i).update(delta);
 			}
+			
+			for(int i = 0; i < DisplayText.allDisplayTexts.size(); i++) {
+				DisplayText.allDisplayTexts.get(i).update(delta);
+			}
+			
 			
 			for(int i = 0; i < Jumper.allJumpers.size(); i++) {
 				Jumper.allJumpers.get(i).update(delta);
@@ -112,6 +118,10 @@ public class GameState extends State{
 			BackgroundObject.allBackgroundObjects.get(i).buffer();
 		}
 		
+		for(int i = 0; i < TextureBlock.allTextureBlocks.size(); i++) {
+			TextureBlock.allTextureBlocks.get(i).buffer(true);
+		}
+		
 		player.buffer();
 		
 		for(int i = 0; i < Leaf.allLeafs.size(); i++) {
@@ -139,7 +149,7 @@ public class GameState extends State{
 		}
 		
 		for(int i = 0; i < TextureBlock.allTextureBlocks.size(); i++) {
-			TextureBlock.allTextureBlocks.get(i).buffer();
+			TextureBlock.allTextureBlocks.get(i).buffer(false);
 		}
 		
 		for(int i = 0; i < DeadlyBlock.allDeadlyBlocks.size(); i++) {
@@ -157,6 +167,7 @@ public class GameState extends State{
 		for(int i = 0; i < Slope.allSlopes.size(); i++) {
 			Slope.allSlopes.get(i).buffer();
 		}
+		
 		for(int i = 0; i < MovingPlatform.allMovingPlatforms.size(); i++) {
 			MovingPlatform.allMovingPlatforms.get(i).buffer();
 		}
@@ -174,6 +185,11 @@ public class GameState extends State{
 		for(int i = 0; i < Spawner.allSpawners.size(); i++) {
 			Spawner.allSpawners.get(i).buffer();
 		}
+		
+		for(int i = 0; i < DisplayText.allDisplayTexts.size(); i++) {
+			DisplayText.allDisplayTexts.get(i).buffer();
+		}
+		
 		
 	}
 

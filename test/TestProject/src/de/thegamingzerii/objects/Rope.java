@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 
 import de.thegamingzerii.maingame.Game;
 import de.thegamingzerii.states.GameState;
+import de.thegamingzerii.utility.Vector2d;
 
 @SuppressWarnings("serial")
 public class Rope extends JPanel implements IInteract{
@@ -142,13 +143,21 @@ public class Rope extends JPanel implements IInteract{
 	}
 	
 	public void letGo() {
+		/**
 		GameState.player.xSpeed = 10 *  (Math.cos(swingTimer));
 		GameState.player.xAcc = 0;
 		GameState.player.ySpeed = -20 *  Math.sin(swingTimer);
 
 		GameState.player.moveRight = moveRight;
 		GameState.player.moveLeft = moveLeft;
-		
+		*/
+		Vector2d vec = new Vector2d(line.getP1(), line.getP2());
+		vec.normalize();
+		Vector2d vec2 = vec.getNormal();
+		GameState.player.xSpeed = vec2.getX() * 100;
+		GameState.player.ySpeed = vec2.getY() * 100;
+		GameState.player.moveRight = moveRight;
+		GameState.player.moveLeft = moveLeft;
 	}
 	
 	public void paint(Graphics2D g) {
@@ -157,13 +166,27 @@ public class Rope extends JPanel implements IInteract{
 		int yUsable = (int)((line.getY1() - Game.camera.getCameraPos().getY()) * Game.camera.scale);
 		int xEndUsable = (int) ((line.getX2() - Game.camera.getCameraPos().getX()-4) * Game.camera.scale);
 		int yEndUsable = (int)((line.getY2() - Game.camera.getCameraPos().getY()) * Game.camera.scale);
+		
 		BufferedImage image;
+		Vector2d vec = new Vector2d(line.getP1(), line.getP2());
+		Vector2d vec2 = vec.getNormal();
+		Line2D ortVec = vec2.getLine(line.getP2());
+		int xUsable2 = (int) ((ortVec.getX1() - Game.camera.getCameraPos().getX()-4) * Game.camera.scale);
+		int yUsable2 = (int)((ortVec.getY1() - Game.camera.getCameraPos().getY()) * Game.camera.scale);
+		int xEndUsable2 = (int) ((ortVec.getX2() - Game.camera.getCameraPos().getX()-4) * Game.camera.scale);
+		int yEndUsable2 = (int)((ortVec.getY2() - Game.camera.getCameraPos().getY()) * Game.camera.scale);
+		
+		
+		
 		g.setStroke(new BasicStroke((float) (20*Game.camera.scale/Game.camera.zoom)));
 		Color brown = new Color(59, 31, 6);
 		g.setColor(brown);
         g.draw(new Line2D.Float(xUsable, yUsable, xEndUsable, yEndUsable));
+        if(Game.drawHitBoxes)
+        	g.draw(new Line2D.Float(xUsable2, yUsable2, xEndUsable2, yEndUsable2));
         g.setColor(Color.BLACK);
         g.setStroke(new BasicStroke(1));
+        
 		try {
 	        image = ImageIO.read(new File("Assets/Knot.png"));
 	        @SuppressWarnings("static-access")

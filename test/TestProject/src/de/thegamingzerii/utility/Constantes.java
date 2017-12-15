@@ -17,11 +17,11 @@ public class Constantes {
 	
 
 	public enum BlockType{
-		Ground, Grass, Ground2, Slope1, Slope2, Slope3
+		Ground, Grass, Ground2, Slope1, Slope2, Slope3, Brick1, Brick2, Brick3, BrickStairs1, BrickStairs2, BrickStairs3
 	}
 	
 	public enum BackgroundType{
-		Tree1, Bush1
+		Tree1, Bush1, BackGround1
 	}
 	
 	public enum SpawnerType{

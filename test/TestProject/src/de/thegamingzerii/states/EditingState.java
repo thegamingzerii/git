@@ -27,6 +27,7 @@ import de.thegamingzerii.objects.MovingPlatform;
 import de.thegamingzerii.objects.Rope;
 import de.thegamingzerii.objects.Slope;
 import de.thegamingzerii.objects.TextureBlock;
+import de.thegamingzerii.utility.DisplayText;
 
 @SuppressWarnings("serial")
 public class EditingState extends State{
@@ -40,8 +41,9 @@ public class EditingState extends State{
 	private ArrayList<Integer> xSnaps = new ArrayList<Integer>();
 	private ArrayList<Integer> ySnaps = new ArrayList<Integer>();
 	
-	private final int differentBlockTextures = 6;
-	private final int differentBackgroundTextures = 2;
+	private final int differentBlockTextures = 12;
+	private final int differentBackgroundTextures = 3;
+	public static boolean background = false;
 	
 	@Override
 	public void init() {
@@ -54,6 +56,10 @@ public class EditingState extends State{
 
 	@Override
 	public void update(double delta) {
+		
+		for(int i = 0; i < DisplayText.allDisplayTexts.size(); i++) {
+			DisplayText.allDisplayTexts.get(i).update(delta);
+		}
 
 		if(MouseInfo.getPointerInfo().getLocation().getX() > 1900)
 			Game.actualCamera.moveCamera(50, 0);
@@ -284,7 +290,7 @@ public class EditingState extends State{
 			case 5:
 				
 				if(!TextureBlock.deleteTextureBlock(getSnappedLeftX(e.getX()), getSnappedUpY(e.getY())))
-					Map.addToMap("TextureBlock " + getSnappedLeftX(e.getX()) + " " + getSnappedUpY(e.getY()) + " " + textureMode%differentBlockTextures);
+					Map.addToMap("TextureBlock " + getSnappedLeftX(e.getX()) + " " + getSnappedUpY(e.getY()) + " " + textureMode%differentBlockTextures + " " + background);
 				break;
 			case 6:
 				Map.addToMap("Slope " + Math.round(placingX) + " " + Math.round(placingY) + " " + Math.round(getSnappedX(e.getX()*Game.camera.zoom+ Game.camera.getCameraPos().getX())) + " " + Math.round(getSnappedY(e.getY()*Game.camera.zoom+ Game.camera.getCameraPos().getY())));

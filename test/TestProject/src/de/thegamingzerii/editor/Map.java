@@ -131,10 +131,28 @@ public class Map {
     			case 5:
     				type = BlockType.Slope3;
     				break;
+    			case 6:
+    				type = BlockType.Brick1;
+    				break;
+    			case 7:
+    				type = BlockType.Brick2;
+    				break;
+    			case 8:
+    				type = BlockType.Brick3;
+    				break;
+    			case 9:
+    				type = BlockType.BrickStairs1;
+    				break;
+    			case 10:
+    				type = BlockType.BrickStairs2;
+    				break;
+    			case 11:
+    				type = BlockType.BrickStairs3;
+    				break;
     			default:
     				break;
     			}
-    			objects.add(new TextureBlock(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), type));
+    			objects.add(new TextureBlock(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), type, Boolean.valueOf(splited[4])));
     		}
     		if(splited[0].equals("Slope")) {
     			objects.add(new Slope(new Point2D.Double(Double.parseDouble(splited[1]), Double.parseDouble(splited[2])), new Point2D.Double(Double.parseDouble(splited[3]), Double.parseDouble(splited[4]))));
@@ -150,6 +168,9 @@ public class Map {
     				break;
     			case 1:
     				type = BackgroundType.Bush1;
+    				break;
+    			case 2:
+    				type = BackgroundType.BackGround1;
     				break;
     			}
     			objects.add(new BackgroundObject(Double.parseDouble(splited[1]), Double.parseDouble(splited[2]), type));

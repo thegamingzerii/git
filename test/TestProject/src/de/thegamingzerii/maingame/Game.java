@@ -30,6 +30,7 @@ import java.io.File;
 import java.io.IOException;
 
 import de.thegamingzerii.utility.Constantes;
+import de.thegamingzerii.utility.DisplayText;
 import de.thegamingzerii.editor.Map;
 import de.thegamingzerii.editor.Settings;
 import de.thegamingzerii.items.Bomb;
@@ -159,6 +160,7 @@ public class Game extends JPanel{
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("M"), "m");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("V"), "v");
 		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("C"), "c");
+		ingameState.getInputMap(IFW).put(KeyStroke.getKeyStroke("Y"), "y");
 		
 		ingameState.getActionMap().put("jump", new JumpAction(false));
 		ingameState.getActionMap().put("move up", new MoveAction(0, false));
@@ -189,6 +191,7 @@ public class Game extends JPanel{
 		ingameState.getActionMap().put("c", new PressedOtherKey(13));
 		ingameState.getActionMap().put("l", new SwitchTexture());
 		ingameState.getActionMap().put("e", new Interact());
+		ingameState.getActionMap().put("y", new SwitchBackground());
 		
 		
 		
@@ -398,13 +401,19 @@ public static void main(String[] args) throws InterruptedException {
   	  	    System.out.println("Reset Logic Tiles");
   	  	    }
   	  	    
+  	  	    
+  	  	    if(command.equals("reWriteMap")) {
+  	  	    Map.reWriteMap();
+  	  	    System.out.println("Map has been rewriten");
+  	  	    }
+  	  	    
   	  	    if(command.equals("spawnLeaf")) {
   	  	    	new Leaf(GameState.player.x - 100, GameState.player.y);
   	  	    	System.out.println("Leaf Spawned");
   	  	    }
-  	  	    if(command.equals("rewriteMap")) {
-	  	    	Map.reWriteMap();
-	  	    	System.out.println("map rewritten");
+  	  	    if(command.equals("resetPlayerPos")) {
+	  	    	GameState.player.changePos(0, 0);
+	  	    	System.out.println("Player position has been reset to (0/0)");
 	  	    }
   	  	    
   		  }
@@ -651,6 +660,28 @@ private class SwitchTexture extends AbstractAction{
 				EditingState.textureMode++;
 				
 			}
+		}
+		
+	}
+
+
+private class SwitchBackground extends AbstractAction{
+
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(currentState == editingState) {
+				if(EditingState.background) {
+					EditingState.background = false;
+					new DisplayText("Foreground", 800, 500, 50, 60);
+				}
+				else {
+					EditingState.background = true;
+					new DisplayText("Background", 800, 500, 50, 60);
+				}
+				
+			}
+		
 		}
 		
 	}

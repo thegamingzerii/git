@@ -22,6 +22,8 @@ public class BackgroundObject implements IBufferable{
 	
 	private static ArrayList<BufferedImage> bufferedImages = new ArrayList<BufferedImage>();
 	private static ArrayList<Image> images = new ArrayList<Image>();
+	private int width;
+	private int height;
 	
 	public BackgroundObject(double x, double y, BackgroundType type) {
 		this.x = x;
@@ -41,6 +43,7 @@ public class BackgroundObject implements IBufferable{
 		try {
 			bufferedImages.add(ImageIO.read(new File("Assets/Tree.png")));
 			bufferedImages.add(ImageIO.read(new File("Assets/Bush.png")));
+			bufferedImages.add(ImageIO.read(new File("Assets/Bridge.png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -52,7 +55,11 @@ public class BackgroundObject implements IBufferable{
 	public static void reScale() {
 		images.clear();
 		for(int i = 0; i < bufferedImages.size(); i++) {
-			images.add(bufferedImages.get(i).getScaledInstance((int)(512 * Game.camera.scale), (int)(1024 * Game.camera.scale), bufferedImages.get(i).SCALE_DEFAULT));
+				if(i != 2)
+					images.add(bufferedImages.get(i).getScaledInstance((int)(512 * Game.camera.scale), (int)(1024 * Game.camera.scale), bufferedImages.get(i).SCALE_DEFAULT));
+				else
+					images.add(bufferedImages.get(i).getScaledInstance((int)(1024 * Game.camera.scale), (int)(1024 * Game.camera.scale), bufferedImages.get(i).SCALE_DEFAULT));
+
 		}
 	}
 	
@@ -62,6 +69,8 @@ public class BackgroundObject implements IBufferable{
 			return 0;
 		case Bush1:
 			return 1;
+		case BackGround1:
+			return 2;
 		default:
 			return -1;
 			
@@ -114,6 +123,9 @@ public class BackgroundObject implements IBufferable{
 			break;
 		case Bush1:
 			id = 1;
+			break;
+		case BackGround1:
+			id = 2;
 			break;
 			
 		}

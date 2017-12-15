@@ -28,585 +28,1447 @@ Obstacle 10368.0 384.0 10368.0 512.0
 Obstacle 13696.0 -256.0 13824.0 -256.0
 Obstacle 13824.0 -256.0 13824.0 -896.0
 Obstacle 13824.0 -896.0 16128.0 -1536.0
+Obstacle 16000.0 640.0 18048.0 640.0
 Rope 1550.0 -692.0 628.0
 Rope 3283.0 -1517.0 508.0
 DeadlyBlock 10496.0 768.0 11392.0 768.0
-TextureBlock -128.0 512.0 0
-TextureBlock 0.0 512.0 0
-TextureBlock 128.0 512.0 0
-TextureBlock 256.0 512.0 0
-TextureBlock 384.0 512.0 0
-TextureBlock 512.0 512.0 0
-TextureBlock 640.0 512.0 0
-TextureBlock 768.0 512.0 0
-TextureBlock 896.0 512.0 0
-TextureBlock 1024.0 512.0 0
-TextureBlock 1152.0 512.0 0
-TextureBlock -256.0 512.0 0
-TextureBlock -384.0 512.0 0
-TextureBlock -512.0 512.0 0
-TextureBlock -640.0 512.0 0
-TextureBlock -896.0 512.0 0
-TextureBlock -1024.0 512.0 0
-TextureBlock -1152.0 512.0 0
-TextureBlock 1408.0 384.0 4
-TextureBlock 1664.0 256.0 4
-TextureBlock 1920.0 128.0 4
-TextureBlock 2176.0 0.0 4
-TextureBlock 1280.0 384.0 3
-TextureBlock 1536.0 256.0 3
-TextureBlock 1792.0 128.0 3
-TextureBlock 2048.0 0.0 3
-TextureBlock 1408.0 512.0 2
-TextureBlock 1664.0 384.0 2
-TextureBlock 1536.0 512.0 2
-TextureBlock 2048.0 256.0 2
-TextureBlock 2176.0 128.0 2
-TextureBlock 1920.0 256.0 2
-TextureBlock 1792.0 384.0 2
-TextureBlock 1920.0 384.0 2
-TextureBlock 1664.0 512.0 2
-TextureBlock 1408.0 640.0 2
-TextureBlock 2176.0 256.0 2
-TextureBlock 1536.0 384.0 5
-TextureBlock 1280.0 512.0 5
-TextureBlock 1792.0 256.0 5
-TextureBlock 2048.0 128.0 5
-TextureBlock 2176.0 384.0 2
-TextureBlock 2176.0 512.0 2
-TextureBlock 2176.0 640.0 2
-TextureBlock 2176.0 768.0 2
-TextureBlock 2048.0 768.0 2
-TextureBlock 1920.0 768.0 2
-TextureBlock 1664.0 768.0 2
-TextureBlock 1792.0 768.0 2
-TextureBlock 1536.0 768.0 2
-TextureBlock 1408.0 768.0 2
-TextureBlock 1536.0 640.0 2
-TextureBlock 1664.0 640.0 2
-TextureBlock 1792.0 640.0 2
-TextureBlock 1920.0 640.0 2
-TextureBlock 2048.0 640.0 2
-TextureBlock 2048.0 512.0 2
-TextureBlock 2048.0 384.0 2
-TextureBlock 1920.0 512.0 2
-TextureBlock 1792.0 512.0 2
-TextureBlock -1152.0 640.0 2
-TextureBlock -1024.0 640.0 2
-TextureBlock -896.0 640.0 2
-TextureBlock -768.0 640.0 2
-TextureBlock -640.0 640.0 2
-TextureBlock -512.0 640.0 2
-TextureBlock -384.0 640.0 2
-TextureBlock -256.0 640.0 2
-TextureBlock -128.0 640.0 2
-TextureBlock 0.0 640.0 2
-TextureBlock 128.0 640.0 2
-TextureBlock 256.0 640.0 2
-TextureBlock 384.0 640.0 2
-TextureBlock 512.0 640.0 2
-TextureBlock 640.0 640.0 2
-TextureBlock 768.0 640.0 2
-TextureBlock 896.0 640.0 2
-TextureBlock 1024.0 640.0 2
-TextureBlock 1152.0 640.0 2
-TextureBlock 1280.0 640.0 2
-TextureBlock 1280.0 768.0 2
-TextureBlock 1152.0 768.0 2
-TextureBlock 1024.0 768.0 2
-TextureBlock 896.0 768.0 2
-TextureBlock 768.0 768.0 2
-TextureBlock 640.0 768.0 2
-TextureBlock 512.0 768.0 2
-TextureBlock 256.0 768.0 2
-TextureBlock 128.0 768.0 2
-TextureBlock 0.0 768.0 2
-TextureBlock -128.0 768.0 2
-TextureBlock -384.0 768.0 2
-TextureBlock -512.0 768.0 2
-TextureBlock -640.0 768.0 2
-TextureBlock -768.0 768.0 2
-TextureBlock -896.0 768.0 2
-TextureBlock -256.0 768.0 2
-TextureBlock 384.0 768.0 2
-TextureBlock -1024.0 768.0 2
-TextureBlock -1152.0 768.0 2
-TextureBlock -1152.0 384.0 1
-TextureBlock -1024.0 384.0 1
-TextureBlock -896.0 384.0 1
-TextureBlock -768.0 384.0 1
-TextureBlock -640.0 384.0 1
-TextureBlock -512.0 384.0 1
-TextureBlock -384.0 384.0 1
-TextureBlock -256.0 384.0 1
-TextureBlock -128.0 384.0 1
-TextureBlock 0.0 384.0 1
-TextureBlock 128.0 384.0 1
-TextureBlock 256.0 384.0 1
-TextureBlock 384.0 384.0 1
-TextureBlock 640.0 384.0 1
-TextureBlock 768.0 384.0 1
-TextureBlock 896.0 384.0 1
-TextureBlock 1024.0 384.0 1
-TextureBlock 1152.0 384.0 1
-TextureBlock 2304.0 0.0 0
-TextureBlock 2432.0 0.0 0
-TextureBlock 2560.0 0.0 0
-TextureBlock 2688.0 0.0 0
-TextureBlock 2816.0 0.0 0
-TextureBlock 2944.0 0.0 0
-TextureBlock 3072.0 0.0 0
-TextureBlock 3200.0 0.0 0
-TextureBlock 3328.0 0.0 0
-TextureBlock 3456.0 0.0 0
-TextureBlock 3584.0 0.0 0
-TextureBlock 3712.0 0.0 0
-TextureBlock 3840.0 0.0 0
-TextureBlock 3968.0 0.0 0
-TextureBlock 4096.0 0.0 0
-TextureBlock 2304.0 128.0 2
-TextureBlock 2304.0 256.0 2
-TextureBlock 2304.0 384.0 2
-TextureBlock 2304.0 512.0 2
-TextureBlock 2304.0 640.0 2
-TextureBlock 2432.0 768.0 2
-TextureBlock 2304.0 768.0 2
-TextureBlock 2432.0 640.0 2
-TextureBlock 2432.0 512.0 2
-TextureBlock 2432.0 384.0 2
-TextureBlock 2432.0 256.0 2
-TextureBlock 2432.0 128.0 2
-TextureBlock 2560.0 128.0 2
-TextureBlock 2560.0 256.0 2
-TextureBlock 2560.0 384.0 2
-TextureBlock 2560.0 512.0 2
-TextureBlock 2560.0 640.0 2
-TextureBlock 2560.0 768.0 2
-TextureBlock 2688.0 768.0 2
-TextureBlock 2688.0 640.0 2
-TextureBlock 2688.0 512.0 2
-TextureBlock 2688.0 384.0 2
-TextureBlock 2688.0 256.0 2
-TextureBlock 2688.0 128.0 2
-TextureBlock 2816.0 128.0 2
-TextureBlock 2816.0 256.0 2
-TextureBlock 2816.0 384.0 2
-TextureBlock 2816.0 512.0 2
-TextureBlock 2816.0 640.0 2
-TextureBlock 2816.0 768.0 2
-TextureBlock 2944.0 768.0 2
-TextureBlock 2944.0 640.0 2
-TextureBlock 2944.0 512.0 2
-TextureBlock 2944.0 384.0 2
-TextureBlock 2944.0 256.0 2
-TextureBlock 2944.0 128.0 2
-TextureBlock 3072.0 128.0 2
-TextureBlock 3072.0 256.0 2
-TextureBlock 3072.0 384.0 2
-TextureBlock 3072.0 512.0 2
-TextureBlock 3072.0 640.0 2
-TextureBlock 3072.0 768.0 2
-TextureBlock 3200.0 768.0 2
-TextureBlock 3200.0 640.0 2
-TextureBlock 3200.0 512.0 2
-TextureBlock 3200.0 384.0 2
-TextureBlock 3200.0 256.0 2
-TextureBlock 3200.0 128.0 2
-TextureBlock 3328.0 128.0 2
-TextureBlock 3328.0 256.0 2
-TextureBlock 3328.0 384.0 2
-TextureBlock 3328.0 512.0 2
-TextureBlock 3328.0 640.0 2
-TextureBlock 3328.0 768.0 2
-TextureBlock 3456.0 768.0 2
-TextureBlock 3456.0 640.0 2
-TextureBlock 3456.0 512.0 2
-TextureBlock 3456.0 384.0 2
-TextureBlock 3456.0 256.0 2
-TextureBlock 3456.0 128.0 2
-TextureBlock 3584.0 128.0 2
-TextureBlock 3584.0 256.0 2
-TextureBlock 3584.0 384.0 2
-TextureBlock 3584.0 512.0 2
-TextureBlock 3584.0 640.0 2
-TextureBlock 3584.0 768.0 2
-TextureBlock 3712.0 768.0 2
-TextureBlock 4096.0 512.0 2
-TextureBlock 4096.0 640.0 2
-TextureBlock 4096.0 768.0 2
-TextureBlock 4096.0 128.0 2
-TextureBlock 4096.0 256.0 2
-TextureBlock 4096.0 384.0 2
-TextureBlock 3968.0 128.0 2
-TextureBlock 3840.0 128.0 2
-TextureBlock 3712.0 128.0 2
-TextureBlock 3712.0 256.0 2
-TextureBlock 3840.0 256.0 2
-TextureBlock 3968.0 256.0 2
-TextureBlock 3968.0 384.0 2
-TextureBlock 3840.0 384.0 2
-TextureBlock 3712.0 384.0 2
-TextureBlock 3712.0 512.0 2
-TextureBlock 3840.0 512.0 2
-TextureBlock 3968.0 512.0 2
-TextureBlock 3968.0 640.0 2
-TextureBlock 3840.0 640.0 2
-TextureBlock 3712.0 640.0 2
-TextureBlock 3840.0 768.0 2
-TextureBlock 3968.0 768.0 2
-TextureBlock 4224.0 128.0 2
-TextureBlock 4352.0 128.0 2
-TextureBlock 4352.0 256.0 2
-TextureBlock 4224.0 256.0 2
-TextureBlock 4224.0 384.0 2
-TextureBlock 4352.0 384.0 2
-TextureBlock 4352.0 512.0 2
-TextureBlock 4224.0 512.0 2
-TextureBlock 4352.0 640.0 2
-TextureBlock 4224.0 640.0 2
-TextureBlock 4352.0 768.0 2
-TextureBlock 4224.0 768.0 2
-TextureBlock 4224.0 0.0 0
-TextureBlock 4352.0 0.0 0
-TextureBlock 2304.0 -128.0 1
-TextureBlock 2432.0 -128.0 1
-TextureBlock 2560.0 -128.0 1
-TextureBlock 2688.0 -128.0 1
-TextureBlock 2816.0 -128.0 1
-TextureBlock 2944.0 -128.0 1
-TextureBlock 3072.0 -128.0 1
-TextureBlock 3200.0 -128.0 1
-TextureBlock 3328.0 -128.0 1
-TextureBlock 3456.0 -128.0 1
-TextureBlock 3584.0 -128.0 1
-TextureBlock 3712.0 -128.0 1
-TextureBlock 3840.0 -128.0 1
-TextureBlock 3968.0 -128.0 1
-TextureBlock 4096.0 -128.0 1
-TextureBlock 4224.0 -128.0 1
-TextureBlock 4352.0 -128.0 1
-TextureBlock -1152.0 896.0 2
-TextureBlock -1024.0 896.0 2
-TextureBlock -896.0 896.0 2
-TextureBlock -768.0 896.0 2
-TextureBlock -384.0 896.0 2
-TextureBlock -640.0 896.0 2
-TextureBlock -512.0 896.0 2
-TextureBlock -256.0 896.0 2
-TextureBlock 0.0 896.0 2
-TextureBlock 896.0 896.0 2
-TextureBlock 1152.0 896.0 2
-TextureBlock 1408.0 896.0 2
-TextureBlock 1664.0 896.0 2
-TextureBlock 2048.0 896.0 2
-TextureBlock 2432.0 896.0 2
-TextureBlock 2688.0 896.0 2
-TextureBlock 3072.0 896.0 2
-TextureBlock 3968.0 896.0 2
-TextureBlock 4224.0 896.0 2
-TextureBlock 4352.0 896.0 2
-TextureBlock 4096.0 896.0 2
-TextureBlock 3840.0 896.0 2
-TextureBlock 3712.0 896.0 2
-TextureBlock 3584.0 896.0 2
-TextureBlock 3328.0 896.0 2
-TextureBlock 3200.0 896.0 2
-TextureBlock 3456.0 896.0 2
-TextureBlock 2944.0 896.0 2
-TextureBlock 2816.0 896.0 2
-TextureBlock 2560.0 896.0 2
-TextureBlock 2304.0 896.0 2
-TextureBlock 2176.0 896.0 2
-TextureBlock 1920.0 896.0 2
-TextureBlock 1792.0 896.0 2
-TextureBlock 1536.0 896.0 2
-TextureBlock 1280.0 896.0 2
-TextureBlock 1024.0 896.0 2
-TextureBlock 768.0 896.0 2
-TextureBlock 512.0 896.0 2
-TextureBlock 640.0 896.0 2
-TextureBlock 384.0 896.0 2
-TextureBlock 256.0 896.0 2
-TextureBlock 128.0 896.0 2
-TextureBlock -128.0 896.0 2
-TextureBlock 512.0 384.0 1
-TextureBlock -768.0 512.0 0
-TextureBlock 2816.0 -768.0 0
-TextureBlock 2816.0 -640.0 2
-TextureBlock 2816.0 -512.0 2
-TextureBlock 2816.0 -384.0 2
-TextureBlock 8448.0 0.0 0
-TextureBlock 8320.0 0.0 0
-TextureBlock 8192.0 0.0 0
-TextureBlock 8064.0 0.0 0
-TextureBlock 7936.0 0.0 0
-TextureBlock 7808.0 0.0 0
-TextureBlock 7680.0 0.0 0
-TextureBlock 7552.0 0.0 0
-TextureBlock 7424.0 0.0 0
-TextureBlock 7296.0 0.0 0
-TextureBlock 7168.0 0.0 0
-TextureBlock 7040.0 0.0 0
-TextureBlock 6912.0 0.0 0
-TextureBlock 6784.0 0.0 0
-TextureBlock 6656.0 0.0 0
-TextureBlock 6528.0 0.0 0
-TextureBlock 6400.0 0.0 0
-TextureBlock 6272.0 0.0 0
-TextureBlock 6144.0 0.0 0
-TextureBlock 6016.0 0.0 0
-TextureBlock 5888.0 0.0 0
-TextureBlock 5760.0 0.0 0
-TextureBlock 5632.0 0.0 0
-TextureBlock 5504.0 0.0 0
-TextureBlock 5376.0 0.0 0
-TextureBlock 5248.0 0.0 0
-TextureBlock 5120.0 0.0 0
-TextureBlock 4992.0 0.0 0
-TextureBlock 4864.0 0.0 0
-TextureBlock 4736.0 0.0 0
-TextureBlock 4480.0 0.0 0
-TextureBlock 4608.0 0.0 0
-TextureBlock 8576.0 -128.0 3
-TextureBlock 8832.0 -256.0 3
-TextureBlock 9088.0 -384.0 3
-TextureBlock 8704.0 -128.0 4
-TextureBlock 8960.0 -256.0 4
-TextureBlock 9216.0 -384.0 4
-TextureBlock 8576.0 0.0 5
-TextureBlock 8832.0 -128.0 5
-TextureBlock 9088.0 -256.0 5
-TextureBlock 8704.0 0.0 2
-TextureBlock 8832.0 0.0 2
-TextureBlock 8960.0 0.0 2
-TextureBlock 9216.0 -256.0 2
-TextureBlock 9088.0 -128.0 2
-TextureBlock 8960.0 -128.0 2
-TextureBlock 9344.0 -384.0 0
-TextureBlock 9472.0 -384.0 0
-TextureBlock 9600.0 -384.0 0
-TextureBlock 9728.0 -384.0 0
-TextureBlock 10624.0 -384.0 0
-TextureBlock 10496.0 -384.0 0
-TextureBlock 10368.0 -384.0 0
-TextureBlock 10240.0 -384.0 0
-TextureBlock 10112.0 -384.0 0
-TextureBlock 9984.0 -384.0 0
-TextureBlock 9856.0 -384.0 0
-TextureBlock 9344.0 -256.0 2
-TextureBlock 9472.0 -256.0 2
-TextureBlock 10368.0 256.0 2
-TextureBlock 10368.0 128.0 2
-TextureBlock 10368.0 0.0 2
-TextureBlock 10368.0 -128.0 2
-TextureBlock 10368.0 -256.0 2
-TextureBlock 10496.0 -256.0 2
-TextureBlock 10624.0 -256.0 2
-TextureBlock 10496.0 -128.0 2
-TextureBlock 10496.0 0.0 2
-TextureBlock 10368.0 384.0 2
-TextureBlock 10368.0 512.0 2
-TextureBlock 10496.0 768.0 2
-TextureBlock 10624.0 896.0 2
-TextureBlock 10752.0 896.0 2
-TextureBlock 10368.0 640.0 2
-TextureBlock 10880.0 896.0 2
-TextureBlock 11008.0 768.0 2
-TextureBlock 12288.0 128.0 2
-TextureBlock 12160.0 128.0 2
-TextureBlock 12032.0 128.0 2
-TextureBlock 11904.0 128.0 2
-TextureBlock 11776.0 128.0 2
-TextureBlock 11648.0 128.0 2
-TextureBlock 11520.0 128.0 2
-TextureBlock 11392.0 128.0 2
-TextureBlock 11392.0 0.0 0
-TextureBlock 11520.0 0.0 0
-TextureBlock 11648.0 0.0 0
-TextureBlock 11776.0 0.0 0
-TextureBlock 11904.0 0.0 0
-TextureBlock 12032.0 0.0 0
-TextureBlock 12160.0 0.0 0
-TextureBlock 12288.0 0.0 0
-TextureBlock 13568.0 0.0 0
-TextureBlock 13440.0 0.0 0
-TextureBlock 13312.0 0.0 0
-TextureBlock 13184.0 0.0 0
-TextureBlock 13056.0 0.0 0
-TextureBlock 12928.0 0.0 0
-TextureBlock 12800.0 0.0 0
-TextureBlock 12672.0 0.0 0
-TextureBlock 12544.0 0.0 0
-TextureBlock 12416.0 0.0 0
-TextureBlock 11392.0 256.0 2
-TextureBlock 11392.0 384.0 2
-TextureBlock 11392.0 640.0 2
-TextureBlock 11392.0 512.0 2
-TextureBlock 13696.0 0.0 0
-TextureBlock 13824.0 0.0 0
-TextureBlock 15232.0 640.0 0
-TextureBlock 15360.0 640.0 0
-TextureBlock 15488.0 640.0 0
-TextureBlock 15616.0 640.0 0
-TextureBlock 15744.0 640.0 0
-TextureBlock 15872.0 640.0 0
-TextureBlock 13696.0 -512.0 2
-TextureBlock 13696.0 -384.0 2
-TextureBlock 13056.0 -1664.0 2
-TextureBlock 13184.0 -1536.0 2
-TextureBlock 13312.0 -1408.0 2
-TextureBlock 13440.0 -1280.0 2
-TextureBlock 13568.0 -1152.0 2
-TextureBlock 13568.0 -1024.0 2
-TextureBlock 13696.0 -896.0 2
-TextureBlock 13696.0 -768.0 2
-TextureBlock 13568.0 -896.0 2
-TextureBlock 13440.0 -1152.0 2
-TextureBlock 13312.0 -1280.0 2
-TextureBlock 13696.0 -640.0 2
-TextureBlock 13568.0 -768.0 2
-TextureBlock 9600.0 -256.0 2
-TextureBlock 9728.0 -256.0 2
-TextureBlock 9856.0 -256.0 2
-TextureBlock 9984.0 -256.0 2
-TextureBlock 10112.0 -256.0 2
-TextureBlock 10240.0 -256.0 2
-TextureBlock 10240.0 -128.0 2
-TextureBlock 10112.0 -128.0 2
-TextureBlock 9984.0 -128.0 2
-TextureBlock 9856.0 -128.0 2
-TextureBlock 9728.0 -128.0 2
-TextureBlock 9600.0 -128.0 2
-TextureBlock 9472.0 -128.0 2
-TextureBlock 9344.0 -128.0 2
-TextureBlock 9216.0 -128.0 2
-TextureBlock 9088.0 0.0 2
-TextureBlock 9216.0 0.0 2
-TextureBlock 9344.0 0.0 2
-TextureBlock 9600.0 0.0 2
-TextureBlock 9856.0 0.0 2
-TextureBlock 9984.0 0.0 2
-TextureBlock 10240.0 0.0 2
-TextureBlock 10112.0 0.0 2
-TextureBlock 9728.0 0.0 2
-TextureBlock 9472.0 0.0 2
-TextureBlock 10240.0 128.0 2
-TextureBlock 10240.0 256.0 2
-TextureBlock 10240.0 384.0 2
-TextureBlock 10112.0 128.0 2
-TextureBlock 10112.0 256.0 2
-TextureBlock 10112.0 384.0 2
-TextureBlock 9984.0 128.0 2
-TextureBlock 9984.0 256.0 2
-TextureBlock 9984.0 384.0 2
-TextureBlock 9856.0 128.0 2
-TextureBlock 9856.0 256.0 2
-TextureBlock 9856.0 384.0 2
-TextureBlock 9728.0 128.0 2
-TextureBlock 9728.0 256.0 2
-TextureBlock 9728.0 384.0 2
-TextureBlock 9600.0 128.0 2
-TextureBlock 9472.0 128.0 2
-TextureBlock 9600.0 256.0 2
-TextureBlock 9600.0 384.0 2
-TextureBlock 9344.0 384.0 2
-TextureBlock 9472.0 256.0 2
-TextureBlock 9472.0 384.0 2
-TextureBlock 9344.0 256.0 2
-TextureBlock 9344.0 128.0 2
-TextureBlock 9216.0 128.0 2
-TextureBlock 9216.0 256.0 2
-TextureBlock 9088.0 128.0 2
-TextureBlock 8960.0 128.0 2
-TextureBlock 7808.0 128.0 2
-TextureBlock 7936.0 128.0 2
-TextureBlock 8064.0 128.0 2
-TextureBlock 8192.0 128.0 2
-TextureBlock 8320.0 128.0 2
-TextureBlock 8448.0 128.0 2
-TextureBlock 8576.0 128.0 2
-TextureBlock 8704.0 128.0 2
-TextureBlock 8832.0 128.0 2
-TextureBlock 9088.0 256.0 2
-TextureBlock 8832.0 256.0 2
-TextureBlock 8704.0 256.0 2
-TextureBlock 8576.0 256.0 2
-TextureBlock 8448.0 256.0 2
-TextureBlock 8192.0 256.0 2
-TextureBlock 8064.0 256.0 2
-TextureBlock 7808.0 256.0 2
-TextureBlock 7936.0 256.0 2
-TextureBlock 8320.0 256.0 2
-TextureBlock 8960.0 256.0 2
-TextureBlock 7808.0 384.0 2
-TextureBlock 7936.0 384.0 2
-TextureBlock 8064.0 384.0 2
-TextureBlock 8192.0 384.0 2
-TextureBlock 8320.0 384.0 2
-TextureBlock 8448.0 384.0 2
-TextureBlock 8576.0 384.0 2
-TextureBlock 8704.0 384.0 2
-TextureBlock 8832.0 384.0 2
-TextureBlock 8960.0 384.0 2
-TextureBlock 9216.0 384.0 2
-TextureBlock 9088.0 384.0 2
-TextureBlock 12416.0 128.0 2
-TextureBlock 12416.0 256.0 2
-TextureBlock 12288.0 256.0 2
-TextureBlock 12160.0 256.0 2
-TextureBlock 12032.0 256.0 2
-TextureBlock 11904.0 256.0 2
-TextureBlock 11776.0 256.0 2
-TextureBlock 11648.0 256.0 2
-TextureBlock 11520.0 256.0 2
-TextureBlock 12544.0 256.0 2
-TextureBlock 12672.0 256.0 2
-TextureBlock 12800.0 128.0 2
-TextureBlock 12672.0 128.0 2
-TextureBlock 12544.0 128.0 2
-TextureBlock 12800.0 256.0 2
-TextureBlock 12928.0 128.0 2
-TextureBlock 13056.0 256.0 2
-TextureBlock 13312.0 128.0 2
-TextureBlock 13440.0 128.0 2
-TextureBlock 13568.0 128.0 2
-TextureBlock 13696.0 128.0 2
-TextureBlock 13696.0 256.0 2
-TextureBlock 13824.0 128.0 2
-TextureBlock 13824.0 256.0 2
-TextureBlock 13568.0 256.0 2
-TextureBlock 13440.0 256.0 2
-TextureBlock 13312.0 256.0 2
-TextureBlock 13184.0 256.0 2
-TextureBlock 13184.0 128.0 2
-TextureBlock 13056.0 128.0 2
-TextureBlock 12928.0 256.0 2
-TextureBlock 11520.0 384.0 2
-TextureBlock 11648.0 384.0 2
-TextureBlock 11904.0 384.0 2
-TextureBlock 12288.0 384.0 2
-TextureBlock 12416.0 384.0 2
-TextureBlock 12928.0 384.0 2
-TextureBlock 13184.0 384.0 2
-TextureBlock 13440.0 384.0 2
-TextureBlock 13568.0 384.0 2
-TextureBlock 13696.0 384.0 2
-TextureBlock 13824.0 384.0 2
-TextureBlock 13312.0 384.0 2
-TextureBlock 13056.0 384.0 2
-TextureBlock 12672.0 384.0 2
-TextureBlock 12800.0 384.0 2
-TextureBlock 12544.0 384.0 2
-TextureBlock 12160.0 384.0 2
-TextureBlock 12032.0 384.0 2
-TextureBlock 11776.0 384.0 2
+TextureBlock -128.0 512.0 0 false
+TextureBlock 0.0 512.0 0 false
+TextureBlock 128.0 512.0 0 false
+TextureBlock 256.0 512.0 0 false
+TextureBlock 384.0 512.0 0 false
+TextureBlock 512.0 512.0 0 false
+TextureBlock 640.0 512.0 0 false
+TextureBlock 768.0 512.0 0 false
+TextureBlock 896.0 512.0 0 false
+TextureBlock 1024.0 512.0 0 false
+TextureBlock 1152.0 512.0 0 false
+TextureBlock -256.0 512.0 0 false
+TextureBlock -384.0 512.0 0 false
+TextureBlock -512.0 512.0 0 false
+TextureBlock -640.0 512.0 0 false
+TextureBlock -896.0 512.0 0 false
+TextureBlock -1024.0 512.0 0 false
+TextureBlock -1152.0 512.0 0 false
+TextureBlock 1408.0 384.0 4 false
+TextureBlock 1664.0 256.0 4 false
+TextureBlock 1920.0 128.0 4 false
+TextureBlock 2176.0 0.0 4 false
+TextureBlock 1280.0 384.0 3 false
+TextureBlock 1536.0 256.0 3 false
+TextureBlock 1792.0 128.0 3 false
+TextureBlock 2048.0 0.0 3 false
+TextureBlock 1408.0 512.0 2 false
+TextureBlock 1664.0 384.0 2 false
+TextureBlock 1536.0 512.0 2 false
+TextureBlock 2048.0 256.0 2 false
+TextureBlock 2176.0 128.0 2 false
+TextureBlock 1920.0 256.0 2 false
+TextureBlock 1792.0 384.0 2 false
+TextureBlock 1920.0 384.0 2 false
+TextureBlock 1664.0 512.0 2 false
+TextureBlock 1408.0 640.0 2 false
+TextureBlock 2176.0 256.0 2 false
+TextureBlock 1536.0 384.0 5 false
+TextureBlock 1280.0 512.0 5 false
+TextureBlock 1792.0 256.0 5 false
+TextureBlock 2048.0 128.0 5 false
+TextureBlock 2176.0 384.0 2 false
+TextureBlock 2176.0 512.0 2 false
+TextureBlock 2176.0 640.0 2 false
+TextureBlock 2176.0 768.0 2 false
+TextureBlock 2048.0 768.0 2 false
+TextureBlock 1920.0 768.0 2 false
+TextureBlock 1664.0 768.0 2 false
+TextureBlock 1792.0 768.0 2 false
+TextureBlock 1536.0 768.0 2 false
+TextureBlock 1408.0 768.0 2 false
+TextureBlock 1536.0 640.0 2 false
+TextureBlock 1664.0 640.0 2 false
+TextureBlock 1792.0 640.0 2 false
+TextureBlock 1920.0 640.0 2 false
+TextureBlock 2048.0 640.0 2 false
+TextureBlock 2048.0 512.0 2 false
+TextureBlock 2048.0 384.0 2 false
+TextureBlock 1920.0 512.0 2 false
+TextureBlock 1792.0 512.0 2 false
+TextureBlock -1152.0 640.0 2 false
+TextureBlock -1024.0 640.0 2 false
+TextureBlock -896.0 640.0 2 false
+TextureBlock -768.0 640.0 2 false
+TextureBlock -640.0 640.0 2 false
+TextureBlock -512.0 640.0 2 false
+TextureBlock -384.0 640.0 2 false
+TextureBlock -256.0 640.0 2 false
+TextureBlock -128.0 640.0 2 false
+TextureBlock 0.0 640.0 2 false
+TextureBlock 128.0 640.0 2 false
+TextureBlock 256.0 640.0 2 false
+TextureBlock 384.0 640.0 2 false
+TextureBlock 512.0 640.0 2 false
+TextureBlock 640.0 640.0 2 false
+TextureBlock 768.0 640.0 2 false
+TextureBlock 896.0 640.0 2 false
+TextureBlock 1024.0 640.0 2 false
+TextureBlock 1152.0 640.0 2 false
+TextureBlock 1280.0 640.0 2 false
+TextureBlock 1280.0 768.0 2 false
+TextureBlock 1152.0 768.0 2 false
+TextureBlock 1024.0 768.0 2 false
+TextureBlock 896.0 768.0 2 false
+TextureBlock 768.0 768.0 2 false
+TextureBlock 640.0 768.0 2 false
+TextureBlock 512.0 768.0 2 false
+TextureBlock 256.0 768.0 2 false
+TextureBlock 128.0 768.0 2 false
+TextureBlock 0.0 768.0 2 false
+TextureBlock -128.0 768.0 2 false
+TextureBlock -384.0 768.0 2 false
+TextureBlock -512.0 768.0 2 false
+TextureBlock -640.0 768.0 2 false
+TextureBlock -768.0 768.0 2 false
+TextureBlock -896.0 768.0 2 false
+TextureBlock -256.0 768.0 2 false
+TextureBlock 384.0 768.0 2 false
+TextureBlock -1024.0 768.0 2 false
+TextureBlock -1152.0 768.0 2 false
+TextureBlock -1152.0 384.0 1 false
+TextureBlock -1024.0 384.0 1 false
+TextureBlock -896.0 384.0 1 false
+TextureBlock -768.0 384.0 1 false
+TextureBlock -640.0 384.0 1 false
+TextureBlock -512.0 384.0 1 false
+TextureBlock -384.0 384.0 1 false
+TextureBlock -256.0 384.0 1 false
+TextureBlock -128.0 384.0 1 false
+TextureBlock 0.0 384.0 1 false
+TextureBlock 128.0 384.0 1 false
+TextureBlock 256.0 384.0 1 false
+TextureBlock 384.0 384.0 1 false
+TextureBlock 640.0 384.0 1 false
+TextureBlock 768.0 384.0 1 false
+TextureBlock 896.0 384.0 1 false
+TextureBlock 1024.0 384.0 1 false
+TextureBlock 1152.0 384.0 1 false
+TextureBlock 2304.0 0.0 0 false
+TextureBlock 2432.0 0.0 0 false
+TextureBlock 2560.0 0.0 0 false
+TextureBlock 2688.0 0.0 0 false
+TextureBlock 2816.0 0.0 0 false
+TextureBlock 2944.0 0.0 0 false
+TextureBlock 3072.0 0.0 0 false
+TextureBlock 3200.0 0.0 0 false
+TextureBlock 3328.0 0.0 0 false
+TextureBlock 3456.0 0.0 0 false
+TextureBlock 3584.0 0.0 0 false
+TextureBlock 3712.0 0.0 0 false
+TextureBlock 3840.0 0.0 0 false
+TextureBlock 3968.0 0.0 0 false
+TextureBlock 4096.0 0.0 0 false
+TextureBlock 2304.0 128.0 2 false
+TextureBlock 2304.0 256.0 2 false
+TextureBlock 2304.0 384.0 2 false
+TextureBlock 2304.0 512.0 2 false
+TextureBlock 2304.0 640.0 2 false
+TextureBlock 2432.0 768.0 2 false
+TextureBlock 2304.0 768.0 2 false
+TextureBlock 2432.0 640.0 2 false
+TextureBlock 2432.0 512.0 2 false
+TextureBlock 2432.0 384.0 2 false
+TextureBlock 2432.0 256.0 2 false
+TextureBlock 2432.0 128.0 2 false
+TextureBlock 2560.0 128.0 2 false
+TextureBlock 2560.0 256.0 2 false
+TextureBlock 2560.0 384.0 2 false
+TextureBlock 2560.0 512.0 2 false
+TextureBlock 2560.0 640.0 2 false
+TextureBlock 2560.0 768.0 2 false
+TextureBlock 2688.0 768.0 2 false
+TextureBlock 2688.0 640.0 2 false
+TextureBlock 2688.0 512.0 2 false
+TextureBlock 2688.0 384.0 2 false
+TextureBlock 2688.0 256.0 2 false
+TextureBlock 2688.0 128.0 2 false
+TextureBlock 2816.0 128.0 2 false
+TextureBlock 2816.0 256.0 2 false
+TextureBlock 2816.0 384.0 2 false
+TextureBlock 2816.0 512.0 2 false
+TextureBlock 2816.0 640.0 2 false
+TextureBlock 2816.0 768.0 2 false
+TextureBlock 2944.0 768.0 2 false
+TextureBlock 2944.0 640.0 2 false
+TextureBlock 2944.0 512.0 2 false
+TextureBlock 2944.0 384.0 2 false
+TextureBlock 2944.0 256.0 2 false
+TextureBlock 2944.0 128.0 2 false
+TextureBlock 3072.0 128.0 2 false
+TextureBlock 3072.0 256.0 2 false
+TextureBlock 3072.0 384.0 2 false
+TextureBlock 3072.0 512.0 2 false
+TextureBlock 3072.0 640.0 2 false
+TextureBlock 3072.0 768.0 2 false
+TextureBlock 3200.0 768.0 2 false
+TextureBlock 3200.0 640.0 2 false
+TextureBlock 3200.0 512.0 2 false
+TextureBlock 3200.0 384.0 2 false
+TextureBlock 3200.0 256.0 2 false
+TextureBlock 3200.0 128.0 2 false
+TextureBlock 3328.0 128.0 2 false
+TextureBlock 3328.0 256.0 2 false
+TextureBlock 3328.0 384.0 2 false
+TextureBlock 3328.0 512.0 2 false
+TextureBlock 3328.0 640.0 2 false
+TextureBlock 3328.0 768.0 2 false
+TextureBlock 3456.0 768.0 2 false
+TextureBlock 3456.0 640.0 2 false
+TextureBlock 3456.0 512.0 2 false
+TextureBlock 3456.0 384.0 2 false
+TextureBlock 3456.0 256.0 2 false
+TextureBlock 3456.0 128.0 2 false
+TextureBlock 3584.0 128.0 2 false
+TextureBlock 3584.0 256.0 2 false
+TextureBlock 3584.0 384.0 2 false
+TextureBlock 3584.0 512.0 2 false
+TextureBlock 3584.0 640.0 2 false
+TextureBlock 3584.0 768.0 2 false
+TextureBlock 3712.0 768.0 2 false
+TextureBlock 4096.0 512.0 2 false
+TextureBlock 4096.0 640.0 2 false
+TextureBlock 4096.0 768.0 2 false
+TextureBlock 4096.0 128.0 2 false
+TextureBlock 4096.0 256.0 2 false
+TextureBlock 4096.0 384.0 2 false
+TextureBlock 3968.0 128.0 2 false
+TextureBlock 3840.0 128.0 2 false
+TextureBlock 3712.0 128.0 2 false
+TextureBlock 3712.0 256.0 2 false
+TextureBlock 3840.0 256.0 2 false
+TextureBlock 3968.0 256.0 2 false
+TextureBlock 3968.0 384.0 2 false
+TextureBlock 3840.0 384.0 2 false
+TextureBlock 3712.0 384.0 2 false
+TextureBlock 3712.0 512.0 2 false
+TextureBlock 3840.0 512.0 2 false
+TextureBlock 3968.0 512.0 2 false
+TextureBlock 3968.0 640.0 2 false
+TextureBlock 3840.0 640.0 2 false
+TextureBlock 3712.0 640.0 2 false
+TextureBlock 3840.0 768.0 2 false
+TextureBlock 3968.0 768.0 2 false
+TextureBlock 4224.0 128.0 2 false
+TextureBlock 4352.0 128.0 2 false
+TextureBlock 4352.0 256.0 2 false
+TextureBlock 4224.0 256.0 2 false
+TextureBlock 4224.0 384.0 2 false
+TextureBlock 4352.0 384.0 2 false
+TextureBlock 4352.0 512.0 2 false
+TextureBlock 4224.0 512.0 2 false
+TextureBlock 4352.0 640.0 2 false
+TextureBlock 4224.0 640.0 2 false
+TextureBlock 4352.0 768.0 2 false
+TextureBlock 4224.0 768.0 2 false
+TextureBlock 4224.0 0.0 0 false
+TextureBlock 4352.0 0.0 0 false
+TextureBlock 2304.0 -128.0 1 false
+TextureBlock 2432.0 -128.0 1 false
+TextureBlock 2560.0 -128.0 1 false
+TextureBlock 2688.0 -128.0 1 false
+TextureBlock 2816.0 -128.0 1 false
+TextureBlock 2944.0 -128.0 1 false
+TextureBlock 3072.0 -128.0 1 false
+TextureBlock 3200.0 -128.0 1 false
+TextureBlock 3328.0 -128.0 1 false
+TextureBlock 3456.0 -128.0 1 false
+TextureBlock 3584.0 -128.0 1 false
+TextureBlock 3712.0 -128.0 1 false
+TextureBlock 3840.0 -128.0 1 false
+TextureBlock 3968.0 -128.0 1 false
+TextureBlock 4096.0 -128.0 1 false
+TextureBlock 4224.0 -128.0 1 false
+TextureBlock 4352.0 -128.0 1 false
+TextureBlock -1152.0 896.0 2 false
+TextureBlock -1024.0 896.0 2 false
+TextureBlock -896.0 896.0 2 false
+TextureBlock -768.0 896.0 2 false
+TextureBlock -384.0 896.0 2 false
+TextureBlock -640.0 896.0 2 false
+TextureBlock -512.0 896.0 2 false
+TextureBlock -256.0 896.0 2 false
+TextureBlock 0.0 896.0 2 false
+TextureBlock 896.0 896.0 2 false
+TextureBlock 1152.0 896.0 2 false
+TextureBlock 1408.0 896.0 2 false
+TextureBlock 1664.0 896.0 2 false
+TextureBlock 2048.0 896.0 2 false
+TextureBlock 2432.0 896.0 2 false
+TextureBlock 2688.0 896.0 2 false
+TextureBlock 3072.0 896.0 2 false
+TextureBlock 3968.0 896.0 2 false
+TextureBlock 4224.0 896.0 2 false
+TextureBlock 4352.0 896.0 2 false
+TextureBlock 4096.0 896.0 2 false
+TextureBlock 3840.0 896.0 2 false
+TextureBlock 3712.0 896.0 2 false
+TextureBlock 3584.0 896.0 2 false
+TextureBlock 3328.0 896.0 2 false
+TextureBlock 3200.0 896.0 2 false
+TextureBlock 3456.0 896.0 2 false
+TextureBlock 2944.0 896.0 2 false
+TextureBlock 2816.0 896.0 2 false
+TextureBlock 2560.0 896.0 2 false
+TextureBlock 2304.0 896.0 2 false
+TextureBlock 2176.0 896.0 2 false
+TextureBlock 1920.0 896.0 2 false
+TextureBlock 1792.0 896.0 2 false
+TextureBlock 1536.0 896.0 2 false
+TextureBlock 1280.0 896.0 2 false
+TextureBlock 1024.0 896.0 2 false
+TextureBlock 768.0 896.0 2 false
+TextureBlock 512.0 896.0 2 false
+TextureBlock 640.0 896.0 2 false
+TextureBlock 384.0 896.0 2 false
+TextureBlock 256.0 896.0 2 false
+TextureBlock 128.0 896.0 2 false
+TextureBlock -128.0 896.0 2 false
+TextureBlock 512.0 384.0 1 false
+TextureBlock -768.0 512.0 0 false
+TextureBlock 2816.0 -768.0 0 false
+TextureBlock 2816.0 -640.0 2 false
+TextureBlock 2816.0 -512.0 2 false
+TextureBlock 2816.0 -384.0 2 false
+TextureBlock 8448.0 0.0 0 false
+TextureBlock 8320.0 0.0 0 false
+TextureBlock 8192.0 0.0 0 false
+TextureBlock 8064.0 0.0 0 false
+TextureBlock 7936.0 0.0 0 false
+TextureBlock 7808.0 0.0 0 false
+TextureBlock 7680.0 0.0 0 false
+TextureBlock 7552.0 0.0 0 false
+TextureBlock 7424.0 0.0 0 false
+TextureBlock 7296.0 0.0 0 false
+TextureBlock 7168.0 0.0 0 false
+TextureBlock 7040.0 0.0 0 false
+TextureBlock 6912.0 0.0 0 false
+TextureBlock 6784.0 0.0 0 false
+TextureBlock 6656.0 0.0 0 false
+TextureBlock 6528.0 0.0 0 false
+TextureBlock 6400.0 0.0 0 false
+TextureBlock 6272.0 0.0 0 false
+TextureBlock 6144.0 0.0 0 false
+TextureBlock 6016.0 0.0 0 false
+TextureBlock 5888.0 0.0 0 false
+TextureBlock 5760.0 0.0 0 false
+TextureBlock 5632.0 0.0 0 false
+TextureBlock 5504.0 0.0 0 false
+TextureBlock 5376.0 0.0 0 false
+TextureBlock 5248.0 0.0 0 false
+TextureBlock 5120.0 0.0 0 false
+TextureBlock 4992.0 0.0 0 false
+TextureBlock 4864.0 0.0 0 false
+TextureBlock 4736.0 0.0 0 false
+TextureBlock 4480.0 0.0 0 false
+TextureBlock 4608.0 0.0 0 false
+TextureBlock 8576.0 -128.0 3 false
+TextureBlock 8832.0 -256.0 3 false
+TextureBlock 9088.0 -384.0 3 false
+TextureBlock 8704.0 -128.0 4 false
+TextureBlock 8960.0 -256.0 4 false
+TextureBlock 9216.0 -384.0 4 false
+TextureBlock 8576.0 0.0 5 false
+TextureBlock 8832.0 -128.0 5 false
+TextureBlock 9088.0 -256.0 5 false
+TextureBlock 8704.0 0.0 2 false
+TextureBlock 8832.0 0.0 2 false
+TextureBlock 8960.0 0.0 2 false
+TextureBlock 9216.0 -256.0 2 false
+TextureBlock 9088.0 -128.0 2 false
+TextureBlock 8960.0 -128.0 2 false
+TextureBlock 9344.0 -384.0 0 false
+TextureBlock 9472.0 -384.0 0 false
+TextureBlock 9600.0 -384.0 0 false
+TextureBlock 9728.0 -384.0 0 false
+TextureBlock 10624.0 -384.0 0 false
+TextureBlock 10496.0 -384.0 0 false
+TextureBlock 10368.0 -384.0 0 false
+TextureBlock 10240.0 -384.0 0 false
+TextureBlock 10112.0 -384.0 0 false
+TextureBlock 9984.0 -384.0 0 false
+TextureBlock 9856.0 -384.0 0 false
+TextureBlock 9344.0 -256.0 2 false
+TextureBlock 9472.0 -256.0 2 false
+TextureBlock 10368.0 256.0 2 false
+TextureBlock 10368.0 128.0 2 false
+TextureBlock 10368.0 0.0 2 false
+TextureBlock 10368.0 -128.0 2 false
+TextureBlock 10368.0 -256.0 2 false
+TextureBlock 10496.0 -256.0 2 false
+TextureBlock 10624.0 -256.0 2 false
+TextureBlock 10496.0 -128.0 2 false
+TextureBlock 10496.0 0.0 2 false
+TextureBlock 10368.0 384.0 2 false
+TextureBlock 10368.0 512.0 2 false
+TextureBlock 10496.0 768.0 2 false
+TextureBlock 10624.0 896.0 2 false
+TextureBlock 10752.0 896.0 2 false
+TextureBlock 10368.0 640.0 2 false
+TextureBlock 10880.0 896.0 2 false
+TextureBlock 11008.0 768.0 2 false
+TextureBlock 12288.0 128.0 2 false
+TextureBlock 12160.0 128.0 2 false
+TextureBlock 12032.0 128.0 2 false
+TextureBlock 11904.0 128.0 2 false
+TextureBlock 11776.0 128.0 2 false
+TextureBlock 11648.0 128.0 2 false
+TextureBlock 11520.0 128.0 2 false
+TextureBlock 11392.0 128.0 2 false
+TextureBlock 11392.0 0.0 0 false
+TextureBlock 11520.0 0.0 0 false
+TextureBlock 11648.0 0.0 0 false
+TextureBlock 11776.0 0.0 0 false
+TextureBlock 11904.0 0.0 0 false
+TextureBlock 12032.0 0.0 0 false
+TextureBlock 12160.0 0.0 0 false
+TextureBlock 12288.0 0.0 0 false
+TextureBlock 13568.0 0.0 0 false
+TextureBlock 13440.0 0.0 0 false
+TextureBlock 13312.0 0.0 0 false
+TextureBlock 13184.0 0.0 0 false
+TextureBlock 13056.0 0.0 0 false
+TextureBlock 12928.0 0.0 0 false
+TextureBlock 12800.0 0.0 0 false
+TextureBlock 12672.0 0.0 0 false
+TextureBlock 12544.0 0.0 0 false
+TextureBlock 12416.0 0.0 0 false
+TextureBlock 11392.0 256.0 2 false
+TextureBlock 11392.0 384.0 2 false
+TextureBlock 11392.0 640.0 2 false
+TextureBlock 11392.0 512.0 2 false
+TextureBlock 13696.0 -512.0 2 false
+TextureBlock 13696.0 -384.0 2 false
+TextureBlock 13056.0 -1664.0 2 false
+TextureBlock 13184.0 -1536.0 2 false
+TextureBlock 13312.0 -1408.0 2 false
+TextureBlock 13440.0 -1280.0 2 false
+TextureBlock 13568.0 -1152.0 2 false
+TextureBlock 13568.0 -1024.0 2 false
+TextureBlock 13696.0 -896.0 2 false
+TextureBlock 13696.0 -768.0 2 false
+TextureBlock 13568.0 -896.0 2 false
+TextureBlock 13440.0 -1152.0 2 false
+TextureBlock 13312.0 -1280.0 2 false
+TextureBlock 13696.0 -640.0 2 false
+TextureBlock 13568.0 -768.0 2 false
+TextureBlock 9600.0 -256.0 2 false
+TextureBlock 9728.0 -256.0 2 false
+TextureBlock 9856.0 -256.0 2 false
+TextureBlock 9984.0 -256.0 2 false
+TextureBlock 10112.0 -256.0 2 false
+TextureBlock 10240.0 -256.0 2 false
+TextureBlock 10240.0 -128.0 2 false
+TextureBlock 10112.0 -128.0 2 false
+TextureBlock 9984.0 -128.0 2 false
+TextureBlock 9856.0 -128.0 2 false
+TextureBlock 9728.0 -128.0 2 false
+TextureBlock 9600.0 -128.0 2 false
+TextureBlock 9472.0 -128.0 2 false
+TextureBlock 9344.0 -128.0 2 false
+TextureBlock 9216.0 -128.0 2 false
+TextureBlock 9088.0 0.0 2 false
+TextureBlock 9216.0 0.0 2 false
+TextureBlock 9344.0 0.0 2 false
+TextureBlock 9600.0 0.0 2 false
+TextureBlock 9856.0 0.0 2 false
+TextureBlock 9984.0 0.0 2 false
+TextureBlock 10240.0 0.0 2 false
+TextureBlock 10112.0 0.0 2 false
+TextureBlock 9728.0 0.0 2 false
+TextureBlock 9472.0 0.0 2 false
+TextureBlock 10240.0 128.0 2 false
+TextureBlock 10240.0 256.0 2 false
+TextureBlock 10240.0 384.0 2 false
+TextureBlock 10112.0 128.0 2 false
+TextureBlock 10112.0 256.0 2 false
+TextureBlock 10112.0 384.0 2 false
+TextureBlock 9984.0 128.0 2 false
+TextureBlock 9984.0 256.0 2 false
+TextureBlock 9984.0 384.0 2 false
+TextureBlock 9856.0 128.0 2 false
+TextureBlock 9856.0 256.0 2 false
+TextureBlock 9856.0 384.0 2 false
+TextureBlock 9728.0 128.0 2 false
+TextureBlock 9728.0 256.0 2 false
+TextureBlock 9728.0 384.0 2 false
+TextureBlock 9600.0 128.0 2 false
+TextureBlock 9472.0 128.0 2 false
+TextureBlock 9600.0 256.0 2 false
+TextureBlock 9600.0 384.0 2 false
+TextureBlock 9344.0 384.0 2 false
+TextureBlock 9472.0 256.0 2 false
+TextureBlock 9472.0 384.0 2 false
+TextureBlock 9344.0 256.0 2 false
+TextureBlock 9344.0 128.0 2 false
+TextureBlock 9216.0 128.0 2 false
+TextureBlock 9216.0 256.0 2 false
+TextureBlock 9088.0 128.0 2 false
+TextureBlock 8960.0 128.0 2 false
+TextureBlock 7808.0 128.0 2 false
+TextureBlock 7936.0 128.0 2 false
+TextureBlock 8064.0 128.0 2 false
+TextureBlock 8192.0 128.0 2 false
+TextureBlock 8320.0 128.0 2 false
+TextureBlock 8448.0 128.0 2 false
+TextureBlock 8576.0 128.0 2 false
+TextureBlock 8704.0 128.0 2 false
+TextureBlock 8832.0 128.0 2 false
+TextureBlock 9088.0 256.0 2 false
+TextureBlock 8832.0 256.0 2 false
+TextureBlock 8704.0 256.0 2 false
+TextureBlock 8576.0 256.0 2 false
+TextureBlock 8448.0 256.0 2 false
+TextureBlock 8192.0 256.0 2 false
+TextureBlock 8064.0 256.0 2 false
+TextureBlock 7808.0 256.0 2 false
+TextureBlock 7936.0 256.0 2 false
+TextureBlock 8320.0 256.0 2 false
+TextureBlock 8960.0 256.0 2 false
+TextureBlock 7808.0 384.0 2 false
+TextureBlock 7936.0 384.0 2 false
+TextureBlock 8064.0 384.0 2 false
+TextureBlock 8192.0 384.0 2 false
+TextureBlock 8320.0 384.0 2 false
+TextureBlock 8448.0 384.0 2 false
+TextureBlock 8576.0 384.0 2 false
+TextureBlock 8704.0 384.0 2 false
+TextureBlock 8832.0 384.0 2 false
+TextureBlock 8960.0 384.0 2 false
+TextureBlock 9216.0 384.0 2 false
+TextureBlock 9088.0 384.0 2 false
+TextureBlock 12416.0 128.0 2 false
+TextureBlock 12416.0 256.0 2 false
+TextureBlock 12288.0 256.0 2 false
+TextureBlock 12160.0 256.0 2 false
+TextureBlock 12032.0 256.0 2 false
+TextureBlock 11904.0 256.0 2 false
+TextureBlock 11776.0 256.0 2 false
+TextureBlock 11648.0 256.0 2 false
+TextureBlock 11520.0 256.0 2 false
+TextureBlock 12544.0 256.0 2 false
+TextureBlock 12672.0 256.0 2 false
+TextureBlock 12800.0 128.0 2 false
+TextureBlock 12672.0 128.0 2 false
+TextureBlock 12544.0 128.0 2 false
+TextureBlock 12800.0 256.0 2 false
+TextureBlock 12928.0 128.0 2 false
+TextureBlock 13056.0 256.0 2 false
+TextureBlock 13312.0 128.0 2 false
+TextureBlock 13440.0 128.0 2 false
+TextureBlock 13568.0 128.0 2 false
+TextureBlock 13568.0 256.0 2 false
+TextureBlock 13440.0 256.0 2 false
+TextureBlock 13312.0 256.0 2 false
+TextureBlock 13184.0 256.0 2 false
+TextureBlock 13184.0 128.0 2 false
+TextureBlock 13056.0 128.0 2 false
+TextureBlock 12928.0 256.0 2 false
+TextureBlock 11520.0 384.0 2 false
+TextureBlock 11648.0 384.0 2 false
+TextureBlock 11904.0 384.0 2 false
+TextureBlock 12288.0 384.0 2 false
+TextureBlock 12416.0 384.0 2 false
+TextureBlock 12928.0 384.0 2 false
+TextureBlock 13184.0 384.0 2 false
+TextureBlock 13440.0 384.0 2 false
+TextureBlock 13568.0 384.0 2 false
+TextureBlock 13696.0 384.0 2 false
+TextureBlock 13312.0 384.0 2 false
+TextureBlock 13056.0 384.0 2 false
+TextureBlock 12672.0 384.0 2 false
+TextureBlock 12800.0 384.0 2 false
+TextureBlock 12544.0 384.0 2 false
+TextureBlock 12160.0 384.0 2 false
+TextureBlock 12032.0 384.0 2 false
+TextureBlock 11776.0 384.0 2 false
+TextureBlock 15232.0 768.0 6 false
+TextureBlock 15360.0 768.0 6 false
+TextureBlock 15488.0 768.0 6 false
+TextureBlock 15616.0 768.0 6 false
+TextureBlock 15744.0 768.0 6 false
+TextureBlock 15872.0 768.0 6 false
+TextureBlock 15104.0 768.0 6 false
+TextureBlock 14976.0 768.0 6 false
+TextureBlock 14848.0 768.0 6 false
+TextureBlock 14720.0 768.0 6 false
+TextureBlock 14592.0 768.0 6 false
+TextureBlock 14464.0 768.0 6 false
+TextureBlock 14208.0 768.0 6 false
+TextureBlock 14080.0 768.0 6 false
+TextureBlock 14336.0 768.0 6 false
+TextureBlock 13952.0 768.0 6 false
+TextureBlock 13952.0 640.0 6 false
+TextureBlock 13952.0 512.0 6 false
+TextureBlock 13952.0 384.0 6 false
+TextureBlock 13952.0 256.0 6 false
+TextureBlock 13952.0 128.0 6 false
+TextureBlock 14080.0 384.0 6 false
+TextureBlock 14080.0 512.0 6 false
+TextureBlock 14080.0 640.0 6 false
+TextureBlock 14208.0 640.0 6 false
+TextureBlock 14208.0 512.0 6 false
+TextureBlock 14336.0 640.0 6 false
+TextureBlock 14336.0 512.0 6 false
+TextureBlock 14208.0 384.0 6 false
+TextureBlock 14208.0 256.0 6 false
+TextureBlock 14336.0 384.0 6 false
+TextureBlock 14464.0 384.0 6 false
+TextureBlock 14464.0 512.0 6 false
+TextureBlock 14592.0 640.0 6 false
+TextureBlock 14592.0 512.0 6 false
+TextureBlock 14464.0 640.0 6 false
+TextureBlock 14720.0 512.0 6 false
+TextureBlock 14720.0 640.0 6 false
+TextureBlock 14976.0 640.0 6 false
+TextureBlock 14848.0 640.0 6 false
+TextureBlock 15872.0 512.0 7 true
+TextureBlock 15744.0 512.0 7 true
+TextureBlock 15616.0 512.0 7 true
+TextureBlock 15488.0 512.0 7 true
+TextureBlock 15360.0 512.0 7 true
+TextureBlock 15232.0 512.0 7 true
+TextureBlock 15232.0 384.0 7 true
+TextureBlock 15360.0 384.0 7 true
+TextureBlock 15104.0 384.0 7 true
+TextureBlock 15104.0 256.0 7 true
+TextureBlock 15232.0 256.0 7 true
+TextureBlock 15360.0 256.0 7 true
+TextureBlock 15488.0 256.0 7 true
+TextureBlock 15488.0 384.0 7 true
+TextureBlock 15616.0 384.0 7 true
+TextureBlock 15616.0 256.0 7 true
+TextureBlock 15744.0 256.0 7 true
+TextureBlock 15744.0 384.0 7 true
+TextureBlock 15872.0 384.0 7 true
+TextureBlock 15872.0 256.0 7 true
+TextureBlock 15872.0 128.0 7 true
+TextureBlock 15744.0 128.0 7 true
+TextureBlock 15616.0 128.0 7 true
+TextureBlock 15488.0 128.0 7 true
+TextureBlock 15360.0 128.0 7 true
+TextureBlock 15232.0 128.0 7 true
+TextureBlock 15104.0 128.0 7 true
+TextureBlock 17920.0 768.0 6 false
+TextureBlock 17792.0 768.0 6 false
+TextureBlock 17664.0 768.0 6 false
+TextureBlock 17536.0 768.0 6 false
+TextureBlock 17408.0 768.0 6 false
+TextureBlock 17280.0 768.0 6 false
+TextureBlock 17152.0 768.0 6 false
+TextureBlock 17024.0 768.0 6 false
+TextureBlock 16896.0 768.0 6 false
+TextureBlock 16768.0 768.0 6 false
+TextureBlock 16640.0 768.0 6 false
+TextureBlock 16512.0 768.0 6 false
+TextureBlock 16384.0 768.0 6 false
+TextureBlock 16256.0 768.0 6 false
+TextureBlock 16128.0 768.0 6 false
+TextureBlock 16000.0 768.0 6 false
+TextureBlock 16000.0 128.0 7 true
+TextureBlock 16000.0 256.0 7 true
+TextureBlock 16000.0 384.0 7 true
+TextureBlock 16000.0 512.0 7 true
+TextureBlock 16128.0 512.0 7 true
+TextureBlock 16128.0 384.0 7 true
+TextureBlock 16128.0 256.0 7 true
+TextureBlock 16128.0 128.0 7 true
+TextureBlock 16256.0 128.0 7 true
+TextureBlock 16256.0 256.0 7 true
+TextureBlock 16256.0 384.0 7 true
+TextureBlock 16256.0 512.0 7 true
+TextureBlock 16384.0 512.0 7 true
+TextureBlock 16384.0 384.0 7 true
+TextureBlock 16384.0 256.0 7 true
+TextureBlock 16384.0 128.0 7 true
+TextureBlock 16512.0 128.0 7 true
+TextureBlock 16512.0 256.0 7 true
+TextureBlock 16512.0 384.0 7 true
+TextureBlock 16512.0 512.0 7 true
+TextureBlock 16640.0 512.0 7 true
+TextureBlock 16640.0 384.0 7 true
+TextureBlock 16640.0 128.0 7 true
+TextureBlock 16768.0 128.0 7 true
+TextureBlock 16768.0 256.0 7 true
+TextureBlock 16640.0 256.0 7 true
+TextureBlock 16768.0 384.0 7 true
+TextureBlock 16768.0 512.0 7 true
+TextureBlock 16896.0 512.0 7 true
+TextureBlock 16896.0 384.0 7 true
+TextureBlock 16896.0 256.0 7 true
+TextureBlock 16896.0 128.0 7 true
+TextureBlock 17024.0 128.0 7 true
+TextureBlock 17024.0 256.0 7 true
+TextureBlock 17024.0 512.0 7 true
+TextureBlock 17024.0 384.0 7 true
+TextureBlock 17152.0 512.0 7 true
+TextureBlock 17152.0 384.0 7 true
+TextureBlock 17280.0 384.0 7 true
+TextureBlock 17408.0 384.0 7 true
+TextureBlock 17536.0 512.0 7 true
+TextureBlock 17664.0 384.0 7 true
+TextureBlock 17920.0 384.0 7 true
+TextureBlock 17920.0 512.0 7 true
+TextureBlock 17792.0 512.0 7 true
+TextureBlock 17792.0 384.0 7 true
+TextureBlock 17664.0 512.0 7 true
+TextureBlock 17536.0 384.0 7 true
+TextureBlock 17408.0 512.0 7 true
+TextureBlock 17280.0 512.0 7 true
+TextureBlock 17152.0 256.0 7 true
+TextureBlock 17152.0 128.0 7 true
+TextureBlock 17280.0 128.0 7 true
+TextureBlock 17280.0 256.0 7 true
+TextureBlock 17408.0 128.0 7 true
+TextureBlock 17536.0 128.0 7 true
+TextureBlock 17664.0 128.0 7 true
+TextureBlock 17792.0 128.0 7 true
+TextureBlock 17920.0 128.0 7 true
+TextureBlock 17920.0 256.0 7 true
+TextureBlock 17792.0 256.0 7 true
+TextureBlock 17536.0 256.0 7 true
+TextureBlock 17664.0 256.0 7 true
+TextureBlock 17408.0 256.0 7 true
+TextureBlock 15232.0 640.0 8 false
+TextureBlock 15360.0 640.0 8 false
+TextureBlock 15488.0 640.0 8 false
+TextureBlock 15616.0 640.0 8 false
+TextureBlock 15744.0 640.0 8 false
+TextureBlock 16000.0 640.0 8 false
+TextureBlock 15872.0 640.0 8 false
+TextureBlock 16128.0 640.0 8 false
+TextureBlock 16256.0 640.0 8 false
+TextureBlock 16384.0 640.0 8 false
+TextureBlock 16512.0 640.0 8 false
+TextureBlock 16640.0 640.0 8 false
+TextureBlock 16768.0 640.0 8 false
+TextureBlock 16896.0 640.0 8 false
+TextureBlock 17024.0 640.0 8 false
+TextureBlock 15232.0 896.0 6 false
+TextureBlock 15232.0 1024.0 6 false
+TextureBlock 15360.0 896.0 6 false
+TextureBlock 15360.0 1024.0 6 false
+TextureBlock 15488.0 1024.0 6 false
+TextureBlock 15488.0 896.0 6 false
+TextureBlock 15616.0 896.0 6 false
+TextureBlock 15616.0 1024.0 6 false
+TextureBlock 15744.0 1024.0 6 false
+TextureBlock 15744.0 896.0 6 false
+TextureBlock 15872.0 896.0 6 false
+TextureBlock 15872.0 1024.0 6 false
+TextureBlock 16000.0 1024.0 6 false
+TextureBlock 16000.0 896.0 6 false
+TextureBlock 16128.0 896.0 6 false
+TextureBlock 16128.0 1024.0 6 false
+TextureBlock 16256.0 1024.0 6 false
+TextureBlock 16256.0 896.0 6 false
+TextureBlock 16384.0 896.0 6 false
+TextureBlock 16384.0 1024.0 6 false
+TextureBlock 16512.0 1024.0 6 false
+TextureBlock 16640.0 896.0 6 false
+TextureBlock 16512.0 896.0 6 false
+TextureBlock 16640.0 1024.0 6 false
+TextureBlock 17920.0 896.0 6 false
+TextureBlock 17792.0 896.0 6 false
+TextureBlock 17792.0 1024.0 6 false
+TextureBlock 17664.0 1024.0 6 false
+TextureBlock 17664.0 896.0 6 false
+TextureBlock 17536.0 896.0 6 false
+TextureBlock 17408.0 1024.0 6 false
+TextureBlock 17408.0 896.0 6 false
+TextureBlock 17280.0 896.0 6 false
+TextureBlock 17152.0 896.0 6 false
+TextureBlock 16896.0 896.0 6 false
+TextureBlock 16768.0 896.0 6 false
+TextureBlock 17024.0 896.0 6 false
+TextureBlock 16768.0 1024.0 6 false
+TextureBlock 16896.0 1024.0 6 false
+TextureBlock 17024.0 1024.0 6 false
+TextureBlock 17152.0 1024.0 6 false
+TextureBlock 17280.0 1024.0 6 false
+TextureBlock 17536.0 1024.0 6 false
+TextureBlock 17920.0 1024.0 6 false
+TextureBlock 17152.0 640.0 8 false
+TextureBlock 17280.0 640.0 8 false
+TextureBlock 17408.0 640.0 8 false
+TextureBlock 17536.0 640.0 8 false
+TextureBlock 17664.0 640.0 8 false
+TextureBlock 17792.0 640.0 8 false
+TextureBlock 17920.0 640.0 8 false
+TextureBlock 15488.0 -128.0 7 true
+TextureBlock 15104.0 -128.0 7 true
+TextureBlock 15104.0 0.0 7 true
+TextureBlock 15232.0 -128.0 7 true
+TextureBlock 15232.0 0.0 7 true
+TextureBlock 15360.0 -128.0 7 true
+TextureBlock 15360.0 0.0 7 true
+TextureBlock 15616.0 -128.0 7 true
+TextureBlock 15616.0 0.0 7 true
+TextureBlock 15488.0 0.0 7 true
+TextureBlock 15744.0 -128.0 7 true
+TextureBlock 15744.0 0.0 7 true
+TextureBlock 15872.0 -128.0 7 true
+TextureBlock 15872.0 0.0 7 true
+TextureBlock 16128.0 -128.0 7 true
+TextureBlock 16128.0 0.0 7 true
+TextureBlock 16000.0 -128.0 7 true
+TextureBlock 16000.0 0.0 7 true
+TextureBlock 16384.0 -128.0 7 true
+TextureBlock 16256.0 -128.0 7 true
+TextureBlock 16256.0 0.0 7 true
+TextureBlock 16384.0 0.0 7 true
+TextureBlock 16640.0 0.0 7 true
+TextureBlock 16768.0 0.0 7 true
+TextureBlock 16896.0 0.0 7 true
+TextureBlock 17024.0 0.0 7 true
+TextureBlock 17152.0 0.0 7 true
+TextureBlock 17280.0 0.0 7 true
+TextureBlock 17408.0 0.0 7 true
+TextureBlock 17536.0 0.0 7 true
+TextureBlock 17664.0 0.0 7 true
+TextureBlock 17792.0 0.0 7 true
+TextureBlock 17920.0 0.0 7 true
+TextureBlock 17920.0 -128.0 7 true
+TextureBlock 17792.0 -128.0 7 true
+TextureBlock 17664.0 -128.0 7 true
+TextureBlock 17536.0 -128.0 7 true
+TextureBlock 17408.0 -128.0 7 true
+TextureBlock 17280.0 -128.0 7 true
+TextureBlock 17152.0 -128.0 7 true
+TextureBlock 17024.0 -128.0 7 true
+TextureBlock 16896.0 -128.0 7 true
+TextureBlock 16768.0 -128.0 7 true
+TextureBlock 16640.0 -128.0 7 true
+TextureBlock 16512.0 0.0 7 true
+TextureBlock 16512.0 -128.0 7 true
+TextureBlock 15104.0 -256.0 7 true
+TextureBlock 15104.0 -384.0 7 true
+TextureBlock 15232.0 -384.0 7 true
+TextureBlock 15232.0 -256.0 7 true
+TextureBlock 15360.0 -256.0 7 true
+TextureBlock 15360.0 -384.0 7 true
+TextureBlock 15488.0 -384.0 7 true
+TextureBlock 15488.0 -256.0 7 true
+TextureBlock 15616.0 -256.0 7 true
+TextureBlock 15616.0 -384.0 7 true
+TextureBlock 15744.0 -384.0 7 true
+TextureBlock 15744.0 -256.0 7 true
+TextureBlock 15872.0 -256.0 7 true
+TextureBlock 15872.0 -384.0 7 true
+TextureBlock 16128.0 -384.0 7 true
+TextureBlock 16000.0 -256.0 7 true
+TextureBlock 16000.0 -384.0 7 true
+TextureBlock 16128.0 -256.0 7 true
+TextureBlock 16384.0 -384.0 7 true
+TextureBlock 16384.0 -256.0 7 true
+TextureBlock 16256.0 -384.0 7 true
+TextureBlock 16256.0 -256.0 7 true
+TextureBlock 16512.0 -384.0 7 true
+TextureBlock 16640.0 -256.0 7 true
+TextureBlock 16640.0 -384.0 7 true
+TextureBlock 16768.0 -384.0 7 true
+TextureBlock 17152.0 -384.0 7 true
+TextureBlock 17408.0 -384.0 7 true
+TextureBlock 17664.0 -384.0 7 true
+TextureBlock 17920.0 -256.0 7 true
+TextureBlock 17920.0 -384.0 7 true
+TextureBlock 17792.0 -384.0 7 true
+TextureBlock 17792.0 -256.0 7 true
+TextureBlock 17664.0 -256.0 7 true
+TextureBlock 17536.0 -256.0 7 true
+TextureBlock 17536.0 -384.0 7 true
+TextureBlock 17408.0 -256.0 7 true
+TextureBlock 17280.0 -384.0 7 true
+TextureBlock 17280.0 -256.0 7 true
+TextureBlock 17152.0 -256.0 7 true
+TextureBlock 17024.0 -384.0 7 true
+TextureBlock 17024.0 -256.0 7 true
+TextureBlock 16896.0 -384.0 7 true
+TextureBlock 16896.0 -256.0 7 true
+TextureBlock 16768.0 -256.0 7 true
+TextureBlock 16512.0 -256.0 7 true
+TextureBlock 15104.0 -512.0 7 true
+TextureBlock 15232.0 -512.0 7 true
+TextureBlock 15360.0 -512.0 7 true
+TextureBlock 15488.0 -512.0 7 true
+TextureBlock 15616.0 -512.0 7 true
+TextureBlock 15744.0 -512.0 7 true
+TextureBlock 15872.0 -512.0 7 true
+TextureBlock 16000.0 -512.0 7 true
+TextureBlock 16128.0 -512.0 7 true
+TextureBlock 16256.0 -512.0 7 true
+TextureBlock 16384.0 -512.0 7 true
+TextureBlock 16512.0 -512.0 7 true
+TextureBlock 16640.0 -512.0 7 true
+TextureBlock 16768.0 -512.0 7 true
+TextureBlock 16896.0 -512.0 7 true
+TextureBlock 17024.0 -512.0 7 true
+TextureBlock 17152.0 -512.0 7 true
+TextureBlock 17280.0 -512.0 7 true
+TextureBlock 17408.0 -512.0 7 true
+TextureBlock 17536.0 -512.0 7 true
+TextureBlock 17664.0 -512.0 7 true
+TextureBlock 17792.0 -512.0 7 true
+TextureBlock 17920.0 -512.0 7 true
+TextureBlock 15104.0 -640.0 7 true
+TextureBlock 15232.0 -640.0 7 true
+TextureBlock 15360.0 -640.0 7 true
+TextureBlock 15488.0 -640.0 7 true
+TextureBlock 15616.0 -640.0 7 true
+TextureBlock 15744.0 -640.0 7 true
+TextureBlock 15872.0 -640.0 7 true
+TextureBlock 16000.0 -640.0 7 true
+TextureBlock 16128.0 -640.0 7 true
+TextureBlock 16256.0 -640.0 7 true
+TextureBlock 16384.0 -640.0 7 true
+TextureBlock 16512.0 -640.0 7 true
+TextureBlock 16640.0 -640.0 7 true
+TextureBlock 16768.0 -640.0 7 true
+TextureBlock 16896.0 -640.0 7 true
+TextureBlock 17024.0 -640.0 7 true
+TextureBlock 17152.0 -640.0 7 true
+TextureBlock 17280.0 -640.0 7 true
+TextureBlock 17408.0 -640.0 7 true
+TextureBlock 17536.0 -640.0 7 true
+TextureBlock 17664.0 -640.0 7 true
+TextureBlock 17792.0 -640.0 7 true
+TextureBlock 17920.0 -640.0 7 true
+TextureBlock 7680.0 128.0 2 true
+TextureBlock 7680.0 256.0 2 true
+TextureBlock 7680.0 384.0 2 true
+TextureBlock 7552.0 384.0 2 true
+TextureBlock 7552.0 256.0 2 true
+TextureBlock 7552.0 128.0 2 true
+TextureBlock 7424.0 128.0 2 true
+TextureBlock 6784.0 128.0 2 true
+TextureBlock 6272.0 128.0 2 true
+TextureBlock 5888.0 128.0 2 true
+TextureBlock 5376.0 128.0 2 true
+TextureBlock 5248.0 128.0 2 true
+TextureBlock 5120.0 128.0 2 true
+TextureBlock 4480.0 128.0 2 true
+TextureBlock 4608.0 128.0 2 true
+TextureBlock 4736.0 128.0 2 true
+TextureBlock 4864.0 128.0 2 true
+TextureBlock 4992.0 128.0 2 true
+TextureBlock 5504.0 128.0 2 true
+TextureBlock 5632.0 128.0 2 true
+TextureBlock 5760.0 128.0 2 true
+TextureBlock 6016.0 128.0 2 true
+TextureBlock 6144.0 128.0 2 true
+TextureBlock 6400.0 128.0 2 true
+TextureBlock 6528.0 128.0 2 true
+TextureBlock 6656.0 128.0 2 true
+TextureBlock 7296.0 128.0 2 true
+TextureBlock 7168.0 128.0 2 true
+TextureBlock 7040.0 128.0 2 true
+TextureBlock 6912.0 128.0 2 true
+TextureBlock 7424.0 256.0 2 true
+TextureBlock 7424.0 384.0 2 true
+TextureBlock 7296.0 256.0 2 true
+TextureBlock 7296.0 384.0 2 true
+TextureBlock 7168.0 256.0 2 true
+TextureBlock 7168.0 384.0 2 true
+TextureBlock 7040.0 256.0 2 true
+TextureBlock 7040.0 384.0 2 true
+TextureBlock 6912.0 256.0 2 true
+TextureBlock 6912.0 384.0 2 true
+TextureBlock 6784.0 256.0 2 true
+TextureBlock 6784.0 384.0 2 true
+TextureBlock 6656.0 256.0 2 true
+TextureBlock 6656.0 384.0 2 true
+TextureBlock 6528.0 256.0 2 true
+TextureBlock 6528.0 384.0 2 true
+TextureBlock 6400.0 256.0 2 true
+TextureBlock 6400.0 384.0 2 true
+TextureBlock 6272.0 256.0 2 true
+TextureBlock 6272.0 384.0 2 true
+TextureBlock 6144.0 256.0 2 true
+TextureBlock 6144.0 384.0 2 true
+TextureBlock 6016.0 256.0 2 true
+TextureBlock 6016.0 384.0 2 true
+TextureBlock 5888.0 256.0 2 true
+TextureBlock 5888.0 384.0 2 true
+TextureBlock 5760.0 256.0 2 true
+TextureBlock 5760.0 384.0 2 true
+TextureBlock 5632.0 256.0 2 true
+TextureBlock 5632.0 384.0 2 true
+TextureBlock 5504.0 256.0 2 true
+TextureBlock 5504.0 384.0 2 true
+TextureBlock 5376.0 256.0 2 true
+TextureBlock 5376.0 384.0 2 true
+TextureBlock 5248.0 256.0 2 true
+TextureBlock 5248.0 384.0 2 true
+TextureBlock 5120.0 256.0 2 true
+TextureBlock 5120.0 384.0 2 true
+TextureBlock 4992.0 384.0 2 true
+TextureBlock 4864.0 384.0 2 true
+TextureBlock 4992.0 256.0 2 true
+TextureBlock 4864.0 256.0 2 true
+TextureBlock 4736.0 256.0 2 true
+TextureBlock 4608.0 256.0 2 true
+TextureBlock 4480.0 256.0 2 true
+TextureBlock 4480.0 384.0 2 true
+TextureBlock 4608.0 384.0 2 true
+TextureBlock 4736.0 384.0 2 true
+TextureBlock 4480.0 -128.0 1 true
+TextureBlock 4608.0 -128.0 1 true
+TextureBlock 4736.0 -128.0 1 true
+TextureBlock 4864.0 -128.0 1 true
+TextureBlock 4992.0 -128.0 1 true
+TextureBlock 5120.0 -128.0 1 true
+TextureBlock 5248.0 -128.0 1 true
+TextureBlock 5376.0 -128.0 1 true
+TextureBlock 5504.0 -128.0 1 true
+TextureBlock 5632.0 -128.0 1 true
+TextureBlock 5760.0 -128.0 1 true
+TextureBlock 5888.0 -128.0 1 true
+TextureBlock 6016.0 -128.0 1 true
+TextureBlock 6144.0 -128.0 1 true
+TextureBlock 6272.0 -128.0 1 true
+TextureBlock 6400.0 -128.0 1 true
+TextureBlock 6528.0 -128.0 1 true
+TextureBlock 6656.0 -128.0 1 true
+TextureBlock 6784.0 -128.0 1 true
+TextureBlock 6912.0 -128.0 1 true
+TextureBlock 7040.0 -128.0 1 true
+TextureBlock 7168.0 -128.0 1 true
+TextureBlock 7296.0 -128.0 1 true
+TextureBlock 7424.0 -128.0 1 true
+TextureBlock 7680.0 -128.0 1 true
+TextureBlock 7552.0 -128.0 1 true
+TextureBlock 7808.0 -128.0 1 true
+TextureBlock 7936.0 -128.0 1 true
+TextureBlock 8064.0 -128.0 1 true
+TextureBlock 8192.0 -128.0 1 true
+TextureBlock 8320.0 -128.0 1 true
+TextureBlock 8448.0 -128.0 1 true
+TextureBlock 9344.0 -512.0 1 true
+TextureBlock 9472.0 -512.0 1 true
+TextureBlock 9728.0 -512.0 1 true
+TextureBlock 9600.0 -512.0 1 true
+TextureBlock 9984.0 -512.0 1 true
+TextureBlock 9856.0 -512.0 1 true
+TextureBlock 10112.0 -512.0 1 true
+TextureBlock 10240.0 -512.0 1 true
+TextureBlock 10368.0 -512.0 1 true
+TextureBlock 10496.0 -512.0 1 true
+TextureBlock 10624.0 -512.0 1 true
+TextureBlock 11392.0 -128.0 1 true
+TextureBlock 11520.0 -128.0 1 true
+TextureBlock 11776.0 -128.0 1 true
+TextureBlock 12288.0 -128.0 1 true
+TextureBlock 12928.0 -128.0 1 true
+TextureBlock 13568.0 -128.0 1 true
+TextureBlock 13440.0 -128.0 1 true
+TextureBlock 13312.0 -128.0 1 true
+TextureBlock 13184.0 -128.0 1 true
+TextureBlock 13056.0 -128.0 1 true
+TextureBlock 12800.0 -128.0 1 true
+TextureBlock 12544.0 -128.0 1 true
+TextureBlock 12672.0 -128.0 1 true
+TextureBlock 12416.0 -128.0 1 true
+TextureBlock 12160.0 -128.0 1 true
+TextureBlock 12032.0 -128.0 1 true
+TextureBlock 11904.0 -128.0 1 true
+TextureBlock 11648.0 -128.0 1 true
+TextureBlock 14976.0 384.0 7 true
+TextureBlock 14976.0 256.0 7 true
+TextureBlock 14848.0 256.0 7 true
+TextureBlock 14720.0 256.0 7 true
+TextureBlock 14208.0 0.0 7 true
+TextureBlock 14336.0 0.0 7 true
+TextureBlock 14464.0 128.0 7 true
+TextureBlock 14464.0 0.0 7 true
+TextureBlock 14592.0 0.0 7 true
+TextureBlock 14592.0 128.0 7 true
+TextureBlock 14720.0 0.0 7 true
+TextureBlock 14720.0 128.0 7 true
+TextureBlock 14848.0 0.0 7 true
+TextureBlock 14848.0 128.0 7 true
+TextureBlock 14976.0 -128.0 7 true
+TextureBlock 14976.0 0.0 7 true
+TextureBlock 14976.0 128.0 7 true
+TextureBlock 14848.0 -128.0 7 true
+TextureBlock 14720.0 -128.0 7 true
+TextureBlock 14592.0 -128.0 7 true
+TextureBlock 14464.0 -128.0 7 true
+TextureBlock 14336.0 -128.0 7 true
+TextureBlock 14208.0 -128.0 7 true
+TextureBlock 14080.0 -128.0 7 true
+TextureBlock 13952.0 -128.0 7 true
+TextureBlock 13952.0 -256.0 7 true
+TextureBlock 13952.0 -384.0 7 true
+TextureBlock 13952.0 -512.0 7 true
+TextureBlock 13952.0 -640.0 7 true
+TextureBlock 13952.0 -768.0 7 true
+TextureBlock 14080.0 -768.0 7 true
+TextureBlock 14208.0 -768.0 7 true
+TextureBlock 14336.0 -768.0 7 true
+TextureBlock 14464.0 -768.0 7 true
+TextureBlock 14592.0 -768.0 7 true
+TextureBlock 14720.0 -768.0 7 true
+TextureBlock 14976.0 -768.0 7 true
+TextureBlock 14848.0 -768.0 7 true
+TextureBlock 14976.0 -640.0 7 true
+TextureBlock 14976.0 -512.0 7 true
+TextureBlock 14976.0 -384.0 7 true
+TextureBlock 14976.0 -256.0 7 true
+TextureBlock 14848.0 -256.0 7 true
+TextureBlock 14848.0 -384.0 7 true
+TextureBlock 14848.0 -512.0 7 true
+TextureBlock 14848.0 -640.0 7 true
+TextureBlock 14720.0 -640.0 7 true
+TextureBlock 14720.0 -512.0 7 true
+TextureBlock 14720.0 -384.0 7 true
+TextureBlock 14720.0 -256.0 7 true
+TextureBlock 14592.0 -256.0 7 true
+TextureBlock 14592.0 -384.0 7 true
+TextureBlock 14464.0 -640.0 7 true
+TextureBlock 14592.0 -640.0 7 true
+TextureBlock 14592.0 -512.0 7 true
+TextureBlock 14464.0 -512.0 7 true
+TextureBlock 14464.0 -384.0 7 true
+TextureBlock 14464.0 -256.0 7 true
+TextureBlock 14336.0 -256.0 7 true
+TextureBlock 14336.0 -384.0 7 true
+TextureBlock 14336.0 -512.0 7 true
+TextureBlock 14336.0 -640.0 7 true
+TextureBlock 14080.0 -640.0 7 true
+TextureBlock 14208.0 -640.0 7 true
+TextureBlock 14080.0 -384.0 7 true
+TextureBlock 14208.0 -384.0 7 true
+TextureBlock 14208.0 -512.0 7 true
+TextureBlock 14080.0 -512.0 7 true
+TextureBlock 14080.0 -256.0 7 true
+TextureBlock 14208.0 -256.0 7 true
+TextureBlock 13952.0 -896.0 7 true
+TextureBlock 14080.0 -896.0 7 true
+TextureBlock 14336.0 -896.0 7 true
+TextureBlock 14464.0 -896.0 7 true
+TextureBlock 14592.0 -896.0 7 true
+TextureBlock 14720.0 -896.0 7 true
+TextureBlock 14208.0 -896.0 7 true
+TextureBlock 14848.0 -896.0 7 true
+TextureBlock 14720.0 -1024.0 7 true
+TextureBlock 14592.0 -1024.0 7 true
+TextureBlock 14336.0 -1024.0 7 true
+TextureBlock 14208.0 -1024.0 7 true
+TextureBlock 14464.0 -1024.0 7 true
+TextureBlock 13952.0 -1024.0 7 true
+TextureBlock 14080.0 -1024.0 7 true
+TextureBlock 13952.0 -1152.0 7 true
+TextureBlock 14080.0 -1152.0 7 true
+TextureBlock 14208.0 -1152.0 7 true
+TextureBlock 14336.0 -1152.0 7 true
+TextureBlock 14592.0 -1152.0 7 true
+TextureBlock 14464.0 -1152.0 7 true
+TextureBlock 14208.0 -1280.0 7 true
+TextureBlock 14336.0 -1280.0 7 true
+TextureBlock 14080.0 -1280.0 7 true
+TextureBlock 13952.0 -1280.0 7 true
+TextureBlock 13952.0 -1408.0 7 true
+TextureBlock 14080.0 -1408.0 7 true
+TextureBlock 14848.0 -1024.0 7 true
+TextureBlock 14976.0 -896.0 7 true
+TextureBlock 15104.0 -896.0 7 true
+TextureBlock 15104.0 -768.0 7 true
+TextureBlock 15232.0 -768.0 7 true
+TextureBlock 15360.0 -768.0 7 true
+TextureBlock 14208.0 -1408.0 7 true
+TextureBlock 14336.0 -1408.0 7 true
+TextureBlock 14464.0 -1408.0 7 true
+TextureBlock 14592.0 -1408.0 7 true
+TextureBlock 14720.0 -1408.0 7 true
+TextureBlock 14848.0 -1408.0 7 true
+TextureBlock 15104.0 -1408.0 7 true
+TextureBlock 15232.0 -1408.0 7 true
+TextureBlock 15360.0 -1408.0 7 true
+TextureBlock 15744.0 -1408.0 7 true
+TextureBlock 15872.0 -1408.0 7 true
+TextureBlock 16384.0 -1408.0 7 true
+TextureBlock 16512.0 -1408.0 7 true
+TextureBlock 16512.0 -1152.0 7 true
+TextureBlock 16512.0 -1024.0 7 true
+TextureBlock 16512.0 -896.0 7 true
+TextureBlock 16512.0 -768.0 7 true
+TextureBlock 16512.0 -1280.0 7 true
+TextureBlock 16384.0 -1280.0 7 true
+TextureBlock 16384.0 -1152.0 7 true
+TextureBlock 16384.0 -1024.0 7 true
+TextureBlock 16256.0 -768.0 7 true
+TextureBlock 16384.0 -896.0 7 true
+TextureBlock 16384.0 -768.0 7 true
+TextureBlock 16256.0 -896.0 7 true
+TextureBlock 16256.0 -1024.0 7 true
+TextureBlock 16256.0 -1152.0 7 true
+TextureBlock 16256.0 -1280.0 7 true
+TextureBlock 16256.0 -1408.0 7 true
+TextureBlock 16128.0 -1408.0 7 true
+TextureBlock 16000.0 -1408.0 7 true
+TextureBlock 16128.0 -1280.0 7 true
+TextureBlock 16128.0 -1152.0 7 true
+TextureBlock 16128.0 -1024.0 7 true
+TextureBlock 16128.0 -896.0 7 true
+TextureBlock 16128.0 -768.0 7 true
+TextureBlock 16000.0 -768.0 7 true
+TextureBlock 16000.0 -896.0 7 true
+TextureBlock 16000.0 -1024.0 7 true
+TextureBlock 16000.0 -1152.0 7 true
+TextureBlock 16000.0 -1280.0 7 true
+TextureBlock 15872.0 -1280.0 7 true
+TextureBlock 15616.0 -1408.0 7 true
+TextureBlock 15488.0 -1408.0 7 true
+TextureBlock 14976.0 -1408.0 7 true
+TextureBlock 14464.0 -1280.0 7 true
+TextureBlock 14592.0 -1280.0 7 true
+TextureBlock 14720.0 -1280.0 7 true
+TextureBlock 14720.0 -1152.0 7 true
+TextureBlock 14976.0 -1280.0 7 true
+TextureBlock 14976.0 -1152.0 7 true
+TextureBlock 14848.0 -1280.0 7 true
+TextureBlock 14848.0 -1152.0 7 true
+TextureBlock 14976.0 -1024.0 7 true
+TextureBlock 15104.0 -1024.0 7 true
+TextureBlock 15104.0 -1152.0 7 true
+TextureBlock 15104.0 -1280.0 7 true
+TextureBlock 15232.0 -1280.0 7 true
+TextureBlock 15232.0 -1152.0 7 true
+TextureBlock 15232.0 -1024.0 7 true
+TextureBlock 15232.0 -896.0 7 true
+TextureBlock 15360.0 -896.0 7 true
+TextureBlock 15360.0 -1024.0 7 true
+TextureBlock 15360.0 -1152.0 7 true
+TextureBlock 15360.0 -1280.0 7 true
+TextureBlock 15488.0 -1280.0 7 true
+TextureBlock 15616.0 -1280.0 7 true
+TextureBlock 15744.0 -1280.0 7 true
+TextureBlock 15872.0 -1152.0 7 true
+TextureBlock 15744.0 -1152.0 7 true
+TextureBlock 15616.0 -1152.0 7 true
+TextureBlock 15488.0 -1152.0 7 true
+TextureBlock 15488.0 -1024.0 7 true
+TextureBlock 15616.0 -1024.0 7 true
+TextureBlock 15744.0 -1024.0 7 true
+TextureBlock 15872.0 -1024.0 7 true
+TextureBlock 15872.0 -896.0 7 true
+TextureBlock 15744.0 -896.0 7 true
+TextureBlock 15616.0 -896.0 7 true
+TextureBlock 15488.0 -896.0 7 true
+TextureBlock 15488.0 -768.0 7 true
+TextureBlock 15616.0 -768.0 7 true
+TextureBlock 15744.0 -768.0 7 true
+TextureBlock 15872.0 -768.0 7 true
+TextureBlock 16640.0 -1024.0 7 true
+TextureBlock 16640.0 -896.0 7 true
+TextureBlock 16640.0 -768.0 7 true
+TextureBlock 16768.0 -896.0 7 true
+TextureBlock 16768.0 -768.0 7 true
+TextureBlock 16896.0 -768.0 7 true
+TextureBlock 16896.0 -896.0 7 true
+TextureBlock 17024.0 -768.0 7 true
+TextureBlock 16768.0 -1024.0 7 true
+TextureBlock 16640.0 -1152.0 7 true
+TextureBlock 13824.0 640.0 2 true
+TextureBlock 13824.0 768.0 2 true
+TextureBlock 13696.0 768.0 2 true
+TextureBlock 13696.0 640.0 2 true
+TextureBlock 13696.0 512.0 2 true
+TextureBlock 13568.0 512.0 2 true
+TextureBlock 13568.0 640.0 2 true
+TextureBlock 13568.0 768.0 2 true
+TextureBlock 13440.0 768.0 2 true
+TextureBlock 13440.0 640.0 2 true
+TextureBlock 13440.0 512.0 2 true
+TextureBlock 13312.0 512.0 2 true
+TextureBlock 13312.0 640.0 2 true
+TextureBlock 13184.0 512.0 2 true
+TextureBlock 13952.0 1024.0 6 true
+TextureBlock 14080.0 1024.0 6 true
+TextureBlock 14080.0 896.0 6 true
+TextureBlock 13952.0 896.0 6 true
+TextureBlock 14208.0 896.0 6 true
+TextureBlock 14208.0 1024.0 6 true
+TextureBlock 14336.0 896.0 6 true
+TextureBlock 14336.0 1024.0 6 true
+TextureBlock 14464.0 896.0 6 true
+TextureBlock 14592.0 896.0 6 true
+TextureBlock 14720.0 896.0 6 true
+TextureBlock 14848.0 1024.0 6 true
+TextureBlock 14976.0 896.0 6 true
+TextureBlock 15104.0 1024.0 6 true
+TextureBlock 15104.0 896.0 6 true
+TextureBlock 14976.0 1024.0 6 true
+TextureBlock 14848.0 896.0 6 true
+TextureBlock 14720.0 1024.0 6 true
+TextureBlock 14592.0 1024.0 6 true
+TextureBlock 14464.0 1024.0 6 true
+TextureBlock 11136.0 768.0 2 true
+TextureBlock 11264.0 768.0 2 true
+TextureBlock 11392.0 768.0 2 true
+TextureBlock 11520.0 512.0 2 true
+TextureBlock 11520.0 640.0 2 true
+TextureBlock 11520.0 768.0 2 true
+TextureBlock 11648.0 512.0 2 true
+TextureBlock 11648.0 640.0 2 true
+TextureBlock 11648.0 768.0 2 true
+TextureBlock 11776.0 512.0 2 true
+TextureBlock 11776.0 640.0 2 true
+TextureBlock 11776.0 768.0 2 true
+TextureBlock 11904.0 512.0 2 true
+TextureBlock 11904.0 640.0 2 true
+TextureBlock 11904.0 768.0 2 true
+TextureBlock 12032.0 512.0 2 true
+TextureBlock 12032.0 640.0 2 true
+TextureBlock 12032.0 768.0 2 true
+TextureBlock 12160.0 512.0 2 true
+TextureBlock 12160.0 640.0 2 true
+TextureBlock 12288.0 512.0 2 true
+TextureBlock 11904.0 896.0 2 true
+TextureBlock 11776.0 896.0 2 true
+TextureBlock 11648.0 896.0 2 true
+TextureBlock 11520.0 896.0 2 true
+TextureBlock 11392.0 896.0 2 true
+TextureBlock 11264.0 896.0 2 true
+TextureBlock 11136.0 896.0 2 true
+TextureBlock 11008.0 896.0 2 true
+TextureBlock 11648.0 1024.0 2 true
+TextureBlock 11520.0 1024.0 2 true
+TextureBlock 11392.0 1024.0 2 true
+TextureBlock 11264.0 1024.0 2 true
+TextureBlock 11136.0 1024.0 2 true
+TextureBlock 10752.0 1024.0 2 true
+TextureBlock 10368.0 1024.0 2 true
+TextureBlock 10240.0 512.0 2 true
+TextureBlock 10240.0 640.0 2 true
+TextureBlock 10240.0 768.0 2 true
+TextureBlock 10368.0 768.0 2 true
+TextureBlock 10368.0 896.0 2 true
+TextureBlock 10240.0 896.0 2 true
+TextureBlock 10496.0 896.0 2 true
+TextureBlock 10624.0 1024.0 2 true
+TextureBlock 11008.0 1024.0 2 true
+TextureBlock 10880.0 1024.0 2 true
+TextureBlock 10112.0 512.0 2 true
+TextureBlock 10112.0 640.0 2 true
+TextureBlock 10112.0 768.0 2 true
+TextureBlock 9984.0 512.0 2 true
+TextureBlock 9984.0 640.0 2 true
+TextureBlock 9984.0 768.0 2 true
+TextureBlock 9856.0 512.0 2 true
+TextureBlock 9728.0 512.0 2 true
+TextureBlock 9856.0 640.0 2 true
+TextureBlock 10112.0 896.0 2 true
+TextureBlock 10240.0 1024.0 2 true
+TextureBlock 10368.0 1152.0 2 true
+TextureBlock 10496.0 1024.0 2 true
+TextureBlock 10496.0 1152.0 2 true
+TextureBlock 10624.0 1152.0 2 true
+TextureBlock 10752.0 1152.0 2 true
+TextureBlock 10880.0 1152.0 2 true
+TextureBlock 11008.0 1152.0 2 true
+TextureBlock 11136.0 1152.0 2 true
+TextureBlock 11264.0 1152.0 2 true
+TextureBlock 11392.0 1152.0 2 true
+TextureBlock 11520.0 1152.0 2 true
+TextureBlock 9600.0 512.0 2 true
+TextureBlock 9600.0 640.0 2 true
+TextureBlock 9728.0 640.0 2 true
+TextureBlock 9728.0 768.0 2 true
+TextureBlock 9856.0 768.0 2 true
+TextureBlock 9856.0 896.0 2 true
+TextureBlock 9984.0 896.0 2 true
+TextureBlock 9984.0 1024.0 2 true
+TextureBlock 10240.0 1152.0 2 true
+TextureBlock 10112.0 1152.0 2 true
+TextureBlock 10112.0 1024.0 2 true
+TextureBlock 9984.0 1152.0 2 true
+TextureBlock 9856.0 1024.0 2 true
+TextureBlock 9728.0 896.0 2 true
+TextureBlock 9600.0 768.0 2 true
+TextureBlock 9472.0 640.0 2 true
+TextureBlock 9472.0 512.0 2 true
+TextureBlock 9472.0 768.0 2 true
+TextureBlock 9728.0 1024.0 2 true
+TextureBlock 9600.0 896.0 2 true
+TextureBlock 9856.0 1152.0 2 true
+TextureBlock 9344.0 512.0 2 true
+TextureBlock 9344.0 640.0 2 true
+TextureBlock 9216.0 512.0 2 true
+TextureBlock 9344.0 768.0 2 true
+TextureBlock 9344.0 896.0 2 true
+TextureBlock 9472.0 896.0 2 true
+TextureBlock 9216.0 640.0 2 true
+TextureBlock 9216.0 768.0 2 true
+TextureBlock 9088.0 512.0 2 true
+TextureBlock 9088.0 640.0 2 true
+TextureBlock 8960.0 512.0 2 true
+TextureBlock 9600.0 1024.0 2 true
+TextureBlock 9728.0 1152.0 2 true
+TextureBlock 9472.0 1024.0 2 true
+TextureBlock 9600.0 1152.0 2 true
+TextureBlock 13824.0 -896.0 2 true
+TextureBlock 13696.0 -1024.0 2 true
+TextureBlock 13696.0 -1152.0 2 true
+TextureBlock 13568.0 -1280.0 2 true
+TextureBlock 13440.0 -1408.0 2 true
+TextureBlock 13312.0 -1536.0 2 true
+TextureBlock 13184.0 -1664.0 2 true
+TextureBlock 13696.0 -256.0 7 true
+TextureBlock 13696.0 -128.0 7 true
+TextureBlock 13824.0 -128.0 7 true
+TextureBlock 13824.0 -256.0 7 true
+TextureBlock 13824.0 -384.0 7 true
+TextureBlock 13824.0 -512.0 7 true
+TextureBlock 13824.0 -640.0 7 true
+TextureBlock 13824.0 -768.0 7 true
+TextureBlock 13824.0 -1024.0 2 true
+TextureBlock 13824.0 -1152.0 2 true
+TextureBlock 13824.0 -1280.0 2 true
+TextureBlock 13696.0 -1280.0 2 true
+TextureBlock 13824.0 -1408.0 2 true
+TextureBlock 13568.0 -1408.0 2 true
+TextureBlock 13696.0 -1408.0 2 true
+TextureBlock 13824.0 0.0 8 false
+TextureBlock 13696.0 0.0 8 false
+TextureBlock 13824.0 128.0 6 false
+TextureBlock 13824.0 256.0 6 false
+TextureBlock 13824.0 384.0 6 false
+TextureBlock 13824.0 512.0 6 false
+TextureBlock 13696.0 128.0 6 false
+TextureBlock 13696.0 256.0 6 false
+TextureBlock 13952.0 0.0 9 true
+TextureBlock 14208.0 128.0 9 true
+TextureBlock 14464.0 256.0 9 true
+TextureBlock 14720.0 384.0 9 true
+TextureBlock 14976.0 512.0 9 true
+TextureBlock 14080.0 0.0 10 true
+TextureBlock 14336.0 128.0 10 true
+TextureBlock 14592.0 256.0 10 true
+TextureBlock 14848.0 384.0 10 true
+TextureBlock 15104.0 512.0 10 true
+TextureBlock 14336.0 256.0 11 true
+TextureBlock 14592.0 384.0 11 true
+TextureBlock 14848.0 512.0 11 true
+TextureBlock 15104.0 640.0 11 true
+TextureBlock 14080.0 256.0 6 true
+TextureBlock 14080.0 128.0 11 true
 Slope 1280.0 512.0 2304.0 0.0
 MovingPlatform -1152.0 256.0 512.0 0.0
 BackgroundObject -128.0 -384.0 1
 BackgroundObject 1408.0 -512.0 1
 BackgroundObject 384.0 -384.0 0
 BackgroundObject -128.0 -384.0 0
+BackgroundObject 4864.0 -384.0 2
+BackgroundObject 5632.0 -512.0 2
+BackgroundObject 5376.0 -512.0 2
 Spawner 109.0 78.0 0
 Spawner 621.0 94.0 0
-BreakableWall 2816.0 -256.0 false
+BreakableWall 2816.0 -256.0 true
 BreakableWall 13696.0 -256.0 true

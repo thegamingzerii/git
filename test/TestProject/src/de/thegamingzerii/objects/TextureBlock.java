@@ -22,22 +22,35 @@ public class TextureBlock implements IBufferable{
 	private static BufferedImage s1 = null;
 	private static BufferedImage s2 = null;
 	private static BufferedImage s3 = null;
+	private static BufferedImage b1 = null;
+	private static BufferedImage b2 = null;
+	private static BufferedImage b3 = null;
 	
 	private static Image ground1 = null;
 	private static Image ground2 = null;
 	private static Image slope1 = null;
 	private static Image slope2 = null;
 	private static Image slope3 = null;
-	private static Image grass1 = null;
-	
+
+
 	private static Image[][] grass = new Image[4][5];
 	private static Image[][] scaledGrass = new Image[4][5];
+	
+	private static Image[] brick = new Image[3];
+	private static Image[] scaledBrick = new Image[3];
+	private static Image[] brickTop = new Image[3];
+	private static Image[] scaledBrickTop = new Image[3];
+	private static Image[] brickBackground = new Image[6];
+	private static Image[] scaledBrickBackground = new Image[6];
+	private static Image[] brickStairs = new Image[3];
+	private static Image[] scaledBrickStairs = new Image[3];
 	
 	
 	
 	
 	private static BufferedImage image = null;
 	
+	private boolean background = false;
 	private double x;
 	private double y;
 	public BlockType type;
@@ -46,12 +59,13 @@ public class TextureBlock implements IBufferable{
 	
 	
 	
-	public TextureBlock(double x, double y, BlockType type) {
+	public TextureBlock(double x, double y, BlockType type, Boolean b) {
 		this.x = x;
 		this.y = y;
 		this.type = type;
 		generator = new Random((long) (x*y));
 		randomFactor = Math.round(generator.nextInt()/100);
+		this.background = b;
 		allTextureBlocks.add(this);
 	}
 	
@@ -70,13 +84,35 @@ public class TextureBlock implements IBufferable{
 		s1 = image.getSubimage(0, 256, 128, 128);
 		s2 = image.getSubimage(0, 384, 128, 128);
 		s3 = image.getSubimage(0, 512, 128, 128);
-		
+		b1 = ImageIO.read(new File("Assets/BrickWall.png"));
+		b2 = ImageIO.read(new File("Assets/BrickWallBackground.png"));
+		b3 = ImageIO.read(new File("Assets/BrickWallTop.png"));
 		image = ImageIO.read(new File("Assets/Grass.png"));
 		
 		for(int i = 0; i < 4; i++) {
 			for(int j = 0; j < 5; j++) {
 				grass[i][j] = image.getSubimage(0 + 128 * i, 0 + 128 * j, 128, 128);
 			}
+		}
+		
+		image = ImageIO.read(new File("Assets/BrickWallBackground.png"));
+		for(int i = 0; i < 6; i++) {
+			brickBackground[i] = image.getSubimage(0, 0 + 128 * i, 128, 128);
+		}
+		
+		image = ImageIO.read(new File("Assets/BrickWall.png"));
+		for(int i = 0; i < 3; i++) {
+			brick[i] = image.getSubimage(0, 0 + 128 * i, 128, 128);
+		}
+		
+		image = ImageIO.read(new File("Assets/BrickWallTop.png"));
+		for(int i = 0; i < 3; i++) {
+			brickTop[i] = image.getSubimage(0, 0 + 128 * i, 128, 128);
+		}
+		
+		image = ImageIO.read(new File("Assets/BrickWallStairs.png"));
+		for(int i = 0; i < 3; i++) {
+			brickStairs[i] = image.getSubimage(0, 0 + 128 * i, 128, 128);
 		}
 		reScale();
 	}
@@ -88,10 +124,24 @@ public class TextureBlock implements IBufferable{
 		slope1 = s1.getScaledInstance((int)(128 * Game.camera.scale), (int)(128 * Game.camera.scale), image.SCALE_DEFAULT);
 		slope2 = s2.getScaledInstance((int)(128 * Game.camera.scale), (int)(128 * Game.camera.scale), image.SCALE_DEFAULT);
 		slope3 = s3.getScaledInstance((int)(128 * Game.camera.scale), (int)(128 * Game.camera.scale), image.SCALE_DEFAULT);
+
 		for(int i = 0; i < 4; i++) {
 			for(int j = 0; j < 5; j++) {
 				scaledGrass[i][j] = grass[i][j].getScaledInstance((int)(128 * Game.camera.scale), (int)(128 * Game.camera.scale), image.SCALE_DEFAULT);
 			}
+		}
+		
+		for(int i = 0; i < 3; i++) {
+			scaledBrick[i] = brick[i].getScaledInstance((int)(128 * Game.camera.scale), (int)(128 * Game.camera.scale), image.SCALE_DEFAULT);
+		}
+		for(int i = 0; i < 6; i++) {
+			scaledBrickBackground[i] = brickBackground[i].getScaledInstance((int)(128 * Game.camera.scale), (int)(128 * Game.camera.scale), image.SCALE_DEFAULT);
+		}
+		for(int i = 0; i < 3; i++) {
+			scaledBrickTop[i] = brickTop[i].getScaledInstance((int)(128 * Game.camera.scale), (int)(128 * Game.camera.scale), image.SCALE_DEFAULT);
+		}
+		for(int i = 0; i < 3; i++) {
+			scaledBrickStairs[i] = brickStairs[i].getScaledInstance((int)(128 * Game.camera.scale), (int)(128 * Game.camera.scale), image.SCALE_DEFAULT);
 		}
 	}
 	
@@ -119,6 +169,24 @@ public class TextureBlock implements IBufferable{
 				break;
 			case Grass:		
 				g.drawImage(scaledGrass[ExtraMaths.ActualModulo(Math.floor((Game.animationCounter + randomFactor) /8), 4)][ExtraMaths.ActualModulo(randomFactor, 5)], xUsable, yUsable, Game.currentGame);
+				break;
+			case Brick1:
+				g.drawImage(scaledBrick[ExtraMaths.ActualModulo(randomFactor, 3)], xUsable, yUsable, Game.currentGame);
+				break;
+			case Brick2:
+				g.drawImage(scaledBrickBackground[ExtraMaths.ActualModulo(randomFactor, 6)], xUsable, yUsable, Game.currentGame);
+				break;
+			case Brick3:
+				g.drawImage(scaledBrickTop[ExtraMaths.ActualModulo(randomFactor, 3)], xUsable, yUsable, Game.currentGame);
+				break;
+			case BrickStairs1:
+				g.drawImage(scaledBrickStairs[0], xUsable, yUsable, Game.currentGame);
+				break;
+			case BrickStairs2:
+				g.drawImage(scaledBrickStairs[1], xUsable, yUsable, Game.currentGame);
+				break;
+			case BrickStairs3:
+				g.drawImage(scaledBrickStairs[2], xUsable, yUsable, Game.currentGame);
 				break;
 			}
 		}
@@ -162,12 +230,36 @@ public class TextureBlock implements IBufferable{
 		case Grass:
 			id = 1;
 			break;
+		case Brick1:
+			id = 6;
+			break;
+		case Brick2:
+			id = 7;
+			break;
+		case Brick3:
+			id = 8;
+			break;
+		case BrickStairs1:
+			id = 9;
+			break;
+		case BrickStairs2:
+			id = 10;
+			break;
+		case BrickStairs3:
+			id = 11;
+			break;
 		default:
 			id = 0;
 			break;
 			
 		}
-		return "TextureBlock " + x + " " + y + " " + id;
+		String backgroundString = "";
+		if(background)
+			backgroundString = " true";
+		else
+			backgroundString = " false";
+		
+		return "TextureBlock " + x + " " + y + " " + id + backgroundString;
 	}
 	
 	public double getX() {
@@ -201,7 +293,7 @@ public class TextureBlock implements IBufferable{
 				g.drawImage(ground1, x, y, Game.currentGame);
 				break;
 			case 1:
-				g.drawImage(grass1, x, y, Game.currentGame);
+				g.drawImage(scaledGrass[0][0], x, y, Game.currentGame);
 				break;
 			case 2:
 				g.drawImage(ground2, x, y, Game.currentGame);
@@ -215,6 +307,24 @@ public class TextureBlock implements IBufferable{
 			case 5:
 				g.drawImage(slope3, x, y, Game.currentGame);
 				break;
+			case 6:
+				g.drawImage(scaledBrick[0], x, y, Game.currentGame);
+				break;
+			case 7:
+				g.drawImage(scaledBrickBackground[0], x, y, Game.currentGame);
+				break;
+			case 8:
+				g.drawImage(scaledBrickTop[0], x, y, Game.currentGame);
+				break;
+			case 9:
+				g.drawImage(scaledBrickStairs[0], x, y, Game.currentGame);
+				break;
+			case 10:
+				g.drawImage(scaledBrickStairs[1], x, y, Game.currentGame);
+				break;
+			case 11:
+				g.drawImage(scaledBrickStairs[2], x, y, Game.currentGame);
+				break;
 				
 			}
 
@@ -223,8 +333,14 @@ public class TextureBlock implements IBufferable{
 
 	@Override
 	public void buffer() {
-		
 		if(onScreen()) {
+			Game.currentBuffer.add(this.getCopy());
+		}
+			
+	}
+	
+public void buffer(boolean b) {	
+		if(onScreen() && this.background == b) {
 			Game.currentBuffer.add(this.getCopy());
 		}
 			
@@ -235,5 +351,3 @@ public class TextureBlock implements IBufferable{
 		return new TextureBlock(this);
 	}
 }
-
-
