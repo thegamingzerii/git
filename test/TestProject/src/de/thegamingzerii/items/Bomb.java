@@ -37,22 +37,22 @@ public class Bomb extends GravityObject{
 	}
 	
 	
-	public void update(double delta) {		
+	public void update(double delta) {	
 		if(!exploded) {
 			if(super.gravity(delta))
 				if(xSpeed > 0)
 					xSpeed = 0.2;
 				else
-					xSpeed = -0.2;
+					xSpeed = -1 * delta;
 			explosionTimer -= delta;
 			if(explosionTimer <= 0)
 				explode();
 			
 			
-			x += xSpeed;
+			x += xSpeed * 5 * delta;
 			
 			if(CollisionChecker.CheckAllCollisions(this)) {
-				x -= xSpeed;
+				x -= xSpeed * 5 * delta;
 				explode();
 			}
 				

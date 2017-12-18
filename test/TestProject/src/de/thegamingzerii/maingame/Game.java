@@ -327,7 +327,6 @@ public class Game extends JPanel{
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 					RenderingHints.VALUE_ANTIALIAS_ON);
 			camera.paint(g2d);
-			currentState.paint(g2d);
 			
 			ArrayList<IBufferable> paintBuffer = bufferList.get(bufferList.size()-1);
 			bufferList.clear();
@@ -339,6 +338,7 @@ public class Game extends JPanel{
 				paintBuffer.get(i).paint(g2d);
 			}
 				
+			currentState.paint(g2d);
 			
 			g.setColor(Color.red);
 			String currentFont = g.getFont().toString();
